@@ -1,6 +1,7 @@
 "use client";
 
 import * as Scrollytelling from "~/lib/scrollytelling-client";
+import Image from "next/image";
 
 import s from "./hero.module.scss";
 import Link from "next/link";
@@ -41,7 +42,7 @@ export const Hero = () => {
               </svg>
             </span>
             <span className={s["circle-img-container"]}>
-              <img src="/circle.png" alt="Circle" className={s["star"]} />
+              <Image src="/circle.png" alt="Circle" className={s["star"]} width={32} height={32} />
             </span>
             <span className={s["starburst"]}>
               <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -341,7 +342,7 @@ export const Hero = () => {
               </div>
               <div className={s["footer"]}>
                 <p>
-                  We're a passionate team of creative developers crafting cutting-edge
+                  We&apos;re a passionate team of creative developers crafting cutting-edge
                   digital experiences. We combine innovation with technical expertise
                   to transform ideas into exceptional digital solutions through
                   strategic branding, stunning design & robust development.
@@ -358,7 +359,7 @@ export const Hero = () => {
                 </svg>
                 <p>
                   Excellence is our standard. We approach every project with meticulous
-                  attention to detail and unwavering dedication. We don't just meet
+                  attention to detail and unwavering dedication. We don&apos;t just meet
                   expectations - we exceed them at every opportunity.
                 </p>
                 <p>
