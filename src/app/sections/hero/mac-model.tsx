@@ -1,6 +1,5 @@
 "use client";
 import { gsap } from "gsap";
-import * as THREE from "three";
 import { Float, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { GLTF } from "three-stdlib";
@@ -8,14 +7,16 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { useScrollytelling } from "~/lib/scrollytelling-client";
 
+import type { Mesh, MeshStandardMaterial, Group } from "three";
+
 type GLTFResult = GLTF & {
   nodes: {
-    Cube009: THREE.Mesh;
-    Cube009_1: THREE.Mesh;
+    Cube009: Mesh;
+    Cube009_1: Mesh;
   };
   materials: {
-    m_Mac128k: THREE.MeshStandardMaterial;
-    m_Outline: THREE.MeshStandardMaterial;
+    m_Mac128k: MeshStandardMaterial;
+    m_Outline: MeshStandardMaterial;
   };
 };
 
@@ -23,10 +24,11 @@ useGLTF.preload("/models/Mac128k-light.glb");
 
 const MacModel = () => {
   const { timeline } = useScrollytelling();
+  // Use double assertion to avoid TypeScript error
   const { nodes, materials } = useGLTF(
     "/models/Mac128k-light.glb"
-  ) as GLTFResult;
-  const innerRef = useRef<THREE.Group>(null);
+  ) as unknown as GLTFResult;
+  const innerRef = useRef<Group>(null);
   const width = useThree((state) => state.viewport.width);
 
   useFrame(() => {
