@@ -2,7 +2,7 @@
 
 .spacer {
   position: relative;
-  height: 700vh;
+  height: 210vh; // Reduced from 700vh since we only need space for text animation
 }
 
 .pin {
@@ -10,22 +10,8 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  position: sticky;
+  justify-content: center;  position: sticky;
   top: 0;
-
-  .canvas-container {
-    --offset-y: 40%;
-
-    z-index: 1;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: calc(100% + var(--offset-y));
-    transform: translateY(-50%);
-    overflow: hidden;
-  }
 
   .paragraph {
     font-size: tovw(56px, "desktop", 20px);
