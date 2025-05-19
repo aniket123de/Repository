@@ -6,7 +6,6 @@ import Image from "next/image";
 import s from "./hero.module.scss";
 import Link from "next/link";
 import { LogoBasement } from "../../logos/logo";
-import { CanvasWithMacModel } from "./mac-model";
 import { toVw } from "~/lib/utils";
 import { useMedia } from "~/hooks/use-media";
 
@@ -96,7 +95,7 @@ export const Hero = () => {
 
         <section className={s["section"]}>
           <div className={s["model-container"]}>
-            <CanvasWithMacModel />
+            {/* <CanvasWithMacModel /> */}
           </div>
 
           <div className="wrapper">
