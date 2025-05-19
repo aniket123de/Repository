@@ -93,23 +93,32 @@
 }
 
 .logo {
-  width: tovw(251px, "desktop-large", 200px);
-  height: tovw(36px, "desktop-large", 28px);
+  width: max-content;
+  font-size: tovw(36px, "desktop-large", 28px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--color-white);
 }
 
 .star {
-  width: tovw(679px);
-  height: tovw(120px);
+  width: tovw(150px, "desktop-large", 60px); // Adjusted for better fit
+  height: tovw(150px, "desktop-large", 60px); // Keep aspect ratio square for image
+  display: block;
+  object-fit: contain;
+  aspect-ratio: 1 / 1;
 
   @media screen and (max-width: 800px) {
-    display: none;
+    width: tovw(60px, "tablet", 40px);
+    height: tovw(60px, "tablet", 40px);
+    display: block;
   }
 }
 
 .section {
   position: relative;
   overflow-x: hidden;
-  padding-top: tovw(28px, "desktop-large", 24px);
+  padding-top: tovw(20px, "desktop-large", 24px);
 }
 
 .model-container {
@@ -228,5 +237,101 @@
     @media screen and (max-width: 800px) {
       display: none;
     }
+  }
+}
+
+.hero-decorative-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3.5rem;
+  margin: 2.5rem 0 2.5rem 0;
+  position: relative;
+  z-index: 2;
+
+  @media (max-width: 600px) {
+    gap: 1.5rem;
+    margin: 1.5rem 0 1.5rem 0;
+  }
+}
+
+.starburst {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: starburst-float 2.5s ease-in-out infinite alternate;
+
+  &:first-child {
+    animation-delay: 0s;
+  }
+  &:last-child {
+    animation-delay: 1.25s;
+  }
+}
+
+@keyframes starburst-float {
+  0% {
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+  }
+  100% {
+    transform: translateY(-12px) scale(1.08);
+    filter: brightness(1.15);
+  }
+}
+
+.circle-img-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%); // lighter #57B9C2 shades
+  border-radius: 50%;
+  box-shadow: 0 0 32px 0 #57b9c240, 0 4px 32px 0 #b2ebf280;
+  padding: 0.5rem;
+  transition: box-shadow 0.3s;
+
+  &:hover {
+    box-shadow: 0 0 48px 0 #57b9c2cc, 0 8px 48px 0 #b2ebf2cc;
+  }
+}
+
+.star {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 0 24px 0 #57B9C280;
+  background: transparent;
+  transition: box-shadow 0.3s;
+
+  @media (max-width: 600px) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+// Starburst SVG color overrides for #57B9C2 theme
+.starburst svg circle:nth-child(1) {
+  /* Outer glow gradient */
+  fill: url(#starburst-glow);
+}
+.starburst svg circle:nth-child(2) {
+  /* Main circle */
+  fill: #57B9C2;
+}
+.starburst svg path {
+  /* Star shape */
+  fill: #fff;
+}
+
+// Custom gradient for SVGs
+.starburst svg defs radialGradient {
+  stop:first-child {
+    stop-color: #b2ebf2;
+    stop-opacity: 0.9;
+  }
+  stop:last-child {
+    stop-color: #57B9C2;
+    stop-opacity: 0;
   }
 }

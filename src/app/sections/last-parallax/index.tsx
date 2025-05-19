@@ -9,11 +9,7 @@ import s from "./last-parallax.module.scss";
 
 export const LastParallax = () => {
   return (
-    <Scrollytelling.Root
-      start="top bottom"
-      scrub={0.75}
-      debug={{ label: "Last Parallax" }}
-    >
+    <Scrollytelling.Root scrub={0.75}>
       <section className={s["section"]}>
         <div className="wrapper">
           <Scrollytelling.Waypoint

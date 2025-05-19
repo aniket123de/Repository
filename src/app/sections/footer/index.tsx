@@ -21,7 +21,7 @@ export const Footer = () => {
   const isDesktopSm = useMedia("(min-width: 1024px)");
 
   return (
-    <Scrollytelling.Root start="top 80%" debug={{ label: "Footer" }}>
+    <Scrollytelling.Root start="top 80%">
       <footer className={s.footer}>
         <PreFooter />
         <div className={s["imgs-container"]}>
@@ -112,12 +112,12 @@ const PreFooter = () => {
       gravity: 0.6,
       origin: { y: 0.425 },
       colors: [
-        "#ff4d00",
-        "#ff5e00",
-        "#ff8000",
-        "#ffa200",
-        "#b23500",
-        "#d84000",
+        "#57B9C2",
+        "#5fd0e6",
+        "#b2ebf2",
+        "#e0f7fa",
+        "#3a8a94",
+        "#2e6e75",
       ],
     });
   }, []);
@@ -199,12 +199,12 @@ const Terminal = () => {
         gravity: 0.6,
         origin: { y: 0.42 },
         colors: [
-          "#ff4d00",
-          "#ff5e00",
-          "#ff8000",
-          "#ffa200",
-          "#b23500",
-          "#d84000",
+          "#57B9C2",
+          "#5fd0e6",
+          "#b2ebf2",
+          "#e0f7fa",
+          "#3a8a94",
+          "#2e6e75",
         ],
       });
     });
