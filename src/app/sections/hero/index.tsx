@@ -360,14 +360,10 @@ export const Hero = () => {
                   />
                 </svg>
                 <p>
-                  Excellence is our standard. We approach every project with meticulous
-                  attention to detail and unwavering dedication. We don&apos;t just meet
-                  expectations - we exceed them at every opportunity.
+                  Collaboration is our foundation. We approach every hackathon and initiative with bold creativity, technical precision, and a passion for impact. We don&apos;t just build projects : we cultivate innovation and community at every step.
                 </p>
                 <p>
-                  We partner with visionaries of all sizes, from startups to enterprises,
-                  bringing the same level of dedication and excellence to every project
-                  we undertake.
+                  We collaborate with builders at every level, from curious beginners to seasoned hackers, bringing unmatched energy, guidance, and purpose to every team, every build, every breakthrough.
                 </p>
               </div>
             </div>
