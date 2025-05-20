@@ -25,7 +25,7 @@ const basementGrotesque = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "BSMNT @ Scrollytelling",
+  title: "Repository",
   description:
     "A demo website made exclusively to showcase a couple of cool animations powered by our new library, @bsmnt/scrollytelling.",
   viewport: {
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
     width: "device-width",
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "/circle.png",
+    shortcut: "/circle.png",
   },
   manifest: "/manifest.webmanifest",
   twitter: {
@@ -44,14 +44,14 @@ export const metadata: Metadata = {
     description: "BSMNT @ Scrollytelling",
     images: [{ width: 1200, height: 630, url: `${siteOrigin}/og.jpg` }],
     site: "@basementstudio",
-    title: "BSMNT @ Scrollytelling",
+    title: "Repository",
   },
   openGraph: {
-    description: "BSMNT @ Scrollytelling",
+    description: "Repository",
     images: [{ width: 1200, height: 630, url: `${siteOrigin}/og.jpg` }],
     locale: "en-US",
-    siteName: "BSMNT @ Scrollytelling",
-    title: "BSMNT @ Scrollytelling",
+    siteName: "Repository",
+    title: "Repository",
     type: "website",
     url: siteOrigin,
   },
