@@ -5,10 +5,12 @@ import { HorizontalMarquee } from "./sections/horizontal-marquee";
 import { LastParallax } from "./sections/last-parallax";
 import { LabIntro } from "./sections/lab-cylinder/intro";
 import { LabCylinder } from "./sections/lab-cylinder";
+import ScrollProgressBar from "./components/scroll-progress-bar";
 
 export default function HomePage() {
   return (
     <main>
+      <ScrollProgressBar />
       <Hero />
       <FallingCaps />
       <HorizontalMarquee />
