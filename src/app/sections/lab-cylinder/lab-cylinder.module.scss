@@ -1,0 +1,130 @@
+@import "../../css/helpers";
+
+.eventsSection {
+  padding: 4rem 0;
+  background-color: #000;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.sectionHeading {
+  margin-bottom: 2.5rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+}
+
+.stackList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.stackItem {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  
+  &.expanded {
+    margin: 1rem 0;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.stackHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.eventMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.eventDate {
+  font-size: 0.875rem;
+  opacity: 0.7;
+}
+
+.eventTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.expandButton {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.expandedContent {
+  padding: 0 1.5rem 1.5rem;
+  overflow: hidden;
+}
+
+.description {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.learnMoreLink {
+  display: inline-block;
+  color: #ffc700;
+  text-decoration: none;
+  font-weight: 500;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.viewAllContainer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.viewAllButton {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border-radius: 2rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+}
