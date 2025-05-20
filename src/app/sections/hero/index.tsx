@@ -63,7 +63,7 @@ export const Hero = () => {
             </pre>
             <div className={s["cta--buttons"]}>
             <a
-              href="https://github.com/basementstudio/scrollytelling"
+              href="https://github.com/aniket123de/Repository"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -84,11 +84,14 @@ export const Hero = () => {
               <span>GitHub</span>
             </a>
             <a 
-            target="_blank"
-            rel="noopener noreferrer"
-            className={s["docs-link"]} href="/docs">
-              <span>b</span>
-              Docs</a>
+              href="https://chat.whatsapp.com/DuEKwdOeedk2R564i2Ri5A"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={s["docs-link"]}
+            >
+              <span>W</span>
+              Community
+            </a>
             </div>
           </div>
         </header>
