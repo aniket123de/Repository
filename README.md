@@ -27,31 +27,11 @@ From prep sessions to team-ups, Repository is your launchpad for hackathon succe
 
 ## Stay Connected
 
-- *Website:* [https://repository-community.vercel.app](https://repository-community.vercel.app)  
+- *Website:* [[https://repository-community.vercel.app](https://repository-main.vercel.app/)](https://repository-main.vercel.app/)  
 - *Instagram:* [@repository_bppimt](https://instagram.com/repository_bppimt) (update as needed)  
-- *Email:* repository.bppimt@gmail.com (example)  
-- *Join our community:* (Discord/Telegram link)
+- *Email:* repositorycore@gmail.com (example)  
+- *Join our community:* (https://chat.whatsapp.com/DuEKwdOeedk2R564i2Ri5A)
 
 ---
 
 Made with heart by the *Repository Core Team*
-
-## Development
-
-1. Install yarn:
-
-   ```
-   npm install -g yarn
-   ```
-
-2. Install the dependencies with:
-
-   ```
-   yarn
-   ```
-
-3. Start developing and watch for code changes:
-
-   ```
-   yarn dev
-   ```
