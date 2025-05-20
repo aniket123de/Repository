@@ -50,8 +50,28 @@ Made with heart by the *Repository Core Team*
    yarn
    ```
 
-3. Start developing and watch for code changes:
+## Contributing
 
-   ```
-   yarn dev
-   ```
+We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to:
+- Submit issues
+- Create pull requests
+- Contribute code
+- Add proper attribution
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Maintainer
+
+- Aniket De
+
+## Acknowledgments
+
+- Thanks to all contributors who have helped shape Repository
+- Special thanks to BPPIMT for their continued support
+- Built with Next.js, TypeScript, and ❤️
+
+---
+
+© 2025 Repository Team. All Rights Reserved.
