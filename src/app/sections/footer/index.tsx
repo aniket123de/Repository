@@ -15,7 +15,7 @@ import { toVw } from "../../../lib/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 
-const ghHref = "https://github.com/basementstudio/scrollytelling";
+const ghHref = "https://github.com/aniket123de/Repository";
 
 export const Footer = () => {
   const isDesktopSm = useMedia("(min-width: 1024px)");
@@ -77,15 +77,15 @@ export const Footer = () => {
             <span>get in touch</span>
             <Link
               className="link"
-              href="mailto:sayhi@basement.studio"
+              href="mailto:repositorycore@gmail.com"
               target="_blank"
               rel="noreferrer"
-            >
-              sayhi@basement.studio
+            > 
+              repositorycore@gmail.com
             </Link>
           </div>
           <div>
-            <span>@basement.studio llc {new Date().getFullYear()}</span>
+            <span>@ CBWW Team {new Date().getFullYear()}</span>
             <span>all rights reserved</span>
           </div>
         </div>
@@ -251,7 +251,7 @@ const Terminal = () => {
 
 const socials = [
   {
-    name: "twitter",
+    name: "Whatsapp",
     url: "https://twitter.com/basementstudio",
   },
   {
@@ -263,7 +263,7 @@ const socials = [
     url: "https://github.com/basementstudio",
   },
   {
-    name: "dribbble",
+    name: "linkedin",
     url: "https://dribbble.com/basementstudio",
   },
 ];
