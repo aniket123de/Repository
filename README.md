@@ -27,9 +27,9 @@ From prep sessions to team-ups, Repository is your launchpad for hackathon succe
 
 ## Stay Connected
 
-- *Website:* [[https://repository-community.vercel.app](https://repository-main.vercel.app/)](https://repository-main.vercel.app/)  
-- *Instagram:* [@repository_bppimt](https://instagram.com/repository_bppimt) (update as needed)  
-- *Email:* repositorycore@gmail.com (example)  
+- *Website:* (https://repository-main.vercel.app/)  
+- *Instagram:* [@repository_bppimt](https://instagram.com/repository_bppimt) 
+- *Email:* repositorycore@gmail.com 
 - *Join our community:* (https://chat.whatsapp.com/DuEKwdOeedk2R564i2Ri5A)
 
 ---
