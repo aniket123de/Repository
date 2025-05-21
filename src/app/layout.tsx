@@ -25,6 +25,7 @@ const basementGrotesque = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteOrigin),
   title: "Repository",
   description:
     "A demo website made exclusively to showcase a couple of cool animations powered by our new library, @bsmnt/scrollytelling.",
