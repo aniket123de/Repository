@@ -9,6 +9,11 @@ import { LogoBasement } from "../../logos/logo";
 import { toVw } from "~/lib/utils";
 import { useMedia } from "~/hooks/use-media";
 
+// Font Awesome imports
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBinoculars, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+
 export const Hero = () => {
   const isMobileSize = useMedia("(max-width: 768px)");
 
@@ -81,17 +86,39 @@ export const Hero = () => {
                   clipRule="evenodd"
                 />
               </svg>
-              <span>GitHub</span>
-            </a>
-            <a 
+              <span>GitHub</span>            </a>            <a 
               href="https://chat.whatsapp.com/DuEKwdOeedk2R564i2Ri5A"
               target="_blank"
               rel="noopener noreferrer"
               className={s["docs-link"]}
             >
-              <span>W</span>
+              <FontAwesomeIcon 
+                icon={faWhatsapp} 
+                width={15}
+                height={15}
+              />
               Community
-            </a>
+            </a>            <a 
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon 
+                icon={faBinoculars} 
+                width={15}
+                height={15}
+              />
+              <span>FYT</span>
+            </a>            <Link 
+              href="/team"
+            >
+              <FontAwesomeIcon 
+                icon={faUsers} 
+                width={15}
+                height={15}
+              />
+              <span>Team</span>
+            </Link>
             </div>
           </div>
         </header>
