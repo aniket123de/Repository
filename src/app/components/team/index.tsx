@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +11,14 @@ import {
   faInstagram 
 } from '@fortawesome/free-brands-svg-icons';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import s from './team.module.scss';
+
+// Register GSAP plugins
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 type TeamMemberProps = {
   name: string;
@@ -36,9 +43,138 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
   socials,
   isReversed 
 }) => {
+  // Create refs for animation targets
+  const memberRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const starburstRef = useRef<HTMLDivElement>(null);
+  const infoRef = useRef<HTMLDivElement>(null);
+  const quoteRef = useRef<HTMLDivElement>(null);
+  const quoteStartRef = useRef<HTMLSpanElement>(null);
+  const quoteEndRef = useRef<HTMLSpanElement>(null);
+  const socialLinksRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!memberRef.current) return;
+
+    // Initial animation for the component
+    gsap.fromTo(
+      memberRef.current,
+      { opacity: 0, y: 30 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.8, 
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: memberRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+    // Add a subtle animation for the image when scrolling
+    if (imageRef.current) {
+      const imageElement = imageRef.current.querySelector('img');
+      if (imageElement) {
+        const direction = isReversed ? 1 : -1;
+        gsap.fromTo(
+          imageElement,
+          { 
+            scale: 0.95,
+            x: direction * 30,
+            rotation: direction * -3
+          },
+          {
+            scale: 1,
+            x: 0,
+            rotation: 0,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: memberRef.current,
+              start: "top 75%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
+      }
+    }
+    // Animate starburst on hover
+    const starburst = starburstRef.current;
+    if (starburst && memberRef.current) {
+      memberRef.current.addEventListener('mouseenter', () => {
+        gsap.to(starburst, {
+          rotation: 15,
+          scale: 1.1,
+          duration: 0.5,
+          ease: "power1.out"
+        });
+      });
+      memberRef.current.addEventListener('mouseleave', () => {
+        gsap.to(starburst, {
+          rotation: 0,
+          scale: 1,
+          duration: 0.5,
+          ease: "power1.in"
+        });
+      });
+    }
+    // Animate quote marks
+    if (quoteRef.current && quoteStartRef.current && quoteEndRef.current) {
+      const quoteContainer = quoteRef.current;
+      const quoteStart = quoteStartRef.current;
+      const quoteEnd = quoteEndRef.current;
+      quoteContainer.addEventListener('mouseenter', () => {
+        gsap.to(quoteStart, {
+          scale: 1.2,
+          opacity: 0.5,
+          duration: 0.4,
+          ease: "power1.out"
+        });
+        gsap.to(quoteEnd, {
+          scale: 1.2,
+          opacity: 0.5,
+          duration: 0.4,
+          ease: "power1.out"
+        });
+      });
+      quoteContainer.addEventListener('mouseleave', () => {
+        gsap.to([quoteStart, quoteEnd], {
+          scale: 1,
+          opacity: 0.2,
+          duration: 0.4,
+          ease: "power1.in"
+        });
+      });
+    }
+    // Social links hover animation
+    if (socialLinksRef.current) {
+      const socialLinks = socialLinksRef.current.querySelectorAll('a');
+      socialLinks.forEach((link) => {
+        link.addEventListener('mouseenter', () => {
+          gsap.to(link, {
+            y: -5,
+            scale: 1.1,
+            duration: 0.3,
+            ease: "power1.out"
+          });
+        });
+        link.addEventListener('mouseleave', () => {
+          gsap.to(link, {
+            y: 0,
+            scale: 1,
+            duration: 0.3,
+            ease: "power1.in"
+          });
+        });
+      });
+    }
+  }, [isReversed]);
+
   const imageSection = (
-    <div className={s["team-member-image"]}>
-      <div className={s["image-wrapper"]}>        <Image 
+    <div className={s["team-member-image"]} ref={imageRef}>
+      <div className={s["image-wrapper"]}>
+        <Image 
           src={image} 
           alt={`${name} - ${role}`} 
           width={300} 
@@ -51,7 +187,8 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
             target.src = '/circle.png'; // Use existing image as fallback
           }}
         />
-        <div className={s["starburst-wrapper"]}>          <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className={s["starburst-wrapper"]} ref={starburstRef}>
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <radialGradient id={`glow-${name.replace(/\s+/g, '')}`} cx="50%" cy="50%" r="50%">
                 <stop offset="0%" stopColor="#b2ebf2" stopOpacity="0.9"/>
@@ -64,10 +201,10 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
           </svg>
         </div>
       </div>
-      <div className={s["member-info"]}>
+      <div className={s["member-info"]} ref={infoRef}>
         <h3>{name}</h3>
         <h4>{role}</h4>
-        <div className={s["social-links"]}>
+        <div className={s["social-links"]} ref={socialLinksRef}>
           {socials.twitter && (
             <Link href={socials.twitter} target="_blank" rel="noopener noreferrer" aria-label={`${name}'s Twitter`}>
               <FontAwesomeIcon icon={faTwitter} />
@@ -99,15 +236,15 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
   );
   const statementSection = (
     <div className={s["team-member-statement"]}>
-      <div className={s["quote-container"]}>
-        <span className={s["quote-mark"]}>&ldquo;</span>
+      <div className={s["quote-container"]} ref={quoteRef}>
+        <span className={s["quote-mark"]} ref={quoteStartRef}>&ldquo;</span>
         <p>{statement}</p>
-        <span className={s["quote-mark"]}>&rdquo;</span>
+        <span className={s["quote-mark"]} ref={quoteEndRef}>&rdquo;</span>
       </div>
     </div>
   );
   return (
-    <div className={`${s["team-member"]} ${isReversed ? s["reversed"] : ""}`}>
+    <div className={`${s["team-member"]} ${isReversed ? s["reversed"] : ""}`} ref={memberRef}>
       {imageSection}
       {statementSection}
     </div>
@@ -116,10 +253,75 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
 
 export const TeamSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const teamMembersRef = useRef<HTMLDivElement>(null);
+  const starburstHeaderRef = useRef<HTMLSpanElement>(null);
   
   useEffect(() => {
     setIsLoaded(true);
-  }, []);
+    
+    if (typeof window === 'undefined' || !sectionRef.current) return;
+      // Animate header elements
+    const headerTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+        toggleActions: "play none none none"
+      }
+    });
+    
+    if (headerRef.current) {
+      const h2Element = headerRef.current.querySelector('h2');
+      const pElement = headerRef.current.querySelector('p');
+      
+      if (h2Element) {
+        headerTimeline.fromTo(
+          h2Element, 
+          { opacity: 0, y: 30 }, 
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+        );
+      }
+      
+      if (starburstHeaderRef.current) {
+        headerTimeline.fromTo(
+          starburstHeaderRef.current, 
+          { opacity: 0, scale: 0.5, rotation: -20 }, 
+          { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: "back.out(1.7)" },
+          "-=0.4"
+        );
+      }
+      
+      if (pElement) {
+        headerTimeline.fromTo(
+          pElement, 
+          { opacity: 0, y: 20 }, 
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+          "-=0.4"
+        );
+      }
+    }
+    
+    // Add a cool entrance animation for the whole section
+    gsap.fromTo(
+      sectionRef.current,
+      { 
+        backgroundPosition: "0% 30%" 
+      },
+      { 
+        backgroundPosition: "0% 50%", 
+        duration: 1.5, 
+        ease: "power1.inOut",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      }
+    );
+    
+  }, [isLoaded]);
   
   const teamMembers = [
     {
@@ -225,14 +427,14 @@ export const TeamSection = () => {
       }
     }
   ];
-
   return (
-    <section className={s["team-section"]}>
+    <section className={s["team-section"]} ref={sectionRef}>
       <div className="wrapper">
-        <div className={s["section-header"]}>
+        <div className={s["section-header"]} ref={headerRef}>
           <h2>Our Core Team</h2>
           <div className={s["header-decoration"]}>
-            <span className={s["starburst"]}>              <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <span className={s["starburst"]} ref={starburstHeaderRef}>
+              <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <radialGradient id="team-header-glow" cx="50%" cy="50%" r="50%">
                     <stop offset="0%" stopColor="#b2ebf2" stopOpacity="0.9"/>
@@ -246,7 +448,8 @@ export const TeamSection = () => {
             </span>
           </div>
           <p>Meet the passionate individuals driving our community forward</p>
-        </div>      <div className={s["team-members"]}>
+        </div>      
+        <div className={s["team-members"]} ref={teamMembersRef}>
           {teamMembers.map((member, index) => (
             <TeamMember
               key={member.name}
