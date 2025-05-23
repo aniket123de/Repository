@@ -336,7 +336,7 @@ export const TeamSection = () => {
       }
     },
     {
-      name: "Parthi",
+      name: "Parthita",
       role: "Outreach Lead",
       statement: "I believe in the power of connections. My mission is to expand our community's reach by building bridges with other tech groups, companies and educational institutions, creating opportunities for collaboration and growth for all our members.",
       image: "/team/parthi.jpg",
