@@ -51,45 +51,82 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
   const quoteRef = useRef<HTMLDivElement>(null);
   const quoteStartRef = useRef<HTMLSpanElement>(null);
   const quoteEndRef = useRef<HTMLSpanElement>(null);
-  const socialLinksRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
+  const socialLinksRef = useRef<HTMLDivElement>(null);  useEffect(() => {
     if (!memberRef.current) return;
 
-    // Initial animation for the component
+    // Enhanced initial animation for the component
     gsap.fromTo(
       memberRef.current,
-      { opacity: 0, y: 30 },
+      { 
+        opacity: 0, 
+        y: 50,
+        scale: 0.95,
+        rotationX: 5
+      },
       { 
         opacity: 1, 
-        y: 0, 
-        duration: 0.8, 
-        ease: "power2.out",
+        y: 0,
+        scale: 1,
+        rotationX: 0,
+        duration: 1.2, 
+        ease: "power3.out",
         scrollTrigger: {
           trigger: memberRef.current,
-          start: "top 80%",
+          start: "top 85%",
           toggleActions: "play none none none"
         }
       }
     );
-    // Add a subtle animation for the image when scrolling
+    
+    // Enhanced animation for the image when scrolling
     if (imageRef.current) {
       const imageElement = imageRef.current.querySelector('img');
+      const imageWrapperElement = imageRef.current.querySelector(`.${s["image-wrapper"]}`);
+      
       if (imageElement) {
         const direction = isReversed ? 1 : -1;
+        
+        // First, animate the wrapper with a bounce effect
+        gsap.fromTo(
+          imageWrapperElement,
+          {
+            opacity: 0,
+            scale: 0.8,
+            y: 40,
+            rotation: direction * -5
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            rotation: 0,
+            duration: 1.5,
+            ease: "elastic.out(1, 0.5)",
+            scrollTrigger: {
+              trigger: memberRef.current,
+              start: "top 75%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
+        
+        // Then animate the actual image with a slight delay
         gsap.fromTo(
           imageElement,
           { 
             scale: 0.95,
-            x: direction * 30,
-            rotation: direction * -3
+            x: direction * 40,
+            rotation: direction * -8,
+            filter: 'blur(5px) brightness(0.7)'
           },
           {
             scale: 1,
             x: 0,
             rotation: 0,
-            duration: 1,
-            ease: "power2.out",
+            filter: 'blur(0) brightness(0.95)',
+            duration: 1.8,
+            delay: 0.2,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: memberRef.current,
               start: "top 75%",
@@ -119,52 +156,158 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
         });
       });
     }
-    // Animate quote marks
+    // Animate quote marks and text with staggered effect
     if (quoteRef.current && quoteStartRef.current && quoteEndRef.current) {
       const quoteContainer = quoteRef.current;
       const quoteStart = quoteStartRef.current;
       const quoteEnd = quoteEndRef.current;
+      const quoteText = quoteRef.current.querySelector('p');
+      
+      // Initial animation for quote elements
+      gsap.fromTo(
+        quoteContainer,
+        { 
+          opacity: 0, 
+          x: isReversed ? -30 : 30,
+          scale: 0.95
+        },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 1,
+          delay: 0.3,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: memberRef.current,
+            start: "top 75%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+      
+      // Animate quote marks separately
+      gsap.fromTo(
+        [quoteStart, quoteEnd],
+        {
+          opacity: 0,
+          scale: 0.5,
+        },
+        {
+          opacity: 0.2,
+          scale: 1,
+          duration: 1.2,
+          delay: 0.5,
+          ease: "back.out(1.7)",
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: memberRef.current,
+            start: "top 75%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+      
+      // Hover animation
       quoteContainer.addEventListener('mouseenter', () => {
         gsap.to(quoteStart, {
-          scale: 1.2,
-          opacity: 0.5,
+          scale: 1.3,
+          opacity: 0.7,
+          x: -5,
           duration: 0.4,
           ease: "power1.out"
         });
         gsap.to(quoteEnd, {
-          scale: 1.2,
-          opacity: 0.5,
+          scale: 1.3,
+          opacity: 0.7,
+          x: 5,
+          duration: 0.4,
+          ease: "power1.out"
+        });
+        gsap.to(quoteText, {
+          scale: 1.02,
           duration: 0.4,
           ease: "power1.out"
         });
       });
+      
       quoteContainer.addEventListener('mouseleave', () => {
         gsap.to([quoteStart, quoteEnd], {
           scale: 1,
           opacity: 0.2,
+          x: 0,
+          duration: 0.4,
+          ease: "power1.in"
+        });
+        gsap.to(quoteText, {
+          scale: 1,
           duration: 0.4,
           ease: "power1.in"
         });
       });
     }
-    // Social links hover animation
+
+    // Social links enhanced hover animation
     if (socialLinksRef.current) {
       const socialLinks = socialLinksRef.current.querySelectorAll('a');
-      socialLinks.forEach((link) => {
+      
+      // Initial animation
+      gsap.fromTo(
+        socialLinks,
+        {
+          opacity: 0,
+          y: 20
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          delay: 0.8,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: memberRef.current,
+            start: "top 75%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+      
+      // Hover animations
+      socialLinks.forEach((link, index) => {
         link.addEventListener('mouseenter', () => {
           gsap.to(link, {
-            y: -5,
-            scale: 1.1,
+            y: -8,
+            scale: 1.2,
+            duration: 0.4,
+            ease: "back.out(1.7)"
+          });
+          
+          // Affect neighboring links slightly
+          const otherLinks = Array.from(socialLinks).filter((_, i) => i !== index);
+          gsap.to(otherLinks, {
+            scale: 0.95,
+            opacity: 0.7,
             duration: 0.3,
             ease: "power1.out"
           });
         });
+        
         link.addEventListener('mouseleave', () => {
           gsap.to(link, {
             y: 0,
             scale: 1,
             duration: 0.3,
             ease: "power1.in"
+          });
+          
+          // Restore neighboring links
+          const otherLinks = Array.from(socialLinks).filter((_, i) => i !== index);
+          gsap.to(otherLinks, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.3,
+            ease: "power1.out"
           });
         });
       });
@@ -257,12 +400,11 @@ export const TeamSection = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const teamMembersRef = useRef<HTMLDivElement>(null);
   const starburstHeaderRef = useRef<HTMLSpanElement>(null);
-  
   useEffect(() => {
     setIsLoaded(true);
     
     if (typeof window === 'undefined' || !sectionRef.current) return;
-      // Animate header elements
+      // Enhanced animations for header elements
     const headerTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
@@ -275,30 +417,83 @@ export const TeamSection = () => {
       const h2Element = headerRef.current.querySelector('h2');
       const pElement = headerRef.current.querySelector('p');
       
+      // Simpler but still beautiful heading animation
       if (h2Element) {
         headerTimeline.fromTo(
           h2Element, 
-          { opacity: 0, y: 30 }, 
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+          { 
+            opacity: 0, 
+            y: 40,
+            filter: 'blur(8px)'
+          }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            filter: 'blur(0px)',
+            duration: 1.2, 
+            ease: "power3.out" 
+          }
         );
       }
       
+      // Enhanced starburst animation
       if (starburstHeaderRef.current) {
         headerTimeline.fromTo(
           starburstHeaderRef.current, 
-          { opacity: 0, scale: 0.5, rotation: -20 }, 
-          { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: "back.out(1.7)" },
-          "-=0.4"
+          { 
+            opacity: 0, 
+            scale: 0.2, 
+            rotation: -60
+          }, 
+          { 
+            opacity: 1, 
+            scale: 1.2, 
+            rotation: 360, 
+            duration: 1.5, 
+            ease: "back.out(1.7)" 
+          },
+          "-=0.8"
         );
+        
+        // Add a small bounce at the end
+        headerTimeline.to(
+          starburstHeaderRef.current,
+          {
+            scale: 1,
+            duration: 0.5,
+            ease: "bounce.out"
+          }
+        );
+        
+        // Add continuous floating animation
+        gsap.to(starburstHeaderRef.current, {
+          y: -10,
+          rotation: '+=15',
+          duration: 2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
       }
       
+      // Enhanced paragraph animation
       if (pElement) {
         headerTimeline.fromTo(
           pElement, 
-          { opacity: 0, y: 20 }, 
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          "-=0.4"
+          { 
+            opacity: 0, 
+            y: 30
+          }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 1.2, 
+            ease: "power3.out" 
+          },
+          "-=0.7"
         );
+        
+        
       }
     }
     
@@ -336,6 +531,17 @@ export const TeamSection = () => {
       }
     },
     {
+      name: "Aniket",
+      role: "Community Lead",
+      statement: "Community is the heart of everything we do. I'm passionate about fostering an inclusive, supportive environment where everyone feels welcome to share ideas, collaborate on projects, and grow together as developers and as people.",
+      image: "/team/aniket.jpg",
+      socials: {
+        linkedin: "https://linkedin.com/in/aniket",
+        github: "https://github.com/aniket123de",
+        twitter: "https://twitter.com/aniket"
+      }
+    },
+    {
       name: "Parthita",
       role: "Outreach Lead",
       statement: "I believe in the power of connections. My mission is to expand our community's reach by building bridges with other tech groups, companies and educational institutions, creating opportunities for collaboration and growth for all our members.",
@@ -353,17 +559,6 @@ export const TeamSection = () => {
       socials: {
         linkedin: "https://linkedin.com/in/anik",
         twitter: "https://twitter.com/anik"
-      }
-    },
-    {
-      name: "Aniket",
-      role: "Community Lead",
-      statement: "Community is the heart of everything we do. I'm passionate about fostering an inclusive, supportive environment where everyone feels welcome to share ideas, collaborate on projects, and grow together as developers and as people.",
-      image: "/team/aniket.jpg",
-      socials: {
-        linkedin: "https://linkedin.com/in/aniket",
-        github: "https://github.com/aniket123de",
-        twitter: "https://twitter.com/aniket"
       }
     },
     {

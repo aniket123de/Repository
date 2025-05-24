@@ -1,46 +1,126 @@
 @import "../../css/helpers";
 
 .team-section {
-  padding: tovw(80px, "desktop-large", 60px) 0;
+  padding: tovw(100px, "desktop-large", 80px) 0;
   background-color: var(--color-black);
   color: var(--color-white);
   background-image: 
-    radial-gradient(circle at 25% 10%, rgba(87, 185, 194, 0.03) 0%, transparent 20%),
-    radial-gradient(circle at 75% 75%, rgba(87, 185, 194, 0.03) 0%, transparent 20%),
-    linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(87, 185, 194, 0.01) 100%);
+    radial-gradient(circle at 25% 10%, rgba(87, 185, 194, 0.05) 0%, transparent 30%),
+    radial-gradient(circle at 75% 75%, rgba(87, 185, 194, 0.05) 0%, transparent 30%),
+    linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(87, 185, 194, 0.02) 100%);
   
   // Prepare for GSAP animations
   overflow: hidden;
   perspective: 1000px;
-
-  .section-header {
+  position: relative;
+  
+  // Add subtle floating particles
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(87, 185, 194, 0.02) 0%, transparent 70%);
+    filter: blur(15px);
+    z-index: 0;
+    animation: float-around 20s infinite ease-in-out;
+  }
+  
+  &::before {
+    top: 15%;
+    left: 10%;
+    animation-delay: 0s;
+  }
+  
+  &::after {
+    bottom: 20%;
+    right: 10%;
+    animation-delay: 10s;
+    width: 250px;
+    height: 250px;
+  }  .section-header {
     text-align: center;
-    margin-bottom: tovw(80px, "desktop-large", 60px);
+    margin-bottom: tovw(100px, "desktop-large", 80px);
     position: relative;
+    z-index: 1;
+    padding: tovw(40px, "desktop-large", 30px) tovw(30px, "desktop-large", 20px);
+    border-radius: 16px;
+    
+    // Add decorative elements
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      z-index: -1;
+    }
+    
+    &::before {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle at center, var(--color-orange) 0%, transparent 70%);
+      top: -100px;
+      left: 10%;
+    }
+    
+    &::after {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle at center, #57B9C2 0%, transparent 70%);
+      bottom: -80px;
+      right: 10%;
+    }
 
     h2 {
-      font-size: tovw(64px, "desktop-large", 48px);
+      font-size: tovw(80px, "desktop-large", 60px);
       font-weight: 800;
-      margin-bottom: tovw(24px, "desktop-large", 16px);
+      margin-bottom: tovw(30px, "desktop-large", 20px);
       letter-spacing: -0.02em;
+      text-shadow: 0 2px 15px rgba(87, 185, 194, 0.4);
+      background: linear-gradient(120deg, #fff, #b2ebf2, #fff);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      position: relative;
+      animation: shine 8s linear infinite;
+      
+      @keyframes shine {
+        to {
+          background-position: 200% center;
+        }
+      }
     }
 
     p {
-      font-size: tovw(20px, "desktop-large", 18px);
-      max-width: tovw(700px, "desktop-large", 600px);
+      font-size: tovw(22px, "desktop-large", 20px);
+      max-width: tovw(800px, "desktop-large", 700px);
       margin: 0 auto;
       opacity: 0.9;
+      line-height: 1.5;
+      position: relative;
+      
+      &::after {
+        content: '';
+        display: block;
+        width: 180px;
+        height: 2px;
+        background: linear-gradient(to right, transparent, var(--color-orange), transparent);
+        margin: 40px auto 0;
+      }
     }
 
     .header-decoration {
       display: flex;
       justify-content: center;
-      margin-bottom: tovw(24px, "desktop-large", 16px);
+      margin-bottom: tovw(30px, "desktop-large", 20px);
 
-    .starburst {
+      .starburst {
         transform: scale(0); // Start scale at 0 for GSAP animation
         opacity: 0; // Start with opacity 0 
         // animation is now controlled via GSAP
+        filter: drop-shadow(0 0 8px rgba(87, 185, 194, 0.3));
       }
     }
   }
@@ -58,14 +138,71 @@
 .team-member {  
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: tovw(80px, "desktop-large", 40px);
+  gap: tovw(100px, "desktop-large", 60px);
   align-items: center;
-  padding: tovw(60px, "desktop-large", 40px) 0;
+  padding: tovw(80px, "desktop-large", 60px) tovw(40px, "desktop-large", 30px);
   opacity: 0; // Start with opacity 0 for GSAP animation
   will-change: transform, opacity;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  border-radius: 20px;
+  margin: 30px 0;
+  backdrop-filter: blur(5px);
+  
+  // Create a glass-like card effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(87, 185, 194, 0.05));
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 20px;
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: -1;
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
   
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-12px);
+    
+    &::before {
+      opacity: 1;
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 0 30px rgba(87, 185, 194, 0.1);
+    }
+  }
+  
+  // Add decorative elements to make each card unique
+  &:nth-child(odd)::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(87, 185, 194, 0.03), transparent 70%);
+    top: -30px;
+    right: 30px;
+    z-index: -2;
+  }
+  
+  &:nth-child(even)::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(255, 107, 53, 0.03), transparent 70%);
+    bottom: -20px;
+    left: 40px;
+    z-index: -2;
   }
   
   @media screen and (max-width: 800px) {
@@ -141,18 +278,24 @@
       width: tovw(200px, "tablet");
     }
   }
-    .member-avatar {
+  .member-avatar {
     width: 100%;
     height: auto;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
     aspect-ratio: 1;
     object-fit: cover;
-    filter: brightness(0.95);
+    filter: brightness(0.95) contrast(1.05);
     will-change: filter, transform, box-shadow;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: rotate(-2deg);
+    border: 3px solid rgba(255, 255, 255, 0.1);
     
     &:hover {
-      filter: brightness(1.05);
+      filter: brightness(1.1) contrast(1.08);
+      transform: rotate(0deg) scale(1.03);
+      border-color: rgba(87, 185, 194, 0.3);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 20px rgba(87, 185, 194, 0.2);
     }
   }
     .starburst-wrapper {
@@ -194,82 +337,122 @@
       margin-bottom: tovw(16px, "desktop-large", 12px);
     }
   }
-  
-  .social-links {
+    .social-links {
     display: flex;
     justify-content: center;
     gap: tovw(16px, "desktop-large", 12px);
+    margin-top: tovw(20px, "desktop-large", 16px);
+    position: relative;
+    z-index: 2;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 8px;
+      bottom: -20px;
+      left: 0;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 80%);
+      border-radius: 50%;
+      filter: blur(5px);
+      opacity: 0.7;
+    }
     
     a {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: tovw(40px, "desktop-large", 36px);
-      height: tovw(40px, "desktop-large", 36px);
+      width: tovw(44px, "desktop-large", 40px);
+      height: tovw(44px, "desktop-large", 40px);
       border-radius: 50%;
-      background-color: var(--color-orange);
+      background: linear-gradient(135deg, var(--color-orange), darken(#FF6B35, 15%));
       color: var(--color-black);
       font-size: tovw(18px, "desktop-large", 16px);
-      transition: transform 0.3s ease, background-color 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 
+        0 4px 10px rgba(0, 0, 0, 0.2),
+        0 0 0 2px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50% 50% 0 0;
+      }
       
       &:hover {
-        transform: translateY(-3px);
-        background-color: #b2ebf2;
+        transform: translateY(-6px) scale(1.1);
+        background: linear-gradient(135deg, #b2ebf2, #57B9C2);
+        box-shadow: 
+          0 10px 20px rgba(0, 0, 0, 0.25),
+          0 0 0 3px rgba(178, 235, 242, 0.3);
+      }
+      
+      &:active {
+        transform: translateY(-2px) scale(0.95);
       }
       
       @media screen and (max-width: 800px) {
-        width: tovw(36px, "tablet");
-        height: tovw(36px, "tablet");
+        width: tovw(38px, "tablet");
+        height: tovw(38px, "tablet");
         font-size: tovw(16px, "tablet");
       }
     }
   }
 }
 
-.team-member-statement {  
-  .quote-container {
+.team-member-statement {    .quote-container {
     position: relative;
-    padding: tovw(20px, "desktop-large", 16px) tovw(30px, "desktop-large", 20px);
-    background: rgba(87, 185, 194, 0.05);
-    border-left: 3px solid var(--color-orange);
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: tovw(30px, "desktop-large", 24px) tovw(40px, "desktop-large", 30px);
+    background: linear-gradient(135deg, rgba(87, 185, 194, 0.08), rgba(87, 185, 194, 0.02));
+    border-left: 4px solid var(--color-orange);
+    border-radius: 16px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(87, 185, 194, 0.05);
     transform-origin: center;
     will-change: transform, box-shadow, background;
+    backdrop-filter: blur(5px);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     
   &::after {
       content: '';
       position: absolute;
-      bottom: -10px;
-      left: 30px;
-      width: 20px;
-      height: 20px;
-      background-color: rgba(87, 185, 194, 0.05);
+      bottom: -12px;
+      left: 40px;
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, rgba(87, 185, 194, 0.08), rgba(87, 185, 194, 0.02));
       transform: rotate(45deg);
       border-bottom: 1px solid rgba(87, 185, 194, 0.2);
       border-right: 1px solid rgba(87, 185, 194, 0.2);
       z-index: -1;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
       
       .team-member.reversed & {
         left: auto;
-        right: 30px;
+        right: 40px;
       }
       
       @media screen and (max-width: 800px) {
         left: 50%;
-        margin-left: -10px;
+        margin-left: -12px;
         
         .team-member.reversed & {
           left: 50%;
           right: auto;
-          margin-left: -10px;
+          margin-left: -12px;
         }
       }
     }
       &:hover {
-      background: rgba(87, 185, 194, 0.08);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-      transform: translateY(-3px);
+      background: linear-gradient(135deg, rgba(87, 185, 194, 0.12), rgba(87, 185, 194, 0.04));
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(87, 185, 194, 0.1), 0 0 30px rgba(87, 185, 194, 0.1);
+      transform: translateY(-5px) scale(1.02);
     }
     
     @media screen and (max-width: 800px) {
@@ -331,5 +514,65 @@
   100% {
     transform: translateY(-10px) rotate(5deg);
     filter: brightness(1);
+  }
+}
+
+@keyframes float-around {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0.5;
+  }
+  25% {
+    transform: translate(30px, 20px);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(10px, 40px);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translate(-20px, 20px);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.5;
+  }
+}
+
+.social-links {
+  a {
+    // Existing styles...
+    
+    // Add unique hover effects for each social platform
+    &:nth-child(1) {
+      transition-delay: 0.05s;
+    }
+    
+    &:nth-child(2) {
+      transition-delay: 0.1s;
+    }
+    
+    &:nth-child(3) {
+      transition-delay: 0.15s;
+    }
+    
+    &:nth-child(4) {
+      transition-delay: 0.2s;
+    }
+    
+    &:nth-child(5) {
+      transition-delay: 0.25s;
+    }
+  }
+  
+  &:hover {
+    a {
+      transform: translateY(0); // Reset for initial state
+      
+      &:hover {
+        transform: translateY(-8px) scale(1.15);
+      }
+    }
   }
 }
