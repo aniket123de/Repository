@@ -23,7 +23,7 @@
     "canvas-confetti": "^1.6.0",
     "clsx": "^1.2.1",
     "eslint-config-custom": "^0.0.0",
-    "framer-motion": "^11.18.2",
+    "framer-motion": "^12.12.2",
     "gsap": "^3.11.5",
     "leva": "^0.9.34",
     "next": "^13.3.0",
@@ -32,6 +32,7 @@
     "react-merge-refs": "^3.0.2",
     "sharp": "^0.32.0",
     "styled-components": "^6.1.18",
+    "tailwind-merge": "^3.3.0",
     "three": "0.159.0",
     "zustand": "^4.3.7"
   },
