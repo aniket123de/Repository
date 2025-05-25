@@ -275,7 +275,7 @@
       
       svg {
         font-size: tovw(35px, "desktop-large", 30px);
-        color: white;
+        color: rgb(0, 0, 0);
       }
     }
     
@@ -350,7 +350,7 @@
       .filter-btn {
         background: rgba(255, 255, 255, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.15);
-        color: white;
+        color: rgb(0, 0, 0);
         border-radius: 20px;
         padding: tovw(10px, "desktop-large", 8px) tovw(20px, "desktop-large", 16px);
         font-size: tovw(14px, "desktop-large", 12px);
@@ -508,7 +508,7 @@
       .connect-btn {
         background: linear-gradient(to right, #57B9C2, #4ca8b2);
         border: none;
-        color: white;
+        color: rgb(0, 0, 0);
         
         &:hover {
           background: linear-gradient(to right, #67cad3, #57B9C2);
