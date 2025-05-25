@@ -115,7 +115,7 @@ const GithubLoginModal = ({ isOpen, onClose }: GithubLoginModalProps) => {
                   </div>
                   
                   <div className={styles.accountBenefits}>
-                    <p>You're successfully logged in with GitHub!</p>
+                    <p>You&apos;re successfully logged in with GitHub!</p>
                     <ul>
                       <li>
                         <FontAwesomeIcon icon={faUser} />
