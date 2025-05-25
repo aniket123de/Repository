@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
+import Image from "next/image";
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -321,9 +321,12 @@ const NearbyCoders = () => {
             <div className={s["card-header"]}>
               <div className={s["avatar-container"]}>
                 <div className={s["avatar"]}>
-                  <img 
+                  <Image 
                     src={coder.avatar} 
                     alt={coder.name} 
+                    width={60}
+                    height={60}
+                    className={s["avatar"]}
                   />
                 </div>
               </div>

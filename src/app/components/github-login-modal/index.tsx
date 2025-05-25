@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faXmark, faChevronRight, faUser, faCode, faStar } from '@fortawesome/free-solid-svg-icons';
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import styles from "./github-login-modal.module.scss";
 
 type GithubLoginModalProps = {
@@ -100,10 +101,12 @@ const GithubLoginModal = ({ isOpen, onClose }: GithubLoginModalProps) => {
               {status === "authenticated" ? (
                 <div className={styles.loggedInContainer}>
                   <div className={styles.userInfo}>
-                    <img 
+                    <Image 
                       src={session.user?.image || 'https://github.com/identicons/app/oauth_app/1497612'}
                       alt={session.user?.name || 'User'} 
                       className={styles.userAvatar}
+                      width={70}
+                      height={70}
                     />
                     <div>
                       <h3>{session.user?.name}</h3>
