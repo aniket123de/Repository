@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faGithub,  
@@ -20,6 +21,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import s from './fyt.module.scss';
 import * as Scrollytelling from "~/lib/scrollytelling-client";
+import GithubLoginModal from '~/app/components/github-login-modal';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -68,10 +70,20 @@ const nearbyCodersData = [
 
 // FYT Hero Section
 const FytHero = () => {
+  const { data: session } = useSession();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const loginButtonRef = useRef<HTMLButtonElement>(null);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -124,18 +136,26 @@ const FytHero = () => {
         <h1 className={s["hero-title"]} ref={titleRef}>
           Find Your Tribe
         </h1>
-        
-        <p className={s["hero-description"]} ref={descriptionRef}>
+          <p className={s["hero-description"]} ref={descriptionRef}>
           Connect with passionate coders in your area, collaborate on projects,
           and build a community of like-minded developers. Your next hackathon
           partner might be just around the corner!
         </p>
         
-        <button className={s["github-login-btn"]} ref={loginButtonRef}>
+        <button 
+          className={s["github-login-btn"]} 
+          ref={loginButtonRef} 
+          onClick={handleOpenModal}
+        >
           <FontAwesomeIcon icon={faGithub} className={s["btn-icon"]} />
-          <span>Login with GitHub</span>
+          <span>{session ? 'My Profile' : 'Login with GitHub'}</span>
         </button>
       </div>
+      
+      <GithubLoginModal 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal} 
+      />
     </div>
   );
 };
@@ -424,8 +444,18 @@ const MapSection = () => {
 
 // Join Community Section
 const JoinCommunity = () => {
+  const { data: session } = useSession();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -461,17 +491,24 @@ const JoinCommunity = () => {
             </svg>
           </span>
         </div>
-        <h2>Ready to Join the Community?</h2>
-        <p>
+        <h2>Ready to Join the Community?</h2>        <p>
           Connect with like-minded developers, build your network, and find 
           collaborators for your next big project. The tech community is 
           waiting for you!
         </p>
-        <button className={s["github-login-btn"]}>
+        <button 
+          className={s["github-login-btn"]} 
+          onClick={handleOpenModal}
+        >
           <FontAwesomeIcon icon={faGithub} className={s["btn-icon"]} />
-          <span>Get Started Now</span>
+          <span>{session ? 'View My Profile' : 'Get Started Now'}</span>
         </button>
       </div>
+      
+      <GithubLoginModal 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal}
+      />
     </div>
   );
 };

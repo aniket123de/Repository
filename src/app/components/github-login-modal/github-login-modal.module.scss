@@ -1,0 +1,293 @@
+@import "../../css/helpers";
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  width: 90%;
+  max-width: 500px;
+  background: #0d1117; // GitHub dark theme color
+  border-radius: 16px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 30px rgba(87, 185, 194, 0.1);
+  overflow: hidden;
+  position: relative;
+  color: #f0f6fc; // GitHub light text
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #f0f6fc;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  z-index: 10;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+  }
+}
+
+.modalHeader {
+  background: linear-gradient(to right, #171f29, #131922);
+  padding: tovw(30px, "desktop-large", 25px) tovw(30px, "desktop-large", 20px);
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  
+  h2 {
+    font-size: tovw(28px, "desktop-large", 24px);
+    margin: 0;
+    font-weight: 600;
+  }
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3px;
+    width: 60px;
+    background: linear-gradient(to right, #57B9C2, #4ca8b2);
+    border-radius: 3px 3px 0 0;
+  }
+}
+
+.logoContainer {
+  margin-bottom: 20px;
+  
+  .githubLogo {
+    font-size: tovw(50px, "desktop-large", 45px);
+    color: #f0f6fc;
+    filter: drop-shadow(0 0 10px rgba(87, 185, 194, 0.5));
+  }
+}
+
+.modalBody {
+  padding: tovw(30px, "desktop-large", 25px);
+}
+
+.benefitsSection {
+  h3 {
+    font-size: tovw(22px, "desktop-large", 18px);
+    margin-bottom: tovw(20px, "desktop-large", 15px);
+    text-align: center;
+    font-weight: 500;
+  }
+  
+  ul {
+    margin-bottom: tovw(30px, "desktop-large", 25px);
+    
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: tovw(15px, "desktop-large", 12px);
+      font-size: tovw(16px, "desktop-large", 14px);
+      color: #c9d1d9;
+      
+      svg {
+        color: #57B9C2;
+        margin-right: tovw(15px, "desktop-large", 12px);
+        font-size: tovw(18px, "desktop-large", 16px);
+      }
+    }
+  }
+}
+
+.privacyNote {
+  padding: tovw(15px, "desktop-large", 12px);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid #57B9C2;
+  margin-bottom: tovw(30px, "desktop-large", 25px);
+  
+  p {
+    font-size: tovw(14px, "desktop-large", 12px);
+    color: #8b949e;
+    margin: 0;
+  }
+}
+
+.modalActions {
+  display: flex;
+  flex-direction: column;
+  gap: tovw(15px, "desktop-large", 12px);
+}
+
+.loginButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: tovw(10px, "desktop-large", 8px);
+  width: 100%;
+  padding: tovw(16px, "desktop-large", 14px);
+  border-radius: 6px;
+  background: linear-gradient(to right, #57B9C2, #4ca8b2);
+  border: none;
+  color: #0d1117;
+  font-size: tovw(16px, "desktop-large", 14px);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: linear-gradient(to right, #67cad3, #57B9C2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(87, 185, 194, 0.3);
+  }
+  
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  svg {
+    font-size: tovw(20px, "desktop-large", 18px);
+  }
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #0d1117;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Logged in state styles
+.loggedInContainer {
+  display: flex;
+  flex-direction: column;
+  gap: tovw(30px, "desktop-large", 25px);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: tovw(20px, "desktop-large", 15px);
+  
+  .userAvatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid #57B9C2;
+  }
+  
+  h3 {
+    font-size: tovw(20px, "desktop-large", 18px);
+    margin: 0 0 5px;
+    font-weight: 600;
+  }
+  
+  p {
+    font-size: tovw(14px, "desktop-large", 12px);
+    color: #8b949e;
+    margin: 0;
+  }
+}
+
+.accountBenefits {
+  p {
+    font-size: tovw(16px, "desktop-large", 14px);
+    margin-bottom: tovw(15px, "desktop-large", 12px);
+    color: #c9d1d9;
+    text-align: center;
+  }
+  
+  ul {
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: tovw(10px, "desktop-large", 8px);
+      font-size: tovw(14px, "desktop-large", 12px);
+      color: #c9d1d9;
+      
+      svg {
+        color: #57B9C2;
+        margin-right: tovw(12px, "desktop-large", 10px);
+        font-size: tovw(16px, "desktop-large", 14px);
+      }
+    }
+  }
+}
+
+.continueButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: tovw(10px, "desktop-large", 8px);
+  width: 100%;
+  padding: tovw(16px, "desktop-large", 14px);
+  border-radius: 6px;
+  background: linear-gradient(to right, #57B9C2, #4ca8b2);
+  border: none;
+  color: #0d1117;
+  font-size: tovw(16px, "desktop-large", 14px);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: linear-gradient(to right, #67cad3, #57B9C2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(87, 185, 194, 0.3);
+  }
+  
+  svg {
+    font-size: tovw(14px, "desktop-large", 12px);
+  }
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: tovw(12px, "desktop-large", 10px);
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #c9d1d9;
+  font-size: tovw(14px, "desktop-large", 12px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
