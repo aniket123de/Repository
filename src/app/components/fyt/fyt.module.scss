@@ -1,0 +1,628 @@
+@import "../../css/helpers";
+
+// Animation keyframes
+@keyframes float-around {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-15px) translateX(15px);
+  }
+  50% {
+    transform: translateY(0) translateX(25px);
+  }
+  75% {
+    transform: translateY(15px) translateX(5px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes marker-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+// Base section styling
+.fyt-section {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  overflow: hidden;
+  position: relative;
+  
+  // Gradient background effect
+  background-image: 
+    radial-gradient(circle at 25% 10%, rgba(87, 185, 194, 0.05) 0%, transparent 30%),
+    radial-gradient(circle at 75% 75%, rgba(87, 185, 194, 0.05) 0%, transparent 30%),
+    linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(87, 185, 194, 0.02) 100%);
+  
+  // Subtle particles floating in the background
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(87, 185, 194, 0.02) 0%, transparent 70%);
+    filter: blur(15px);
+    z-index: 0;
+    animation: float-around 20s infinite ease-in-out;
+  }
+  
+  &::before {
+    top: 15%;
+    left: 10%;
+    animation-delay: 0s;
+  }
+  
+  &::after {
+    bottom: 20%;
+    right: 10%;
+    animation-delay: 10s;
+    width: 250px;
+    height: 250px;
+  }
+}
+
+// Hero section
+.hero {
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: tovw(60px, "desktop-large", 40px);
+  position: relative;
+  
+  .hero-content {
+    max-width: tovw(1000px, "desktop-large", 800px);
+    text-align: center;
+    z-index: 1;
+    padding: tovw(40px, "desktop-large", 30px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-decoration {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    
+    .starburst {
+      position: absolute;
+      top: tovw(-20px, "desktop-large", -15px);
+      right: tovw(100px, "desktop-large", 80px);
+      animation: pulse 6s infinite ease-in-out;
+      
+      @media (max-width: 768px) {
+        top: -10px;
+        right: 40px;
+      }
+    }
+  }
+  
+  .hero-title {
+    font-size: tovw(90px, "desktop-large", 70px);
+    font-weight: 800;
+    margin-bottom: tovw(40px, "desktop-large", 30px);
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 15px rgba(87, 185, 194, 0.4);
+    background: linear-gradient(120deg, #fff, #b2ebf2, #fff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 8s linear infinite;
+    
+    @keyframes shine {
+      to {
+        background-position: 200% center;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      font-size: 50px;
+    }
+  }
+  
+  .hero-description {
+    font-size: tovw(24px, "desktop-large", 20px);
+    max-width: 80%;
+    margin-bottom: tovw(50px, "desktop-large", 40px);
+    opacity: 0.9;
+    line-height: 1.5;
+    
+    @media (max-width: 768px) {
+      font-size: 18px;
+      max-width: 100%;
+    }
+  }
+  
+  .github-login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #57B9C2, #4ca8b2);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: tovw(16px, "desktop-large", 14px) tovw(40px, "desktop-large", 30px);
+    font-size: tovw(18px, "desktop-large", 16px);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(87, 185, 194, 0.3);
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(87, 185, 194, 0.4);
+      background: linear-gradient(to right, #67cad3, #57B9C2);
+    }
+    
+    .btn-icon {
+      margin-right: tovw(12px, "desktop-large", 10px);
+      font-size: tovw(20px, "desktop-large", 18px);
+    }
+  }
+}
+
+// How It Works section
+.how-it-works {
+  padding: tovw(100px, "desktop-large", 80px) tovw(40px, "desktop-large", 30px);
+  text-align: center;
+  position: relative;
+  
+  h2 {
+    font-size: tovw(50px, "desktop-large", 40px);
+    margin-bottom: tovw(60px, "desktop-large", 50px);
+    font-weight: 700;
+  }
+  
+  .steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: tovw(40px, "desktop-large", 30px);
+    max-width: tovw(1200px, "desktop-large", 1000px);
+    margin: 0 auto;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      max-width: 100%;
+    }
+  }
+  
+  .step-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    padding: tovw(30px, "desktop-large", 25px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(87, 185, 194, 0.1);
+    }
+    
+    .step-icon {
+      width: tovw(80px, "desktop-large", 70px);
+      height: tovw(80px, "desktop-large", 70px);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #57B9C2, #4499a1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto tovw(25px, "desktop-large", 20px);
+      
+      svg {
+        font-size: tovw(35px, "desktop-large", 30px);
+        color: white;
+      }
+    }
+    
+    h3 {
+      font-size: tovw(24px, "desktop-large", 20px);
+      margin-bottom: tovw(16px, "desktop-large", 14px);
+      font-weight: 600;
+    }
+    
+    p {
+      font-size: tovw(16px, "desktop-large", 14px);
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.5;
+    }
+  }
+}
+
+// Nearby Coders section
+.nearby-coders {
+  padding: tovw(100px, "desktop-large", 80px) tovw(40px, "desktop-large", 30px);
+  position: relative;
+  
+  h2 {
+    font-size: tovw(50px, "desktop-large", 40px);
+    margin-bottom: tovw(50px, "desktop-large", 40px);
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  .search-container {
+    max-width: tovw(1000px, "desktop-large", 800px);
+    margin: 0 auto tovw(50px, "desktop-large", 40px);
+    
+    .search-input {
+      position: relative;
+      margin-bottom: tovw(20px, "desktop-large", 16px);
+      
+      .search-icon {
+        position: absolute;
+        left: tovw(20px, "desktop-large", 16px);
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(255, 255, 255, 0.6);
+      }
+      
+      input {
+        width: 100%;
+        padding: tovw(16px, "desktop-large", 14px) tovw(16px, "desktop-large", 14px) tovw(16px, "desktop-large", 14px) tovw(50px, "desktop-large", 45px);
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        font-size: tovw(16px, "desktop-large", 14px);
+        
+        &:focus {
+          outline: none;
+          border-color: rgba(87, 185, 194, 0.5);
+          box-shadow: 0 0 0 2px rgba(87, 185, 194, 0.25);
+        }
+        
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.5);
+        }
+      }
+    }
+    
+    .filters {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      .filter-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: white;
+        border-radius: 20px;
+        padding: tovw(10px, "desktop-large", 8px) tovw(20px, "desktop-large", 16px);
+        font-size: tovw(14px, "desktop-large", 12px);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.15);
+        }
+      }
+      
+      .distance-filter {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: tovw(14px, "desktop-large", 12px);
+      }
+    }
+  }
+  
+  .coders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(tovw(300px, "desktop-large", 270px), 1fr));
+    gap: tovw(30px, "desktop-large", 25px);
+    max-width: tovw(1200px, "desktop-large", 1000px);
+    margin: 0 auto;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .coder-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(87, 185, 194, 0.1);
+      
+      .avatar-container {
+        .avatar {
+          transform: scale(1.05);
+        }
+      }
+    }
+    
+    .card-header {
+      padding: tovw(20px, "desktop-large", 16px);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: tovw(15px, "desktop-large", 12px);
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      
+      .avatar-container {
+        overflow: hidden;
+        
+        .avatar {
+          width: tovw(60px, "desktop-large", 50px);
+          height: tovw(60px, "desktop-large", 50px);
+          border-radius: 50%;
+          overflow: hidden;
+          border: 2px solid rgba(87, 185, 194, 0.5);
+          transition: transform 0.3s ease;
+          
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+      
+      .name-container {
+        h3 {
+          font-size: tovw(18px, "desktop-large", 16px);
+          margin-bottom: 5px;
+          font-weight: 600;
+        }
+        
+        .github-username {
+          font-size: tovw(14px, "desktop-large", 12px);
+          color: rgba(255, 255, 255, 0.7);
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+      }
+      
+      .distance {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: tovw(14px, "desktop-large", 12px);
+        color: #57B9C2;
+      }
+    }
+    
+    .card-body {
+      padding: tovw(20px, "desktop-large", 16px);
+      
+      .skills-section, .interests-section {
+        margin-bottom: tovw(15px, "desktop-large", 12px);
+        
+        h4 {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: tovw(16px, "desktop-large", 14px);
+          margin-bottom: tovw(10px, "desktop-large", 8px);
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.9);
+          
+          svg {
+            color: #57B9C2;
+          }
+        }
+        
+        .tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          
+          .tag {
+            background: rgba(87, 185, 194, 0.15);
+            border: 1px solid rgba(87, 185, 194, 0.3);
+            border-radius: 12px;
+            padding: tovw(6px, "desktop-large", 5px) tovw(12px, "desktop-large", 10px);
+            font-size: tovw(12px, "desktop-large", 11px);
+            color: rgba(255, 255, 255, 0.9);
+          }
+        }
+      }
+    }
+    
+    .card-actions {
+      padding: tovw(20px, "desktop-large", 16px);
+      display: flex;
+      gap: tovw(10px, "desktop-large", 8px);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      
+      .connect-btn, .view-profile-btn {
+        flex: 1;
+        padding: tovw(10px, "desktop-large", 8px);
+        border-radius: 8px;
+        font-size: tovw(14px, "desktop-large", 12px);
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      
+      .connect-btn {
+        background: linear-gradient(to right, #57B9C2, #4ca8b2);
+        border: none;
+        color: white;
+        
+        &:hover {
+          background: linear-gradient(to right, #67cad3, #57B9C2);
+        }
+      }
+      
+      .view-profile-btn {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+      }
+    }
+  }
+}
+
+// Map Section
+.map-section {
+  padding: tovw(100px, "desktop-large", 80px) tovw(40px, "desktop-large", 30px);
+  text-align: center;
+  position: relative;
+  
+  h2 {
+    font-size: tovw(50px, "desktop-large", 40px);
+    margin-bottom: tovw(60px, "desktop-large", 50px);
+    font-weight: 700;
+  }
+  
+  .map-container {
+    max-width: tovw(1200px, "desktop-large", 1000px);
+    margin: 0 auto;
+    
+    .map-placeholder {
+      width: 100%;
+      height: tovw(600px, "desktop-large", 500px);
+      border-radius: 20px;
+      background: linear-gradient(to bottom right, #0a1720, #092029);
+      position: relative;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+          linear-gradient(rgba(87, 185, 194, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(87, 185, 194, 0.02) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+      
+      .map-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        
+        .marker {
+          position: absolute;
+          color: #57B9C2;
+          font-size: tovw(24px, "desktop-large", 20px);
+          filter: drop-shadow(0 0 10px rgba(87, 185, 194, 0.5));
+          transition: all 0.3s ease;
+          cursor: pointer;
+          
+          &:hover {
+            transform: scale(1.2);
+            color: #67cad3;
+          }
+          
+          &.current-user {
+            color: #ff6b6b;
+            font-size: tovw(30px, "desktop-large", 26px);
+            animation: marker-bounce 2s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));
+            
+            &:hover {
+              color: #ff8585;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Join Community section
+.join-community {
+  padding: tovw(120px, "desktop-large", 100px) tovw(40px, "desktop-large", 30px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  
+  .community-content {
+    max-width: tovw(800px, "desktop-large", 700px);
+    text-align: center;
+    padding: tovw(60px, "desktop-large", 50px);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 24px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    z-index: 1;
+  }
+  
+  .starburst-container {
+    .starburst {
+      position: absolute;
+      top: tovw(-28px, "desktop-large", -24px);
+      left: 50%;
+      transform: translateX(-50%);
+      animation: pulse 6s infinite ease-in-out;
+    }
+  }
+  
+  h2 {
+    font-size: tovw(40px, "desktop-large", 36px);
+    margin-bottom: tovw(30px, "desktop-large", 25px);
+    font-weight: 700;
+  }
+  
+  p {
+    font-size: tovw(18px, "desktop-large", 16px);
+    margin-bottom: tovw(40px, "desktop-large", 35px);
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  
+  .github-login-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #57B9C2, #4ca8b2);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: tovw(16px, "desktop-large", 14px) tovw(40px, "desktop-large", 30px);
+    font-size: tovw(18px, "desktop-large", 16px);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(87, 185, 194, 0.3);
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(87, 185, 194, 0.4);
+      background: linear-gradient(to right, #67cad3, #57B9C2);
+    }
+    
+    .btn-icon {
+      margin-right: tovw(12px, "desktop-large", 10px);
+      font-size: tovw(20px, "desktop-large", 18px);
+    }
+  }
+}

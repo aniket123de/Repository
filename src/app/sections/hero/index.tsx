@@ -97,10 +97,8 @@ export const Hero = () => {
                 height={15}
               />
               Community
-            </a>            <a 
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
+            </a>            <Link 
+              href="/fyt"
             >
               <FontAwesomeIcon 
                 icon={faBinoculars} 
@@ -108,7 +106,7 @@ export const Hero = () => {
                 height={15}
               />
               <span>FYT</span>
-            </a>            <Link 
+            </Link><Link 
               href="/team"
             >
               <FontAwesomeIcon 
