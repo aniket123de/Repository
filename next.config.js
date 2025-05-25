@@ -5,7 +5,7 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   images: {
-    domains: ["lab.basement.studio"],
+    domains: ["repository-main.vercel.app", "github.com"],
   },
   rewrites: async () => [
     {
