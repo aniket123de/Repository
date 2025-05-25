@@ -44,9 +44,8 @@ export const Hero = () => {
                 <circle cx="28" cy="28" r="22" fill="#57B9C2"/>
                 <path d="M28 10L31.5 22.5L44 26L31.5 29.5L28 42L24.5 29.5L12 26L24.5 22.5L28 10Z" fill="#fff"/>
               </svg>
-            </span>
-            <span className={s["circle-img-container"]}>
-              <Image src="/circle.png" alt="Circle" className={s["star"]} width={32} height={32} />
+            </span>            <span className={s["circle-img-container"]}>
+              <Image src="/circle.png" alt="Circle" className={s["star"]} width={100} height={100} priority quality={100} />
             </span>
             <span className={s["starburst"]}>
               <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">

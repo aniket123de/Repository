@@ -102,7 +102,7 @@
 }
 
 .star {
-  width: tovw(150px, "desktop-large", 60px); // Adjusted for better fit
+  width: tovw(150px, "desktop-large", 60px); // Increased size for clarity
   height: tovw(150px, "desktop-large", 60px); // Keep aspect ratio square for image
   display: block;
   object-fit: contain;
@@ -296,8 +296,8 @@
 }
 
 .star {
-  width: 64px;
-  height: 64px;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
   border-radius: 50%;
   box-shadow: 0 0 24px 0 #57B9C280;
@@ -305,8 +305,8 @@
   transition: box-shadow 0.3s;
 
   @media (max-width: 600px) {
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
   }
 }
 
