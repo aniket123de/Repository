@@ -479,6 +479,8 @@ const JoinCommunity = () => {
 export const FytSection = () => {
   return (
     <div className={s["fyt-section"]}>
+      <div className={s["floating-particles"]}></div>
+      <div className={s["dots"]}></div>
       <FytHero />
       <HowItWorks />
       <NearbyCoders />

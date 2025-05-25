@@ -1,0 +1,47 @@
+/* FYT Page Background Styles */
+.fyt-page {
+  position: relative;
+  min-height: 100vh;
+}
+
+.fyt-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background-size: 25px 25px;
+  background-image:
+    linear-gradient(to right, rgba(87, 185, 194, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(87, 185, 194, 0.1) 1px, transparent 1px);
+  opacity: 0.3;
+}
+
+/* Add dots at intersections */
+.fyt-page::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle at center, rgba(87, 185, 194, 0.2) 1px, transparent 1px);
+  background-size: 25px 25px;
+  background-position: 0 0;
+  opacity: 0.4;
+  animation: subtle-pulse 8s infinite alternate ease-in-out;
+}
+
+@keyframes subtle-pulse {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}

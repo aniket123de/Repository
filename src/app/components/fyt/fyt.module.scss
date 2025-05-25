@@ -36,21 +36,61 @@
   }
 }
 
+// Add a keyframe animation for the dot grid
+@keyframes subtle-fade {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+// Add floating particles animation
+@keyframes floating-particles {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-1%) translateX(1%) rotate(1deg);
+  }
+  50% {
+    transform: translateY(1%) translateX(2%) rotate(0deg);
+  }
+  75% {
+    transform: translateY(2%) translateX(-1%) rotate(-1deg);
+  }
+}
+
 // Base section styling
 .fyt-section {
-  background-color: var(--color-black);
+  background: transparent !important;
   color: var(--color-white);
-  overflow: hidden;
   position: relative;
+  overflow: visible;
+  z-index: auto;
   
-  // Gradient background effect
-  background-image: 
-    radial-gradient(circle at 25% 10%, rgba(87, 185, 194, 0.05) 0%, transparent 30%),
-    radial-gradient(circle at 75% 75%, rgba(87, 185, 194, 0.05) 0%, transparent 30%),
-    linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(87, 185, 194, 0.02) 100%);
+  // Dot-line pattern overlay (grids only, no dots)
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.5;
+    animation: subtle-fade 8s ease-in-out infinite;
+    background-size: 30px 30px;
+    background-image:
+      linear-gradient(to right, rgba(87, 185, 194, 0.1) 1px, transparent 1.5px),
+      linear-gradient(to bottom, rgba(87, 185, 194, 0.1) 1px, transparent 1.5px);
+    background-position: center;
+  }
   
   // Subtle particles floating in the background
-  &::before, &::after {
+  &::after {
     content: '';
     position: absolute;
     width: 300px;
@@ -62,18 +102,23 @@
     animation: float-around 20s infinite ease-in-out;
   }
   
-  &::before {
-    top: 15%;
-    left: 10%;
-    animation-delay: 0s;
-  }
-  
   &::after {
     bottom: 20%;
     right: 10%;
     animation-delay: 10s;
     width: 250px;
     height: 250px;
+  }
+  
+  // Add floating particles
+  .floating-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
   }
 }
 
@@ -156,7 +201,7 @@
     align-items: center;
     justify-content: center;
     background: linear-gradient(to right, #57B9C2, #4ca8b2);
-    color: white;
+    color: #111 !important;
     border: none;
     border-radius: 30px;
     padding: tovw(16px, "desktop-large", 14px) tovw(40px, "desktop-large", 30px);
@@ -165,6 +210,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(87, 185, 194, 0.3);
+    text-shadow: none;
     
     &:hover {
       transform: translateY(-3px);
@@ -625,4 +671,13 @@
       font-size: tovw(20px, "desktop-large", 18px);
     }
   }
+}
+
+// Add page wrapper background
+.page-wrapper {
+  position: relative;
+  background-color: #0a141f;
+  background-image: radial-gradient(circle at center, rgba(87,185,194,0.05) 0%, transparent 70%);
+  min-height: 100vh;
+  overflow: hidden;
 }

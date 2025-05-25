@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FytSection } from '~/app/components/fyt';
+import './fyt-page.css';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -37,11 +38,10 @@ export default function FytPage() {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
-  
-  return (
+    return (
     <>
       <ScrollProgressBar />
-      <main>
+      <main className="fyt-page">
         <FytSection />
       </main>
       <ScrollToTopButton />
