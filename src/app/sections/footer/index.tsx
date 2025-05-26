@@ -136,7 +136,7 @@ const PreFooter = () => {
       />
       <div className={s["left-content"]}>
         <p>
-          Now we are talking! Say hello to our brand new scrollytelling library.
+          Discover your coding community—find your tribe and build together!
         </p>
         <Terminal />
         <a
@@ -145,7 +145,7 @@ const PreFooter = () => {
           target="_blank"
           rel="noreferrer"
         >
-          Check it out on GitHub
+          Check it out now !!
         </a>
         <a
           className={s["mobile-qr-link"]}
@@ -228,10 +228,16 @@ const Terminal = () => {
               <span key={idx} className={s.circle} />
             ))}
           </span>
-          <span className={s["terminal-title"]}>terminal</span>
+          <span className={s["terminal-title"]}>Browser</span>
         </div>
         <DottedDiv className={s.content}>
-          <p ref={contentRef}>yarn add @bsmnt/scrollytelling</p>
+          <p
+            ref={contentRef}
+            style={{ cursor: "pointer", textDecoration: "bold" }}
+            onClick={() => window.open("https://bit.ly/3STCHsu", "_blank")}
+          >
+            https://bit.ly/3STCHsu
+          </p>
           <button
             title="copy text"
             className={s["copy-button"]}
