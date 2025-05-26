@@ -234,9 +234,9 @@ const Terminal = () => {
           <p
             ref={contentRef}
             style={{ cursor: "pointer", textDecoration: "bold" }}
-            onClick={() => window.open("https://bit.ly/3STCHsu", "_blank")}
+            onClick={() => window.open("https://repository-main.vercel.app/fyt", "_blank")}
           >
-            https://bit.ly/3STCHsu
+            repository-main.vercel.app/fyt
           </p>
           <button
             title="copy text"
