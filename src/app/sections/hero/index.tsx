@@ -292,7 +292,14 @@ export const Hero = () => {
               </div>
               <div>
                 {/* Third word: "COOL SHIT" replaced with hero.svg */}
-                <Image src="/hero.svg" alt="Hero" className={s["svg-coolshit"]} width={300} height={100} />
+                <Image 
+                  src="/hero.svg" 
+                  alt="Hero" 
+                  className={s["svg-coolshit"]} 
+                  width={1856} 
+                  height={257} 
+                  style={{ width: "100%", height: "auto" }}
+                />
               </div>
               <div className={s["svg__container"]}>
                 <Scrollytelling.Animation
