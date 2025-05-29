@@ -73,35 +73,34 @@ export const LabCylinder = () => {
   const events: Event[] = [
     {
       id: "event1",
-      title: "Can AI Take Over Full Stack Dev?",
+      title: "Lorem Ipsum Title 1",
       date: "Apr 20, 2025",
-      description:
-        "Join Sarthak Sharma—full-stack wizard from Sheryians Coding School with 450k+ YouTube learners—for a power-packed session on the future of development.",
-      link: "/events/ai-dev",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      link: "/events/lorem-ipsum-1",
     },
     {
       id: "event2",
-      title: "Let's Talk AI & Hackathons with tensor...boy",
+      title: "Lorem Ipsum Title 2",
       date: "Apr 19, 2025",
       description:
-        "An interactive session about AI hackathons and how to excel in them with tensor...boy.",
-      link: "/events/tensor-boy",
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      link: "/events/lorem-ipsum-2",
     },
     {
       id: "event3",
-      title: "Let's talk data science with Subhodeep, data-scientist from Amazon",
+      title: "Lorem Ipsum Title 3",
       date: "Mar 09, 2025",
       description:
-        "Learn about the latest trends in data science and career opportunities with Amazon's data scientist.",
-      link: "/events/data-science-amazon",
+        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      link: "/events/lorem-ipsum-3",
     },
     {
       id: "event4",
-      title: "AI, Hackathons, and Data Science 101",
+      title: "Lorem Ipsum Title 4",
       date: "Feb 08, 2025",
       description:
-        "A beginner-friendly introduction to AI, hackathons, and the fundamentals of data science.",
-      link: "/events/ai-101",
+        "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
+      link: "/events/lorem-ipsum-4",
     },
   ];
 
