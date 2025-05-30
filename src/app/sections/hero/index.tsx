@@ -67,7 +67,7 @@ export const Hero = () => {
             </pre>
             <div className={s["cta--buttons"]}>
             <a
-              href="https://github.com/aniket123de/Repository"
+              href="https://github.com/Repository-Main"
               target="_blank"
               rel="noopener noreferrer"
             >
