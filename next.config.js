@@ -5,7 +5,14 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   images: {
-    domains: ["repository-main.vercel.app", "github.com"],
+    domains: [
+      "repository-main.vercel.app",
+      "github.com",
+      "avatars.githubusercontent.com"
+    ],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   webpack: (config, { dev, isServer }) => {
     if (dev && !isServer) {
