@@ -7,6 +7,17 @@ const nextConfig = {
   images: {
     domains: ["repository-main.vercel.app", "github.com"],
   },
+  webpack: (config, { dev, isServer }) => {
+    if (dev && !isServer) {
+      config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 300,
+      };
+      // Fix for HMR CSS issues
+      config.optimization.splitChunks = false;
+    }
+    return config;
+  },
   rewrites: async () => [
     {
       source: "/:path*",
