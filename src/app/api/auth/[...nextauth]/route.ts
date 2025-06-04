@@ -4,10 +4,17 @@ import type { JWT } from "next-auth/jwt";
 import type { Session, User, Account, Profile } from "next-auth";
 
 const authOptions: NextAuthOptions = {
+  debug: true, // Enable debug messages
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID || "",
       clientSecret: process.env.GITHUB_SECRET || "",
+      authorization: {
+        params: {
+          scope: 'read:user user:email',
+        },
+      },
+      allowDangerousEmailAccountLinking: true,
     }),
   ],
   callbacks: {
@@ -24,6 +31,16 @@ const authOptions: NextAuthOptions = {
       (session as any).accessToken = (token as any).accessToken;
       (session.user as any).profile = (token as any).profile;
       return session;
+    },
+    async redirect({ url, baseUrl }) {
+      // Ensure we maintain the correct port during redirects
+      const currentPort = process.env.PORT || '3002';
+      const urlObject = new URL(url);
+      if (urlObject.hostname === 'localhost') {
+        urlObject.port = currentPort;
+        return urlObject.toString();
+      }
+      return url;
     },
   },
   theme: {
