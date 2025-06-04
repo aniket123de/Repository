@@ -33,14 +33,27 @@ const authOptions: NextAuthOptions = {
       return session;
     },
     async redirect({ url, baseUrl }) {
-      // Ensure we maintain the correct port during redirects
-      const currentPort = process.env.PORT || '3002';
-      const urlObject = new URL(url);
-      if (urlObject.hostname === 'localhost') {
-        urlObject.port = currentPort;
-        return urlObject.toString();
+      try {
+        // Always use HTTPS in production
+        if (process.env.NODE_ENV === 'production') {
+          const prodUrl = new URL(url);
+          prodUrl.protocol = 'https:';
+          prodUrl.host = 'repository-main.vercel.app';
+          return prodUrl.toString();
+        }
+        
+        // Local development handling
+        const currentPort = process.env.PORT || '3002';
+        const urlObject = new URL(url);
+        if (urlObject.hostname === 'localhost') {
+          urlObject.port = currentPort;
+          return urlObject.toString();
+        }
+        return url;
+      } catch (error) {
+        console.error('Redirect error:', error);
+        return baseUrl;
       }
-      return url;
     },
   },
   theme: {
@@ -50,6 +63,18 @@ const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: '/auth/signin',
+    error: '/auth/error',
+  },
+  logger: {
+    error(code, ...message) {
+      console.error(code, ...message);
+    },
+    warn(code, ...message) {
+      console.warn(code, ...message);
+    },
+    debug(code, ...message) {
+      console.debug(code, ...message);
+    },
   }
 };
 
