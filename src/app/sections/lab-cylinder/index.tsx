@@ -216,12 +216,6 @@ export const LabCylinder = () => {
             </AnimatePresence>
           </div>
         </div>
-
-        <div className={styles.viewAllContainer}>
-          <Link href="/events" className={styles.viewAllButton}>
-            View All Events
-          </Link>
-        </div>
       </div>
     </section>
   );
