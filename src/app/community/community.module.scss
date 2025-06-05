@@ -54,6 +54,27 @@
   }
 }
 
+@keyframes buttonPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(87, 185, 194, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(87, 185, 194, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(87, 185, 194, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
 .container {
   min-height: 100vh;
   background: linear-gradient(135deg, #0a0a0a 0%, #111827 50%, #0a0a0a 100%);
@@ -217,6 +238,21 @@
   transform-origin: center center;
 }
 
+/* Enhanced Section Headers */
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.sectionDivider {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(87, 185, 194, 0.8) 0%, rgba(87, 185, 194, 0) 100%);
+  border-radius: 2px;
+}
+
 /* Social section */
 .socialSection {
   margin-bottom: 6rem;
@@ -259,7 +295,7 @@
   align-items: center;
   gap: 1rem;
   padding: 1.5rem;
-  background: rgba(15, 23, 42, 0.6);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.8));
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
   text-decoration: none;
@@ -268,13 +304,27 @@
   backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
 }
 
 .socialCard:hover {
-  transform: translateY(-4px);
-  background: rgba(15, 23, 42, 0.8);
-  border-color: var(--accent-color);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 1));
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 .socialIconWrapper {
@@ -287,6 +337,13 @@
   background: rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    transform: scale(1.1);
+  }
 }
 
 .socialIcon {
@@ -368,7 +425,7 @@
 }
 
 .recruitmentCard {
-  background: rgba(15, 23, 42, 0.6);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.8));
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   padding: 2rem;
@@ -382,10 +439,9 @@
 }
 
 .recruitmentCard:hover {
-  transform: translateY(-8px);
-  background: rgba(15, 23, 42, 0.8);
-  border-color: #57B9C2;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  transform: scale(1.05);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 1));
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 .cardHeader {
@@ -571,11 +627,45 @@
 
 /* Page Footer */
 .pageFooter {
-  margin-top: 4rem;
-  padding: 2rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(10, 15, 30, 0.8));
+  border-top: 2px solid rgba(87, 185, 194, 0.2);
+  border-radius: 20px 20px 0 0;
+  margin-top: 6rem;
+  padding: 3rem 2rem 2rem;
   text-align: center;
-  opacity: 0.7;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(87, 185, 194, 0.8), transparent);
+  }
+}
+
+.footerContent {
+  max-width: 600px;
+  margin: 0 auto;
+  
+  p {
+    margin: 0.5rem 0;
+    opacity: 0.7;
+    font-size: 1rem;
+    
+    &:first-child {
+      font-weight: 600;
+      opacity: 0.9;
+    }
+    
+    &:last-child {
+      font-style: italic;
+      color: #57B9C2;
+    }
+  }
 }
 
 /* Form Overlay */
@@ -699,15 +789,12 @@
 .formGroup textarea {
   width: 100%;
   padding: 0.9rem 1.2rem;
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  border-radius: 8px;
   color: white;
   font-size: 1rem;
   transition: all 0.3s ease;
-    &::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-  }
 }
 
 .formGroup input:focus,
@@ -732,63 +819,132 @@
 }
 
 .cancelButton {
-  padding: 0.9rem 1.8rem;
-  border-radius: 10px;
-  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #57B9C2;
   font-weight: 600;
+  padding: 1rem 2rem;
+  border: 2px solid rgba(87, 185, 194, 0.3);
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
-  color: white;
-}
-
-.cancelButton:hover {
-  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: rgba(87, 185, 194, 0.1);
+    transition: width 0.3s ease;
+    z-index: 0;
+  }
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #57B9C2;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(87, 185, 194, 0.3);
+    
+    &::before {
+      width: 100%;
+    }
+  }
+  
+  span {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .submitButton {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.9rem 1.8rem;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
-  background: linear-gradient(90deg, #57B9C2, #4A9DA6);
+  background: linear-gradient(45deg, #57B9C2, #4A9DA6);
   color: white;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 8px 24px rgba(87, 185, 194, 0.4);
   position: relative;
   overflow: hidden;
-    &::before {
-    content: "";
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  
+  &::before {
+    content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: all 0.6s ease;
+    transition: left 0.5s;
   }
   
-  svg {
-    transition: transform 0.3s ease;
+  &:hover {
+    background: linear-gradient(45deg, #4A9DA6, #57B9C2);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 32px rgba(87, 185, 194, 0.6);
+    
+    &::before {
+      left: 100%;
+    }
+  }
+  
+  &:active {
+    transform: translateY(-1px) scale(0.98);
   }
 }
 
-.submitButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(87, 185, 194, 0.4);
+/* Typeform Container Styles */
+.typeformContainer {
+  position: relative;
+  margin-top: 2rem;
 }
 
-.submitButton:hover::before {
-  left: 100%;
-}
-
-.submitButton:hover svg {
-  transform: translateX(4px);
+.typeformWrapper {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.8), rgba(10, 15, 30, 0.9));
+  border: 2px solid rgba(87, 185, 194, 0.3);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(87, 185, 194, 0.2);
+  backdrop-filter: blur(15px);
+  position: relative;
+  overflow: hidden;
+  min-height: 600px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(87, 185, 194, 0.05), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
+  
+  iframe, [data-tf-live] {
+    border-radius: 16px;
+    overflow: hidden;
+  }
 }
 
 /* Responsive styles */

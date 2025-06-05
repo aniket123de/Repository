@@ -140,13 +140,14 @@ export default function CommunityPage() {
             />
           </div>
         </div>
-      </section>
-
-      <section className={s.socialSection}>
-        <h2>
-          <span className={s.sectionAccent}>#</span>
-          Connect With Us
-        </h2>
+      </section>      <section className={s.socialSection}>
+        <div className={s.sectionHeader}>
+          <h2>
+            <span className={s.sectionAccent}>#</span>
+            Connect With Us
+          </h2>
+          <div className={s.sectionDivider}></div>
+        </div>
         <p className={s.sectionDesc}>Join our channels to stay updated and engage with our community</p>
         <div className={s.socialGrid}>
           {socialLinks.map((social) => (
@@ -169,16 +170,23 @@ export default function CommunityPage() {
             </a>
           ))}
         </div>
+      </section>      <section className={s.recruitmentSection}>
+        <div className={s.sectionHeader}>
+          <h2>
+            <span className={s.sectionAccent}>#</span>
+            Campus Ambassador Form
+          </h2>
+          <div className={s.sectionDivider}></div>
+        </div>
+        <p className={s.sectionDesc}>Join our team as a Campus Ambassador and represent our community at your campus.</p>
+        <div className={s.typeformContainer}>
+          <div className={s.typeformWrapper}>
+            <div data-tf-live="01JWZTSNGVQBDXFKWEET4EQ2QR"></div>
+          </div>
+        </div>
       </section>
 
-      <section className={s.recruitmentSection}>
-        <h2>
-          <span className={s.sectionAccent}>#</span>
-          Campus Ambassador Form
-        </h2>
-        <p className={s.sectionDesc}>Join our team as a Campus Ambassador and represent our community at your campus.</p>
-        <div data-tf-live="01JWZTSNGVQBDXFKWEET4EQ2QR"></div>
-      </section>      <footer className={s.pageFooter}>
+      <footer className={s.pageFooter}>
         <div className={s.footerContent}>
           <p>© {new Date().getFullYear()} Repository Community</p>
           <p>Building the future, together.</p>
@@ -252,11 +260,10 @@ export default function CommunityPage() {
                     />
                   </div>
                 </div>
-              </div>
-              
+              </div>              
               <div className={s.formActions}>
                 <button type="button" className={s.cancelButton} onClick={() => setActiveForm(null)}>
-                  Cancel
+                  <span>Cancel</span>
                 </button>
                 <button type="submit" className={s.submitButton}>
                   <span>Submit Application</span>
@@ -364,11 +371,10 @@ export default function CommunityPage() {
                     />
                   </div>
                 </div>
-              </div>
-              
+              </div>              
               <div className={s.formActions}>
                 <button type="button" className={s.cancelButton} onClick={() => setActiveForm(null)}>
-                  Cancel
+                  <span>Cancel</span>
                 </button>
                 <button type="submit" className={s.submitButton}>
                   <span>Submit Application</span>
