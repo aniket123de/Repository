@@ -53,9 +53,9 @@ export default function CommunityPage() {
       color: "#333"
     }
   ];  useEffect(() => {
-    // Load Typeform script
+    // Load YouForm script
     const script = document.createElement("script");
-    script.src = "//embed.typeform.com/next/embed.js";
+    script.src = "https://app.youform.com/embed.js";
     script.async = true;
     document.body.appendChild(script);
 
@@ -140,10 +140,9 @@ export default function CommunityPage() {
           </h2>
           <div className={s.sectionDivider}></div>
         </div>
-        <p className={s.sectionDesc}>Join our team as a Campus Ambassador and represent our community at your campus.</p>
-        <div className={s.typeformContainer}>
+        <p className={s.sectionDesc}>Join our team as a Campus Ambassador and represent our community at your campus.</p>        <div className={s.typeformContainer}>
           <div className={s.typeformWrapper}>
-            <div data-tf-live="01JWZTSNGVQBDXFKWEET4EQ2QR"></div>
+            <div data-youform-embed data-form='ygfgmlyw' data-width='100%' data-height='700'></div>
           </div>
         </div>
       </section>      <footer className={s.pageFooter}>
