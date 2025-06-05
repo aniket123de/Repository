@@ -82,6 +82,8 @@
   padding: 2rem;
   position: relative;
   overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .bgAnimation {
@@ -124,6 +126,8 @@
   position: relative;
   z-index: 1;
   padding: 2rem 0;
+  width: 100%;
+  overflow: hidden; /* Prevent content overflow */
 }
 
 .titleContainer {
@@ -947,8 +951,11 @@
   }
 }
 
-/* Global mobile optimizations for community page */
-:global(.community-page) {
+/* Mobile optimizations applied to container */
+.container {
+  // ...existing code...
+  
+  /* Global mobile optimizations */
   overflow-x: hidden;
   
   @media (max-width: 768px) {
@@ -974,18 +981,16 @@
 
 /* Prevent zoom on form inputs for iOS */
 @media (max-width: 768px) {
-  :global(.community-page) {
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    input[type="url"],
-    input[type="password"],
-    input[type="number"],
-    input[type="search"],
-    select,
-    textarea {
-      font-size: 16px !important; /* Prevent zoom on iOS */
-    }
+  .formGroup input[type="text"],
+  .formGroup input[type="email"],
+  .formGroup input[type="tel"],
+  .formGroup input[type="url"],
+  .formGroup input[type="password"],
+  .formGroup input[type="number"],
+  .formGroup input[type="search"],
+  .formGroup select,
+  .formGroup textarea {
+    font-size: 16px !important; /* Prevent zoom on iOS */
   }
 }
 
@@ -1025,25 +1030,39 @@
     padding: 1rem;
     overflow-x: hidden;
   }
-  
-  .header {
+    .header {
     margin-bottom: 3rem;
-    padding: 1rem 0;
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  .titleContainer {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
   
   .title {
     font-size: 2.5rem;
     line-height: 1.2;
     margin-bottom: 0.8rem;
+    word-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
   }
   
   .subtitle {
     font-size: 1rem;
     padding: 0 1rem;
+    max-width: 100%;
+    word-wrap: break-word;
+    line-height: 1.5;
   }
-  
-  .glowUnderline {
+    .glowUnderline {
     width: 100px;
+    max-width: 80%;
   }
   
   .heroSection {
@@ -1199,19 +1218,31 @@
   .container {
     padding: 0.8rem;
   }
-  
-  .header {
+    .header {
     margin-bottom: 2rem;
+    padding: 0.5rem;
+    width: 100%;
+  }
+  
+  .titleContainer {
+    width: 100%;
+    padding: 0 0.5rem;
   }
   
   .title {
     font-size: 2rem;
-    padding: 0 0.5rem;
+    padding: 0;
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+    line-height: 1.1;
   }
   
   .subtitle {
     font-size: 0.9rem;
-    padding: 0 0.5rem;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 95%;
+    word-break: break-word;
   }
   
   .heroTitle {
@@ -1343,9 +1374,12 @@
   .container {
     padding: 0.5rem;
   }
-  
-  .title {
+    .title {
     font-size: 1.8rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+    max-width: 100%;
   }
   
   .heroTitle {
