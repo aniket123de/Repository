@@ -85,10 +85,8 @@ export const Hero = () => {
                   clipRule="evenodd"
                 />
               </svg>
-              <span>GitHub</span>            </a>            <a 
-              href="https://chat.whatsapp.com/DuEKwdOeedk2R564i2Ri5A"
-              target="_blank"
-              rel="noopener noreferrer"
+              <span>GitHub</span>            </a>            <Link 
+              href="/community"
               className={s["docs-link"]}
             >
               <FontAwesomeIcon 
@@ -97,7 +95,7 @@ export const Hero = () => {
                 height={15}
               />
               Community
-            </a>            <Link 
+            </Link><Link 
               href="/fyt"
             >
               <FontAwesomeIcon 

@@ -1,0 +1,894 @@
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(87, 185, 194, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 15px rgba(87, 185, 194, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(87, 185, 194, 0);
+  }
+}
+
+@keyframes circleMove {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate(-60px, -30px) scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.2;
+  }
+}
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #111827 50%, #0a0a0a 100%);
+  color: white;
+  padding: 2rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.bgAnimation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bgCircle {
+  position: absolute;
+  border-radius: 50%;
+  
+  &:nth-child(1) {
+    width: 600px;
+    height: 600px;
+    top: -200px;
+    right: -200px;
+    background: radial-gradient(circle, rgba(87, 185, 194, 0.15) 0%, rgba(87, 185, 194, 0) 70%);
+    animation: circleMove 20s infinite alternate ease-in-out;
+  }
+  
+  &:nth-child(2) {
+    width: 400px;
+    height: 400px;
+    bottom: -150px;
+    left: -150px;
+    background: radial-gradient(circle, rgba(126, 34, 206, 0.15) 0%, rgba(126, 34, 206, 0) 70%);
+    animation: circleMove 15s infinite alternate-reverse ease-in-out;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 1;
+  padding: 2rem 0;
+}
+
+.titleContainer {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.glowUnderline {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 4px;
+  background: linear-gradient(90deg, rgba(87, 185, 194, 0) 0%, rgba(87, 185, 194, 1) 50%, rgba(87, 185, 194, 0) 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 15px rgba(87, 185, 194, 0.8);
+}
+
+.backButton {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #57B9C2;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  z-index: 10;
+  
+  &:hover {
+    background: rgba(87, 185, 194, 0.1);
+    transform: translateX(-4px);
+    text-shadow: 0 0 10px rgba(87, 185, 194, 0.8);
+  }
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #57B9C2, #ffffff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Hero section */
+.heroSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.heroContent {
+  flex: 1;
+  padding-right: 2rem;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  background: linear-gradient(45deg, #57B9C2, #ffffff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heroText {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  max-width: 90%;
+}
+
+.heroVisual {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visualContainer {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.heroImage {
+  animation: float 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(87, 185, 194, 0.6));
+  transform-origin: center center;
+}
+
+/* Social section */
+.socialSection {
+  margin-bottom: 6rem;
+  position: relative;
+  z-index: 1;
+}
+
+.sectionAccent {
+  color: #57B9C2;
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+.socialSection h2 {
+  text-align: left;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.sectionDesc {
+  font-size: 1.1rem;
+  opacity: 0.7;
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
+
+.socialGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.socialCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.socialCard:hover {
+  transform: translateY(-4px);
+  background: rgba(15, 23, 42, 0.8);
+  border-color: var(--accent-color);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.socialIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.socialIcon {
+  font-size: 1.5rem;
+  color: var(--accent-color);
+  position: relative;
+  z-index: 1;
+}
+
+.socialContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.socialName {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.socialJoin {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.cardGlow {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  filter: blur(40px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+  left: -20px;
+  top: -20px;
+}
+
+.socialCard:hover .cardGlow {
+  opacity: 0.2;
+}
+
+.socialCard:hover .socialJoin {
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+/* Recruitment section */
+.recruitmentSection {
+  max-width: 1200px;
+  margin: 0 auto 6rem;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+
+.recruitmentSection h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.recruitmentSection > p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
+
+.recruitmentOptions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2rem;
+}
+
+.recruitmentCard {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: left;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.recruitmentCard:hover {
+  transform: translateY(-8px);
+  background: rgba(15, 23, 42, 0.8);
+  border-color: #57B9C2;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.cardHeader {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.cardIcon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(45deg, #57B9C2, #4A9DA6);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 8px 20px rgba(87, 185, 194, 0.3);
+}
+
+.cardBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: linear-gradient(45deg, #9333ea, #6366f1);
+  color: white;
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+}
+
+.recruitmentCard h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.cardFeatures {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  
+  li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.8rem;
+    opacity: 0.9;
+    
+    &:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #57B9C2;
+      font-weight: bold;
+    }
+  }
+}
+
+.recruitmentCard p {
+  opacity: 0.7;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.applyButton {
+  background: transparent;
+  color: #57B9C2;
+  border: 1px solid #57B9C2;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+}
+
+.applyButton:hover {
+  background: rgba(87, 185, 194, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(87, 185, 194, 0.2);
+}
+
+.btnArrow {
+  transition: transform 0.3s ease;
+}
+
+.applyButton:hover .btnArrow {
+  transform: translateX(4px);
+}
+
+.primaryButton {
+  background: linear-gradient(45deg, #57B9C2, #4A9DA6);
+  color: white;
+  border: none;
+}
+
+.primaryButton:hover {
+  background: linear-gradient(45deg, #4A9DA6, #57B9C2);
+  box-shadow: 0 8px 24px rgba(87, 185, 194, 0.4);
+}
+
+/* Testimonials Section */
+.testimonialsSection {
+  margin-bottom: 6rem;
+  position: relative;
+  z-index: 1;
+}
+
+.testimonialCards {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding: 2rem 0;
+  scrollbar-width: none; /* Firefox */
+  }
+
+.testimonialCards::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+.testimonialCard {
+  position: relative;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  min-width: 300px;
+  max-width: 400px;
+  backdrop-filter: blur(10px);
+}
+
+.testimonialCard::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  font-size: 5rem;
+  color: rgba(87, 185, 194, 0.2);
+  font-family: serif;
+  line-height: 1;
+  z-index: 0;
+}
+
+.testimonialAvatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  border: 2px solid #57B9C2;
+  position: relative;
+  z-index: 1;
+}
+
+.avatarImage {
+  object-fit: cover;
+}
+
+.testimonialText {
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.testimonialAuthor {
+  font-weight: 600;
+  color: #57B9C2;
+}
+
+/* Page Footer */
+.pageFooter {
+  margin-top: 4rem;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  opacity: 0.7;
+}
+
+/* Form Overlay */
+.formOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.formContainer {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(10, 15, 30, 0.95));
+  border: 1px solid rgba(87, 185, 194, 0.2);
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 900px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(87, 185, 194, 0.2);
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.formHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.formHeader h3 {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 700;
+  flex-grow: 1;
+}
+
+.formBadge {
+  background: linear-gradient(45deg, #9333ea, #6366f1);
+  color: white;
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-right: auto;
+  margin-left: 1rem;
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+}
+
+.formDescription {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.7;
+  line-height: 1.5;
+}
+
+.formColumns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.required {
+  color: #57B9C2;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.8rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+    &::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #57B9C2;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 2px rgba(87, 185, 194, 0.2);
+}
+
+.formGroup textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2.5rem;
+}
+
+.cancelButton {
+  padding: 0.9rem 1.8rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: white;
+}
+
+.cancelButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.8rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  background: linear-gradient(90deg, #57B9C2, #4A9DA6);
+  color: white;
+  position: relative;
+  overflow: hidden;
+    &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.6s ease;
+  }
+  
+  svg {
+    transition: transform 0.3s ease;
+  }
+}
+
+.submitButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(87, 185, 194, 0.4);
+}
+
+.submitButton:hover::before {
+  left: 100%;
+}
+
+.submitButton:hover svg {
+  transform: translateX(4px);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .heroSection {
+    flex-direction: column;
+  }
+  
+  .heroContent {
+    padding-right: 0;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+  
+  .heroText {
+    max-width: 100%;
+  }
+  
+  .socialGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .testimonialCards {
+    flex-direction: column;
+  }
+  
+  .testimonialCard {
+    min-width: unset;
+    max-width: 100%;
+  }
+  
+  .formContainer {
+    padding: 1.5rem;
+  }
+  
+  .formHeader h3 {
+    font-size: 1.5rem;
+  }
+  
+  .formColumns {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .formActions {
+    flex-direction: column;
+  }
+  
+  .cancelButton,
+  .submitButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .backButton {
+    position: relative;
+    margin-bottom: 2rem;
+    justify-content: center;
+  }
+
+  .socialGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .recruitmentOptions {
+    grid-template-columns: 1fr;
+  }
+
+  .formOverlay {
+    padding: 1rem;
+  }
+
+  .formContainer {
+    padding: 1.5rem;
+  }
+
+  .formActions {
+    flex-direction: column;
+  }
+}
