@@ -947,49 +947,229 @@
   }
 }
 
-/* Responsive styles */
+/* Global mobile optimizations for community page */
+:global(.community-page) {
+  overflow-x: hidden;
+  
+  @media (max-width: 768px) {
+    /* Prevent horizontal scrolling on mobile */
+    width: 100%;
+    max-width: 100vw;
+    
+    /* Optimize scrolling behavior */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  @media (max-width: 480px) {
+    /* Better mobile font rendering */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    
+    /* Improve touch scrolling */
+    overscroll-behavior: contain;
+  }
+}
+
+/* Prevent zoom on form inputs for iOS */
+@media (max-width: 768px) {
+  :global(.community-page) {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="password"],
+    input[type="number"],
+    input[type="search"],
+    select,
+    textarea {
+      font-size: 16px !important; /* Prevent zoom on iOS */
+    }
+  }
+}
+
+/* Comprehensive Mobile Responsiveness */
+
+/* Large tablets */
+@media (max-width: 1024px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .title {
+    font-size: 3rem;
+  }
+  
+  .heroTitle {
+    font-size: 3rem;
+  }
+  
+  .socialGrid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.2rem;
+  }
+  
+  .recruitmentOptions {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .typeformWrapper {
+    padding: 1.5rem;
+  }
+}
+
+/* Medium tablets */
 @media (max-width: 768px) {
   .container {
-    padding: 1.5rem 1rem;
+    padding: 1rem;
+    overflow-x: hidden;
+  }
+  
+  .header {
+    margin-bottom: 3rem;
+    padding: 1rem 0;
   }
   
   .title {
     font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .glowUnderline {
+    width: 100px;
   }
   
   .heroSection {
     flex-direction: column;
+    margin-bottom: 3rem;
+    text-align: center;
   }
   
   .heroContent {
     padding-right: 0;
     margin-bottom: 2rem;
-    text-align: center;
   }
   
   .heroTitle {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
   }
   
   .heroText {
     max-width: 100%;
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .visualContainer {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .socialSection,
+  .recruitmentSection {
+    margin-bottom: 4rem;
+  }
+  
+  .socialSection h2,
+  .recruitmentSection h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .sectionHeader {
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .sectionDivider {
+    display: none;
+  }
+  
+  .sectionDesc {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
   }
   
   .socialGrid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .socialCard {
+    padding: 1.2rem;
+  }
+  
+  .socialIconWrapper {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .socialIcon {
+    font-size: 1.3rem;
+  }
+  
+  .socialName {
+    font-size: 0.95rem;
+  }
+  
+  .recruitmentOptions {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .recruitmentCard {
+    padding: 1.5rem;
+  }
+  
+  .cardIcon {
+    width: 56px;
+    height: 56px;
+    font-size: 1.3rem;
+  }
+  
+  .recruitmentCard h3 {
+    font-size: 1.5rem;
+  }
+  
+  .typeformWrapper {
+    padding: 1rem;
+    min-height: 500px;
   }
   
   .testimonialCards {
     flex-direction: column;
+    gap: 1.5rem;
   }
   
   .testimonialCard {
     min-width: unset;
     max-width: 100%;
+    margin: 0 auto;
+    max-width: 400px;
+  }
+  
+  .pageFooter {
+    padding: 2rem 1rem 1.5rem;
+    margin-top: 4rem;
   }
   
   .formContainer {
     padding: 1.5rem;
+    margin: 1rem;
+    max-width: calc(100vw - 2rem);
   }
   
   .formHeader h3 {
@@ -1003,48 +1183,447 @@
   
   .formActions {
     flex-direction: column;
+    gap: 0.8rem;
   }
   
   .cancelButton,
   .submitButton {
     width: 100%;
     justify-content: center;
+    padding: 1rem;
   }
 }
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
+/* Small mobile phones */
+@media (max-width: 480px) {
   .container {
-    padding: 1rem;
+    padding: 0.8rem;
   }
-
-  .title {
-    font-size: 2.5rem;
-  }
-
-  .backButton {
-    position: relative;
+  
+  .header {
     margin-bottom: 2rem;
-    justify-content: center;
   }
-
+  
+  .title {
+    font-size: 2rem;
+    padding: 0 0.5rem;
+  }
+  
+  .subtitle {
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+  }
+  
+  .heroTitle {
+    font-size: 1.8rem;
+    padding: 0 0.5rem;
+  }
+  
+  .heroText {
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+  }
+  
+  .visualContainer {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .socialSection h2,
+  .recruitmentSection h2 {
+    font-size: 1.6rem;
+  }
+  
+  .sectionDesc {
+    font-size: 0.95rem;
+    padding: 0 0.5rem;
+  }
+  
   .socialGrid {
-    grid-template-columns: 1fr;
+    max-width: 100%;
   }
-
-  .recruitmentOptions {
-    grid-template-columns: 1fr;
+  
+  .socialCard {
+    padding: 1rem;
+    gap: 0.8rem;
   }
+  
+  .socialIconWrapper {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .socialIcon {
+    font-size: 1.1rem;
+  }
+  
+  .socialName {
+    font-size: 0.9rem;
+  }
+  
+  .socialJoin {
+    font-size: 0.75rem;
+  }
+  
+  .recruitmentCard {
+    padding: 1.2rem;
+  }
+  
+  .cardIcon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.1rem;
+  }
+  
+  .recruitmentCard h3 {
+    font-size: 1.3rem;
+  }
+  
+  .cardFeatures li {
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .applyButton {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .typeformWrapper {
+    padding: 0.8rem;
+    min-height: 450px;
+    border-radius: 15px;
+  }
+  
+  .testimonialCard {
+    padding: 1.5rem;
+    max-width: 100%;
+  }
+  
+  .testimonialText {
+    font-size: 0.9rem;
+  }
+  
+  .pageFooter {
+    padding: 1.5rem 0.8rem 1rem;
+  }
+  
+  .footerContent p {
+    font-size: 0.9rem;
+  }
+  
+  .formContainer {
+    padding: 1.2rem;
+    margin: 0.5rem;
+    max-width: calc(100vw - 1rem);
+  }
+  
+  .formHeader h3 {
+    font-size: 1.3rem;
+  }
+  
+  .formDescription {
+    font-size: 0.95rem;
+  }
+  
+  .formGroup label {
+    font-size: 0.9rem;
+  }
+  
+  .formGroup input,
+  .formGroup select,
+  .formGroup textarea {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+  }
+}
 
-  .formOverlay {
+/* Extra small screens */
+@media (max-width: 360px) {
+  .container {
+    padding: 0.5rem;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+  }
+  
+  .heroTitle {
+    font-size: 1.6rem;
+  }
+  
+  .socialSection h2,
+  .recruitmentSection h2 {
+    font-size: 1.4rem;
+  }
+  
+  .socialCard {
+    padding: 0.8rem;
+  }
+  
+  .socialIconWrapper {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .socialIcon {
+    font-size: 1rem;
+  }
+  
+  .socialName {
+    font-size: 0.85rem;
+  }
+  
+  .recruitmentCard {
     padding: 1rem;
   }
-
-  .formContainer {
-    padding: 1.5rem;
+  
+  .cardIcon {
+    width: 44px;
+    height: 44px;
+    font-size: 1rem;
   }
+  
+  .recruitmentCard h3 {
+    font-size: 1.2rem;
+  }
+  
+  .typeformWrapper {
+    padding: 0.5rem;
+    min-height: 400px;
+  }
+  
+  .formContainer {
+    padding: 1rem;
+  }
+}
 
-  .formActions {
-    flex-direction: column;
+/* Enhanced mobile touch interactions and accessibility */
+@media (max-width: 768px) {
+  .socialCard,
+  .recruitmentCard,
+  .applyButton,
+  .submitButton,
+  .cancelButton {
+    /* Improve touch target sizes for mobile */
+    min-height: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .socialCard:active,
+  .recruitmentCard:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+  
+  .applyButton:active,
+  .submitButton:active,
+  .cancelButton:active {
+    transform: translateY(0) scale(0.95);
+  }
+  
+  /* Better spacing for mobile reading */
+  .recruitmentCard p {
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  
+  .cardFeatures {
+    margin-bottom: 2rem;
+  }
+  
+  /* Enhanced typeform mobile styling */
+  .typeformWrapper {
+    border-radius: 16px;
+    border-width: 1px;
+  }
+  
+  .typeformWrapper iframe,
+  .typeformWrapper [data-tf-live] {
+    border-radius: 12px;
+  }
+  
+  /* Better mobile background effects */
+  .bgCircle {
+    &:nth-child(1) {
+      width: 400px;
+      height: 400px;
+      top: -100px;
+      right: -100px;
+    }
+    
+    &:nth-child(2) {
+      width: 300px;
+      height: 300px;
+      bottom: -100px;
+      left: -100px;
+    }
+  }
+  
+  /* Mobile-optimized animations */
+  .socialCard,
+  .recruitmentCard {
+    &:hover {
+      transform: none; /* Disable hover effects on mobile */
+    }
+  }
+  
+  .cardGlow {
+    display: none; /* Hide glow effects on mobile for better performance */
+  }
+  
+  /* Better mobile typography hierarchy */
+  .sectionAccent {
+    font-size: 1.1em;
+  }
+}
+
+/* Landscape orientation optimizations */
+@media (max-width: 768px) and (orientation: landscape) {
+  .heroSection {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .heroContent {
+    margin-bottom: 0;
+    padding-right: 1rem;
+  }
+  
+  .visualContainer {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .heroTitle {
+    font-size: 1.8rem;
+  }
+  
+  .heroText {
+    font-size: 0.9rem;
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .socialIcon,
+  .cardIcon {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .glowUnderline,
+  .cardGlow {
+    filter: blur(1px);
+  }
+}
+
+/* Mobile-first container improvements */
+@media (max-width: 480px) {
+  .container {
+    /* Ensure full viewport usage on mobile */
+    min-height: 100dvh; /* Use dynamic viewport height */
+    padding: 0.8rem 0.5rem;
+  }
+  
+  /* Improved mobile navigation */
+  .header {
+    position: sticky;
+    top: 0;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    z-index: 50;
+    margin-bottom: 1rem;
+    padding: 1rem 0.5rem;
+    border-radius: 0 0 20px 20px;
+  }
+  
+  /* Better mobile spacing */
+  .socialSection,
+  .recruitmentSection {
+    margin-bottom: 3rem;
+    scroll-margin-top: 100px; /* Account for sticky header */
+  }
+  
+  /* Enhanced mobile typeform */
+  .typeformContainer {
+    margin-top: 1rem;
+  }
+  
+  .typeformWrapper {
+    /* Better mobile viewport handling */
+    min-height: 60vh;
+    max-height: 80vh;
+    overflow: hidden;
+  }
+  
+  .typeformWrapper iframe,
+  .typeformWrapper [data-tf-live] {
+    width: 100%;
+    height: 100%;
+    min-height: 60vh;
+  }
+}
+
+/* Performance optimizations for low-end devices */
+@media (max-width: 480px) {
+  .bgAnimation {
+    display: none; /* Hide background animations on small screens for better performance */
+  }
+  
+  .float,
+  .pulse,
+  .circleMove,
+  .buttonPulse,
+  .shimmer {
+    animation: none; /* Disable complex animations on mobile */
+  }
+  
+  .socialCard,
+  .recruitmentCard {
+    backdrop-filter: none; /* Remove backdrop filter for better performance */
+    background: rgba(15, 23, 42, 0.9);
+  }
+}
+
+/* Dark mode safe colors for mobile */
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
+  .container {
+    background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+  }
+  
+  .formContainer {
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.95), rgba(10, 15, 30, 0.98));
+  }
+}
+
+/* Accessibility improvements for mobile */
+@media (max-width: 768px) {
+  .socialCard,
+  .recruitmentCard,
+  .applyButton {
+    /* Ensure focusable elements are properly sized */
+    min-height: 48px;
+  }
+  
+  .socialCard:focus,
+  .recruitmentCard:focus,
+  .applyButton:focus,
+  .submitButton:focus,
+  .cancelButton:focus {
+    outline: 2px solid #57B9C2;
+    outline-offset: 2px;
+  }
+  
+  /* Better contrast for small screens */
+  .socialName,
+  .recruitmentCard h3 {
+    color: #ffffff;
+  }
+  
+  .socialJoin {
+    color: rgba(255, 255, 255, 0.8);
   }
 }

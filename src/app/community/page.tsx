@@ -53,15 +53,25 @@ export default function CommunityPage() {
       color: "#333"
     }
   ];
-
   useEffect(() => {
+    // Load Typeform script
     const script = document.createElement("script");
     script.src = "//embed.typeform.com/next/embed.js";
     script.async = true;
     document.body.appendChild(script);
 
+    // Ensure proper mobile viewport handling
+    const metaViewport = document.querySelector('meta[name="viewport"]');
+    if (metaViewport) {
+      metaViewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes');
+    }
+
+    // Add mobile-specific class to body for additional styling
+    document.body.classList.add('community-page');
+
     return () => {
       document.body.removeChild(script);
+      document.body.classList.remove('community-page');
     };
   }, []);
 
