@@ -9,7 +9,7 @@ export default function TerminalForm() {
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
   const terminalRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
 const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
 const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -55,7 +55,7 @@ const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
             setInput("");
             setStep(4);
           })
-          .catch((error) => {
+          .catch((error: any) => {
             console.error("Failed to send email:", error);
             setError("Failed to send message. Please try again.");
           });
@@ -72,7 +72,7 @@ const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
   useEffect(() => {
     if (terminalRef.current) {
-      (terminalRef.current as HTMLElement)?.scrollIntoView({ behavior: "smooth" });
+      terminalRef.current?.scrollIntoView({ behavior: "smooth" });
     }
     if (inputRef.current) {
       (inputRef.current as HTMLInputElement).focus();
@@ -184,7 +184,7 @@ const styles = {
   container: {
     width: "100%",
     height: "100%",
-    boxSizing: "border-box",
+    boxSizing: "border-box" as "border-box", // Explicitly cast to match the expected type
   },
   terminal: {
     backgroundColor: "#000",
@@ -196,8 +196,8 @@ const styles = {
     height: "100%",
     fontSize: "clamp(0.875rem, 2.5vw, 1.5rem)",
     lineHeight: "1.6",
-    boxSizing: "border-box",
-    position: "relative",
+    boxSizing: "border-box" as "border-box", // Explicitly cast to match the expected type
+    position: "relative" as "relative", // Explicitly cast to match the expected type
     overflow: "auto",
     border: "1px solid #374151",
     borderRadius: "1rem",
@@ -235,9 +235,9 @@ const styles = {
   },
   text: {
     margin: "0 0 clamp(0.5rem, 1.5vw, 0.75rem) 0",
-    wordWrap: "break-word",
-    overflowWrap: "break-word",
-    hyphens: "auto",
+    wordWrap: "break-word" as "break-word", // Explicitly cast to match the expected type
+    overflowWrap: "break-word" as "break-word", // Explicitly cast to match the expected type
+    hyphens: "auto" as "auto", // Explicitly cast to match the expected type
   },
   line: {
     display: "flex",
@@ -263,8 +263,8 @@ const styles = {
     lineHeight: "1.5",
     padding: "clamp(0.5rem, 1.5vw, 0.75rem)",
     minHeight: "clamp(1.5rem, 4vw, 2rem)",
-    boxSizing: "border-box",
-    WebkitAppearance: "none",
+    boxSizing: "border-box" as "border-box", // Explicitly cast to match the expected type
+    WebkitAppearance: "none" as "none", // Explicitly cast to match the expected type
     borderRadius: "0.25rem",
     caretColor: "#22c55e",
   },
@@ -272,7 +272,7 @@ const styles = {
     color: "#ef4444",
     marginTop: "clamp(0.5rem, 1.5vw, 0.75rem)",
     fontSize: "clamp(0.8rem, 2.2vw, 1.5rem)",
-    wordWrap: "break-word",
+    wordWrap: "break-word" as "break-word", // Explicitly cast to match the expected type
   },
   white: {
     color: "white",
