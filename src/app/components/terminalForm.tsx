@@ -71,7 +71,7 @@ const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
   };
 
   useEffect(() => {
-    if (terminalRef.current) {
+    if (step > 0 && terminalRef.current) {
       terminalRef.current?.scrollIntoView({ behavior: "smooth" });
     }
     if (inputRef.current) {
