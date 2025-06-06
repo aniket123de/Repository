@@ -21,7 +21,7 @@ const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
     return emailRegex.test(email);
   };
 
-  const handleInput = (e) => {
+  const handleInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       if (step === 0) {
         setName(input);
