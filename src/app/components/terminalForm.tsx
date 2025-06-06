@@ -21,7 +21,7 @@ const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
     return emailRegex.test(email);
   };
 
-  const handleInput = (e) => {
+  const handleInput = (e: { key: string; }) => {
     if (e.key === "Enter") {
       if (step === 0) {
         setName(input);
@@ -72,10 +72,10 @@ const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
   useEffect(() => {
     if (terminalRef.current) {
-      terminalRef.current?.scrollIntoView({ behavior: "smooth" });
+      (terminalRef.current as HTMLElement)?.scrollIntoView({ behavior: "smooth" });
     }
     if (inputRef.current) {
-      inputRef.current.focus();
+      (inputRef.current as HTMLInputElement).focus();
     }
   }, [step]);
 
