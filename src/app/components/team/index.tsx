@@ -517,11 +517,10 @@ export const TeamSection = () => {
     );
     
   }, [isLoaded]);
-  
-  const teamMembers = [
+    const teamMembers = [
     {
       name: "Saptarshi",
-      role: "Founder & Community Architect",
+      role: "Community Lead",
       statement: "Building a vibrant community is about creating spaces where passion meets purpose. I'm dedicated to architecting an ecosystem where developers can grow, innovate, and make meaningful connections that last beyond any single project.",
       image: "/team/sap.jpg",
       socials: {
@@ -542,9 +541,19 @@ export const TeamSection = () => {
       }
     },
     {
+      name: "Yuvraj",
+      role: "Management Lead",
+      statement: "Effective communication builds bridges between communities and the wider world. I'm passionate about sharing our story, amplifying our impact, and creating relationships with media and industry partners that highlight our community's incredible talent and achievements.",
+      image: "/team/yuvraj.jpg",
+      socials: {
+        linkedin: "https://linkedin.com/in/yuvraj",
+        twitter: "https://twitter.com/yuvraj"
+      }
+    },
+    {
       name: "Parthita",
-      role: "Outreach Lead",
-      statement: "I believe in the power of connections. My mission is to expand our community's reach by building bridges with other tech groups, companies and educational institutions, creating opportunities for collaboration and growth for all our members.",
+      role: "Tech Lead",
+      statement: "Technology is a powerful tool for solving real-world problems. I'm focused on guiding our technical initiatives, mentoring emerging developers, and ensuring our community stays at the cutting edge of innovation while building solutions that matter.",
       image: "/team/parthi.jpg",
       socials: {
         linkedin: "https://linkedin.com/in/parthi",
@@ -563,8 +572,8 @@ export const TeamSection = () => {
     },
     {
       name: "Ootso",
-      role: "Tech Lead",
-      statement: "Technology is a powerful tool for solving real-world problems. I'm focused on guiding our technical initiatives, mentoring emerging developers, and ensuring our community stays at the cutting edge of innovation while building solutions that matter.",
+      role: "Outreach Lead",
+      statement: "I believe in the power of connections. My mission is to expand our community's reach by building bridges with other tech groups, companies and educational institutions, creating opportunities for collaboration and growth for all our members.",
       image: "/team/ootso.jpg",
       socials: {
         linkedin: "https://linkedin.com/in/ootso",
@@ -579,6 +588,26 @@ export const TeamSection = () => {
       socials: {
         linkedin: "https://linkedin.com/in/protyoy",
         instagram: "https://instagram.com/protyoy"
+      }
+    },
+    {
+      name: "Shreya",
+      role: "Design Co-Lead",
+      statement: "Great design is about empathy and creativity. I work to craft experiences that not only look good but also feel meaningful to our community.",
+      image: "/team/shreya.jpg",
+      socials: {
+        linkedin: "https://linkedin.com/in/shreya",
+        twitter: "https://twitter.com/shreya"
+      }
+    },
+    {
+      name: "Debopriya",
+      role: "Design Co-Lead",
+      statement: "Design is the bridge between ideas and impact. I strive to create visuals that resonate with our community's mission and inspire action.",
+      image: "", // Blank black placeholder
+      socials: {
+        linkedin: "https://linkedin.com/in/debopriya",
+        instagram: "https://instagram.com/debopriya"
       }
     },
     {
@@ -599,8 +628,7 @@ export const TeamSection = () => {
       socials: {
         linkedin: "https://linkedin.com/in/suryanshu",
         twitter: "https://twitter.com/suryanshu"
-      }
-    },
+      }    },
     {
       name: "Sambit",
       role: "Engagement Co-lead",
@@ -612,13 +640,13 @@ export const TeamSection = () => {
       }
     },
     {
-      name: "Yuvraj",
-      role: "Public Relations Lead",
-      statement: "Effective communication builds bridges between communities and the wider world. I'm passionate about sharing our story, amplifying our impact, and creating relationships with media and industry partners that highlight our community's incredible talent and achievements.",
-      image: "/team/yuvraj.jpg",
+      name: "Pranay",
+      role: "Marketing Lead",
+      statement: "Marketing is about telling the right story to the right audience. I aim to amplify our community's voice and ensure our initiatives reach those who can benefit the most.",
+      image: "/team/pranay.jpg",
       socials: {
-        linkedin: "https://linkedin.com/in/yuvraj",
-        twitter: "https://twitter.com/yuvraj"
+        linkedin: "https://linkedin.com/in/pranay",
+        twitter: "https://twitter.com/pranay"
       }
     }
   ];
