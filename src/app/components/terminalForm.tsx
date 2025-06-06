@@ -8,7 +8,7 @@ export default function TerminalForm() {
   const [message, setMessage] = useState("");
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
-  const terminalRef = useRef(null);
+  const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef(null);
 
 const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
