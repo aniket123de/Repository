@@ -14,6 +14,7 @@ import { useMedia } from "../../../hooks/use-media";
 import { toVw } from "../../../lib/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
+import TerminalForm from "~/app/components/terminalForm";
 
 const ghHref = "https://github.com/aniket123de/Repository";
 
@@ -21,15 +22,13 @@ export const Footer = () => {
   const isDesktopSm = useMedia("(min-width: 1024px)");
 
   return (
-    <Scrollytelling.Root start="top 80%">
+    <Scrollytelling.Root start="top 100%">
       <footer className={s.footer}>
         <PreFooter />
         <div className={s["imgs-container"]}>
-          <Image
-            className={s["team-img"]}
-            src={bsmtTeamImg}
-            alt="Basement Team"
-          />
+          <div>
+            <TerminalForm />
+          </div>
           <div className={s["QR-container"]}>
             <Scrollytelling.Animation
               tween={{
