@@ -259,7 +259,9 @@
 
 /* Social section */
 .socialSection {
-  margin-bottom: 6rem;
+  max-width: 1200px;
+  margin: 0 auto 6rem;
+  text-align: left;
   position: relative;
   z-index: 1;
 }
@@ -408,6 +410,7 @@
 }
 
 .recruitmentSection h2 {
+  text-align: left;
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
   color: white;

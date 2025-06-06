@@ -66,7 +66,10 @@ export default function CommunityPage() {
     }
 
     return () => {
-      document.body.removeChild(script);
+      // Safely remove script only if it exists and is still in the DOM
+      if (script && script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
     };
   }, []);
 
