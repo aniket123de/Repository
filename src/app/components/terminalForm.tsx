@@ -142,7 +142,7 @@ const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
               </p>
               <p style={styles.text}>.</p>
               <p style={styles.text}>.</p>
-              <p style={styles.text}>Type "send" To Run This Query:</p>
+              <p style={styles.text}>Type &quot;send&quot; To Run This Query:</p>
             </>
           )}
 
@@ -154,7 +154,7 @@ const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
               </p>
               <p style={styles.text}>.</p>
               <p style={styles.text}>.</p>
-              <p style={styles.text}>Type "clear" To Send Another Message</p>
+              <p style={styles.text}>Type &quot;clear&quot; To Send Another Message</p>
             </>
           )}
 
