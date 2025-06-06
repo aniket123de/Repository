@@ -258,19 +258,19 @@ const Terminal = () => {
 const socials = [
   {
     name: "Whatsapp",
-    url: "https://twitter.com/basementstudio",
+    url: "https://chat.whatsapp.com/DuEKwdOeedk2R564i2Ri5A",
   },
   {
-    name: "instagram",
-    url: "https://www.instagram.com/basementdotstudio/",
+    name: "Github",
+    url: "https://github.com/Repository-Main",
   },
   {
-    name: "github",
-    url: "https://github.com/basementstudio",
+    name: "Discord",
+    url: "https://discord.gg/g7ZJqyPDUf",
   },
   {
     name: "linkedin",
-    url: "https://dribbble.com/basementstudio",
+    url: "https://www.linkedin.com/company/repositorymain/",
   },
 ];
 
