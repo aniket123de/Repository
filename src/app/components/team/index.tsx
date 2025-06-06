@@ -604,7 +604,7 @@ export const TeamSection = () => {
       name: "Debopriya",
       role: "Design Co-Lead",
       statement: "Design is the bridge between ideas and impact. I strive to create visuals that resonate with our community's mission and inspire action.",
-      image: "", // Blank black placeholder
+      image: "/team/debopriya.jpg", // Blank black placeholder
       socials: {
         linkedin: "https://linkedin.com/in/debopriya",
         instagram: "https://instagram.com/debopriya"
