@@ -70,14 +70,7 @@ const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
     }
   };
 
-  useEffect(() => {
-    if (terminalRef.current) {
-      terminalRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
-    if (inputRef.current) {
-      (inputRef.current as HTMLInputElement).focus();
-    }
-  }, [step]);
+
 
   return (
     <div style={styles.container}>
