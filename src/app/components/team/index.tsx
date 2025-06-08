@@ -556,7 +556,7 @@ export const TeamSection = () => {
     },
     {
       name: "Parthita",
-      role: "Tech Lead",
+      role: "Finance & Tech Lead",
       statement: "Technology is a powerful tool for solving real-world problems. I'm focused on guiding our technical initiatives, mentoring emerging developers, and ensuring our community stays at the cutting edge of innovation while building solutions that matter.",
       image: "/team/parthi.jpg",
       socials: {
