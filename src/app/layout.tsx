@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteOrigin),
   title: "Repository",
   description:
-    "A demo website made exclusively to showcase a couple of cool animations powered by our new library, @bsmnt/scrollytelling.",
+    "Build More, Grow More",
   viewport: {
     height: "device-height",
     initialScale: 1,
@@ -42,10 +42,10 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
   twitter: {
     card: "summary_large_image",
-    creator: "@basementstudio",
-    description: "BSMNT @ Scrollytelling",
+    creator: "@repository",
+    description: "Repository",
     images: [{ width: 1200, height: 630, url: `${siteOrigin}/og.jpg` }],
-    site: "@basementstudio",
+    site: "@repository-main",
     title: "Repository",
   },
   openGraph: {
