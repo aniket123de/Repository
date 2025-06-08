@@ -524,9 +524,10 @@ export const TeamSection = () => {
       statement: "Building a vibrant community is about creating spaces where passion meets purpose. I'm dedicated to architecting an ecosystem where developers can grow, innovate, and make meaningful connections that last beyond any single project.",
       image: "/team/sap.jpg",
       socials: {
-        linkedin: "https://linkedin.com/in/saptarshi",
-        github: "https://github.com/saptarshi",
-        twitter: "https://twitter.com/saptarshi"
+        linkedin: "https://www.linkedin.com/in/saptarshigosh20045",
+        instagram: "https://www.instagram.com/saptarshiiiiiii?igsh=Y3Q5eTc0dmE4ZmFp",
+        twitter: "https://x.com/SAPTARS67452951?t=k-8hq3TzLUKHPa8rzrwqOA&s=09",
+        github: "https://github.com/Godsaptarshifrtw"
       }
     },
     {
@@ -535,9 +536,10 @@ export const TeamSection = () => {
       statement: "Community is the heart of everything we do. I'm passionate about fostering an inclusive, supportive environment where everyone feels welcome to share ideas, collaborate on projects, and grow together as developers and as people.",
       image: "/team/aniket.jpg",
       socials: {
-        linkedin: "https://linkedin.com/in/aniket",
-        github: "https://github.com/aniket123de",
-        twitter: "https://twitter.com/aniket"
+        linkedin: "https://www.linkedin.com/in/aniket-de-505362287/",
+        instagram: "https://www.instagram.com/aweniket/",
+        twitter: "https://x.com/AnkieDe1",
+        github: "https://github.com/aniket123de"
       }
     },
     {
@@ -546,8 +548,10 @@ export const TeamSection = () => {
       statement: "Effective communication builds bridges between communities and the wider world. I'm passionate about sharing our story, amplifying our impact, and creating relationships with media and industry partners that highlight our community's incredible talent and achievements.",
       image: "/team/yuvraj.jpg",
       socials: {
-        linkedin: "https://linkedin.com/in/yuvraj",
-        twitter: "https://twitter.com/yuvraj"
+        linkedin: "https://www.linkedin.com/in/yuvrajprasad",
+        instagram: "https://www.instagram.com/yuvistechpoint.yt/",
+        twitter: "https://x.com/YuvisTechPoint/",
+        github: "https://github.com/YuvisTechPoint"
       }
     },
     {
@@ -556,8 +560,10 @@ export const TeamSection = () => {
       statement: "Technology is a powerful tool for solving real-world problems. I'm focused on guiding our technical initiatives, mentoring emerging developers, and ensuring our community stays at the cutting edge of innovation while building solutions that matter.",
       image: "/team/parthi.jpg",
       socials: {
-        linkedin: "https://linkedin.com/in/parthi",
-        twitter: "https://twitter.com/parthi"
+        linkedin: "https://www.linkedin.com/in/parthita-chattopadhyay-7bb3072b4?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        twitter: "https://x.com/half_icecream?t=1TLgicXbTdsiEs6JBJhA1A&s=09",
+        instagram: "https://www.instagram.com/lesshairyape?igsh=aThxZmx2dDNoaGYy",
+        github: "https://github.com/Parthita"
       }
     },
     {
@@ -566,8 +572,10 @@ export const TeamSection = () => {
       statement: "Technology communities thrive when they extend beyond their boundaries. I work to create partnerships and collaborations that bring fresh perspectives and opportunities to our members while sharing our innovations with the wider tech ecosystem.",
       image: "/team/anik.jpg",
       socials: {
-        linkedin: "https://linkedin.com/in/anik",
-        twitter: "https://twitter.com/anik"
+        linkedin: "https://www.linkedin.com/in/anik-paul-2bb315265/",
+        instagram: "https://twitter.com/PaulAnik1157",
+        twitter: "https://twitter.com/PaulAnik1157",
+        github: "https://github.com/Anik-Paul-toj"
       }
     },
     {
@@ -576,8 +584,10 @@ export const TeamSection = () => {
       statement: "I believe in the power of connections. My mission is to expand our community's reach by building bridges with other tech groups, companies and educational institutions, creating opportunities for collaboration and growth for all our members.",
       image: "/team/ootso.jpg",
       socials: {
-        linkedin: "https://linkedin.com/in/ootso",
-        github: "https://github.com/ootso"
+        linkedin: "https://www.linkedin.com/in/ootso-dharchowdhury-924213340/",
+        instagram: "https://www.instagram.com/ootsooooosleepy?utm_source=qr&igsh=MW5rMHhjOGJnczVvYQ==",
+        twitter: "https://x.com/OotsoC89232?t=hTN1lKtavKbih04gpWOVtA&s=09",
+        github: "https://github.com/Ben160804"
       }
     },
     {
@@ -586,8 +596,10 @@ export const TeamSection = () => {
       statement: "Great ideas deserve great storytelling. I blend creativity with strategy to showcase our community's incredible work, build our brand identity, and create compelling narratives that resonate with developers and industry leaders alike.",
       image: "/team/ptoy.jpg",
       socials: {
-        linkedin: "https://linkedin.com/in/protyoy",
-        instagram: "https://instagram.com/protyoy"
+        linkedin: "linkedin.com/in/protyoy-bhandary",
+        instagram: "https://www.instagram.com/_.pro.__/",
+        twitter: "x.com/ptoybuilds",
+        github: "GitHub.com/prox004"
       }
     },
     {
@@ -596,18 +608,34 @@ export const TeamSection = () => {
       statement: "Great design is about empathy and creativity. I work to craft experiences that not only look good but also feel meaningful to our community.",
       image: "/team/shreya.jpg",
       socials: {
-        linkedin: "https://linkedin.com/in/shreya",
-        twitter: "https://twitter.com/shreya"
+        linkedin: "linkedin.com/in/shreyajha2103",
+        instagram: "https://www.instagram.com/shreyajha.ux/",
+        twitter: "https://x.com/ShreyaJha_21",
+        github: "https://github.com/ShreyaJha21"
       }
     },
     {
       name: "Debopriya",
       role: "Design Co-Lead",
       statement: "Design is the bridge between ideas and impact. I strive to create visuals that resonate with our community's mission and inspire action.",
-      image: "/team/debopriya.jpg", // Blank black placeholder
+      image: "/team/debopriya.jpg", 
       socials: {
-        linkedin: "https://linkedin.com/in/debopriya",
-        instagram: "https://instagram.com/debopriya"
+        linkedin: "https://www.linkedin.com/in/debopriya-mullick-89395628b",
+        instagram: "https://www.instagram.com/_rai.o4?igsh=MXRqbmRrMzY5OTQ0cg==",
+        twitter: "https://x.com/sayhellorai?t=V-J_iHaYbi9Q1OQARsdnhw&s=09",
+        github: "https://github.com/Debopriya-codes"
+      }
+    },
+    {
+      name: "Suryanshu",
+      role: "Senior Advisor",
+      statement: "Community thrives on active participation. My focus is creating engaging experiences that inspire members to contribute, collaborate and connect on a deeper level, turning casual participants into community champions.",
+      image: "/team/suryanshu.jpg",
+      socials: {
+        linkedin: "https://www.linkedin.com/in/suryanshu-paul-2aa003253/",
+        instagram: "https://www.instagram.com/suryanshupaul18/",
+        twitter: "https://x.com/paul2_suryanshu",
+        github: "https://github.com/paulsuryanshu"
       }
     },
     {
@@ -616,27 +644,22 @@ export const TeamSection = () => {
       statement: "Meaningful engagement creates lasting community bonds. I work to design events, workshops and interactive experiences that bring our members together, spark creativity, and create an atmosphere where knowledge sharing becomes second nature.",
       image: "/team/adrish.jpg",
       socials: {
-        linkedin: "https://linkedin.com/in/adrish",
-        twitter: "https://twitter.com/adrish"
+        linkedin: "https://www.linkedin.com/in/adrishbasak/",
+        instagram: "https://www.instagram.com/bepoisdying/?hl=en",
+        twitter: "https://x.com/bepoooooooooe",
+        github: "https://github.com/bepoooe"
       }
     },
-    {
-      name: "Suryanshu",
-      role: "Engagement Lead",
-      statement: "Community thrives on active participation. My focus is creating engaging experiences that inspire members to contribute, collaborate and connect on a deeper level, turning casual participants into community champions.",
-      image: "/team/suryanshu.jpg",
-      socials: {
-        linkedin: "https://linkedin.com/in/suryanshu",
-        twitter: "https://twitter.com/suryanshu"
-      }    },
     {
       name: "Sambit",
       role: "Engagement Co-lead",
       statement: "The strength of a community lies in its member interactions. I help craft meaningful engagement opportunities that foster genuine connections, encourage knowledge exchange, and create a supportive environment where everyone can thrive.",
       image: "/team/sambit.jpg",
       socials: {
-        linkedin: "https://linkedin.com/in/sambit",
-        github: "https://github.com/sambit"
+        linkedin: "https://www.linkedin.com/in/sambit-das-59688526a",
+        instagram: "https://www.instagram.com/itssambit/",
+        twitter: "https://x.com/iamsosambit?t=41IgU4oGEpRmUMK4NWVEgg&s=09",
+        github: "https://github.com/sambitdas77"
       }
     },
     {
@@ -645,8 +668,10 @@ export const TeamSection = () => {
       statement: "Marketing is about telling the right story to the right audience. I aim to amplify our community's voice and ensure our initiatives reach those who can benefit the most.",
       image: "/team/pranay.jpg",
       socials: {
-        linkedin: "https://linkedin.com/in/pranay",
-        twitter: "https://twitter.com/pranay"
+        linkedin: "https://www.linkedin.com/in/pranay-chatterjee-346717244/",
+        instagram: "https://www.instagram.com/heypranayy/",
+        twitter: "https://x.com/Pranay_221",
+        github: "https://github.com/heypranayy"
       }
     }
   ];
