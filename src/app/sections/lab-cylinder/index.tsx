@@ -68,13 +68,14 @@ export const LabCylinder = () => {
         }
       );
 
-      // Cards stagger animation
+      // Cards stagger animation with rotation
       gsap.fromTo(
         cardsRef.current,
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 30, rotateY: 90 },
         {
           opacity: 1,
           y: 0,
+          rotateY: 0,
           duration: 1,
           stagger: 0.2,
           ease: "power3.out",
@@ -85,38 +86,66 @@ export const LabCylinder = () => {
         }
       );
 
-      // Typewriting effect for the heading
+      // Typewriting effect for the heading when it comes into the viewport
       if (typewriterRef.current) {
         const text = "HACKATHON PARTNERSHIPS";
         const chars = text.split("");
         typewriterRef.current.textContent = "";
 
-        chars.forEach((char, i) => {
-          gsap.to(typewriterRef.current, {
-            textContent: text.slice(0, i + 1),
-            duration: 0.05,
-            delay: i * 0.05,
-            ease: "none",
-          });
-        });
+        ScrollTrigger.create({
+          trigger: typewriterRef.current,
+          start: "top 80%",
+          onEnter: () => {
+            const timeline = gsap.timeline();
+            chars.forEach((char, i) => {
+              timeline.to(typewriterRef.current, {
+                textContent: text.slice(0, i + 1),
+                duration: 0.05,
+                ease: "none",
+              });
+            });
 
-        // Add a glowing effect to the heading after typewriting
-        gsap.to(typewriterRef.current, {
-          textShadow: "0px 0px 20px rgba(255, 255, 255, 0.8)",
-          duration: 1,
-          repeat: -1,
-          yoyo: true,
-          ease: "power1.inOut",
+            // Add a glowing effect to the heading after typewriting
+            timeline.to(typewriterRef.current, {
+              textShadow: "0px 0px 20px rgba(255, 255, 255, 0.8)",
+              duration: 1,
+              repeat: -1,
+              yoyo: true,
+              ease: "power1.inOut",
+            });
+          },
         });
       }
 
-      // Floating animation for subtle background elements
+      // Floating animation for subtle background elements with rotation
       gsap.to(".floating-element", {
         y: "+=20",
-        duration: 4,
+        rotate: "360deg",
+        duration: 6,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
+      });
+
+      // Modal open animation with bounce effect
+      gsap.fromTo(
+        ".modalContent",
+        { scale: 0.8, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.7,
+          ease: "bounce.out",
+        }
+      );
+
+      // Modal close animation with fade-out and scale-down
+      gsap.to(".modalContent", {
+        scale: 0.8,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power3.in",
+        onComplete: () => setSelectedPdf(null),
       });
     });
 
@@ -154,15 +183,6 @@ export const LabCylinder = () => {
       venue: "IEM Ashram Campus",
     },
     {
-      id: 2,
-      name: "Metamorph 2K25",
-      date: "Sep 6-7, 2025",
-      description: "Transform ideas into reality through innovative coding solutions.",
-      logo: "/hackathon-logos/metamorph2k25_logo.jpeg",
-      pdf: "/hackathon-logos/MetamorphMoU.docx",
-      venue: "Guru Nanak Institute of Technology",
-    },
-    {
       id: 3,
       name: "StatusCode2",
       date: "Aug 23-24, 2025",
@@ -170,6 +190,15 @@ export const LabCylinder = () => {
       logo: "/hackathon-logos/sc2logo.png",
       pdf: "/hackathon-logos/MoU StatusCode2.docx",
       venue: "IIIT Kalyani",
+    },
+    {
+      id: 2,
+      name: "Metamorph 2K25",
+      date: "Sep 6-7, 2025",
+      description: "Transform ideas into reality through innovative coding solutions.",
+      logo: "/hackathon-logos/metamorph2k25_logo.jpeg",
+      pdf: "/hackathon-logos/MetamorphMoU.docx",
+      venue: "Guru Nanak Institute of Technology",
     },
   ];
 
@@ -299,6 +328,9 @@ const PartnershipCard = ({
           </span>
           <p className={styles.description || 'description'}>
             {partnership.description}
+          </p>
+          <p className={styles.description || 'description'}>
+            <strong>Venue:</strong> {partnership.venue}
           </p>
         </div>        {/* View MoU Button */}
         <motion.button
