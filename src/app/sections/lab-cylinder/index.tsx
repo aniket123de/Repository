@@ -3,7 +3,12 @@
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import s from "./lab-cylinder.module.scss";
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 // Fallback styles object in case CSS module fails to load
 const fallbackStyles = {
@@ -35,60 +40,106 @@ interface Partnership {
   description: string;
   logo: string;
   pdf: string;
+  venue: string;
 }
 
 export const LabCylinder = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement[]>([]);
+  const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
+  const typewriterRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Update visibility state based on intersection
-        setIsVisible(entry.isIntersecting);
-      },
-      {
-        threshold: 0.1, // Trigger when 10% of the section is visible
-        rootMargin: "50px", // Start animation slightly before the section comes into view
+    const ctx = gsap.context(() => {
+      // Section entry animation
+      gsap.fromTo(
+        sectionRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.5,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          },
+        }
+      );
+
+      // Cards stagger animation
+      gsap.fromTo(
+        cardsRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          stagger: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          },
+        }
+      );
+
+      // Typewriting effect for the heading
+      if (typewriterRef.current) {
+        const text = "HACKATHON PARTNERSHIPS";
+        const chars = text.split("");
+        typewriterRef.current.textContent = "";
+
+        chars.forEach((char, i) => {
+          gsap.to(typewriterRef.current, {
+            textContent: text.slice(0, i + 1),
+            duration: 0.05,
+            delay: i * 0.05,
+            ease: "none",
+          });
+        });
+
+        // Add a glowing effect to the heading after typewriting
+        gsap.to(typewriterRef.current, {
+          textShadow: "0px 0px 20px rgba(255, 255, 255, 0.8)",
+          duration: 1,
+          repeat: -1,
+          yoyo: true,
+          ease: "power1.inOut",
+        });
       }
-    );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+      // Floating animation for subtle background elements
+      gsap.to(".floating-element", {
+        y: "+=20",
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    });
 
-    return () => observer.disconnect();
+    return () => ctx.revert();
   }, []);
 
-  const containerVariants = {
-    hidden: {
-      opacity: 0,
-      transition: {
-        when: "afterChildren",
-      },
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        when: "beforeChildren",
-        staggerChildren: 0.1,
-      },
-    },
+  const openPdfModal = (pdfUrl: string) => {
+    setSelectedPdf(pdfUrl);
+    gsap.fromTo(
+      ".modalContent",
+      { scale: 0.8, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" }
+    );
   };
-  const itemVariants = {
-    hidden: {
+
+  const closePdfModal = () => {
+    gsap.to(".modalContent", {
+      scale: 0.8,
       opacity: 0,
-      y: 50,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-      },
-    },
+      duration: 0.5,
+      ease: "power3.in",
+      onComplete: () => setSelectedPdf(null),
+    });
   };
 
   // Partnership data
@@ -100,6 +151,7 @@ export const LabCylinder = () => {
       description: "36 hours of non-stop innovation! Open-theme hackathon at IEM Ashram Campus.",
       logo: "/hackathon-logos/hackolutionlogo.jpeg",
       pdf: "/hackathon-logos/MoU Hackolution.pdf",
+      venue: "IEM Ashram Campus",
     },
     {
       id: 2,
@@ -108,6 +160,7 @@ export const LabCylinder = () => {
       description: "Transform ideas into reality through innovative coding solutions.",
       logo: "/hackathon-logos/metamorph2k25_logo.jpeg",
       pdf: "/hackathon-logos/MetamorphMoU.docx",
+      venue: "Guru Nanak Institute of Technology",
     },
     {
       id: 3,
@@ -116,82 +169,68 @@ export const LabCylinder = () => {
       description: "The wildest hackathon of the year! Code till your fingers cramp.",
       logo: "/hackathon-logos/sc2logo.png",
       pdf: "/hackathon-logos/MoU StatusCode2.docx",
+      venue: "IIIT Kalyani",
     },
   ];
-
-  const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
-
-  const openPdfModal = (pdfUrl: string) => {
-    setSelectedPdf(pdfUrl);
-  };
-
-  const closePdfModal = () => {
-    setSelectedPdf(null);
-  };
 
   return (
     <section className={styles.eventsSection} ref={sectionRef}>
       <div className={styles.container}>
-        <h2 className={styles.sectionHeading}>HACKATHON PARTNERSHIPS</h2>
-          <AnimatePresence mode="wait">
+        <h2 className={styles.sectionHeading} ref={typewriterRef}></h2>
+        {/* Add floating elements for visual enhancement */}
+        <div className="floating-element" style={{ position: "absolute", top: "10%", left: "5%", width: "100px", height: "100px", background: "rgba(255, 255, 255, 0.1)", borderRadius: "50%" }}></div>
+        <div className="floating-element" style={{ position: "absolute", bottom: "15%", right: "8%", width: "150px", height: "150px", background: "rgba(255, 255, 255, 0.1)", borderRadius: "50%" }}></div>
+        <AnimatePresence mode="wait">
           <motion.div
             className={styles.eventsGrid}
-            initial="hidden"
-            animate={isVisible ? "visible" : "hidden"}
-            variants={containerVariants}
+            ref={(el) => {
+              if (el) cardsRef.current.push(el);
+            }}
           >
             {partnerships.map((partnership, index) => (
               <PartnershipCard
                 key={partnership.id}
                 partnership={partnership}
-                variants={itemVariants}
-                custom={index}
                 styles={styles}
                 onOpenPdf={openPdfModal}
               />
             ))}
           </motion.div>
-        </AnimatePresence>        {/* PDF/Document Modal */}
+        </AnimatePresence>
         <AnimatePresence>
           {selectedPdf && (
             <motion.div
               className={styles.modalOverlay}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
               onClick={closePdfModal}
             >
               <motion.div
-                className={styles.modalContent}
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
+                className={`${styles.modalContent} modalContent`}
                 onClick={(e) => e.stopPropagation()}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
                   <h3>Memorandum of Understanding</h3>
                   <button onClick={closePdfModal}>×</button>
                 </div>
-                {selectedPdf.endsWith('.pdf') ? (
+                {selectedPdf.endsWith(".pdf") ? (
                   <iframe
                     src={selectedPdf}
                     style={{
-                      width: '100%',
-                      height: '70vh',
-                      border: 'none',
-                      borderRadius: '8px'
+                      width: "100%",
+                      height: "70vh",
+                      border: "none",
+                      borderRadius: "8px",
                     }}
                     title="MoU PDF"
                   />
                 ) : (
-                  <div className={styles.downloadContainer || 'downloadContainer'}>
-                    <div className={styles.documentIcon || 'documentIcon'}>📄</div>
+                  <div className={styles.downloadContainer || "downloadContainer"}>
+                    <div className={styles.documentIcon || "documentIcon"}>📄</div>
                     <p>This document cannot be previewed in the browser.</p>
                     <p>Click the button below to download and view the MoU document.</p>
                     <a
                       href={selectedPdf}
                       download
-                      className={styles.downloadButton || 'downloadButton'}
+                      className={styles.downloadButton || "downloadButton"}
                     >
                       Download MoU Document
                     </a>
@@ -209,8 +248,6 @@ export const LabCylinder = () => {
 // Partnership card component
 const PartnershipCard = ({
   partnership,
-  variants,
-  custom,
   styles,
   onOpenPdf,
 }: {
@@ -221,9 +258,8 @@ const PartnershipCard = ({
     description: string;
     logo: string;
     pdf: string;
+    venue: string;
   };
-  variants: any;
-  custom: number;
   styles: any;
   onOpenPdf: (pdfUrl: string) => void;
 }) => {
@@ -232,8 +268,6 @@ const PartnershipCard = ({
   return (
     <motion.div
       className={styles.partnershipCard || 'partnershipCard'}
-      variants={variants}
-      custom={custom}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       whileHover={{

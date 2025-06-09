@@ -27,7 +27,7 @@
     "emailjs-com": "^3.2.0",
     "eslint-config-custom": "^0.0.0",
     "framer-motion": "^12.12.2",
-    "gsap": "^3.11.5",
+    "gsap": "^3.13.0",
     "leva": "^0.9.34",
     "next": "^13.5.11",
     "next-auth": "^4.24.7",

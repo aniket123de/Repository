@@ -1,0 +1,13 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hackGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ecdc4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#44a08d;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="20" fill="url(#hackGradient)"/>
+  <rect x="30" y="30" width="60" height="60" rx="10" fill="white" opacity="0.9"/>
+  <text x="60" y="50" text-anchor="middle" fill="url(#hackGradient)" font-family="monospace" font-size="14" font-weight="bold">{0}</text>
+  <text x="60" y="70" text-anchor="middle" fill="url(#hackGradient)" font-family="monospace" font-size="10" font-weight="bold">LUTION</text>
+  <text x="60" y="105" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">HACK{0}LUTION</text>
+</svg>
