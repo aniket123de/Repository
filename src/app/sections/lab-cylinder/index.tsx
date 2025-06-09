@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import s from "./lab-cylinder.module.scss";
 
@@ -30,20 +30,20 @@ const fallbackStyles = {
   learnMoreLink: 'learnMoreLink',
   viewAllContainer: 'viewAllContainer',
   viewAllButton: 'viewAllButton',
+  modalOverlay: 'modalOverlay',
+  modalContent: 'modalContent',
 };
 
 // Use fallback if styles fail to load
 const styles = s && Object.keys(s).length > 0 ? s : fallbackStyles;
 
-// Sample event data structure
-interface Event {
-  id: string;
-  title: string;
+interface Partnership {
+  id: number;
+  name: string;
   date: string;
-  description?: string;
-  link?: string;
-  discordLink?: string;
-  type: 'hackathon' | 'workshop' | 'webinar';
+  description: string;
+  logo: string;
+  pdf: string;
 }
 
 export const LabCylinder = () => {
@@ -84,7 +84,6 @@ export const LabCylinder = () => {
       },
     },
   };
-
   const itemVariants = {
     hidden: {
       opacity: 0,
@@ -99,248 +98,337 @@ export const LabCylinder = () => {
         damping: 20,
       },
     },
-  };  // Sample event data (replace with actual data source)
-  const events: Event[] = [    {
-      id: "hackathon1",
-      title: "HexaFall",
-      date: "Jun 28-29, 2025",
-      description: "A 36-hour Offline Mysterious Hackathon Like Never Before!\n\nJoin us at JIS University, Kolkata for an extraordinary coding adventure.\n\nRegistration deadline: June 15, 2025.",
-      link: "https://www.hexafalls.tech",
-      discordLink: "https://discord.gg/cYdBDCXuPu",
-      type: "hackathon"
-    },
+  };
+
+  // Partnership data
+  const partnerships = [
     {
-      id: "hackathon2",
-      title: "HACK{0}LUTION 2K25",
+      id: 1,
+      name: "HACK{0}LUTION 2K25",
       date: "Jun 26-27, 2025",
-      description: "36 hours of non-stop innovation! Open-theme hackathon at IEM Ashram Campus, Kolkata. Think. Code. Compete. Win big! Registration is live now.",
-      link: "https://hackolution.tech",
-      type: "hackathon"
-    },    {
-      id: "hackathon3",
-      title: "StatusCode2",
+      description: "36 hours of non-stop innovation! Open-theme hackathon at IEM Ashram Campus.",
+      logo: "/hackathon-logos/hackolutionlogo.jpeg",
+      pdf: "/hackathon-logos/MoU Hackolution.pdf",
+    },
+    {
+      id: 2,
+      name: "Metamorph 2K25",
+      date: "TBD 2025",
+      description: "Transform ideas into reality through innovative coding solutions.",
+      logo: "/hackathon-logos/metamorph2k25_logo.jpeg",
+      pdf: "/hackathon-logos/MetamorphMoU.docx",
+    },
+    {
+      id: 3,
+      name: "StatusCode2",
       date: "Jun 20-21, 2025",
-      description: "The wildest hackathon of the year! Code till your fingers cramp, debug like your GPA depends on it. Pull up with your gang and join the madness.",
-      link: "https://lnkd.in/gV-pfKVN",
-      type: "hackathon"
+      description: "The wildest hackathon of the year! Code till your fingers cramp.",
+      logo: "/hackathon-logos/sc2logo.png",
+      pdf: "/hackathon-logos/MoU StatusCode2.docx",
     },
-    {
-      id: "hackathon4",
-      title: "Design-a-thon",
-      date: "May 09-10, 2025",
-      description: "A 24-hour UI/UX sprint hosted by Inspiria Knowledge Campus. Build smart, inclusive product prototypes in Figma addressing real-world challenges. ₹50,000 worth prizes. Individual participation only.",
-      link: "https://inspiria.edu.in/Design-a-thon",
-      type: "hackathon"
-    },
-    {
-      id: "workshop1",
-      title: "React Advanced Patterns Workshop",
-      date: "Apr 19, 2025",
-      description: "Master advanced React patterns and best practices in this hands-on workshop led by industry experts.",
-      link: "/events/react-workshop",
-      type: "workshop"
-    },
-    {
-      id: "webinar1",
-      title: "Building Scalable APIs",
-      date: "Mar 12, 2025",
-      description: "Learn the fundamentals of designing and building scalable APIs that can handle millions of requests.",
-      link: "/events/api-webinar",
-      type: "webinar"
-    },
-    {
-      id: "workshop2",
-      title: "UI/UX Design Fundamentals",
-      date: "Feb 20, 2025",
-      description: "Master the principles of user interface and user experience design in this comprehensive workshop.",
-      link: "/events/design-workshop",
-      type: "workshop"
-    }
   ];
 
-  // Separate events by type
-  const hackathonEvents = events.filter(event => event.type === 'hackathon');
-  const workshopWebinarEvents = events.filter(event => event.type === 'workshop' || event.type === 'webinar');  return (
+  const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
+
+  const openPdfModal = (pdfUrl: string) => {
+    setSelectedPdf(pdfUrl);
+  };
+
+  const closePdfModal = () => {
+    setSelectedPdf(null);
+  };
+
+  return (
     <section className={styles.eventsSection} ref={sectionRef}>
       <div className={styles.container}>
-        <h2 className={styles.sectionHeading}>UPCOMING EVENTS</h2>        <div className={styles.eventsGrid}>
-          {/* Hackathon Column */}
-          <div className={styles.eventColumn}>
-            <h3 className={styles.columnHeading}>
-              Hackathons
-            </h3>
-            <AnimatePresence mode="wait">
-              <motion.ul
-                key="hackathon-list"
-                className={styles.stackList}
-                initial="hidden"
-                animate={isVisible ? "visible" : "hidden"}
-                variants={containerVariants}
+        <h2 className={styles.sectionHeading}>HACKATHON PARTNERSHIPS</h2>
+        
+        <AnimatePresence mode="wait">
+          <motion.div
+            className={styles.eventsGrid}
+            initial="hidden"
+            animate={isVisible ? "visible" : "hidden"}
+            variants={containerVariants}            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '2rem',
+              padding: '2rem 0',
+              justifyItems: 'center'
+            }}
+          >
+            {partnerships.map((partnership, index) => (
+              <PartnershipCard
+                key={partnership.id}
+                partnership={partnership}
+                variants={itemVariants}
+                custom={index}
+                styles={styles}
+                onOpenPdf={openPdfModal}
+              />
+            ))}
+          </motion.div>
+        </AnimatePresence>        {/* PDF/Document Modal */}
+        <AnimatePresence>
+          {selectedPdf && (
+            <motion.div
+              className={styles.modalOverlay}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closePdfModal}
+              style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                zIndex: 1000,
+                padding: '2rem'
+              }}
+            >
+              <motion.div
+                className={styles.modalContent}
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  backgroundColor: 'white',
+                  borderRadius: '12px',
+                  padding: '1rem',
+                  maxWidth: '90vw',
+                  maxHeight: '90vh',
+                  overflow: 'auto'
+                }}
               >
-                {hackathonEvents.map((event, index) => (
-                  <EventStackItem
-                    key={event.id}
-                    event={event}
-                    variants={itemVariants}
-                    custom={index}
-                    styles={styles}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                  <h3>Memorandum of Understanding</h3>
+                  <button
+                    onClick={closePdfModal}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      fontSize: '1.5rem',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    ×
+                  </button>
+                </div>
+                {selectedPdf.endsWith('.pdf') ? (
+                  <iframe
+                    src={selectedPdf}
+                    style={{
+                      width: '100%',
+                      height: '70vh',
+                      border: 'none',
+                      borderRadius: '8px'
+                    }}
+                    title="MoU PDF"
                   />
-                ))}
-              </motion.ul>
-            </AnimatePresence>
-          </div>
-
-          {/* Workshop/Webinar Column */}
-          <div className={styles.eventColumn}>
-            <h3 className={styles.columnHeading}>
-              Workshops & Webinars
-            </h3>
-            <AnimatePresence mode="wait">
-              <motion.ul
-                key="workshop-list"
-                className={styles.stackList}
-                initial="hidden"
-                animate={isVisible ? "visible" : "hidden"}
-                variants={containerVariants}
-              >
-                {workshopWebinarEvents.map((event, index) => (
-                  <EventStackItem
-                    key={event.id}
-                    event={event}
-                    variants={itemVariants}
-                    custom={index + hackathonEvents.length}
-                    styles={styles}
-                  />
-                ))}
-              </motion.ul>
-            </AnimatePresence>
-          </div>
-        </div>
+                ) : (
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    height: '70vh',
+                    color: '#333',
+                    textAlign: 'center'
+                  }}>
+                    <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📄</div>
+                    <p style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>
+                      This document cannot be previewed in the browser.
+                    </p>
+                    <p style={{ color: '#666', marginBottom: '2rem' }}>
+                      Click the button below to download and view the MoU document.
+                    </p>
+                    <a
+                      href={selectedPdf}
+                      download
+                      style={{
+                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        color: 'white',
+                        padding: '0.75rem 2rem',
+                        borderRadius: '25px',
+                        textDecoration: 'none',
+                        fontSize: '1rem',
+                        fontWeight: '600',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                      }}
+                    >
+                      Download MoU Document
+                    </a>
+                  </div>
+                )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
 };
 
-// Event stack item with dropdown functionality
-const EventStackItem = ({
-  event,
+// Partnership card component
+const PartnershipCard = ({
+  partnership,
   variants,
   custom,
   styles,
+  onOpenPdf,
 }: {
-  event: Event;
+  partnership: {
+    id: number;
+    name: string;
+    date: string;
+    description: string;
+    logo: string;
+    pdf: string;
+  };
   variants: any;
   custom: number;
   styles: any;
+  onOpenPdf: (pdfUrl: string) => void;
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  const expandVariants = {
-    collapsed: {
-      height: 0,
-      opacity: 0,
-      transition: {
-        height: {
-          duration: 0.3,
-          ease: [0.04, 0.62, 0.23, 0.98],
-        },
-        opacity: { duration: 0.2 },
-      },
-    },
-    expanded: {
-      height: "auto",
-      opacity: 1,
-      transition: {
-        height: {
-          duration: 0.3,
-          ease: [0.04, 0.62, 0.23, 0.98],
-        },
-        opacity: { duration: 0.25, delay: 0.1 },
-      },
-    },
-  };
   return (
-    <motion.li
-      className={`${styles.stackItem} ${isExpanded ? styles.expanded : ""} ${styles[event.type]}`}
-      onClick={toggleExpand}
+    <motion.div
+      className={`${styles.stackItem} ${styles.hackathon}`}
       variants={variants}
       custom={custom}
-      layout
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      style={{
+        background: 'rgba(255, 255, 255, 0.05)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        borderRadius: '16px',
+        padding: '2rem',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+        height: '100%',
+        minHeight: '350px',
+        position: 'relative',
+        overflow: 'hidden',
+        cursor: 'pointer',
+        transition: 'all 0.3s ease'
+      }}
+      whileHover={{
+        scale: 1.02,
+        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)'
+      }}
     >
+      {/* Logo Container */}
       <motion.div
-        className={styles.stackHeader}
-        layout="position"
+        style={{
+          width: '120px',
+          height: '120px',
+          borderRadius: '50%',
+          background: 'rgba(255, 255, 255, 0.1)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: '1.5rem',
+          overflow: 'hidden'
+        }}
+        animate={{
+          rotate: isHovered ? 5 : 0
+        }}
       >
-        <div className={styles.eventMeta}>
-          <span className={styles.eventDate}>{event.date}</span>
-          <h3 className={styles.eventTitle}>{event.title}</h3>          <span className={styles.eventType}>
-            {event.type === 'hackathon' ? 'Hackathon' : 
-             event.type === 'workshop' ? 'Workshop' : 'Webinar'}
-          </span>
-        </div>
-        <motion.button
-          className={styles.expandButton}
-          aria-label={isExpanded ? "Collapse" : "Expand"}
-          animate={{ rotate: isExpanded ? 180 : 0 }}
-          transition={{ duration: 0.3, ease: "circOut" }}
-        >
-          {isExpanded ? "−" : "+"}
-        </motion.button>
+        <img
+          src={partnership.logo}
+          alt={`${partnership.name} logo`}
+          style={{
+            width: '80px',
+            height: '80px',
+            objectFit: 'contain'
+          }}
+        />
       </motion.div>
 
-      <AnimatePresence mode="wait">
-        {isExpanded && (
-          <motion.div
-            className={styles.expandedContent}
-            initial="collapsed"
-            animate="expanded"
-            exit="collapsed"
-            variants={expandVariants}
+      {/* Content */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div>
+          <h3 className={styles.eventTitle} style={{ marginBottom: '0.5rem', fontSize: '1.25rem' }}>
+            {partnership.name}
+          </h3>
+          <span className={styles.eventDate} style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem' }}>
+            {partnership.date}
+          </span>
+          <p 
+            className={styles.description} 
+            style={{ 
+              margin: '1rem 0', 
+              fontSize: '0.9rem', 
+              lineHeight: '1.4',
+              color: 'rgba(255, 255, 255, 0.8)'
+            }}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                transition: {
-                  delay: 0.2,
-                  duration: 0.3,
-                  ease: [0.04, 0.62, 0.23, 0.98]
-                }
-              }}
-              exit={{
-                opacity: 0,
-                y: 20,
-                transition: {
-                  duration: 0.2
-                }
-              }}            >
-              <p className={styles.description}>{event.description}</p>
-              {event.discordLink && (
-                <p className={styles.description}>
-                  Join our{" "}
-                  <Link 
-                    href={event.discordLink} 
-                    className={styles.learnMoreLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Discord
-                  </Link>
-                  {" "}for updates and community discussions!
-                </p>
-              )}
-              <Link href={event.link || "#"} className={styles.learnMoreLink}>
-                Learn more
-              </Link>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.li>
+            {partnership.description}
+          </p>
+        </div>
+
+        {/* View MoU Button */}
+        <motion.button
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpenPdf(partnership.pdf);
+          }}
+          className={styles.learnMoreLink}
+          style={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            color: 'white',
+            border: 'none',
+            padding: '0.75rem 1.5rem',
+            borderRadius: '25px',
+            fontSize: '0.9rem',
+            fontWeight: '600',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            alignSelf: 'center',
+            marginTop: '1rem'
+          }}
+          whileHover={{
+            scale: 1.05,
+            background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)'
+          }}
+          whileTap={{ scale: 0.95 }}
+        >
+          View MoU
+        </motion.button>
+      </div>
+
+      {/* Decorative elements */}
+      <motion.div
+        style={{
+          position: 'absolute',
+          top: '-50%',
+          right: '-50%',
+          width: '100px',
+          height: '100px',
+          background: 'linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent)',
+          borderRadius: '50%',
+          pointerEvents: 'none'
+        }}
+        animate={{
+          rotate: isHovered ? 180 : 0,
+          scale: isHovered ? 1.2 : 1
+        }}
+        transition={{ duration: 0.6 }}
+      />
+    </motion.div>
   );
 };
