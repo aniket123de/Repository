@@ -11,27 +11,18 @@ const fallbackStyles = {
   container: 'container',
   sectionHeading: 'sectionHeading',
   eventsGrid: 'eventsGrid',
-  eventColumn: 'eventColumn',
-  columnHeading: 'columnHeading',
-  stackList: 'stackList',
-  stackItem: 'stackItem',
-  expanded: 'expanded',
-  hackathon: 'hackathon',
-  workshop: 'workshop',
-  webinar: 'webinar',
-  stackHeader: 'stackHeader',
-  eventMeta: 'eventMeta',
-  eventDate: 'eventDate',
+  partnershipCard: 'partnershipCard',
+  logoContainer: 'logoContainer',
   eventTitle: 'eventTitle',
-  eventType: 'eventType',
-  expandButton: 'expandButton',
-  expandedContent: 'expandedContent',
+  eventDate: 'eventDate',
   description: 'description',
-  learnMoreLink: 'learnMoreLink',
-  viewAllContainer: 'viewAllContainer',
-  viewAllButton: 'viewAllButton',
+  viewMouButton: 'viewMouButton',
+  text: 'text',
   modalOverlay: 'modalOverlay',
   modalContent: 'modalContent',
+  downloadContainer: 'downloadContainer',
+  documentIcon: 'documentIcon',
+  downloadButton: 'downloadButton',
 };
 
 // Use fallback if styles fail to load
@@ -113,7 +104,7 @@ export const LabCylinder = () => {
     {
       id: 2,
       name: "Metamorph 2K25",
-      date: "TBD 2025",
+      date: "Sep 6-7, 2025",
       description: "Transform ideas into reality through innovative coding solutions.",
       logo: "/hackathon-logos/metamorph2k25_logo.jpeg",
       pdf: "/hackathon-logos/MetamorphMoU.docx",
@@ -121,7 +112,7 @@ export const LabCylinder = () => {
     {
       id: 3,
       name: "StatusCode2",
-      date: "Jun 20-21, 2025",
+      date: "Aug 23-24, 2025",
       description: "The wildest hackathon of the year! Code till your fingers cramp.",
       logo: "/hackathon-logos/sc2logo.png",
       pdf: "/hackathon-logos/MoU StatusCode2.docx",
@@ -142,19 +133,12 @@ export const LabCylinder = () => {
     <section className={styles.eventsSection} ref={sectionRef}>
       <div className={styles.container}>
         <h2 className={styles.sectionHeading}>HACKATHON PARTNERSHIPS</h2>
-        
-        <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait">
           <motion.div
             className={styles.eventsGrid}
             initial="hidden"
             animate={isVisible ? "visible" : "hidden"}
-            variants={containerVariants}            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '2rem',
-              padding: '2rem 0',
-              justifyItems: 'center'
-            }}
+            variants={containerVariants}
           >
             {partnerships.map((partnership, index) => (
               <PartnershipCard
@@ -176,19 +160,6 @@ export const LabCylinder = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={closePdfModal}
-              style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                zIndex: 1000,
-                padding: '2rem'
-              }}
             >
               <motion.div
                 className={styles.modalContent}
@@ -196,28 +167,10 @@ export const LabCylinder = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
-                style={{
-                  backgroundColor: 'white',
-                  borderRadius: '12px',
-                  padding: '1rem',
-                  maxWidth: '90vw',
-                  maxHeight: '90vh',
-                  overflow: 'auto'
-                }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                   <h3>Memorandum of Understanding</h3>
-                  <button
-                    onClick={closePdfModal}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      fontSize: '1.5rem',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    ×
-                  </button>
+                  <button onClick={closePdfModal}>×</button>
                 </div>
                 {selectedPdf.endsWith('.pdf') ? (
                   <iframe
@@ -231,41 +184,14 @@ export const LabCylinder = () => {
                     title="MoU PDF"
                   />
                 ) : (
-                  <div style={{ 
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    alignItems: 'center', 
-                    justifyContent: 'center',
-                    height: '70vh',
-                    color: '#333',
-                    textAlign: 'center'
-                  }}>
-                    <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📄</div>
-                    <p style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>
-                      This document cannot be previewed in the browser.
-                    </p>
-                    <p style={{ color: '#666', marginBottom: '2rem' }}>
-                      Click the button below to download and view the MoU document.
-                    </p>
+                  <div className={styles.downloadContainer || 'downloadContainer'}>
+                    <div className={styles.documentIcon || 'documentIcon'}>📄</div>
+                    <p>This document cannot be previewed in the browser.</p>
+                    <p>Click the button below to download and view the MoU document.</p>
                     <a
                       href={selectedPdf}
                       download
-                      style={{
-                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                        color: 'white',
-                        padding: '0.75rem 2rem',
-                        borderRadius: '25px',
-                        textDecoration: 'none',
-                        fontSize: '1rem',
-                        fontWeight: '600',
-                        transition: 'all 0.3s ease'
-                      }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.background = 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)';
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                      }}
+                      className={styles.downloadButton || 'downloadButton'}
                     >
                       Download MoU Document
                     </a>
@@ -305,130 +231,54 @@ const PartnershipCard = ({
 
   return (
     <motion.div
-      className={`${styles.stackItem} ${styles.hackathon}`}
+      className={styles.partnershipCard || 'partnershipCard'}
       variants={variants}
       custom={custom}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      style={{
-        background: 'rgba(255, 255, 255, 0.05)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        borderRadius: '16px',
-        padding: '2rem',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center',
-        height: '100%',
-        minHeight: '350px',
-        position: 'relative',
-        overflow: 'hidden',
-        cursor: 'pointer',
-        transition: 'all 0.3s ease'
-      }}
       whileHover={{
-        scale: 1.02,
-        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)'
+        y: -8,
       }}
     >
-      {/* Logo Container */}
+      {/* Logo Container - No circle, flexible display */}
       <motion.div
-        style={{
-          width: '120px',
-          height: '120px',
-          borderRadius: '50%',
-          background: 'rgba(255, 255, 255, 0.1)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginBottom: '1.5rem',
-          overflow: 'hidden'
-        }}
+        className={styles.logoContainer || 'logoContainer'}
         animate={{
-          rotate: isHovered ? 5 : 0
+          scale: isHovered ? 1.05 : 1
         }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
       >
         <img
           src={partnership.logo}
           alt={`${partnership.name} logo`}
-          style={{
-            width: '80px',
-            height: '80px',
-            objectFit: 'contain'
-          }}
         />
       </motion.div>
 
       {/* Content */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '100%' }}>
         <div>
-          <h3 className={styles.eventTitle} style={{ marginBottom: '0.5rem', fontSize: '1.25rem' }}>
+          <h3 className={styles.eventTitle || 'eventTitle'}>
             {partnership.name}
           </h3>
-          <span className={styles.eventDate} style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem' }}>
+          <span className={styles.eventDate || 'eventDate'}>
             {partnership.date}
           </span>
-          <p 
-            className={styles.description} 
-            style={{ 
-              margin: '1rem 0', 
-              fontSize: '0.9rem', 
-              lineHeight: '1.4',
-              color: 'rgba(255, 255, 255, 0.8)'
-            }}
-          >
+          <p className={styles.description || 'description'}>
             {partnership.description}
           </p>
-        </div>
-
-        {/* View MoU Button */}
+        </div>        {/* View MoU Button */}
         <motion.button
           onClick={(e) => {
             e.stopPropagation();
             onOpenPdf(partnership.pdf);
           }}
-          className={styles.learnMoreLink}
-          style={{
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            color: 'white',
-            border: 'none',
-            padding: '0.75rem 1.5rem',
-            borderRadius: '25px',
-            fontSize: '0.9rem',
-            fontWeight: '600',
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            alignSelf: 'center',
-            marginTop: '1rem'
-          }}
-          whileHover={{
-            scale: 1.05,
-            background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)'
-          }}
-          whileTap={{ scale: 0.95 }}
+          className={styles.viewMouButton || 'viewMouButton'}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
-          View MoU
+          <span className={styles.text || 'text'}>View MoU</span>
         </motion.button>
       </div>
-
-      {/* Decorative elements */}
-      <motion.div
-        style={{
-          position: 'absolute',
-          top: '-50%',
-          right: '-50%',
-          width: '100px',
-          height: '100px',
-          background: 'linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent)',
-          borderRadius: '50%',
-          pointerEvents: 'none'
-        }}
-        animate={{
-          rotate: isHovered ? 180 : 0,
-          scale: isHovered ? 1.2 : 1
-        }}
-        transition={{ duration: 0.6 }}
-      />
     </motion.div>
   );
 };
