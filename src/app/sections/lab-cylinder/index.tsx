@@ -102,7 +102,7 @@ export const LabCylinder = () => {
   };  // Sample event data (replace with actual data source)
   const events: Event[] = [    {
       id: "hackathon1",
-      title: "HexaFalls",
+      title: "HexaFall",
       date: "Jun 28-29, 2025",
       description: "A 36-hour Offline Mysterious Hackathon Like Never Before!\n\nJoin us at JIS University, Kolkata for an extraordinary coding adventure.\n\nRegistration deadline: June 15, 2025.",
       link: "https://www.hexafalls.tech",
