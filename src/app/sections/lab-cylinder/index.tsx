@@ -138,7 +138,7 @@ export const LabCylinder = () => {
       date: "Jun 26-27, 2025",
       description: "36 hours of non-stop innovation and coding madness!",
       logo: "/hackathon-logos/hackolutionlogo.jpeg",
-      link: "https://hackolution.example.com",
+      link: "http://www.hackolution.tech",
       venue: "IEM Ashram Campus",
     },
     {
@@ -147,7 +147,7 @@ export const LabCylinder = () => {
       date: "Aug 23-24, 2025",
       description: "The wildest hackathon of the year! Code till your fingers cramp.",
       logo: "/hackathon-logos/sc2logo.png",
-      link: "https://statuscode2.example.com",
+      link: "https://statuscode-2.devfolio.co/?ref=843a4bfca8",
       venue: "IIIT Kalyani",
     },
     {
