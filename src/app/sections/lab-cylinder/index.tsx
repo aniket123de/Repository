@@ -177,7 +177,7 @@ export const LabCylinder = () => {
       id: 1,
       name: "HACK{0}LUTION 2K25",
       date: "Jun 26-27, 2025",
-      description: "36 hours of non-stop innovation! Open-theme hackathon at IEM Ashram Campus.",
+      description: "36 hours of non-stop innovation and coding madness!",
       logo: "/hackathon-logos/hackolutionlogo.jpeg",
       pdf: "/hackathon-logos/MoU Hackolution.pdf",
       venue: "IEM Ashram Campus",
