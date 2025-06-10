@@ -39,7 +39,7 @@ interface Partnership {
   date: string;
   description: string;
   logo: string;
-  pdf: string;
+  link: string;
   venue: string;
 }
 
@@ -47,7 +47,6 @@ export const LabCylinder = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
-  const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
   const typewriterRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -126,50 +125,10 @@ export const LabCylinder = () => {
         yoyo: true,
         ease: "sine.inOut",
       });
-
-      // Modal open animation with bounce effect
-      gsap.fromTo(
-        ".modalContent",
-        { scale: 0.8, opacity: 0 },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 0.7,
-          ease: "bounce.out",
-        }
-      );
-
-      // Modal close animation with fade-out and scale-down
-      gsap.to(".modalContent", {
-        scale: 0.8,
-        opacity: 0,
-        duration: 0.5,
-        ease: "power3.in",
-        onComplete: () => setSelectedPdf(null),
-      });
     });
 
     return () => ctx.revert();
   }, []);
-
-  const openPdfModal = (pdfUrl: string) => {
-    setSelectedPdf(pdfUrl);
-    gsap.fromTo(
-      ".modalContent",
-      { scale: 0.8, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" }
-    );
-  };
-
-  const closePdfModal = () => {
-    gsap.to(".modalContent", {
-      scale: 0.8,
-      opacity: 0,
-      duration: 0.5,
-      ease: "power3.in",
-      onComplete: () => setSelectedPdf(null),
-    });
-  };
 
   // Partnership data
   const partnerships = [
@@ -179,7 +138,7 @@ export const LabCylinder = () => {
       date: "Jun 26-27, 2025",
       description: "36 hours of non-stop innovation and coding madness!",
       logo: "/hackathon-logos/hackolutionlogo.jpeg",
-      pdf: "/hackathon-logos/MoU Hackolution.pdf",
+      link: "https://hackolution.example.com",
       venue: "IEM Ashram Campus",
     },
     {
@@ -188,7 +147,7 @@ export const LabCylinder = () => {
       date: "Aug 23-24, 2025",
       description: "The wildest hackathon of the year! Code till your fingers cramp.",
       logo: "/hackathon-logos/sc2logo.png",
-      pdf: "/hackathon-logos/MoU StatusCode2.docx",
+      link: "https://statuscode2.example.com",
       venue: "IIIT Kalyani",
     },
     {
@@ -197,7 +156,7 @@ export const LabCylinder = () => {
       date: "Sep 6-7, 2025",
       description: "Transform ideas into reality through innovative coding solutions.",
       logo: "/hackathon-logos/metamorph2k25_logo.jpeg",
-      pdf: "/hackathon-logos/MetamorphMoU.docx",
+      link: "https://metamorph.example.com",
       venue: "Guru Nanak Institute of Technology",
     },
   ];
@@ -221,53 +180,9 @@ export const LabCylinder = () => {
                 key={partnership.id}
                 partnership={partnership}
                 styles={styles}
-                onOpenPdf={openPdfModal}
               />
             ))}
           </motion.div>
-        </AnimatePresence>
-        <AnimatePresence>
-          {selectedPdf && (
-            <motion.div
-              className={styles.modalOverlay}
-              onClick={closePdfModal}
-            >
-              <motion.div
-                className={`${styles.modalContent} modalContent`}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-                  <h3>Memorandum of Understanding</h3>
-                  <button onClick={closePdfModal}>×</button>
-                </div>
-                {selectedPdf.endsWith(".pdf") ? (
-                  <iframe
-                    src={selectedPdf}
-                    style={{
-                      width: "100%",
-                      height: "70vh",
-                      border: "none",
-                      borderRadius: "8px",
-                    }}
-                    title="MoU PDF"
-                  />
-                ) : (
-                  <div className={styles.downloadContainer || "downloadContainer"}>
-                    <div className={styles.documentIcon || "documentIcon"}>📄</div>
-                    <p>This document cannot be previewed in the browser.</p>
-                    <p>Click the button below to download and view the MoU document.</p>
-                    <a
-                      href={selectedPdf}
-                      download
-                      className={styles.downloadButton || "downloadButton"}
-                    >
-                      Download MoU Document
-                    </a>
-                  </div>
-                )}
-              </motion.div>
-            </motion.div>
-          )}
         </AnimatePresence>
       </div>
     </section>
@@ -278,7 +193,6 @@ export const LabCylinder = () => {
 const PartnershipCard = ({
   partnership,
   styles,
-  onOpenPdf,
 }: {
   partnership: {
     id: number;
@@ -286,11 +200,10 @@ const PartnershipCard = ({
     date: string;
     description: string;
     logo: string;
-    pdf: string;
+    link: string;
     venue: string;
   };
   styles: any;
-  onOpenPdf: (pdfUrl: string) => void;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -303,7 +216,7 @@ const PartnershipCard = ({
         y: -8,
       }}
     >
-      {/* Logo Container - No circle, flexible display */}
+      {/* Logo Container */}
       <motion.div
         className={styles.logoContainer || 'logoContainer'}
         animate={{
@@ -332,18 +245,18 @@ const PartnershipCard = ({
           <p className={styles.description || 'description'}>
             <strong>Venue:</strong> {partnership.venue}
           </p>
-        </div>        {/* View MoU Button */}
-        <motion.button
-          onClick={(e) => {
-            e.stopPropagation();
-            onOpenPdf(partnership.pdf);
-          }}
+        </div>
+        {/* View More Button */}
+        <motion.a
+          href={partnership.link}
+          target="_blank"
+          rel="noopener noreferrer"
           className={styles.viewMouButton || 'viewMouButton'}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <span className={styles.text || 'text'}>View MoU</span>
-        </motion.button>
+          <span className={styles.text || 'text'}>View More</span>
+        </motion.a>
       </div>
     </motion.div>
   );
