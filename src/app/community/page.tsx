@@ -25,25 +25,13 @@ export default function CommunityPage() {
     {
       name: "Discord Server",
       icon: faDiscord,
-      url: "#",
+      url: "https://discord.gg/xwy4fe3H",
       color: "#5865F2"
-    },
-    {
-      name: "Twitter",
-      icon: faTwitter,
-      url: "#",
-      color: "#1DA1F2"
-    },
-    {
-      name: "Instagram",
-      icon: faInstagram,
-      url: "#",
-      color: "#E4405F"
     },
     {
       name: "LinkedIn",
       icon: faLinkedin,
-      url: "#",
+      url: "https://www.linkedin.com/company/repositorymain/",
       color: "#0077B5"
     },
     {
