@@ -440,18 +440,8 @@ const MapSection = () => {
 // Join Community Section
 const JoinCommunity = () => {
   const { data: session } = useSession();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);  const contentRef = useRef<HTMLDivElement>(null);
   
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
   useEffect(() => {
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -490,13 +480,14 @@ const JoinCommunity = () => {
           Connect with like-minded developers, build your network, and find 
           collaborators for your next big project. The tech community is 
           waiting for you!
-        </p>        <button 
-          className={s["community-btn"]} 
-          onClick={handleOpenModal}
-        >
-          <FontAwesomeIcon icon={faUsers} className={s["btn-icon"]} />
-          <span>{session ? 'View My Profile' : 'Get Started Now'}</span>
-        </button>
+        </p>        <Link href="/fyt">
+          <button 
+            className={s["community-btn"]}
+          >
+            <FontAwesomeIcon icon={faUsers} className={s["btn-icon"]} />
+            <span>{session ? 'View My Profile' : 'Get Started Now'}</span>
+          </button>
+        </Link>
       </div>
     </div>
   );
