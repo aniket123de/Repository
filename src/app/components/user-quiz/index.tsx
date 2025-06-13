@@ -304,7 +304,7 @@ export const UserQuiz = () => {
     <div className={s["form-container"]}>
       <div className={s["form-header"]}>
         <h3>Tell us about yourself</h3>
-        <p>Let's get to know you better!</p>
+        <p>Let&apos;s get to know you better!</p>
       </div>
       
       <div className={s["form-group"]}>
@@ -364,10 +364,9 @@ export const UserQuiz = () => {
   );
 
   const renderExpertiseSelection = () => (
-    <div className={s["expertise-container"]}>
-      <div className={s["form-header"]}>
-        <h3>What's your area of expertise?</h3>
-        <p>Select the domain you're most passionate about</p>
+    <div className={s["expertise-container"]}>      <div className={s["form-header"]}>
+        <h3>What&apos;s your area of expertise?</h3>
+        <p>Select the domain you&apos;re most passionate about</p>
       </div>
 
       <div className={s["expertise-grid"]}>
@@ -419,9 +418,8 @@ export const UserQuiz = () => {
             <div className={s["success-message"]}>
               <div className={s["success-icon"]}>
                 <FontAwesomeIcon icon={faCheck} />
-              </div>
-              <h3>Profile Submitted Successfully!</h3>
-              <p>Thank you! Your profile has been saved and you'll now get better developer matches based on your interests.</p>
+              </div>              <h3>Profile Submitted Successfully!</h3>
+              <p>Thank you! Your profile has been saved and you&apos;ll now get better developer matches based on your interests.</p>
               
               <div className={s["navigation-buttons"]}>
                 <button 
@@ -444,9 +442,8 @@ export const UserQuiz = () => {
                 <span className={s["score-number"]}>{totalSelections}</span>
                 <span className={s["score-label"]}>Interests</span>
               </div>
-            </div>
-            <h3>Profile Complete!</h3>
-            <p>Great! We've captured your interests in {expertiseLabels[userData.expertise]}. This will help us match you with like-minded developers.</p>
+            </div>            <h3>Profile Complete!</h3>
+            <p>Great! We&apos;ve captured your interests in {expertiseLabels[userData.expertise]}. This will help us match you with like-minded developers.</p>
           </div>
 
           <div className={s["user-summary"]}>
@@ -471,8 +468,7 @@ export const UserQuiz = () => {
                 <span className={s["value"]}>{expertiseLabels[userData.expertise]}</span>
               </div>
             </div>
-            
-            <div className={s["interests-summary"]}>
+              <div className={s["interests-summary"]}>
               <h5>Your Selected Interests:</h5>
               {Object.entries(allAnswers).map(([questionIndex, answers]) => (
                 <div key={questionIndex} className={s["question-interests"]}>
