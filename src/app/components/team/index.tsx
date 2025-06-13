@@ -394,12 +394,157 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
   );
 };
 
+type CampusAmbassadorProps = {
+  name: string;
+  email: string;
+  linkedin: string;
+  college: string;
+};
+
+export const CampusAmbassador: React.FC<CampusAmbassadorProps> = ({ 
+  name, 
+  email, 
+  linkedin, 
+  college 
+}) => {
+  const ambassadorRef = useRef<HTMLDivElement>(null);
+  const infoRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ambassadorRef.current) return;
+
+    // Initial animation for the ambassador card
+    gsap.fromTo(
+      ambassadorRef.current,
+      { 
+        opacity: 0, 
+        y: 30,
+        scale: 0.95
+      },
+      { 
+        opacity: 1, 
+        y: 0,
+        scale: 1,
+        duration: 0.8, 
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ambassadorRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+
+    // Animate info section
+    if (infoRef.current) {
+      gsap.fromTo(
+        infoRef.current,
+        { 
+          opacity: 0, 
+          x: -20
+        },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          delay: 0.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ambassadorRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+    }
+
+    // Animate contact links
+    if (contactRef.current) {
+      const contactLinks = contactRef.current.querySelectorAll('a');
+      
+      gsap.fromTo(
+        contactLinks,
+        {
+          opacity: 0,
+          y: 15
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          delay: 0.4,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: ambassadorRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+
+      // Hover animations for contact links
+      contactLinks.forEach((link) => {
+        link.addEventListener('mouseenter', () => {
+          gsap.to(link, {
+            y: -3,
+            scale: 1.05,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+        
+        link.addEventListener('mouseleave', () => {
+          gsap.to(link, {
+            y: 0,
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+      });
+    }
+  }, []);
+
+  return (
+    <div className={s["campus-ambassador"]} ref={ambassadorRef}>
+      <div className={s["ambassador-info"]} ref={infoRef}>
+        <h4>{name}</h4>
+        <p className={s["college-name"]}>{college}</p>
+      </div>
+      <div className={s["ambassador-contact"]} ref={contactRef}>
+        <Link 
+          href={`mailto:${email}`} 
+          className={s["contact-link"]}
+          aria-label={`Email ${name}`}
+        >
+          <FontAwesomeIcon icon={faGlobe} />
+          <span>Email</span>
+        </Link>
+        <Link 
+          href={linkedin} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className={s["contact-link"]}
+          aria-label={`${name}'s LinkedIn`}
+        >
+          <FontAwesomeIcon icon={faLinkedinIn} />
+          <span>LinkedIn</span>
+        </Link>
+      </div>
+    </div>
+  );
+};
+
 export const TeamSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const teamMembersRef = useRef<HTMLDivElement>(null);
   const starburstHeaderRef = useRef<HTMLSpanElement>(null);
+  const ambassadorsRef = useRef<HTMLDivElement>(null);
+  const ambassadorsHeaderRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     setIsLoaded(true);
     
@@ -517,6 +662,52 @@ export const TeamSection = () => {
     );
     
   }, [isLoaded]);
+  
+  // Campus ambassadors animation
+  useEffect(() => {
+    if (!ambassadorsHeaderRef.current || !ambassadorsRef.current) return;
+
+    // Animate ambassadors header
+    gsap.fromTo(
+      ambassadorsHeaderRef.current.querySelector('h3'),
+      { 
+        opacity: 0, 
+        y: 30
+      },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 1, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ambassadorsHeaderRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+
+    gsap.fromTo(
+      ambassadorsHeaderRef.current.querySelector('p'),
+      { 
+        opacity: 0, 
+        y: 20
+      },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.8, 
+        delay: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ambassadorsHeaderRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+  }, [isLoaded]);
+
     const teamMembers = [
     {
       name: "Saptarshi",
@@ -674,6 +865,90 @@ export const TeamSection = () => {
         github: "https://github.com/heypranayy"
       }
     }
+  ];  const campusAmbassadors = [
+    {
+      name: "Arnab Mal",
+      email: "arnab37686@gmail.com",
+      linkedin: "https://www.linkedin.com/in/arnab-mal-a544a828b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      college: "Asansol Engineering College"
+    },
+    {
+      name: "Sattik Mondal",
+      email: "sattikmondal853@gmail.com",
+      linkedin: "https://www.linkedin.com/in/sattik-m-4b78b2298/",
+      college: "Greater Kolkata College of Engineering"
+    },
+    {
+      name: "Gourabananda Datta",
+      email: "gourabanandadattacse@gmail.com",
+      linkedin: "https://www.linkedin.com/in/gourabananda-datta-a3521a285",
+      college: "Ramkrishna Mahato Government Engineering College, Purulia"
+    },
+    {
+      name: "Ayushman Rana",
+      email: "ayushmanrana81@gmail.com",
+      linkedin: "https://www.linkedin.com/in/ayushman-rana-1478b32a5/",
+      college: "Haldia Institute of Technology"
+    },
+    {
+      name: "Piyush Goenka",
+      email: "goenkapiyush2005@gmail.com",
+      linkedin: "https://www.linkedin.com/in/piyushgoenka2005/",
+      college: "Techno International New Town"
+    },
+    {
+      name: "Ricky Dey",
+      email: "deyricky36@gmail.com",
+      linkedin: "https://www.linkedin.com/in/ricky-dey-a49726206/",
+      college: "Techno International New Town"
+    },
+    {
+      name: "Rupsa Das",
+      email: "rupsadas581@gmail.com",
+      linkedin: "https://www.linkedin.com/in/rupsa-das2006",
+      college: "Government College of Engineering and Leather Technology"
+    },
+    {
+      name: "Shayan Ghosh",
+      email: "shayanghosh0439@gmail.com",
+      linkedin: "https://www.linkedin.com/in/shayan-ghosh-0834b3271/",
+      college: "Abacus Institute of Engineering and Management"
+    },    {
+      name: "Rahul Pradhan",
+      email: "rahulpradhancse@gmail.com",
+      linkedin: "https://www.linkedin.com/in/rahul-pradhan-56113a30b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      college: "Narula Institute of Technology"
+    },
+    {
+      name: "Rahul Singh",
+      email: "singhrahul161104@gmail.com",
+      linkedin: "https://www.linkedin.com/in/rahul-singh-a89436290",
+      college: "St. Thomas' College of Engineering and Technology"
+    },
+    {
+      name: "Aayushi Kaushik",
+      email: "33200122001@tib.edu.in",
+      linkedin: "https://www.linkedin.com/in/aayushi-kaushik-243b10251",
+      college: "Techno International Batanagar"
+    },
+    {
+      name: "Dhrubojyoti Saha",
+      email: "dhrubojyotisaha5@gmail.com",
+      linkedin: "https://github.com/dhrubojyotii",
+      college: "JIS College of Engineering"
+    },
+    {
+      name: "Souvik Saha",
+      email: "sahasouvik631@gmail.com",
+      linkedin: "https://github.com/souvik27-lab",
+      college: "Saroj Mohan Institute of Technology"
+    },
+    {
+      name: "Abhishek Gupta",
+      email: "itzabhi888@gmail.com",
+      linkedin: "https://github.com/ezabhishek1",
+      college: "JIS University"
+    }
   ];
   return (
     <section className={s["team-section"]} ref={sectionRef}>
@@ -709,6 +984,25 @@ export const TeamSection = () => {
               isReversed={index % 2 !== 0}
             />
           ))}
+        </div>
+
+        {/* Campus Ambassadors Section */}
+        <div className={s["ambassadors-section"]}>
+          <div className={s["ambassadors-header"]} ref={ambassadorsHeaderRef}>
+            <h3>Campus Ambassadors</h3>
+            <p>Our dedicated representatives across leading institutions</p>
+          </div>
+          <div className={s["campus-ambassadors"]} ref={ambassadorsRef}>
+            {campusAmbassadors.map((ambassador) => (
+              <CampusAmbassador
+                key={ambassador.name}
+                name={ambassador.name}
+                email={ambassador.email}
+                linkedin={ambassador.linkedin}
+                college={ambassador.college}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

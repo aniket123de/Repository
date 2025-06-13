@@ -576,3 +576,163 @@
     }
   }
 }
+
+// Campus Ambassadors Section
+.ambassadors-section {
+  margin-top: tovw(120px, "desktop-large", 80px);
+  position: relative;
+  z-index: 1;
+
+  .ambassadors-header {
+    text-align: center;
+    margin-bottom: tovw(80px, "desktop-large", 60px);
+
+    h3 {
+      font-size: tovw(48px, "desktop-large", 36px);
+      font-weight: 800;
+      margin-bottom: tovw(20px, "desktop-large", 15px);
+      background: linear-gradient(135deg, var(--color-white) 0%, var(--color-orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 120px;
+        height: 2px;
+        background: linear-gradient(to right, transparent, var(--color-orange), transparent);
+        margin: 30px auto 0;
+      }
+    }
+
+    p {
+      font-size: tovw(18px, "desktop-large", 16px);
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.5;
+    }
+  }
+
+  .campus-ambassadors {    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: tovw(30px, "desktop-large", 20px);
+    
+    @media screen and (max-width: 800px) {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+}
+
+.campus-ambassador {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: tovw(30px, "desktop-large", 24px);
+  display: flex;
+  flex-direction: column;
+  gap: tovw(20px, "desktop-large", 16px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  opacity: 0; // Start with opacity 0 for GSAP animation
+  will-change: transform, opacity;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-orange), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(87, 185, 194, 0.3);
+    box-shadow: 
+      0 10px 40px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(87, 185, 194, 0.1);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  .ambassador-info {
+    h4 {
+      font-size: tovw(20px, "desktop-large", 18px);
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: tovw(8px, "desktop-large", 6px);
+      line-height: 1.2;
+    }
+
+    .college-name {
+      font-size: tovw(14px, "desktop-large", 12px);
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.4;
+      font-weight: 500;
+    }
+  }
+
+  .ambassador-contact {
+    display: flex;
+    gap: tovw(16px, "desktop-large", 12px);
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: tovw(8px, "desktop-large", 6px);
+      padding: tovw(8px, "desktop-large", 6px) tovw(12px, "desktop-large", 10px);
+      background: rgba(87, 185, 194, 0.1);
+      border: 1px solid rgba(87, 185, 194, 0.2);
+      border-radius: 8px;
+      color: var(--color-white);
+      text-decoration: none;
+      font-size: tovw(13px, "desktop-large", 11px);
+      font-weight: 500;
+      transition: all 0.3s ease;
+      min-width: fit-content;
+
+      svg {
+        width: tovw(14px, "desktop-large", 12px);
+        height: tovw(14px, "desktop-large", 12px);
+        color: var(--color-orange);
+      }
+
+      span {
+        white-space: nowrap;
+      }
+
+      &:hover {
+        background: rgba(87, 185, 194, 0.2);
+        border-color: rgba(87, 185, 194, 0.4);
+        color: var(--color-orange);
+        transform: translateY(-2px);
+        
+        svg {
+          color: var(--color-white);
+        }
+      }      @media screen and (max-width: 800px) {
+        font-size: 10px;
+        padding: 6px 8px;
+        
+        svg {
+          width: 10px;
+          height: 10px;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 800px) {
+    padding: 20px;
+    gap: 12px;
+  }
+}
