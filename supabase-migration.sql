@@ -26,7 +26,9 @@ DROP INDEX IF EXISTS idx_user_profiles_username;
 CREATE INDEX IF NOT EXISTS idx_user_profiles_email ON user_profiles(email);
 CREATE INDEX IF NOT EXISTS idx_user_profiles_expertise ON user_profiles(expertise);
 CREATE INDEX IF NOT EXISTS idx_user_profiles_skills ON user_profiles USING GIN(skills);
+CREATE INDEX IF NOT EXISTS idx_user_profiles_interest_details ON user_profiles USING GIN(interest_details);
 CREATE INDEX IF NOT EXISTS idx_user_profiles_name ON user_profiles(name);
+CREATE INDEX IF NOT EXISTS idx_user_profiles_bio ON user_profiles USING GIN(to_tsvector('english', bio));
 CREATE INDEX IF NOT EXISTS idx_user_profiles_created_at ON user_profiles(created_at);
 
 -- Create a function to update the updated_at timestamp

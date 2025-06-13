@@ -14,9 +14,13 @@ export async function GET(request: NextRequest) {
       .from('user_profiles')
       .select('*');    // Apply filters
     if (query) {
-      supabaseQuery = supabaseQuery.or(
-        `name.ilike.%${query}%,skills.cs.{${query}}`
-      );
+      // Search in name, skills array, interest details (as text), and bio
+      supabaseQuery = supabaseQuery.or([
+        `name.ilike.%${query}%`,
+        `skills.cs.{${query}}`,
+        `interest_details::text.ilike.%${query}%`, // Convert JSONB to text for searching
+        `bio.ilike.%${query}%` // Also search in bio field
+      ].join(','));
     }
 
     if (expertise) {
