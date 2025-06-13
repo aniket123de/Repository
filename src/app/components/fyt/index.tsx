@@ -6,65 +6,71 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faGithub,  
-} from '@fortawesome/free-brands-svg-icons';
-import { 
   faBinoculars, 
   faUsers, 
   faMapMarkerAlt, 
   faCode, 
   faLaptopCode, 
   faUserPlus,
-  faSearch
+  faSearch,
+  faUser,
+  faEnvelope
 } from '@fortawesome/free-solid-svg-icons';
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import s from './fyt.module.scss';
 import * as Scrollytelling from "~/lib/scrollytelling-client";
 import { UserQuiz } from '~/app/components/user-quiz';
+import { useUserSearch } from '~/hooks/useUserSearch';
+import { UserProfile } from '~/lib/supabase';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Sample data for nearby coders
-const nearbyCodersData = [
+// Sample data for nearby coders - simplified without removed fields
+const nearbyCodersData: UserProfile[] = [
   {
     id: 1,
     name: "Alex Johnson",
-    githubUsername: "alexjcoder",
-    distance: "2.4 km",
-    avatar: "https://github.com/identicons/app/oauth_app/1497612",
+    email: "alex.johnson@example.com",
+    linkedin: "https://linkedin.com/in/alexjohnson",
+    expertise: "webdev",
     skills: ["React", "TypeScript", "Node.js"],
     interests: ["Open Source", "Web3", "AI"],
+    bio: "Full-stack developer passionate about modern web technologies"
   },
   {
     id: 2,
     name: "Samantha Liu",
-    githubUsername: "samliu42",
-    distance: "3.7 km",
-    avatar: "https://github.com/identicons/app/oauth_app/1497613",
+    email: "samantha.liu@example.com",
+    linkedin: "https://linkedin.com/in/samanthaliu",
+    expertise: "aiml",
     skills: ["Python", "Django", "Machine Learning"],
     interests: ["Data Science", "Backend Development", "Cloud"],
+    bio: "AI/ML engineer with expertise in deep learning and data science"
   },
   {
     id: 3,
     name: "Raj Patel",
-    githubUsername: "rajdev404",
-    distance: "5.1 km",
-    avatar: "https://github.com/identicons/app/oauth_app/1497614",
+    email: "raj.patel@example.com",
+    linkedin: "https://linkedin.com/in/rajpatel",
+    expertise: "appdev",
     skills: ["JavaScript", "Vue.js", "Firebase"],
     interests: ["Frontend", "UI/UX", "Mobile Development"],
+    bio: "Mobile app developer focused on cross-platform solutions"
   },
   {
     id: 4,
     name: "Maria Gonzalez",
-    githubUsername: "mariacode",
-    distance: "6.8 km",
-    avatar: "https://github.com/identicons/app/oauth_app/1497615",
+    email: "maria.gonzalez@example.com",
+    linkedin: "https://linkedin.com/in/mariagonzalez",
+    expertise: "blockchain",
     skills: ["Java", "Spring Boot", "PostgreSQL"],
     interests: ["Enterprise Solutions", "System Design", "DevOps"],
+    bio: "Blockchain developer specializing in smart contracts and DeFi"
   }
 ];
 
@@ -226,10 +232,32 @@ const HowItWorks = () => {
 
 // Nearby Coders Component
 const NearbyCoders = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const { users: coders, isLoading, error, searchUsers } = useUserSearch(nearbyCodersData);
+  
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+  // Handle search input with debouncing
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    
+    // Clear previous timeout and set new one for debouncing
+    const timeoutId = setTimeout(() => {
+      searchUsers(value);
+    }, 500);
+    
+    return () => clearTimeout(timeoutId);
+  };
+
+  // Load initial data on mount
+  useEffect(() => {
+    searchUsers(); // Load all users initially
+  }, [searchUsers]);
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -280,90 +308,100 @@ const NearbyCoders = () => {
   return (
     <div className={s["nearby-coders"]} ref={sectionRef}>
       <h2 ref={titleRef}>Connect with Your Tribe</h2>
-      
-      <div className={s["search-container"]} ref={searchRef}>
+        <div className={s["search-container"]} ref={searchRef}>
         <div className={s["search-input"]}>
           <FontAwesomeIcon icon={faSearch} className={s["search-icon"]} />
-          <input type="text" placeholder="Search by skills, interests or name..." />
-        </div>
-        <div className={s["filters"]}>
+          <input 
+            type="text" 
+            placeholder="Search by skills, interests or name..." 
+            value={searchQuery}
+            onChange={handleSearch}
+          />
+        </div>        <div className={s["filters"]}>
           <button className={s["filter-btn"]}>Filters</button>
-          <span className={s["distance-filter"]}>Skill Match: 95%</span>
-        </div>      </div>
+          <span className={s["distance-filter"]}>
+            {isLoading ? 'Searching...' : error ? 'Search error' : `${coders.length} results`}
+          </span>
+        </div>
+      </div>
       
       <div className={s["recommendation-banner"]}>
         <FontAwesomeIcon icon={faLaptopCode} />
         <p>Based on your quiz results, we&apos;ve found developers with similar expertise and interests!</p>
       </div>
-      
-      <div className={s["coders-grid"]} ref={cardsRef}>
-        {nearbyCodersData.map((coder, index) => (          <div 
-            key={coder.id} 
-            className={s["coder-card"]}
-            ref={(el) => {
-              cardRefs.current[index] = el;
-              return undefined;
-            }}
-          >
-            <div className={s["card-header"]}>              <div className={s["avatar-container"]}>
-                <div className={s["avatar"]}>
-                  <Image 
-                    src={coder.avatar} 
-                    alt={coder.name} 
-                    width={60}
-                    height={60}
-                    className={s["avatar"]}
-                  />
-                </div>
-                <div className={s["match-badge"]}>
-                  <span>95% Match</span>
-                </div>
-              </div>
-              <div className={s["name-container"]}>
-                <h3>{coder.name}</h3>
-                <div className={s["github-username"]}>
-                  <FontAwesomeIcon icon={faGithub} />
-                  <span>{coder.githubUsername}</span>
-                </div>
-              </div>
-              <div className={s["distance"]}>
-                <FontAwesomeIcon icon={faMapMarkerAlt} />
-                <span>{coder.distance}</span>
-              </div>
-            </div>
-            
-            <div className={s["card-body"]}>
-              <div className={s["skills-section"]}>
-                <h4>
-                  <FontAwesomeIcon icon={faCode} />
-                  <span>Skills</span>
-                </h4>
-                <div className={s["tags"]}>
-                  {coder.skills.map((skill, i) => (
-                    <span key={i} className={s["tag"]}>{skill}</span>
-                  ))}
+        <div className={s["coders-grid"]} ref={cardsRef}>
+        {isLoading ? (
+          <div className={s["loading-state"]}>
+            <div className={s["loading-spinner"]}></div>
+            <p>Finding your tribe...</p>
+          </div>
+        ) : (
+          coders.map((coder, index) => (
+            <div 
+              key={coder.id} 
+              className={s["coder-card"]}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+                return undefined;
+              }}
+            >              <div className={s["card-header"]}>
+                <div className={s["name-container"]}>
+                  <div className={s["profile-icon"]}>
+                    <FontAwesomeIcon icon={faUser} />
+                  </div>
+                  <h3>{coder.name}</h3>
                 </div>
               </div>
               
-              <div className={s["interests-section"]}>
-                <h4>
-                  <FontAwesomeIcon icon={faLaptopCode} />
-                  <span>Interests</span>
-                </h4>
-                <div className={s["tags"]}>
-                  {coder.interests.map((interest, i) => (
-                    <span key={i} className={s["tag"]}>{interest}</span>
-                  ))}
+              <div className={s["card-body"]}>
+                <div className={s["skills-section"]}>
+                  <h4>
+                    <FontAwesomeIcon icon={faCode} />
+                    <span>Skills</span>
+                  </h4>                  <div className={s["tags"]}>
+                    {(coder.skills || []).map((skill, i) => (
+                      <span key={i} className={s["tag"]}>{skill}</span>
+                    ))}
+                  </div>
                 </div>
+                
+                <div className={s["interests-section"]}>
+                  <h4>
+                    <FontAwesomeIcon icon={faLaptopCode} />
+                    <span>Interests</span>
+                  </h4>                  <div className={s["tags"]}>
+                    {(Array.isArray(coder.interests) ? coder.interests : []).map((interest: string, i: number) => (
+                      <span key={i} className={s["tag"]}>{interest}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>              <div className={s["card-actions"]}>
+                {coder.email && (
+                  <a 
+                    href={`mailto:${coder.email}`}
+                    className={s["email-btn"]}
+                    title="Send Email"
+                  >
+                    <FontAwesomeIcon icon={faEnvelope} />
+                    <span>Email</span>
+                  </a>
+                )}
+                {coder.linkedin && (
+                  <a 
+                    href={coder.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={s["linkedin-btn"]}
+                    title="View LinkedIn Profile"
+                  >
+                    <FontAwesomeIcon icon={faLinkedin} />
+                    <span>LinkedIn</span>
+                  </a>
+                )}
               </div>
             </div>
-            
-            <div className={s["card-actions"]}>
-              <button className={s["connect-btn"]}>Connect</button>
-              <button className={s["view-profile-btn"]}>View Profile</button>
-            </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );
@@ -487,12 +525,11 @@ const JoinCommunity = () => {
           Connect with like-minded developers, build your network, and find 
           collaborators for your next big project. The tech community is 
           waiting for you!
-        </p>
-        <button 
-          className={s["github-login-btn"]} 
+        </p>        <button 
+          className={s["community-btn"]} 
           onClick={handleOpenModal}
         >
-          <FontAwesomeIcon icon={faGithub} className={s["btn-icon"]} />
+          <FontAwesomeIcon icon={faUsers} className={s["btn-icon"]} />
           <span>{session ? 'View My Profile' : 'Get Started Now'}</span>
         </button>
       </div>

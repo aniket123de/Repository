@@ -253,7 +253,8 @@ export const UserQuiz = () => {
           linkedin: userData.linkedin,
           expertise: userData.expertise
         },
-        interests: allAnswers,        interestDetails: userData.expertise ? Object.entries(allAnswers).map(([questionIndex, answers]) => ({
+        interests: allAnswers,
+        interestDetails: userData.expertise ? Object.entries(allAnswers).map(([questionIndex, answers]) => ({
           question: interestQuestions[userData.expertise as keyof typeof interestQuestions][parseInt(questionIndex)].question,
           selectedOptions: answers.map(answerIndex => 
             interestQuestions[userData.expertise as keyof typeof interestQuestions][parseInt(questionIndex)].options[answerIndex]
@@ -262,24 +263,28 @@ export const UserQuiz = () => {
         submittedAt: new Date().toISOString()
       };
 
-      // TODO: Replace this with actual API call to your database
       console.log('Profile Data to Submit:', profileData);
       
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Submit to Supabase via API
+      const response = await fetch('/api/submit-profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profileData)
+      });
+
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit profile');
+      }
       
       setIsSubmitted(true);
-      
-      // TODO: Add actual API call here
-      // const response = await fetch('/api/submit-profile', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(profileData)
-      // });
+      console.log('Profile submitted successfully:', result);
       
     } catch (error) {
       console.error('Error submitting profile:', error);
-      // TODO: Add error handling
+      // You can add a toast notification or error state here
+      alert(`Error submitting profile: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setIsSubmitting(false);
     }

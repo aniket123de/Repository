@@ -215,11 +215,10 @@
     
     @media (max-width: 768px) {
       font-size: 18px;
-      max-width: 100%;
-    }
+      max-width: 100%;    }
   }
   
-  .github-login-btn {
+  .community-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -491,85 +490,45 @@
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
-    &:hover {
+      &:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 30px rgba(87, 185, 194, 0.1);
       
-      .avatar-container {
-        .avatar {
+      .name-container {
+        .profile-icon {
           transform: scale(1.05);
         }
       }
     }
-    
-    .card-header {
+      .card-header {
       padding: tovw(20px, "desktop-large", 16px);
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: tovw(15px, "desktop-large", 12px);
+      display: flex;
       align-items: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        .avatar-container {
-        overflow: hidden;
-        position: relative;
+      
+      .name-container {
+        display: flex;
+        align-items: center;
+        gap: tovw(15px, "desktop-large", 12px);
         
-        .avatar {
+        .profile-icon {
           width: tovw(60px, "desktop-large", 50px);
           height: tovw(60px, "desktop-large", 50px);
           border-radius: 50%;
-          overflow: hidden;
-          border: 2px solid rgba(87, 185, 194, 0.5);
-          transition: transform 0.3s ease;
-          
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-        }
-        
-        .match-badge {
-          position: absolute;
-          top: -6px;
-          right: -6px;
-          background: linear-gradient(135deg, #4ade80, #22c55e);
-          color: white;
-          font-size: tovw(11px, "desktop-large", 10px);
-          font-weight: 700;
-          padding: tovw(4px, "desktop-large", 3px) tovw(8px, "desktop-large", 6px);
-          border-radius: 10px;
-          box-shadow: 0 2px 8px rgba(74, 222, 128, 0.4);
-          border: 2px solid rgba(255, 255, 255, 0.2);
-          
-          span {
-            font-size: tovw(11px, "desktop-large", 10px);
-          }
-        }
-      }
-      
-      .name-container {
-        h3 {
-          font-size: tovw(18px, "desktop-large", 16px);
-          margin-bottom: 5px;
-          font-weight: 600;
-        }
-        
-        .github-username {
-          font-size: tovw(14px, "desktop-large", 12px);
-          color: rgba(255, 255, 255, 0.7);
+          background: linear-gradient(135deg, #57B9C2, #4A9DA6);
           display: flex;
           align-items: center;
-          gap: 5px;
+          justify-content: center;
+          color: white;
+          font-size: tovw(24px, "desktop-large", 20px);
+          transition: all 0.3s ease;
         }
-      }
-      
-      .distance {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        font-size: tovw(14px, "desktop-large", 12px);
-        color: #57B9C2;
+        
+        h3 {
+          font-size: tovw(18px, "desktop-large", 16px);
+          margin: 0;
+          font-weight: 600;
+        }
       }
     }
     
@@ -608,42 +567,101 @@
           }
         }
       }
-    }
-    
-    .card-actions {
+    }    .card-actions {
       padding: tovw(20px, "desktop-large", 16px);
       display: flex;
-      gap: tovw(10px, "desktop-large", 8px);
+      gap: tovw(12px, "desktop-large", 10px);
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       
-      .connect-btn, .view-profile-btn {
+      .email-btn, .linkedin-btn {
         flex: 1;
-        padding: tovw(10px, "desktop-large", 8px);
-        border-radius: 8px;
+        padding: tovw(14px, "desktop-large", 12px) tovw(20px, "desktop-large", 16px);
+        border-radius: 12px;
         font-size: tovw(14px, "desktop-large", 12px);
-        font-weight: 500;
+        font-weight: 600;
         cursor: pointer;
-        transition: all 0.2s ease;
-      }
-      
-      .connect-btn {
-        background: linear-gradient(to right, #57B9C2, #4ca8b2);
-        border: none;
-        color: rgb(0, 0, 0);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: tovw(8px, "desktop-large", 6px);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transition: left 0.5s;
+        }
+        
+        &:hover::before {
+          left: 100%;
+        }
+        
+        svg {
+          font-size: tovw(14px, "desktop-large", 12px);
+          transition: transform 0.3s ease;
+        }
+        
+        span {
+          font-weight: 600;
+          letter-spacing: 0.5px;
+        }
         
         &:hover {
-          background: linear-gradient(to right, #67cad3, #57B9C2);
+          transform: translateY(-3px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+          
+          svg {
+            transform: scale(1.1);
+          }
+        }
+        
+        &:active {
+          transform: translateY(-1px);
+          transition: transform 0.1s ease;
+        }
+        
+        // Mobile responsive - show only icons on very small screens
+        @media (max-width: 480px) {
+          padding: tovw(12px, "desktop-large", 10px);
+          
+          span {
+            display: none;
+          }
+          
+          svg {
+            font-size: tovw(16px, "desktop-large", 14px);
+          }
         }
       }
       
-      .view-profile-btn {
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+      .email-btn {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        border: none;
         color: white;
         
         &:hover {
-          background: rgba(255, 255, 255, 0.05);
-          border-color: rgba(255, 255, 255, 0.3);
+          background: linear-gradient(135deg, #ff5252, #e53e3e);
+          box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+      }
+      
+      .linkedin-btn {
+        background: linear-gradient(135deg, #0077b5, #005885);
+        border: none;
+        color: white;
+        
+        &:hover {
+          background: linear-gradient(135deg, #005885, #004266);
+          box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
         }
       }
     }
@@ -762,11 +780,10 @@
   p {
     font-size: tovw(18px, "desktop-large", 16px);
     margin-bottom: tovw(40px, "desktop-large", 35px);
-    opacity: 0.9;
-    line-height: 1.6;
+    opacity: 0.9;    line-height: 1.6;
   }
   
-  .github-login-btn {
+  .community-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -791,6 +808,66 @@
       margin-right: tovw(12px, "desktop-large", 10px);
       font-size: tovw(20px, "desktop-large", 18px);
     }
+  }
+}
+
+// Loading states
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: tovw(80px, "desktop-large", 60px) tovw(20px, "desktop-large", 16px);
+  grid-column: 1 / -1;
+  
+  p {
+    margin-top: tovw(20px, "desktop-large", 16px);
+    font-size: tovw(18px, "desktop-large", 16px);
+    color: #666;
+    font-weight: 500;
+  }
+}
+
+.loading-spinner {
+  width: tovw(40px, "desktop-large", 32px);
+  height: tovw(40px, "desktop-large", 32px);
+  border: 3px solid rgba(87, 185, 194, 0.2);
+  border-top: 3px solid #57B9C2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Empty state
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: tovw(80px, "desktop-large", 60px) tovw(20px, "desktop-large", 16px);
+  grid-column: 1 / -1;
+  text-align: center;
+  
+  .empty-icon {
+    font-size: tovw(48px, "desktop-large", 40px);
+    color: rgba(87, 185, 194, 0.3);
+    margin-bottom: tovw(20px, "desktop-large", 16px);
+  }
+  
+  h3 {
+    font-size: tovw(24px, "desktop-large", 20px);
+    color: #333;
+    margin-bottom: tovw(12px, "desktop-large", 10px);
+  }
+  
+  p {
+    font-size: tovw(16px, "desktop-large", 14px);
+    color: #666;
+    max-width: tovw(400px, "desktop-large", 320px);
   }
 }
 

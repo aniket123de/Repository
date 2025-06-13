@@ -3,19 +3,17 @@
 import React from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt, faCode, faLaptop, faBook, faUsers, faUserPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faMapMarkerAlt, faCode, faLaptop, faBook, faUsers, faUserPlus, faSignOutAlt, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { signOut } from 'next-auth/react';
 import styles from './user-profile-card.module.scss';
 
 type UserProfileCardProps = {
   user: {
     name: string;
-    username: string;
-    image: string;
-    distance?: string;
+    email?: string;
+    linkedin?: string;
     bio?: string;
-    location?: string;
     stats?: {
       repos: number;
       followers: number;
@@ -36,36 +34,13 @@ const UserProfileCard = ({ user, onClose }: UserProfileCardProps) => {
     }
   };
 
-  return (
-    <div className={styles.card}>
+  return (    <div className={styles.card}>
       <div className={styles.header}>
-        <div className={styles.avatar}>
-          <Image 
-            src={user.image} 
-            alt={user.name} 
-            width={64} 
-            height={64}
-            className={styles.avatarImage}
-          />
+        <div className={styles.profileIcon}>
+          <FontAwesomeIcon icon={faUser} />
         </div>
         <div className={styles.userInfo}>
           <h2>{user.name}</h2>
-          <div className={styles.username}>
-            <FontAwesomeIcon icon={faGithub} className={styles.icon} />
-            {user.username}
-          </div>
-          {user.location && (
-            <div className={styles.location}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} className={styles.icon} />
-              {user.location}
-            </div>
-          )}
-          {user.distance && (
-            <div className={styles.distance}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} className={styles.icon} />
-              {user.distance}
-            </div>
-          )}
         </div>
         <button 
           className={styles.logoutButton} 
@@ -130,18 +105,29 @@ const UserProfileCard = ({ user, onClose }: UserProfileCardProps) => {
             </div>
           </div>
         )}
-      </div>
-
-      <div className={styles.actions}>
-        <button className={styles.connectButton}>Connect</button>
-        <a 
-          href={user.githubUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className={styles.viewButton}
-        >
-          View Profile
-        </a>
+      </div>      <div className={styles.actions}>
+        {user.email && (
+          <a 
+            href={`mailto:${user.email}`}
+            className={styles.emailButton}
+            title="Send Email"
+          >
+            <FontAwesomeIcon icon={faEnvelope} />
+            <span>Email</span>
+          </a>
+        )}
+        {user.linkedin && (
+          <a 
+            href={user.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.linkedinButton}
+            title="View LinkedIn Profile"
+          >
+            <FontAwesomeIcon icon={faLinkedin} />
+            <span>LinkedIn</span>
+          </a>
+        )}
       </div>
     </div>
   );

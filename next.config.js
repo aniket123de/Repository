@@ -3,12 +3,12 @@ const withBundleAnalyzer = require("@next/bundle-analyzer");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
-  swcMinify: true,
-  images: {
+  swcMinify: true,  images: {
     domains: [
       "repository-main.vercel.app",
       "github.com",
-      "avatars.githubusercontent.com"
+      "avatars.githubusercontent.com",
+      "ui-avatars.com"
     ],
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
