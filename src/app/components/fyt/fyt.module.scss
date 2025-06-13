@@ -842,6 +842,23 @@
   100% { transform: rotate(360deg); }
 }
 
+// Error state
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: tovw(80px, "desktop-large", 60px) tovw(20px, "desktop-large", 16px);
+  grid-column: 1 / -1;
+  text-align: center;
+  
+  p {
+    font-size: tovw(16px, "desktop-large", 14px);
+    color: #ff6b6b;
+    max-width: tovw(400px, "desktop-large", 320px);
+  }
+}
+
 // Empty state
 .empty-state {
   display: flex;

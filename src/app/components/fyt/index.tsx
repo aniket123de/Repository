@@ -30,50 +30,6 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Sample data for nearby coders - simplified without removed fields
-const nearbyCodersData: UserProfile[] = [
-  {
-    id: 1,
-    name: "Alex Johnson",
-    email: "alex.johnson@example.com",
-    linkedin: "https://linkedin.com/in/alexjohnson",
-    expertise: "webdev",
-    skills: ["React", "TypeScript", "Node.js"],
-    interests: ["Open Source", "Web3", "AI"],
-    bio: "Full-stack developer passionate about modern web technologies"
-  },
-  {
-    id: 2,
-    name: "Samantha Liu",
-    email: "samantha.liu@example.com",
-    linkedin: "https://linkedin.com/in/samanthaliu",
-    expertise: "aiml",
-    skills: ["Python", "Django", "Machine Learning"],
-    interests: ["Data Science", "Backend Development", "Cloud"],
-    bio: "AI/ML engineer with expertise in deep learning and data science"
-  },
-  {
-    id: 3,
-    name: "Raj Patel",
-    email: "raj.patel@example.com",
-    linkedin: "https://linkedin.com/in/rajpatel",
-    expertise: "appdev",
-    skills: ["JavaScript", "Vue.js", "Firebase"],
-    interests: ["Frontend", "UI/UX", "Mobile Development"],
-    bio: "Mobile app developer focused on cross-platform solutions"
-  },
-  {
-    id: 4,
-    name: "Maria Gonzalez",
-    email: "maria.gonzalez@example.com",
-    linkedin: "https://linkedin.com/in/mariagonzalez",
-    expertise: "blockchain",
-    skills: ["Java", "Spring Boot", "PostgreSQL"],
-    interests: ["Enterprise Solutions", "System Design", "DevOps"],
-    bio: "Blockchain developer specializing in smart contracts and DeFi"
-  }
-];
-
 // FYT Hero Section
 const FytHero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -233,7 +189,7 @@ const HowItWorks = () => {
 // Nearby Coders Component
 const NearbyCoders = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const { users: coders, isLoading, error, searchUsers } = useUserSearch(nearbyCodersData);
+  const { users: coders, isLoading, error, searchUsers } = useUserSearch();
   
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -328,12 +284,21 @@ const NearbyCoders = () => {
       <div className={s["recommendation-banner"]}>
         <FontAwesomeIcon icon={faLaptopCode} />
         <p>Based on your quiz results, we&apos;ve found developers with similar expertise and interests!</p>
-      </div>
-        <div className={s["coders-grid"]} ref={cardsRef}>
+      </div>        <div className={s["coders-grid"]} ref={cardsRef}>
         {isLoading ? (
           <div className={s["loading-state"]}>
             <div className={s["loading-spinner"]}></div>
             <p>Finding your tribe...</p>
+          </div>
+        ) : error ? (
+          <div className={s["error-state"]}>
+            <p>Unable to load developers. Please try again later.</p>
+          </div>
+        ) : coders.length === 0 ? (
+          <div className={s["empty-state"]}>
+            <FontAwesomeIcon icon={faUsers} className={s["empty-icon"]} />
+            <h3>No developers found</h3>
+            <p>Be the first to join the community! Fill out the quiz above to connect with like-minded developers.</p>
           </div>
         ) : (
           coders.map((coder, index) => (

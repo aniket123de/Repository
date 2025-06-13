@@ -63,26 +63,5 @@ DROP POLICY IF EXISTS "Users can update their own profile" ON user_profiles;
 CREATE POLICY "Users can update their own profile" ON user_profiles
     FOR UPDATE USING (true);
 
--- Clear existing sample data and insert fresh data (optional)
-DELETE FROM user_profiles WHERE email IN ('alex@example.com', 'samantha@example.com', 'raj@example.com', 'maria@example.com');
-
-INSERT INTO user_profiles (name, email, linkedin, expertise, skills, interest_details, bio) VALUES
-('Alex Johnson', 'alex@example.com', 'https://linkedin.com/in/alexjohnson', 'webdev', 
- ARRAY['React', 'TypeScript', 'Node.js'], 
- '[{"question": "Which frontend technologies are you most interested in?", "selectedOptions": ["React/Next.js", "TypeScript"]}]',
- 'Full-stack developer passionate about modern web technologies'),
-
-('Samantha Liu', 'samantha@example.com', 'https://linkedin.com/in/samanthaliu', 'aiml',
- ARRAY['Python', 'Django', 'Machine Learning'],
- '[{"question": "Which AI/ML domains interest you most?", "selectedOptions": ["Machine Learning", "Deep Learning"]}]',
- 'AI/ML engineer with expertise in deep learning and data science'),
-
-('Raj Patel', 'raj@example.com', 'https://linkedin.com/in/rajpatel', 'appdev',
- ARRAY['JavaScript', 'Vue.js', 'Firebase'],
- '[{"question": "Which mobile development approaches interest you?", "selectedOptions": ["React Native", "Flutter"]}]',
- 'Mobile app developer focused on cross-platform solutions'),
-
-('Maria Gonzalez', 'maria@example.com', 'https://linkedin.com/in/mariagonzalez', 'blockchain',
- ARRAY['Java', 'Spring Boot', 'PostgreSQL'],
- '[{"question": "Which blockchain platforms interest you most?", "selectedOptions": ["Ethereum", "Solana"]}]',
- 'Blockchain developer specializing in smart contracts and DeFi');
+-- Clear any existing sample/test data (optional - only run this if you want to remove test data)
+-- DELETE FROM user_profiles WHERE email IN ('alex@example.com', 'samantha@example.com', 'raj@example.com', 'maria@example.com');
