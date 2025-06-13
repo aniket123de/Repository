@@ -157,7 +157,7 @@ const HowItWorks = () => {
     },
     {
       icon: faSearch,
-      title: "Connect & Collaborate",
+      title: "Connect & Code",
       description: "Browse through your personalized matches and connect with developers who share your passion."
     },
   ];
@@ -372,70 +372,6 @@ const NearbyCoders = () => {
   );
 };
 
-// Dynamic Map Section
-const MapSection = () => {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const mapContentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: mapRef.current,
-        start: "top 70%",
-        toggleActions: "play none none reverse"
-      }
-    });
-
-    tl.fromTo(
-      titleRef.current,
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
-    )
-    .fromTo(
-      mapContentRef.current,
-      { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power2.out" },
-      "-=0.4"
-    );
-  }, []);
-
-  return (
-    <div className={s["map-section"]} ref={mapRef}>
-      <h2 ref={titleRef}>Developer Map</h2>
-      <div className={s["map-container"]} ref={mapContentRef}>
-        <div className={s["map-placeholder"]}>
-          <div className={s["map-overlay"]}>
-            <div className={s["marker"]} style={{ top: '30%', left: '40%' }}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} />
-            </div>
-            <div className={s["marker"]} style={{ top: '45%', left: '60%' }}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} />
-            </div>
-            <div className={s["marker"]} style={{ top: '55%', left: '25%' }}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} />
-            </div>
-            <div className={s["marker"]} style={{ top: '65%', left: '70%' }}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} />
-            </div>
-            <div className={s["marker"]} style={{ top: '35%', left: '85%' }}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} />
-            </div>
-            <div className={s["marker"]} style={{ top: '20%', left: '55%' }}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} />
-            </div>
-            <div className={s["marker"]} style={{ top: '70%', left: '45%' }}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} />
-            </div>
-            <div className={s["marker"]} style={{ top: '50%', left: '50%' }}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} className={s["current-user"]} />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 // Join Community Section
 const JoinCommunity = () => {
