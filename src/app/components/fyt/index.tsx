@@ -310,7 +310,7 @@ const NearbyCoders = () => {
       
       <div className={s["recommendation-banner"]}>
         <FontAwesomeIcon icon={faLaptopCode} />
-        <p>Based on your quiz results, we've found developers with similar expertise and interests!</p>
+        <p>Based on your quiz results, we&apos;ve found developers with similar expertise and interests!</p>
       </div>
       
       <div className={s["coders-grid"]} ref={cardsRef}>

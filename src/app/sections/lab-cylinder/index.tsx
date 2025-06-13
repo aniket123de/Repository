@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
@@ -221,13 +222,14 @@ const PartnershipCard = ({
       <motion.div
         className={styles.logoContainer || 'logoContainer'}
         animate={{
-          scale: isHovered ? 1.05 : 1
-        }}
+          scale: isHovered ? 1.05 : 1        }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-      >
-        <img
+      >        <Image
           src={partnership.logo}
           alt={`${partnership.name} logo`}
+          width={120}
+          height={60}
+          style={{ objectFit: "contain" }}
         />
       </motion.div>
 
