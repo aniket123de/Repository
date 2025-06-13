@@ -6,6 +6,18 @@
   max-width: 380px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
+  
+  @media (max-width: 768px) {
+    max-width: 100%;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 0 auto;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 16px;
+    border-radius: 10px;
+  }
 }
 
 .header {
@@ -14,6 +26,16 @@
   gap: 16px;
   margin-bottom: 20px;
   position: relative;
+  
+  @media (max-width: 768px) {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
 }
 
 .profileIcon {
@@ -27,12 +49,25 @@
   color: white;
   font-size: 1.5rem;
   flex-shrink: 0;
+  
+  @media (max-width: 768px) {
+    width: 56px;
+    height: 56px;
+    font-size: 1.3rem;
+  }
+  
+  @media (max-width: 480px) {
+    width: 48px;
+    height: 48px;
+    font-size: 1.1rem;
+  }
 }
 
 .userInfo {
   flex: 1;
   min-width: 0;
-    h2 {
+  
+  h2 {
     font-size: 1.5rem;
     font-weight: 600;
     color: #ffffff;
@@ -40,6 +75,22 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    
+    @media (max-width: 768px) {
+      font-size: 1.3rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 1.2rem;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: unset;
+      line-height: 1.3;
+    }
+    
+    @media (max-width: 360px) {
+      font-size: 1.1rem;
+    }
   }
 }
 
@@ -59,11 +110,32 @@
   justify-content: center;
   width: 32px;
   height: 32px;
+  min-height: 32px; // Ensure minimum touch target
+  touch-action: manipulation;
+  
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+    min-height: 36px;
+    padding: 10px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    padding: 12px;
+  }
   
   &:hover {
     background: rgba(255, 255, 255, 0.1);
     color: #ff4d4d;
     transform: rotate(90deg);
+  }
+  
+  &:active {
+    transform: scale(0.95) rotate(90deg);
+    transition: transform 0.1s ease;
   }
 }
 
@@ -75,6 +147,19 @@
   padding: 12px 16px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
+  
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
 }
 
 .stats {
@@ -86,6 +171,24 @@
   background: rgba(255, 255, 255, 0.03);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  
+  @media (max-width: 768px) {
+    gap: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 6px;
+    padding: 8px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+  }
+  
+  @media (max-width: 360px) {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 }
 
 .stat {
@@ -96,6 +199,28 @@
   padding: 8px;
   border-radius: 8px;
   transition: all 0.2s ease;
+  min-height: 60px;
+  justify-content: center;
+  
+  @media (max-width: 768px) {
+    padding: 6px;
+    gap: 3px;
+    min-height: 50px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 4px;
+    gap: 2px;
+    min-height: 45px;
+  }
+  
+  @media (max-width: 360px) {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    min-height: 40px;
+    padding: 8px 12px;
+  }
   
   &:hover {
     background: rgba(255, 255, 255, 0.05);
@@ -105,26 +230,72 @@
     color: #57B9C2;
     font-size: 1.1rem;
     margin-bottom: 2px;
+    
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+      margin-bottom: 1px;
+    }
+    
+    @media (max-width: 360px) {
+      margin-bottom: 0;
+      margin-right: 8px;
+    }
   }
   
   .value {
     color: #ffffff;
     font-size: 1.1rem;
     font-weight: 600;
+    
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 0.95rem;
+    }
   }
   
   .label {
     color: #8B949E;
     font-size: 0.8rem;
+    
+    @media (max-width: 768px) {
+      font-size: 0.75rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 0.7rem;
+    }
   }
 }
 
 .content {
   margin-bottom: 24px;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 16px;
+  }
 }
 
 .section {
   margin-bottom: 20px;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 16px;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 14px;
+  }
   
   h3 {
     display: flex;
@@ -134,8 +305,24 @@
     color: #ffffff;
     margin: 0 0 12px 0;
     
+    @media (max-width: 768px) {
+      font-size: 0.95rem;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+    
     .sectionIcon {
       color: #57B9C2;
+      
+      @media (max-width: 480px) {
+        font-size: 0.85rem;
+      }
     }
   }
 }
@@ -144,6 +331,14 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  
+  @media (max-width: 768px) {
+    gap: 6px;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 5px;
+  }
 }
 
 .tag {
@@ -154,6 +349,25 @@
   font-size: 0.9rem;
   border: 1px solid rgba(87, 185, 194, 0.2);
   transition: all 0.2s ease;
+  word-break: break-word;
+  
+  @media (max-width: 768px) {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    border-radius: 16px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    border-radius: 14px;
+  }
+  
+  @media (max-width: 360px) {
+    padding: 3px 6px;
+    font-size: 0.75rem;
+    border-radius: 12px;
+  }
   
   &:hover {
     background: rgba(87, 185, 194, 0.2);
@@ -164,6 +378,15 @@
 .actions {
   display: flex;
   gap: 12px;
+  
+  @media (max-width: 768px) {
+    gap: 10px;
+  }
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 8px;
+  }
   
   a {
     flex: 1;
@@ -182,6 +405,30 @@
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-height: 48px; // Minimum touch target
+    touch-action: manipulation;
+    
+    @media (max-width: 768px) {
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      gap: 6px;
+      min-height: 44px;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      gap: 5px;
+      min-height: 42px;
+      border-radius: 10px;
+      width: 100%;
+    }
+    
+    @media (max-width: 360px) {
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      min-height: 40px;
+    }
     
     &::before {
       content: '';
@@ -201,16 +448,32 @@
     svg {
       font-size: 1rem;
       transition: transform 0.3s ease;
+      
+      @media (max-width: 768px) {
+        font-size: 0.9rem;
+      }
+      
+      @media (max-width: 480px) {
+        font-size: 0.85rem;
+      }
     }
     
     span {
       font-weight: 600;
       letter-spacing: 0.5px;
+      
+      @media (max-width: 480px) {
+        letter-spacing: 0.3px;
+      }
     }
     
     &:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+      
+      @media (max-width: 768px) {
+        transform: translateY(-2px);
+      }
       
       svg {
         transform: scale(1.1);
@@ -220,6 +483,10 @@
     &:active {
       transform: translateY(-1px);
       transition: transform 0.1s ease;
+      
+      @media (max-width: 768px) {
+        transform: scale(0.98);
+      }
     }
   }
 }
@@ -232,6 +499,17 @@
   &:hover {
     background: linear-gradient(135deg, #ff5252, #e53e3e);
     box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+    
+    @media (max-width: 768px) {
+      box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    &:hover {
+      background: linear-gradient(135deg, #ff5252, #e53e3e);
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.25);
+    }
   }
 }
 
@@ -243,6 +521,17 @@
   &:hover {
     background: linear-gradient(135deg, #005885, #004266);
     box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
+    
+    @media (max-width: 768px) {
+      box-shadow: 0 6px 20px rgba(0, 119, 181, 0.3);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    &:hover {
+      background: linear-gradient(135deg, #005885, #004266);
+      box-shadow: 0 4px 15px rgba(0, 119, 181, 0.25);
+    }
   }
 }
 
@@ -254,5 +543,14 @@
   &:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-1px);
+    
+    @media (max-width: 768px) {
+      transform: translateY(-1px);
+    }
+    
+    @media (max-width: 480px) {
+      background: rgba(255, 255, 255, 0.08);
+      transform: none;
+    }
   }
 }
