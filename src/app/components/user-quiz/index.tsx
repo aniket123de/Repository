@@ -73,9 +73,14 @@ const interestQuestions = {
       question: "What type of applications do you enjoy building?",
       options: ["Social Media Apps", "E-commerce Apps", "Gaming Apps", "Productivity Tools", "Health & Fitness", "Educational Apps"],
       type: 'multiple' as const
+    },    {
+      id: 3,
+      question: "Which backend technologies do you prefer for mobile apps?",
+      options: ["Node.js/Express", "Python/Django", "Firebase", "AWS Amplify", "Supabase", "Parse Server"],
+      type: 'multiple' as const
     },
     {
-      id: 3,
+      id: 4,
       question: "Which app development areas fascinate you?",
       options: ["AR/VR Integration", "Real-time Features", "Offline Capabilities", "Push Notifications", "App Store Optimization", "Cross-platform Development"],
       type: 'multiple' as const

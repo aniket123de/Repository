@@ -183,22 +183,21 @@ const HowItWorks = () => {
         );
       }
     });
-  }, []);
-  const steps = [
-    {
-      icon: faGithub,
-      title: "Connect with GitHub",
-      description: "Login with your GitHub account to get started and share your developer profile."
-    },
+  }, []);  const steps = [
     {
       icon: faUserPlus,
       title: "Take Our Quiz",
       description: "Complete our interactive quiz to help us understand your skills and interests better."
     },
     {
+      icon: faUsers,
+      title: "Get Smart Matches",
+      description: "Our algorithm analyzes your quiz results to find developers with similar skills, interests, and coding style."
+    },
+    {
       icon: faSearch,
-      title: "Discover Coders",
-      description: "Browse through nearby developers with matching skills and interests."
+      title: "Connect & Collaborate",
+      description: "Browse through your personalized matches and connect with developers who share your passion."
     },
   ];
 
