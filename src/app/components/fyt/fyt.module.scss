@@ -93,6 +93,10 @@
   overflow: visible;
   z-index: auto;
   
+  @media (max-width: 768px) {
+    overflow-x: hidden;
+  }
+  
   // Dot-line pattern overlay (grids only, no dots)
   &::before {
     content: '';
@@ -110,6 +114,16 @@
       linear-gradient(to right, rgba(87, 185, 194, 0.1) 1px, transparent 2px),
       linear-gradient(to bottom, rgba(87, 185, 194, 0.1) 1px, transparent 2px);
     background-position: center;
+    
+    @media (max-width: 768px) {
+      background-size: 25px 25px;
+      opacity: 0.3;
+    }
+    
+    @media (max-width: 480px) {
+      background-size: 20px 20px;
+      opacity: 0.2;
+    }
   }
   
   // Subtle particles floating in the background
@@ -123,6 +137,18 @@
     filter: blur(15px);
     z-index: 0;
     animation: float-around 20s infinite ease-in-out;
+    
+    @media (max-width: 768px) {
+      width: 200px;
+      height: 200px;
+      filter: blur(10px);
+    }
+    
+    @media (max-width: 480px) {
+      width: 150px;
+      height: 150px;
+      filter: blur(8px);
+    }
   }
   
   &::after {
@@ -131,6 +157,20 @@
     animation-delay: 10s;
     width: 250px;
     height: 250px;
+    
+    @media (max-width: 768px) {
+      width: 180px;
+      height: 180px;
+      bottom: 15%;
+      right: 5%;
+    }
+    
+    @media (max-width: 480px) {
+      width: 120px;
+      height: 120px;
+      bottom: 10%;
+      right: 0%;
+    }
   }
   
   // Add floating particles
@@ -154,6 +194,16 @@
   padding: tovw(60px, "desktop-large", 40px);
   position: relative;
   
+  @media (max-width: 768px) {
+    min-height: 80vh;
+    padding: 40px 20px;
+  }
+  
+  @media (max-width: 480px) {
+    min-height: 70vh;
+    padding: 30px 15px;
+  }
+  
   .hero-content {
     max-width: tovw(1000px, "desktop-large", 800px);
     text-align: center;
@@ -162,6 +212,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+    @media (max-width: 768px) {
+      padding: 20px;
+      max-width: 100%;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 15px;
+    }
   }
   
   .hero-decoration {
@@ -181,8 +240,7 @@
       }
     }
   }
-  
-  .hero-title {
+    .hero-title {
     font-size: tovw(90px, "desktop-large", 70px);
     font-weight: 800;
     margin-bottom: tovw(40px, "desktop-large", 30px);
@@ -204,9 +262,17 @@
     @media (max-width: 768px) {
       font-size: 50px;
     }
+    
+    @media (max-width: 480px) {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    
+    @media (max-width: 360px) {
+      font-size: 32px;
+    }
   }
-  
-  .hero-description {
+    .hero-description {
     font-size: tovw(24px, "desktop-large", 20px);
     max-width: 80%;
     margin-bottom: tovw(50px, "desktop-large", 40px);
@@ -215,7 +281,13 @@
     
     @media (max-width: 768px) {
       font-size: 18px;
-      max-width: 100%;    }
+      max-width: 100%;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
   }
   
   .community-btn {
@@ -308,10 +380,28 @@
   text-align: center;
   position: relative;
   
+  @media (max-width: 768px) {
+    padding: 60px 20px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 40px 15px;
+  }
+  
   h2 {
     font-size: tovw(50px, "desktop-large", 40px);
     margin-bottom: tovw(60px, "desktop-large", 50px);
     font-weight: 700;
+    
+    @media (max-width: 768px) {
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
   }
   
   .steps-container {
@@ -324,10 +414,14 @@
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
       max-width: 100%;
+      gap: 20px;
+    }
+    
+    @media (max-width: 480px) {
+      gap: 15px;
     }
   }
-  
-  .step-item {
+    .step-item {
     background: rgba(255, 255, 255, 0.03);
     border-radius: 20px;
     padding: tovw(30px, "desktop-large", 25px);
@@ -335,9 +429,22 @@
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     
+    @media (max-width: 768px) {
+      padding: 20px;
+      border-radius: 16px;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 16px;
+    }
+    
     &:hover {
       transform: translateY(-10px);
       box-shadow: 0 10px 30px rgba(87, 185, 194, 0.1);
+      
+      @media (max-width: 768px) {
+        transform: translateY(-5px);
+      }
     }
     
     .step-icon {
@@ -350,9 +457,29 @@
       justify-content: center;
       margin: 0 auto tovw(25px, "desktop-large", 20px);
       
+      @media (max-width: 768px) {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+      }
+      
+      @media (max-width: 480px) {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 12px;
+      }
+      
       svg {
         font-size: tovw(35px, "desktop-large", 30px);
         color: rgb(0, 0, 0);
+        
+        @media (max-width: 768px) {
+          font-size: 24px;
+        }
+        
+        @media (max-width: 480px) {
+          font-size: 20px;
+        }
       }
     }
     
@@ -360,12 +487,30 @@
       font-size: tovw(24px, "desktop-large", 20px);
       margin-bottom: tovw(16px, "desktop-large", 14px);
       font-weight: 600;
+      
+      @media (max-width: 768px) {
+        font-size: 18px;
+        margin-bottom: 12px;
+      }
+      
+      @media (max-width: 480px) {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
     }
     
     p {
       font-size: tovw(16px, "desktop-large", 14px);
       color: rgba(255, 255, 255, 0.8);
       line-height: 1.5;
+      
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
+      
+      @media (max-width: 480px) {
+        font-size: 13px;
+      }
     }
   }
 }
@@ -375,20 +520,49 @@
   padding: tovw(100px, "desktop-large", 80px) tovw(40px, "desktop-large", 30px);
   position: relative;
   
+  @media (max-width: 768px) {
+    padding: 60px 20px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 40px 15px;
+  }
+  
   h2 {
     font-size: tovw(50px, "desktop-large", 40px);
     margin-bottom: tovw(50px, "desktop-large", 40px);
     font-weight: 700;
     text-align: center;
+    
+    @media (max-width: 768px) {
+      font-size: 36px;
+      margin-bottom: 30px;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
   }
   
   .search-container {
     max-width: tovw(1000px, "desktop-large", 800px);
     margin: 0 auto tovw(50px, "desktop-large", 40px);
     
-    .search-input {
+    @media (max-width: 768px) {
+      margin-bottom: 30px;
+    }
+    
+    @media (max-width: 480px) {
+      margin-bottom: 25px;
+    }
+      .search-input {
       position: relative;
       margin-bottom: tovw(20px, "desktop-large", 16px);
+      
+      @media (max-width: 480px) {
+        margin-bottom: 12px;
+      }
       
       .search-icon {
         position: absolute;
@@ -396,6 +570,11 @@
         top: 50%;
         transform: translateY(-50%);
         color: rgba(255, 255, 255, 0.6);
+        
+        @media (max-width: 480px) {
+          left: 12px;
+          font-size: 14px;
+        }
       }
       
       input {
@@ -407,6 +586,18 @@
         color: white;
         font-size: tovw(16px, "desktop-large", 14px);
         
+        @media (max-width: 768px) {
+          padding: 12px 12px 12px 40px;
+          font-size: 14px;
+          border-radius: 25px;
+        }
+        
+        @media (max-width: 480px) {
+          padding: 10px 10px 10px 35px;
+          font-size: 13px;
+          border-radius: 20px;
+        }
+        
         &:focus {
           outline: none;
           border-color: rgba(87, 185, 194, 0.5);
@@ -415,14 +606,28 @@
         
         &::placeholder {
           color: rgba(255, 255, 255, 0.5);
+          
+          @media (max-width: 480px) {
+            font-size: 12px;
+          }
         }
       }
     }
-    
-    .filters {
+      .filters {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 15px;
+      
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      
+      @media (max-width: 480px) {
+        gap: 8px;
+      }
       
       .filter-btn {
         background: rgba(255, 255, 255, 0.1);
@@ -434,6 +639,18 @@
         cursor: pointer;
         transition: all 0.2s ease;
         
+        @media (max-width: 768px) {
+          padding: 8px 16px;
+          font-size: 12px;
+          text-align: center;
+        }
+        
+        @media (max-width: 480px) {
+          padding: 6px 12px;
+          font-size: 11px;
+          border-radius: 15px;
+        }
+        
         &:hover {
           background: rgba(255, 255, 255, 0.15);
         }
@@ -442,10 +659,19 @@
       .distance-filter {
         color: rgba(255, 255, 255, 0.7);
         font-size: tovw(14px, "desktop-large", 12px);
-      }    }
+        
+        @media (max-width: 768px) {
+          font-size: 12px;
+          text-align: center;
+        }
+        
+        @media (max-width: 480px) {
+          font-size: 11px;
+        }
+      }
+    }
   }
-  
-  .recommendation-banner {
+    .recommendation-banner {
     background: linear-gradient(135deg, rgba(87, 185, 194, 0.15), rgba(75, 222, 128, 0.15));
     border: 1px solid rgba(87, 185, 194, 0.3);
     border-radius: 16px;
@@ -457,10 +683,33 @@
     gap: tovw(15px, "desktop-large", 12px);
     backdrop-filter: blur(10px);
     
+    @media (max-width: 768px) {
+      padding: 16px 20px;
+      margin-bottom: 25px;
+      border-radius: 12px;
+      gap: 10px;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      gap: 8px;
+      flex-direction: column;
+      text-align: center;
+    }
+    
     svg {
       color: #57B9C2;
       font-size: tovw(24px, "desktop-large", 20px);
       flex-shrink: 0;
+      
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
+      
+      @media (max-width: 480px) {
+        font-size: 16px;
+      }
     }
     
     p {
@@ -468,10 +717,17 @@
       color: rgba(255, 255, 255, 0.9);
       font-size: tovw(16px, "desktop-large", 14px);
       font-weight: 500;
+      
+      @media (max-width: 768px) {
+        font-size: 13px;
+      }
+      
+      @media (max-width: 480px) {
+        font-size: 12px;
+      }
     }
   }
-  
-  .coders-grid {
+    .coders-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(tovw(300px, "desktop-large", 270px), 1fr));
     gap: tovw(30px, "desktop-large", 25px);
@@ -480,6 +736,11 @@
     
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    @media (max-width: 480px) {
+      gap: 15px;
     }
   }
   
@@ -499,17 +760,28 @@
           transform: scale(1.05);
         }
       }
-    }
-      .card-header {
+    }      .card-header {
       padding: tovw(20px, "desktop-large", 16px);
       display: flex;
       align-items: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       
+      @media (max-width: 768px) {
+        padding: 16px;
+      }
+      
+      @media (max-width: 480px) {
+        padding: 12px;
+      }
+      
       .name-container {
         display: flex;
         align-items: center;
         gap: tovw(15px, "desktop-large", 12px);
+        
+        @media (max-width: 480px) {
+          gap: 10px;
+        }
         
         .profile-icon {
           width: tovw(60px, "desktop-large", 50px);
@@ -522,21 +794,52 @@
           color: white;
           font-size: tovw(24px, "desktop-large", 20px);
           transition: all 0.3s ease;
+          
+          @media (max-width: 768px) {
+            width: 45px;
+            height: 45px;
+            font-size: 18px;
+          }
+          
+          @media (max-width: 480px) {
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+          }
         }
         
         h3 {
           font-size: tovw(18px, "desktop-large", 16px);
           margin: 0;
           font-weight: 600;
+          
+          @media (max-width: 768px) {
+            font-size: 15px;
+          }
+          
+          @media (max-width: 480px) {
+            font-size: 14px;
+          }
         }
       }
     }
-    
-    .card-body {
+      .card-body {
       padding: tovw(20px, "desktop-large", 16px);
+      
+      @media (max-width: 768px) {
+        padding: 16px;
+      }
+      
+      @media (max-width: 480px) {
+        padding: 12px;
+      }
       
       .skills-section, .interests-section {
         margin-bottom: tovw(15px, "desktop-large", 12px);
+        
+        @media (max-width: 480px) {
+          margin-bottom: 10px;
+        }
         
         h4 {
           display: flex;
@@ -547,8 +850,28 @@
           font-weight: 500;
           color: rgba(255, 255, 255, 0.9);
           
+          @media (max-width: 768px) {
+            font-size: 13px;
+            gap: 6px;
+            margin-bottom: 6px;
+          }
+          
+          @media (max-width: 480px) {
+            font-size: 12px;
+            gap: 5px;
+            margin-bottom: 5px;
+          }
+          
           svg {
             color: #57B9C2;
+            
+            @media (max-width: 768px) {
+              font-size: 12px;
+            }
+            
+            @media (max-width: 480px) {
+              font-size: 11px;
+            }
           }
         }
         
@@ -557,6 +880,14 @@
           flex-wrap: wrap;
           gap: 8px;
           
+          @media (max-width: 768px) {
+            gap: 6px;
+          }
+          
+          @media (max-width: 480px) {
+            gap: 4px;
+          }
+          
           .tag {
             background: rgba(87, 185, 194, 0.15);
             border: 1px solid rgba(87, 185, 194, 0.3);
@@ -564,6 +895,18 @@
             padding: tovw(6px, "desktop-large", 5px) tovw(12px, "desktop-large", 10px);
             font-size: tovw(12px, "desktop-large", 11px);
             color: rgba(255, 255, 255, 0.9);
+            
+            @media (max-width: 768px) {
+              padding: 4px 8px;
+              font-size: 10px;
+              border-radius: 10px;
+            }
+            
+            @media (max-width: 480px) {
+              padding: 3px 6px;
+              font-size: 9px;
+              border-radius: 8px;
+            }
           }
         }
       }
@@ -572,6 +915,17 @@
       display: flex;
       gap: tovw(12px, "desktop-large", 10px);
       border-top: 1px solid rgba(255, 255, 255, 0.05);
+      
+      @media (max-width: 768px) {
+        padding: 16px;
+        gap: 8px;
+      }
+      
+      @media (max-width: 480px) {
+        padding: 12px;
+        gap: 6px;
+        flex-direction: column;
+      }
       
       .email-btn, .linkedin-btn {
         flex: 1;
@@ -589,6 +943,21 @@
         position: relative;
         overflow: hidden;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        
+        @media (max-width: 768px) {
+          padding: 10px 14px;
+          font-size: 11px;
+          gap: 5px;
+          border-radius: 10px;
+        }
+        
+        @media (max-width: 480px) {
+          padding: 8px 12px;
+          font-size: 10px;
+          gap: 4px;
+          border-radius: 8px;
+          flex: none;
+        }
         
         &::before {
           content: '';
@@ -608,16 +977,36 @@
         svg {
           font-size: tovw(14px, "desktop-large", 12px);
           transition: transform 0.3s ease;
+          
+          @media (max-width: 768px) {
+            font-size: 10px;
+          }
+          
+          @media (max-width: 480px) {
+            font-size: 9px;
+          }
         }
         
         span {
           font-weight: 600;
           letter-spacing: 0.5px;
+          
+          @media (max-width: 480px) {
+            font-size: 9px;
+          }
         }
         
         &:hover {
           transform: translateY(-3px);
           box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+          
+          @media (max-width: 768px) {
+            transform: translateY(-2px);
+          }
+          
+          @media (max-width: 480px) {
+            transform: translateY(-1px);
+          }
           
           svg {
             transform: scale(1.1);
@@ -627,10 +1016,14 @@
         &:active {
           transform: translateY(-1px);
           transition: transform 0.1s ease;
+          
+          @media (max-width: 480px) {
+            transform: translateY(0);
+          }
         }
         
         // Mobile responsive - show only icons on very small screens
-        @media (max-width: 480px) {
+        @media (max-width: 320px) {
           padding: tovw(12px, "desktop-large", 10px);
           
           span {
@@ -674,10 +1067,28 @@
   text-align: center;
   position: relative;
   
+  @media (max-width: 768px) {
+    padding: 60px 20px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 40px 15px;
+  }
+  
   h2 {
     font-size: tovw(50px, "desktop-large", 40px);
     margin-bottom: tovw(60px, "desktop-large", 50px);
     font-weight: 700;
+    
+    @media (max-width: 768px) {
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
   }
   
   .map-container {
@@ -692,6 +1103,16 @@
       position: relative;
       overflow: hidden;
       
+      @media (max-width: 768px) {
+        height: 400px;
+        border-radius: 16px;
+      }
+      
+      @media (max-width: 480px) {
+        height: 300px;
+        border-radius: 12px;
+      }
+      
       &::before {
         content: '';
         position: absolute;
@@ -703,6 +1124,14 @@
           linear-gradient(rgba(87, 185, 194, 0.02) 1px, transparent 1px),
           linear-gradient(90deg, rgba(87, 185, 194, 0.02) 1px, transparent 1px);
         background-size: 40px 40px;
+        
+        @media (max-width: 768px) {
+          background-size: 30px 30px;
+        }
+        
+        @media (max-width: 480px) {
+          background-size: 25px 25px;
+        }
       }
       
       .map-overlay {
@@ -720,9 +1149,21 @@
           transition: all 0.3s ease;
           cursor: pointer;
           
+          @media (max-width: 768px) {
+            font-size: 18px;
+          }
+          
+          @media (max-width: 480px) {
+            font-size: 14px;
+          }
+          
           &:hover {
             transform: scale(1.2);
             color: #67cad3;
+            
+            @media (max-width: 768px) {
+              transform: scale(1.1);
+            }
           }
           
           &.current-user {
@@ -730,6 +1171,14 @@
             font-size: tovw(30px, "desktop-large", 26px);
             animation: marker-bounce 2s infinite ease-in-out;
             filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));
+            
+            @media (max-width: 768px) {
+              font-size: 22px;
+            }
+            
+            @media (max-width: 480px) {
+              font-size: 18px;
+            }
             
             &:hover {
               color: #ff8585;
@@ -749,6 +1198,14 @@
   align-items: center;
   position: relative;
   
+  @media (max-width: 768px) {
+    padding: 80px 20px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 60px 15px;
+  }
+  
   .community-content {
     max-width: tovw(800px, "desktop-large", 700px);
     text-align: center;
@@ -759,6 +1216,17 @@
     border: 1px solid rgba(255, 255, 255, 0.05);
     position: relative;
     z-index: 1;
+    
+    @media (max-width: 768px) {
+      padding: 40px 30px;
+      border-radius: 20px;
+      max-width: 100%;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 30px 20px;
+      border-radius: 16px;
+    }
   }
   
   .starburst-container {
@@ -768,6 +1236,24 @@
       left: 50%;
       transform: translateX(-50%);
       animation: pulse 6s infinite ease-in-out;
+      
+      @media (max-width: 768px) {
+        top: -20px;
+        
+        svg {
+          width: 42px;
+          height: 42px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        top: -16px;
+        
+        svg {
+          width: 36px;
+          height: 36px;
+        }
+      }
     }
   }
   
@@ -775,12 +1261,33 @@
     font-size: tovw(40px, "desktop-large", 36px);
     margin-bottom: tovw(30px, "desktop-large", 25px);
     font-weight: 700;
+    
+    @media (max-width: 768px) {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
   }
   
   p {
     font-size: tovw(18px, "desktop-large", 16px);
     margin-bottom: tovw(40px, "desktop-large", 35px);
-    opacity: 0.9;    line-height: 1.6;
+    opacity: 0.9;
+    line-height: 1.6;
+    
+    @media (max-width: 768px) {
+      font-size: 15px;
+      margin-bottom: 30px;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
   }
   
   .community-btn {
@@ -798,15 +1305,45 @@
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(87, 185, 194, 0.3);
     
+    @media (max-width: 768px) {
+      padding: 12px 30px;
+      font-size: 15px;
+      border-radius: 25px;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 10px 25px;
+      font-size: 14px;
+      border-radius: 20px;
+    }
+    
     &:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(87, 185, 194, 0.4);
       background: linear-gradient(to right, #67cad3, #57B9C2);
+      
+      @media (max-width: 768px) {
+        transform: translateY(-2px);
+      }
+      
+      @media (max-width: 480px) {
+        transform: translateY(-1px);
+      }
     }
     
     .btn-icon {
       margin-right: tovw(12px, "desktop-large", 10px);
       font-size: tovw(20px, "desktop-large", 18px);
+      
+      @media (max-width: 768px) {
+        margin-right: 8px;
+        font-size: 16px;
+      }
+      
+      @media (max-width: 480px) {
+        margin-right: 6px;
+        font-size: 14px;
+      }
     }
   }
 }
@@ -820,11 +1357,29 @@
   padding: tovw(80px, "desktop-large", 60px) tovw(20px, "desktop-large", 16px);
   grid-column: 1 / -1;
   
+  @media (max-width: 768px) {
+    padding: 60px 16px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 40px 12px;
+  }
+  
   p {
     margin-top: tovw(20px, "desktop-large", 16px);
     font-size: tovw(18px, "desktop-large", 16px);
     color: #666;
     font-weight: 500;
+    
+    @media (max-width: 768px) {
+      margin-top: 16px;
+      font-size: 15px;
+    }
+    
+    @media (max-width: 480px) {
+      margin-top: 12px;
+      font-size: 14px;
+    }
   }
 }
 
@@ -835,6 +1390,17 @@
   border-top: 3px solid #57B9C2;
   border-radius: 50%;
   animation: spin 1s linear infinite;
+  
+  @media (max-width: 768px) {
+    width: 32px;
+    height: 32px;
+    border-width: 2px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 @keyframes spin {
@@ -852,10 +1418,28 @@
   grid-column: 1 / -1;
   text-align: center;
   
+  @media (max-width: 768px) {
+    padding: 60px 16px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 40px 12px;
+  }
+  
   p {
     font-size: tovw(16px, "desktop-large", 14px);
     color: #ff6b6b;
     max-width: tovw(400px, "desktop-large", 320px);
+    
+    @media (max-width: 768px) {
+      font-size: 14px;
+      max-width: 280px;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 13px;
+      max-width: 100%;
+    }
   }
 }
 
@@ -869,22 +1453,60 @@
   grid-column: 1 / -1;
   text-align: center;
   
+  @media (max-width: 768px) {
+    padding: 60px 16px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 40px 12px;
+  }
+  
   .empty-icon {
     font-size: tovw(48px, "desktop-large", 40px);
     color: rgba(87, 185, 194, 0.3);
     margin-bottom: tovw(20px, "desktop-large", 16px);
+    
+    @media (max-width: 768px) {
+      font-size: 36px;
+      margin-bottom: 14px;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
   }
   
   h3 {
     font-size: tovw(24px, "desktop-large", 20px);
     color: #333;
     margin-bottom: tovw(12px, "desktop-large", 10px);
+    
+    @media (max-width: 768px) {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
   }
   
   p {
     font-size: tovw(16px, "desktop-large", 14px);
     color: #666;
     max-width: tovw(400px, "desktop-large", 320px);
+    
+    @media (max-width: 768px) {
+      font-size: 14px;
+      max-width: 280px;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 13px;
+      max-width: 100%;
+    }
   }
 }
 

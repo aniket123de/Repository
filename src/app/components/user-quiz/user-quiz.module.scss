@@ -6,6 +6,19 @@
   margin: 0 auto;
   position: relative;
   z-index: 2;
+  
+  // Handle mobile viewport issues
+  min-height: 100vh;
+  min-height: 100dvh; // Use dynamic viewport height when supported
+
+  @media (max-width: 768px) {
+    padding: 4rem 1rem;
+    min-height: auto; // Let content determine height on mobile
+  }
+
+  @media (max-width: 480px) {
+    padding: 3rem 0.75rem;
+  }
 
   h2 {
     font-size: clamp(2.5rem, 5vw, 4rem);
@@ -17,6 +30,14 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 4px 20px rgba(87, 185, 194, 0.3);
+    
+    @media (max-width: 768px) {
+      margin-bottom: 3rem;
+    }
+    
+    @media (max-width: 480px) {
+      margin-bottom: 2.5rem;
+    }
   }
 }
 
@@ -142,7 +163,6 @@
       color: #57B9C2;
     }
   }
-
   input {
     width: 100%;
     padding: 1rem 1.25rem;
@@ -153,6 +173,22 @@
     font-size: 1rem;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    min-height: 48px; // Minimum touch target size
+    touch-action: manipulation;
+
+    // Improve mobile input experience
+    @media (max-width: 768px) {
+      min-height: 44px;
+      padding: 0.875rem 1rem;
+      font-size: 0.95rem;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 480px) {
+      min-height: 42px;
+      padding: 0.75rem 0.875rem;
+      font-size: 0.9rem;
+    }
 
     &::placeholder {
       color: rgba(255, 255, 255, 0.5);
@@ -190,9 +226,13 @@
     gap: 1rem;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 580px) {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.75rem;
   }
 }
 
@@ -212,6 +252,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 160px; // Minimum touch target
+  touch-action: manipulation;
 
   &::before {
     content: '';
@@ -241,6 +283,11 @@
       transform: scale(1.1) rotate(5deg);
       filter: drop-shadow(0 8px 16px rgba(87, 185, 194, 0.4));
     }
+
+    // Reduce transform on mobile for better UX
+    @media (max-width: 768px) {
+      transform: translateY(-4px) scale(1.01);
+    }
   }
 
   &.selected {
@@ -266,14 +313,24 @@
     h4 {
       color: #4ade80;    }
   }
+  
+  // Add active state for touch feedback
+  &:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+  
   @media (max-width: 768px) {
     padding: 1.5rem 1rem;
     aspect-ratio: 1;
+    min-height: 140px;
+    border-radius: 16px;
   }
 
   @media (max-width: 480px) {
     padding: 1.25rem 0.75rem;
     aspect-ratio: 1;
+    min-height: 120px;
   }
 }
 
@@ -390,11 +447,28 @@
   backdrop-filter: blur(10px);
   text-align: left;
   position: relative;
+  min-height: 60px; // Minimum touch target size
+
+  // Improve touch target for mobile
+  @media (max-width: 768px) {
+    min-height: 56px;
+    padding: 1rem 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    min-height: 52px;
+    padding: 0.875rem 1rem;
+  }
 
   &:hover {
     border-color: #57B9C2;
     background: rgba(255, 255, 255, 0.08);
     transform: translateX(4px);
+
+    // Reduce transform on mobile for better UX
+    @media (max-width: 768px) {
+      transform: translateX(2px);
+    }
   }
 
   &.selected {
@@ -411,6 +485,12 @@
       background: #4ade80;
       color: var(--color-white);
     }
+  }
+
+  // Add active state for touch feedback
+  &:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
   }
 }
 
@@ -624,6 +704,22 @@
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 1rem;
+    
+    // Ensure buttons take full width on mobile for better touch targets
+    .next-btn, .prev-btn, .restart-btn, .submit-btn {
+      width: 100%;
+      max-width: 280px;
+      margin-left: 0 !important;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.75rem;
+    
+    .next-btn, .prev-btn, .restart-btn, .submit-btn {
+      max-width: 240px;
+    }
   }
 
   // For results page with 3 buttons
@@ -640,6 +736,17 @@
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
       justify-items: center;
+      gap: 1rem;
+      
+      .submit-btn {
+        width: 100%;
+        max-width: 280px;
+      }
+      
+      .prev-btn, .restart-btn {
+        width: 100%;
+        max-width: 200px;
+      }
     }
   }
 }
@@ -656,11 +763,32 @@
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  min-height: 48px; // Minimum touch target size
+  touch-action: manipulation; // Improve touch performance
+
+  // Improve touch targets on mobile
+  @media (max-width: 768px) {
+    min-height: 44px;
+    padding: 0.875rem 1.75rem;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 480px) {
+    min-height: 40px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
 
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     transform: none !important;
+  }
+
+  // Add active state for better touch feedback
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
   }
 }
 
@@ -935,5 +1063,269 @@
   .next-btn, .prev-btn, .restart-btn {
     margin-left: 0;
     justify-content: center;
+  }
+
+  .step-indicator {
+    gap: 1rem;
+  }
+
+  .step {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    
+    span {
+      width: 28px;
+      height: 28px;
+      font-size: 0.8rem;
+    }
+  }
+
+  .form-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .form-header p {
+    font-size: 1rem;
+  }
+
+  .question-container h3 {
+    font-size: 1.3rem;
+  }
+
+  .score-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .score-number {
+    font-size: 1.5rem;
+  }
+
+  .results-header h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-quiz {
+    padding: 3rem 0.75rem;
+  }
+
+  .quiz-content {
+    padding: 1.5rem 1rem;
+    border-radius: 16px;
+  }
+
+  .user-quiz h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    margin-bottom: 2.5rem;
+  }
+
+  .step-indicator {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .step {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    width: 100%;
+    justify-content: center;
+    
+    span {
+      width: 24px;
+      height: 24px;
+      font-size: 0.75rem;
+    }
+  }
+
+  .expertise-grid {
+    gap: 0.75rem;
+  }
+
+  .expertise-card {
+    padding: 1.25rem 0.75rem;
+    border-radius: 16px;
+    
+    h4 {
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+  }
+
+  .expertise-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input {
+    padding: 0.875rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .form-header h3 {
+    font-size: 1.4rem;
+  }
+
+  .form-header p {
+    font-size: 0.95rem;
+  }
+
+  .question-container h3 {
+    font-size: 1.2rem;
+    line-height: 1.3;
+  }
+
+  .question-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .option-btn {
+    padding: 1rem 1.25rem;
+    
+    .option-text {
+      font-size: 0.9rem;
+    }
+  }
+
+  .next-btn, .prev-btn, .restart-btn, .submit-btn {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9rem;
+    border-radius: 10px;
+  }
+
+  .next-btn {
+    padding: 14px 28px;
+    
+    :global(.text) {
+      font-size: 0.9rem;
+    }
+  }
+
+  .score-circle {
+    width: 90px;
+    height: 90px;
+  }
+
+  .score-number {
+    font-size: 1.4rem;
+  }
+
+  .results-header h3 {
+    font-size: 1.4rem;
+  }
+
+  .results-header p {
+    font-size: 1rem;
+  }
+
+  .user-summary {
+    padding: 1.5rem;
+  }
+
+  .summary-item {
+    padding: 0.5rem 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    
+    .label {
+      font-size: 0.85rem;
+    }
+    
+    .value {
+      font-size: 0.9rem;
+    }
+  }
+
+  .interest-tag {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .user-quiz {
+    padding: 2.5rem 0.5rem;
+  }
+
+  .quiz-content {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .user-quiz h2 {
+    font-size: clamp(1.75rem, 5vw, 2rem);
+    margin-bottom: 2rem;
+  }
+
+  .expertise-card {
+    padding: 1rem 0.5rem;
+    
+    h4 {
+      font-size: 0.9rem;
+    }
+  }
+
+  .expertise-icon {
+    font-size: 2.2rem;
+  }
+
+  .form-group input {
+    padding: 0.75rem 0.875rem;
+    font-size: 0.85rem;
+  }
+
+  .option-btn {
+    padding: 0.875rem 1rem;
+    
+    .option-text {
+      font-size: 0.85rem;
+    }
+    
+    .option-letter {
+      width: 28px;
+      height: 28px;
+      font-size: 0.8rem;
+    }
+  }
+
+  .next-btn, .prev-btn, .restart-btn, .submit-btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.85rem;
+  }
+
+  .next-btn {
+    padding: 12px 24px;
+  }
+
+  .score-circle {
+    width: 80px;
+    height: 80px;
+  }
+
+  .score-number {
+    font-size: 1.2rem;
+  }
+
+  .results-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .user-summary {
+    padding: 1.25rem;
+  }
+
+  .interest-tag {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.6rem;
   }
 }
