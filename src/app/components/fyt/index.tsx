@@ -22,6 +22,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import s from './fyt.module.scss';
 import * as Scrollytelling from "~/lib/scrollytelling-client";
 import GithubLoginModal from '~/app/components/github-login-modal';
+import { UserQuiz } from '~/app/components/user-quiz';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -198,7 +199,6 @@ const HowItWorks = () => {
       }
     });
   }, []);
-
   const steps = [
     {
       icon: faGithub,
@@ -206,9 +206,9 @@ const HowItWorks = () => {
       description: "Login with your GitHub account to get started and share your developer profile."
     },
     {
-      icon: faMapMarkerAlt,
-      title: "Enable Location",
-      description: "Share your location to find developers near you. Your privacy is always protected."
+      icon: faUserPlus,
+      title: "Take Our Quiz",
+      description: "Complete our interactive quiz to help us understand your skills and interests better."
     },
     {
       icon: faSearch,
@@ -296,7 +296,7 @@ const NearbyCoders = () => {
 
   return (
     <div className={s["nearby-coders"]} ref={sectionRef}>
-      <h2 ref={titleRef}>Coders Near You</h2>
+      <h2 ref={titleRef}>Connect with Your Tribe</h2>
       
       <div className={s["search-container"]} ref={searchRef}>
         <div className={s["search-input"]}>
@@ -305,8 +305,12 @@ const NearbyCoders = () => {
         </div>
         <div className={s["filters"]}>
           <button className={s["filter-btn"]}>Filters</button>
-          <span className={s["distance-filter"]}>Distance: 10km</span>
-        </div>
+          <span className={s["distance-filter"]}>Skill Match: 95%</span>
+        </div>      </div>
+      
+      <div className={s["recommendation-banner"]}>
+        <FontAwesomeIcon icon={faLaptopCode} />
+        <p>Based on your quiz results, we've found developers with similar expertise and interests!</p>
       </div>
       
       <div className={s["coders-grid"]} ref={cardsRef}>
@@ -318,8 +322,7 @@ const NearbyCoders = () => {
               return undefined;
             }}
           >
-            <div className={s["card-header"]}>
-              <div className={s["avatar-container"]}>
+            <div className={s["card-header"]}>              <div className={s["avatar-container"]}>
                 <div className={s["avatar"]}>
                   <Image 
                     src={coder.avatar} 
@@ -328,6 +331,9 @@ const NearbyCoders = () => {
                     height={60}
                     className={s["avatar"]}
                   />
+                </div>
+                <div className={s["match-badge"]}>
+                  <span>95% Match</span>
                 </div>
               </div>
               <div className={s["name-container"]}>
@@ -523,8 +529,8 @@ export const FytSection = () => {
       <div className={s["dots"]}></div>
       <FytHero />
       <HowItWorks />
+      <UserQuiz />
       <NearbyCoders />
-      <MapSection />
       <JoinCommunity />
     </div>
   );

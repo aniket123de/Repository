@@ -365,7 +365,32 @@
       .distance-filter {
         color: rgba(255, 255, 255, 0.7);
         font-size: tovw(14px, "desktop-large", 12px);
-      }
+      }    }
+  }
+  
+  .recommendation-banner {
+    background: linear-gradient(135deg, rgba(87, 185, 194, 0.15), rgba(75, 222, 128, 0.15));
+    border: 1px solid rgba(87, 185, 194, 0.3);
+    border-radius: 16px;
+    padding: tovw(20px, "desktop-large", 16px) tovw(30px, "desktop-large", 24px);
+    margin: 0 auto tovw(40px, "desktop-large", 32px);
+    max-width: tovw(1000px, "desktop-large", 800px);
+    display: flex;
+    align-items: center;
+    gap: tovw(15px, "desktop-large", 12px);
+    backdrop-filter: blur(10px);
+    
+    svg {
+      color: #57B9C2;
+      font-size: tovw(24px, "desktop-large", 20px);
+      flex-shrink: 0;
+    }
+    
+    p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: tovw(16px, "desktop-large", 14px);
+      font-weight: 500;
     }
   }
   
@@ -407,9 +432,9 @@
       gap: tovw(15px, "desktop-large", 12px);
       align-items: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      
-      .avatar-container {
+        .avatar-container {
         overflow: hidden;
+        position: relative;
         
         .avatar {
           width: tovw(60px, "desktop-large", 50px);
@@ -423,6 +448,24 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+          }
+        }
+        
+        .match-badge {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          background: linear-gradient(135deg, #4ade80, #22c55e);
+          color: white;
+          font-size: tovw(11px, "desktop-large", 10px);
+          font-weight: 700;
+          padding: tovw(4px, "desktop-large", 3px) tovw(8px, "desktop-large", 6px);
+          border-radius: 10px;
+          box-shadow: 0 2px 8px rgba(74, 222, 128, 0.4);
+          border: 2px solid rgba(255, 255, 255, 0.2);
+          
+          span {
+            font-size: tovw(11px, "desktop-large", 10px);
           }
         }
       }
