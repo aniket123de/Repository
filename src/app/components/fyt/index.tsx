@@ -21,7 +21,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import s from './fyt.module.scss';
 import * as Scrollytelling from "~/lib/scrollytelling-client";
-import GithubLoginModal from '~/app/components/github-login-modal';
 import { UserQuiz } from '~/app/components/user-quiz';
 
 // Register GSAP plugins
@@ -497,11 +496,6 @@ const JoinCommunity = () => {
           <span>{session ? 'View My Profile' : 'Get Started Now'}</span>
         </button>
       </div>
-      
-      <GithubLoginModal 
-        isOpen={isModalOpen} 
-        onClose={handleCloseModal}
-      />
     </div>
   );
 };
