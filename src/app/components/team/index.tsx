@@ -864,25 +864,24 @@ export const TeamSection = () => {
         twitter: "https://x.com/Pranay_221",
         github: "https://github.com/heypranayy"
       }
-    }
-  ];  const campusAmbassadors = [
+    }  ];  const campusAmbassadors = [
+    {
+      name: "Aayushi Kaushik",
+      email: "33200122001@tib.edu.in",
+      linkedin: "https://www.linkedin.com/in/aayushi-kaushik-243b10251",
+      college: "Techno International Batanagar"
+    },
+    {
+      name: "Abhishek Gupta",
+      email: "itzabhi888@gmail.com",
+      linkedin: "https://github.com/ezabhishek1",
+      college: "JIS University"
+    },
     {
       name: "Arnab Mal",
       email: "arnab37686@gmail.com",
       linkedin: "https://www.linkedin.com/in/arnab-mal-a544a828b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       college: "Asansol Engineering College"
-    },
-    {
-      name: "Sattik Mondal",
-      email: "sattikmondal853@gmail.com",
-      linkedin: "https://www.linkedin.com/in/sattik-m-4b78b2298/",
-      college: "Greater Kolkata College of Engineering"
-    },
-    {
-      name: "Gourabananda Datta",
-      email: "gourabanandadattacse@gmail.com",
-      linkedin: "https://www.linkedin.com/in/gourabananda-datta-a3521a285",
-      college: "Ramkrishna Mahato Government Engineering College, Purulia"
     },
     {
       name: "Ayushman Rana",
@@ -891,10 +890,34 @@ export const TeamSection = () => {
       college: "Haldia Institute of Technology"
     },
     {
+      name: "Dhrubojyoti Saha",
+      email: "dhrubojyotisaha5@gmail.com",
+      linkedin: "https://github.com/dhrubojyotii",
+      college: "JIS College of Engineering"
+    },
+    {
+      name: "Gourabananda Datta",
+      email: "gourabanandadattacse@gmail.com",
+      linkedin: "https://www.linkedin.com/in/gourabananda-datta-a3521a285",
+      college: "Ramkrishna Mahato Government Engineering College, Purulia"
+    },
+    {
       name: "Piyush Goenka",
       email: "goenkapiyush2005@gmail.com",
       linkedin: "https://www.linkedin.com/in/piyushgoenka2005/",
       college: "Techno International New Town"
+    },
+    {
+      name: "Rahul Pradhan",
+      email: "rahulpradhancse@gmail.com",
+      linkedin: "https://www.linkedin.com/in/rahul-pradhan-56113a30b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      college: "Narula Institute of Technology"
+    },
+    {
+      name: "Rahul Singh",
+      email: "singhrahul161104@gmail.com",
+      linkedin: "https://www.linkedin.com/in/rahul-singh-a89436290",
+      college: "St. Thomas' College of Engineering and Technology"
     },
     {
       name: "Ricky Dey",
@@ -909,45 +932,22 @@ export const TeamSection = () => {
       college: "Government College of Engineering and Leather Technology"
     },
     {
+      name: "Sattik Mondal",
+      email: "sattikmondal853@gmail.com",
+      linkedin: "https://www.linkedin.com/in/sattik-m-4b78b2298/",
+      college: "Greater Kolkata College of Engineering"
+    },
+    {
       name: "Shayan Ghosh",
       email: "shayanghosh0439@gmail.com",
       linkedin: "https://www.linkedin.com/in/shayan-ghosh-0834b3271/",
       college: "Abacus Institute of Engineering and Management"
-    },    {
-      name: "Rahul Pradhan",
-      email: "rahulpradhancse@gmail.com",
-      linkedin: "https://www.linkedin.com/in/rahul-pradhan-56113a30b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-      college: "Narula Institute of Technology"
-    },
-    {
-      name: "Rahul Singh",
-      email: "singhrahul161104@gmail.com",
-      linkedin: "https://www.linkedin.com/in/rahul-singh-a89436290",
-      college: "St. Thomas' College of Engineering and Technology"
-    },
-    {
-      name: "Aayushi Kaushik",
-      email: "33200122001@tib.edu.in",
-      linkedin: "https://www.linkedin.com/in/aayushi-kaushik-243b10251",
-      college: "Techno International Batanagar"
-    },
-    {
-      name: "Dhrubojyoti Saha",
-      email: "dhrubojyotisaha5@gmail.com",
-      linkedin: "https://github.com/dhrubojyotii",
-      college: "JIS College of Engineering"
     },
     {
       name: "Souvik Saha",
       email: "sahasouvik631@gmail.com",
       linkedin: "https://github.com/souvik27-lab",
       college: "Saroj Mohan Institute of Technology"
-    },
-    {
-      name: "Abhishek Gupta",
-      email: "itzabhi888@gmail.com",
-      linkedin: "https://github.com/ezabhishek1",
-      college: "JIS University"
     }
   ];
   return (
