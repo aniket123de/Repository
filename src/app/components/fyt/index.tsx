@@ -71,20 +71,10 @@ const nearbyCodersData = [
 
 // FYT Hero Section
 const FytHero = () => {
-  const { data: session } = useSession();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
-  const loginButtonRef = useRef<HTMLButtonElement>(null);
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+  const decorationsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -94,9 +84,7 @@ const FytHero = () => {
         end: "bottom 20%",
         toggleActions: "play none none reverse"
       }
-    });
-
-    tl.fromTo(
+    });    tl.fromTo(
       titleRef.current,
       { y: 50, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
@@ -108,9 +96,9 @@ const FytHero = () => {
       "-=0.6"
     )
     .fromTo(
-      loginButtonRef.current,
+      decorationsRef.current,
       { y: 20, opacity: 0, scale: 0.9 },
-      { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" },
+      { y: 0, opacity: 1, scale: 1, duration: 1, ease: "back.out(1.4)" },
       "-=0.4"
     );
   }, []);
@@ -136,27 +124,24 @@ const FytHero = () => {
 
         <h1 className={s["hero-title"]} ref={titleRef}>
           Find Your Tribe
-        </h1>
-          <p className={s["hero-description"]} ref={descriptionRef}>
+        </h1>        <p className={s["hero-description"]} ref={descriptionRef}>
           Connect with passionate coders in your area, collaborate on projects,
           and build a community of like-minded developers. Your next hackathon
           partner might be just around the corner!
-        </p>
-        
-        <button 
-          className={s["github-login-btn"]} 
-          ref={loginButtonRef} 
-          onClick={handleOpenModal}
-        >
-          <FontAwesomeIcon icon={faGithub} className={s["btn-icon"]} />
-          <span>{session ? 'My Profile' : 'Login with GitHub'}</span>
-        </button>
+        </p>        <div className={s["hero-decorations"]} ref={decorationsRef}>
+          <div className={s["connecting-dots"]}>
+            <div className={s["dot"]}></div>
+            <div className={s["line"]}></div>
+            <div className={s["dot"]}></div>
+            <div className={s["line"]}></div>
+            <div className={s["dot"]}></div>
+            <div className={s["line"]}></div>
+            <div className={s["dot"]}></div>
+            <div className={s["line"]}></div>
+            <div className={s["dot"]}></div>
+          </div>
+        </div>
       </div>
-      
-      <GithubLoginModal 
-        isOpen={isModalOpen} 
-        onClose={handleCloseModal} 
-      />
     </div>
   );
 };
@@ -528,8 +513,8 @@ export const FytSection = () => {
       <div className={s["floating-particles"]}></div>
       <div className={s["dots"]}></div>
       <FytHero />
-      <HowItWorks />
       <UserQuiz />
+      <HowItWorks />
       <NearbyCoders />
       <JoinCommunity />
     </div>
