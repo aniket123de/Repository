@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faBinoculars, 
@@ -16,7 +15,7 @@ import {
   faUser,
   faEnvelope
 } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import s from './fyt.module.scss';
@@ -363,6 +362,18 @@ const NearbyCoders = () => {
                     <span>LinkedIn</span>
                   </a>
                 )}
+                {coder.github && (
+                  <a 
+                    href={coder.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={s["github-btn"]}
+                    title="View GitHub Profile"
+                  >
+                    <FontAwesomeIcon icon={faGithub} />
+                    <span>GitHub</span>
+                  </a>
+                )}
               </div>
             </div>
           ))
@@ -375,8 +386,7 @@ const NearbyCoders = () => {
 
 // Join Community Section
 const JoinCommunity = () => {
-  const { data: session } = useSession();
-  const sectionRef = useRef<HTMLDivElement>(null);  const contentRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);const contentRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const tl = gsap.timeline({
@@ -416,12 +426,11 @@ const JoinCommunity = () => {
           Connect with like-minded developers, build your network, and find 
           collaborators for your next big project. The tech community is 
           waiting for you!
-        </p>        <Link href="/fyt">
-          <button 
+        </p>        <Link href="/fyt">          <button 
             className={s["community-btn"]}
           >
             <FontAwesomeIcon icon={faUsers} className={s["btn-icon"]} />
-            <span>{session ? 'View My Profile' : 'Get Started Now'}</span>
+            <span>Get Started Now</span>
           </button>
         </Link>
       </div>

@@ -16,7 +16,7 @@ import {
   faDesktop,
   faChartLine
 } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedin as faLinkedinBrand } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin as faLinkedinBrand, faGithub } from '@fortawesome/free-brands-svg-icons';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import s from './user-quiz.module.scss';
@@ -30,6 +30,7 @@ interface UserData {
   name: string;
   email: string;
   linkedin: string;
+  github: string;
   expertise: 'webdev' | 'appdev' | 'blockchain' | 'aiml' | '';
 }
 
@@ -143,13 +144,13 @@ const expertiseLabels = {
 };
 
 export const UserQuiz = () => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [userData, setUserData] = useState<UserData>({
+  const [currentStep, setCurrentStep] = useState(0);  const [userData, setUserData] = useState<UserData>({
     name: '',
     email: '',
     linkedin: '',
+    github: '',
     expertise: ''
-  });  const [currentQuestion, setCurrentQuestion] = useState(0);
+  });const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);  const [allAnswers, setAllAnswers] = useState<Record<number, number[]>>({});
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [showResults, setShowResults] = useState(false);
@@ -246,11 +247,11 @@ export const UserQuiz = () => {
     
     try {
       // Prepare the profile data
-      const profileData = {
-        personalInfo: {
+      const profileData = {        personalInfo: {
           name: userData.name,
           email: userData.email,
           linkedin: userData.linkedin,
+          github: userData.github,
           expertise: userData.expertise
         },
         interests: allAnswers,
@@ -291,11 +292,11 @@ export const UserQuiz = () => {
   };
 
   const resetQuiz = () => {
-    setCurrentStep(0);
-    setUserData({
+    setCurrentStep(0);    setUserData({
       name: '',
       email: '',
       linkedin: '',
+      github: '',
       expertise: ''
     });
     setCurrentQuestion(0);
@@ -307,7 +308,7 @@ export const UserQuiz = () => {
     setIsSubmitted(false);
   };
 
-  const isStep0Valid = userData.name && userData.email && userData.linkedin;
+  const isStep0Valid = userData.name && userData.email && userData.linkedin; // Made github optional temporarily
   const isStep1Valid = userData.expertise;
 
   const renderPersonalInfo = () => (
@@ -345,9 +346,7 @@ export const UserQuiz = () => {
           placeholder="Enter your email address"
           required
         />
-      </div>
-
-      <div className={s["form-group"]}>
+      </div>      <div className={s["form-group"]}>
         <label htmlFor="linkedin">
           <FontAwesomeIcon icon={faLinkedinBrand} />
           LinkedIn Profile
@@ -360,7 +359,19 @@ export const UserQuiz = () => {
           placeholder="https://linkedin.com/in/your-profile"
           required
         />
-      </div>      <button 
+      </div>      <div className={s["form-group"]}>
+        <label htmlFor="github">
+          <FontAwesomeIcon icon={faGithub} />
+          GitHub Profile (Optional)
+        </label>
+        <input
+          id="github"
+          type="url"
+          value={userData.github}
+          onChange={(e) => handleInputChange('github', e.target.value)}
+          placeholder="https://github.com/your-username"
+        />
+      </div><button 
         className={s["next-btn"]}
         onClick={handleNextStep}
         disabled={!isStep0Valid}
@@ -476,10 +487,15 @@ export const UserQuiz = () => {
               <div className={s["summary-item"]}>
                 <span className={s["label"]}>Email:</span>
                 <span className={s["value"]}>{userData.email}</span>
-              </div>
-              <div className={s["summary-item"]}>
+              </div>              <div className={s["summary-item"]}>
                 <span className={s["label"]}>LinkedIn:</span>
                 <a href={userData.linkedin} target="_blank" rel="noopener noreferrer" className={s["value"]}>
+                  View Profile
+                </a>
+              </div>
+              <div className={s["summary-item"]}>
+                <span className={s["label"]}>GitHub:</span>
+                <a href={userData.github} target="_blank" rel="noopener noreferrer" className={s["value"]}>
                   View Profile
                 </a>
               </div>

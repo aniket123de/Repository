@@ -947,7 +947,7 @@
         flex-direction: column;
       }
       
-      .email-btn, .linkedin-btn {
+      .email-btn, .linkedin-btn, .github-btn {
         flex: 1;
         padding: tovw(14px, "desktop-large", 12px) tovw(20px, "desktop-large", 16px);
         border-radius: 12px;
@@ -1066,8 +1066,7 @@
           box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
         }
       }
-      
-      .linkedin-btn {
+        .linkedin-btn {
         background: linear-gradient(135deg, #0077b5, #005885);
         border: none;
         color: white;
@@ -1075,6 +1074,17 @@
         &:hover {
           background: linear-gradient(135deg, #005885, #004266);
           box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
+        }
+      }
+      
+      .github-btn {
+        background: linear-gradient(135deg, #333, #24292e);
+        border: none;
+        color: white;
+        
+        &:hover {
+          background: linear-gradient(135deg, #24292e, #1b1f23);
+          box-shadow: 0 8px 25px rgba(36, 41, 46, 0.4);
         }
       }
     }

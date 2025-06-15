@@ -3,9 +3,8 @@
 import React from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt, faCode, faLaptop, faBook, faUsers, faUserPlus, faSignOutAlt, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { signOut } from 'next-auth/react';
+import { faMapMarkerAlt, faCode, faLaptop, faBook, faUsers, faUserPlus, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import styles from './user-profile-card.module.scss';
 
 type UserProfileCardProps = {
@@ -13,6 +12,7 @@ type UserProfileCardProps = {
     name: string;
     email?: string;
     linkedin?: string;
+    github?: string;
     bio?: string;
     stats?: {
       repos: number;
@@ -27,13 +27,6 @@ type UserProfileCardProps = {
 };
 
 const UserProfileCard = ({ user, onClose }: UserProfileCardProps) => {
-  const handleLogout = async () => {
-    await signOut({ redirect: false });
-    if (onClose) {
-      onClose();
-    }
-  };
-
   return (    <div className={styles.card}>
       <div className={styles.header}>
         <div className={styles.profileIcon}>
@@ -42,13 +35,6 @@ const UserProfileCard = ({ user, onClose }: UserProfileCardProps) => {
         <div className={styles.userInfo}>
           <h2>{user.name}</h2>
         </div>
-        <button 
-          className={styles.logoutButton} 
-          onClick={handleLogout}
-          title="Logout"
-        >
-          <FontAwesomeIcon icon={faSignOutAlt} />
-        </button>
       </div>
 
       {user.bio && (
@@ -126,6 +112,18 @@ const UserProfileCard = ({ user, onClose }: UserProfileCardProps) => {
           >
             <FontAwesomeIcon icon={faLinkedin} />
             <span>LinkedIn</span>
+          </a>
+        )}
+        {user.github && (
+          <a 
+            href={user.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.githubButton}
+            title="View GitHub Profile"
+          >
+            <FontAwesomeIcon icon={faGithub} />
+            <span>GitHub</span>
           </a>
         )}
       </div>

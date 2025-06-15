@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS user_profiles (
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     linkedin VARCHAR(500),
+    github VARCHAR(500),
     expertise VARCHAR(50) NOT NULL CHECK (expertise IN ('webdev', 'appdev', 'blockchain', 'aiml')),
     interests JSONB,
     interest_details JSONB,
@@ -19,6 +20,9 @@ ALTER TABLE user_profiles DROP COLUMN IF EXISTS location;
 ALTER TABLE user_profiles DROP COLUMN IF EXISTS avatar_url;
 ALTER TABLE user_profiles DROP COLUMN IF EXISTS distance;
 
+-- Add GitHub column for existing installations
+ALTER TABLE user_profiles ADD COLUMN IF NOT EXISTS github VARCHAR(500);
+
 -- Drop unwanted indexes if they exist
 DROP INDEX IF EXISTS idx_user_profiles_username;
 
@@ -28,6 +32,7 @@ CREATE INDEX IF NOT EXISTS idx_user_profiles_expertise ON user_profiles(expertis
 CREATE INDEX IF NOT EXISTS idx_user_profiles_skills ON user_profiles USING GIN(skills);
 CREATE INDEX IF NOT EXISTS idx_user_profiles_interest_details ON user_profiles USING GIN(interest_details);
 CREATE INDEX IF NOT EXISTS idx_user_profiles_name ON user_profiles(name);
+CREATE INDEX IF NOT EXISTS idx_user_profiles_github ON user_profiles(github);
 CREATE INDEX IF NOT EXISTS idx_user_profiles_bio ON user_profiles USING GIN(to_tsvector('english', bio));
 CREATE INDEX IF NOT EXISTS idx_user_profiles_created_at ON user_profiles(created_at);
 

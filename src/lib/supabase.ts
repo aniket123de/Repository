@@ -28,6 +28,7 @@ export interface UserProfile {
   name: string;
   email?: string;
   linkedin?: string;
+  github?: string;
   expertise?: 'webdev' | 'appdev' | 'blockchain' | 'aiml';
   interests?: Record<number, number[]> | string[];
   interest_details?: Array<{

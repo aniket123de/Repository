@@ -385,7 +385,7 @@
   
   @media (max-width: 480px) {
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
   
   a {
@@ -407,27 +407,27 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     min-height: 48px; // Minimum touch target
     touch-action: manipulation;
-    
-    @media (max-width: 768px) {
-      padding: 12px 16px;
+      @media (max-width: 768px) {
+      padding: 12px 18px;
       font-size: 0.9rem;
       gap: 6px;
       min-height: 44px;
     }
     
     @media (max-width: 480px) {
-      padding: 10px 14px;
+      padding: 12px 16px;
       font-size: 0.85rem;
-      gap: 5px;
+      gap: 6px;
       min-height: 42px;
       border-radius: 10px;
       width: 100%;
     }
     
     @media (max-width: 360px) {
-      padding: 8px 12px;
+      padding: 10px 14px;
       font-size: 0.8rem;
       min-height: 40px;
+      white-space: nowrap;
     }
     
     &::before {
@@ -457,10 +457,10 @@
         font-size: 0.85rem;
       }
     }
-    
-    span {
+      span {
       font-weight: 600;
       letter-spacing: 0.5px;
+      white-space: nowrap;
       
       @media (max-width: 480px) {
         letter-spacing: 0.3px;
@@ -531,6 +531,28 @@
     &:hover {
       background: linear-gradient(135deg, #005885, #004266);
       box-shadow: 0 4px 15px rgba(0, 119, 181, 0.25);
+    }
+  }
+}
+
+.githubButton {
+  background: linear-gradient(135deg, #333, #24292e);
+  color: #ffffff;
+  border: none;
+  
+  &:hover {
+    background: linear-gradient(135deg, #24292e, #1b1f23);
+    box-shadow: 0 8px 25px rgba(36, 41, 46, 0.4);
+    
+    @media (max-width: 768px) {
+      box-shadow: 0 6px 20px rgba(36, 41, 46, 0.3);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    &:hover {
+      background: linear-gradient(135deg, #24292e, #1b1f23);
+      box-shadow: 0 4px 15px rgba(36, 41, 46, 0.25);
     }
   }
 }

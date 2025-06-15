@@ -39,8 +39,13 @@ export async function GET(request: NextRequest) {
 
     if (error) {
       console.error('Supabase error:', error);
+      // Return a more detailed error for debugging
       return NextResponse.json(
-        { error: 'Failed to fetch users' },
+        { 
+          error: 'Failed to fetch users', 
+          details: error.message,
+          hint: error.hint || 'Check if all required columns exist in the database'
+        },
         { status: 500 }
       );
     }
@@ -67,6 +72,7 @@ export async function GET(request: NextRequest) {
       name: user.name,
       email: user.email,
       linkedin: user.linkedin,
+      github: user.github || null, // Handle missing github column gracefully
       expertise: user.expertise,
       skills: user.skills || [],
       interests: user.interest_details ? extractInterestsFromDetails(user.interest_details) : [],
@@ -104,11 +110,14 @@ export async function GET(request: NextRequest) {
         hasMore: isSearchQuery ? false : (count || 0) > offset + limit
       }
     });
-
   } catch (error) {
     console.error('API error:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { 
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error',
+        hint: 'Check server logs for more details'
+      },
       { status: 500 }
     );
   }
