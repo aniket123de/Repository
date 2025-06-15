@@ -878,6 +878,12 @@ export const TeamSection = () => {
       college: "JIS University"
     },
     {
+      name: "Arunima Dutta",
+      email: "arunima.dutta@example.com",
+      linkedin: "https://www.linkedin.com/in/arunima-dutta",
+      college: "Heritage Institute of Technology"
+    },
+    {
       name: "Arnab Mal",
       email: "arnab37686@gmail.com",
       linkedin: "https://www.linkedin.com/in/arnab-mal-a544a828b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
@@ -888,6 +894,12 @@ export const TeamSection = () => {
       email: "ayushmanrana81@gmail.com",
       linkedin: "https://www.linkedin.com/in/ayushman-rana-1478b32a5/",
       college: "Haldia Institute of Technology"
+    },
+    {
+      name: "Debangshu Chatterjee",
+      email: "debangshu.chatterjee@example.com",
+      linkedin: "https://www.linkedin.com/in/debangshu-chatterjee",
+      college: "Institute of Engineering and Management"
     },
     {
       name: "Dhrubojyoti Saha",
@@ -924,6 +936,12 @@ export const TeamSection = () => {
       email: "deyricky36@gmail.com",
       linkedin: "https://www.linkedin.com/in/ricky-dey-a49726206/",
       college: "Techno International New Town"
+    },
+    {
+      name: "Rimanshu Patel",
+      email: "rimanshu.patel@example.com",
+      linkedin: "https://www.linkedin.com/in/rimanshu-patel",
+      college: "Techno India University"
     },
     {
       name: "Rupsa Das",
