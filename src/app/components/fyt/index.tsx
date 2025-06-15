@@ -481,7 +481,7 @@ const NearbyCoders = () => {
       
       <div className={s["recommendation-banner"]}>
         <FontAwesomeIcon icon={faLaptopCode} />
-        <p>Based on your quiz results, we&apos;ve found developers with similar expertise and interests!</p>
+        <p>Discover Developers who share your vision and can help you build an amazing Team</p>
       </div>        <div className={s["coders-grid"]} ref={cardsRef}>
         {isLoading ? (
           <div className={s["loading-state"]}>
