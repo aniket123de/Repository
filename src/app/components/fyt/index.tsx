@@ -13,7 +13,10 @@ import {
   faUserPlus,
   faSearch,
   faUser,
-  faEnvelope
+  faEnvelope,
+  faFilter,
+  faTimes,
+  faChevronDown
 } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import gsap from 'gsap';
@@ -188,7 +191,113 @@ const HowItWorks = () => {
 // Nearby Coders Component
 const NearbyCoders = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const { users: coders, isLoading, error, searchUsers } = useUserSearch();
+  const [showFilters, setShowFilters] = useState(false);
+  const [activeFilters, setActiveFilters] = useState({
+    expertise: [] as string[],
+    skills: [] as string[],
+    hasLinkedIn: false,
+    hasGitHub: false,
+  });
+  const { users: allCoders, isLoading, error, searchUsers } = useUserSearch();
+  
+  // Filter coders based on active filters
+  const filteredCoders = React.useMemo(() => {
+    if (!allCoders) return [];
+    
+    return allCoders.filter(coder => {
+      // Expertise filter
+      if (activeFilters.expertise.length > 0 && 
+          !activeFilters.expertise.includes(coder.expertise || '')) {
+        return false;
+      }
+      
+      // Skills filter
+      if (activeFilters.skills.length > 0) {
+        const coderSkills = (coder.skills || []).map(skill => skill.toLowerCase());
+        const hasMatchingSkill = activeFilters.skills.some(filterSkill => 
+          coderSkills.some(skill => skill.includes(filterSkill.toLowerCase()))
+        );
+        if (!hasMatchingSkill) return false;
+      }
+      
+      // LinkedIn filter
+      if (activeFilters.hasLinkedIn && !coder.linkedin) {
+        return false;
+      }
+      
+      // GitHub filter
+      if (activeFilters.hasGitHub && !coder.github) {
+        return false;
+      }
+      
+      return true;
+    });
+  }, [allCoders, activeFilters]);
+  
+  const coders = filteredCoders;
+  
+  // Handle filter changes
+  const toggleFilter = (category: keyof typeof activeFilters, value: string | boolean) => {
+    setActiveFilters(prev => {
+      if (category === 'hasLinkedIn' || category === 'hasGitHub') {
+        return { ...prev, [category]: !prev[category] };
+      } else {
+        const currentFilters = prev[category] as string[];
+        const newFilters = currentFilters.includes(value as string)
+          ? currentFilters.filter(f => f !== value)
+          : [...currentFilters, value as string];
+        return { ...prev, [category]: newFilters };
+      }
+    });
+  };
+  
+  const clearAllFilters = () => {
+    setActiveFilters({
+      expertise: [],
+      skills: [],
+      hasLinkedIn: false,
+      hasGitHub: false,
+    });
+  };
+  
+  const hasActiveFilters = Object.values(activeFilters).some(filter => 
+    Array.isArray(filter) ? filter.length > 0 : filter
+  );
+  
+  // Get unique values for filter options
+  const availableExpertise = React.useMemo(() => {
+    const expertiseSet = new Set<string>();
+    allCoders?.forEach(coder => {
+      if (coder.expertise) expertiseSet.add(coder.expertise);
+    });
+    return Array.from(expertiseSet);
+  }, [allCoders]);
+    const availableSkills = React.useMemo(() => {
+    const skillsSet = new Set<string>();
+    allCoders?.forEach(coder => {
+      (coder.skills || []).forEach(skill => skillsSet.add(skill));
+    });
+    return Array.from(skillsSet).slice(0, 20); // Limit to top 20 skills
+  }, [allCoders]);
+  
+  const filterDropdownRef = useRef<HTMLDivElement>(null);
+  
+  // Close filter panel when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (filterDropdownRef.current && !filterDropdownRef.current.contains(event.target as Node)) {
+        setShowFilters(false);
+      }
+    };
+    
+    if (showFilters) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showFilters]);
   
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -273,7 +382,97 @@ const NearbyCoders = () => {
             onChange={handleSearch}
           />
         </div>        <div className={s["filters"]}>
-          <button className={s["filter-btn"]}>Filters</button>
+          <div className={s["filter-dropdown"]} ref={filterDropdownRef}>
+            <button 
+              className={`${s["filter-btn"]} ${hasActiveFilters ? s["active"] : ""}`}
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              <FontAwesomeIcon icon={faFilter} />
+              <span>Filters</span>
+              {hasActiveFilters && <span className={s["filter-count"]}>{
+                (activeFilters.expertise.length + activeFilters.skills.length + 
+                 (activeFilters.hasLinkedIn ? 1 : 0) + (activeFilters.hasGitHub ? 1 : 0))
+              }</span>}
+              <FontAwesomeIcon icon={faChevronDown} className={`${s["dropdown-icon"]} ${showFilters ? s["open"] : ""}`} />
+            </button>
+            
+            {showFilters && (
+              <div className={s["filter-panel"]}>
+                <div className={s["filter-header"]}>
+                  <h4>Filter Developers</h4>
+                  {hasActiveFilters && (
+                    <button onClick={clearAllFilters} className={s["clear-filters"]}>
+                      <FontAwesomeIcon icon={faTimes} />
+                      Clear All
+                    </button>
+                  )}
+                </div>
+                
+                <div className={s["filter-section"]}>
+                  <h5>Expertise</h5>
+                  <div className={s["filter-options"]}>
+                    {availableExpertise.map(expertise => (
+                      <label key={expertise} className={s["filter-option"]}>
+                        <input
+                          type="checkbox"
+                          checked={activeFilters.expertise.includes(expertise)}
+                          onChange={() => toggleFilter('expertise', expertise)}
+                        />
+                        <span className={s["checkmark"]}></span>
+                        <span className={s["option-text"]}>
+                          {expertise === 'webdev' ? 'Web Development' :
+                           expertise === 'appdev' ? 'App Development' :
+                           expertise === 'blockchain' ? 'Blockchain' :
+                           expertise === 'aiml' ? 'AI/ML' : expertise}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className={s["filter-section"]}>
+                  <h5>Skills</h5>
+                  <div className={s["filter-options"]}>
+                    {availableSkills.slice(0, 10).map(skill => (
+                      <label key={skill} className={s["filter-option"]}>
+                        <input
+                          type="checkbox"
+                          checked={activeFilters.skills.includes(skill)}
+                          onChange={() => toggleFilter('skills', skill)}
+                        />
+                        <span className={s["checkmark"]}></span>
+                        <span className={s["option-text"]}>{skill}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className={s["filter-section"]}>
+                  <h5>Profile Links</h5>
+                  <div className={s["filter-options"]}>
+                    <label className={s["filter-option"]}>
+                      <input
+                        type="checkbox"
+                        checked={activeFilters.hasLinkedIn}
+                        onChange={() => toggleFilter('hasLinkedIn', true)}
+                      />
+                      <span className={s["checkmark"]}></span>
+                      <span className={s["option-text"]}>Has LinkedIn</span>
+                    </label>
+                    <label className={s["filter-option"]}>
+                      <input
+                        type="checkbox"
+                        checked={activeFilters.hasGitHub}
+                        onChange={() => toggleFilter('hasGitHub', true)}
+                      />
+                      <span className={s["checkmark"]}></span>
+                      <span className={s["option-text"]}>Has GitHub</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
           <span className={s["distance-filter"]}>
             {isLoading ? 'Searching...' : error ? 'Search error' : `${coders.length} results`}
           </span>
