@@ -298,82 +298,105 @@ const NearbyCoders = () => {
             <FontAwesomeIcon icon={faUsers} className={s["empty-icon"]} />
             <h3>No developers found</h3>
             <p>Be the first to join the community! Fill out the quiz above to connect with like-minded developers.</p>
-          </div>
-        ) : (
-          coders.map((coder, index) => (
-            <div 
+          </div>        ) : (
+          coders.map((coder, index) => (            <div 
               key={coder.id} 
               className={s["coder-card"]}
               ref={(el) => {
                 cardRefs.current[index] = el;
                 return undefined;
               }}
-            >              <div className={s["card-header"]}>
-                <div className={s["name-container"]}>
-                  <div className={s["profile-icon"]}>
-                    <FontAwesomeIcon icon={faUser} />
+            >
+              <div className={s["card-header"]}>
+                <div className={s["profile-section"]}>
+                  <div className={s["profile-avatar"]}>
+                    <div className={s["avatar-inner"]}>
+                      <FontAwesomeIcon icon={faUser} />
+                    </div>
+                    <div className={s["status-indicator"]}></div>
                   </div>
-                  <h3>{coder.name}</h3>
+                  <div className={s["profile-info"]}>
+                    <h3 className={s["coder-name"]}>{coder.name}</h3>
+                  </div>
                 </div>
               </div>
               
               <div className={s["card-body"]}>
-                <div className={s["skills-section"]}>
-                  <h4>
-                    <FontAwesomeIcon icon={faCode} />
-                    <span>Skills</span>
-                  </h4>                  <div className={s["tags"]}>
-                    {(coder.skills || []).map((skill, i) => (
-                      <span key={i} className={s["tag"]}>{skill}</span>
-                    ))}
+                <div className={s["info-section"]}>
+                  <div className={s["skills-container"]}>
+                    <div className={s["skills-grid"]}>
+                      {(coder.skills || []).slice(0, 6).map((skill, i) => (
+                        <span key={i} className={s["skill-badge"]}>{skill}</span>
+                      ))}
+                      {(coder.skills || []).length > 6 && (
+                        <span className={s["skill-badge"]} data-more>+{(coder.skills || []).length - 6} more</span>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div className={s["interests-container"]}>
+                    <div className={s["section-header"]}>
+                      <FontAwesomeIcon icon={faLaptopCode} className={s["section-icon"]} />
+                      <h4>Interests & Focus</h4>
+                    </div>
+                    <div className={s["interests-grid"]}>
+                      {(Array.isArray(coder.interests) ? coder.interests : []).slice(0, 4).map((interest: string, i: number) => (
+                        <span key={i} className={s["interest-tag"]}>{interest}</span>
+                      ))}
+                      {(Array.isArray(coder.interests) ? coder.interests : []).length > 4 && (
+                        <span className={s["interest-tag"]} data-more>+{(Array.isArray(coder.interests) ? coder.interests : []).length - 4}</span>
+                      )}
+                    </div>
                   </div>
                 </div>
-                
-                <div className={s["interests-section"]}>
-                  <h4>
-                    <FontAwesomeIcon icon={faLaptopCode} />
-                    <span>Interests</span>
-                  </h4>                  <div className={s["tags"]}>
-                    {(Array.isArray(coder.interests) ? coder.interests : []).map((interest: string, i: number) => (
-                      <span key={i} className={s["tag"]}>{interest}</span>
-                    ))}
-                  </div>
+              </div>
+
+              <div className={s["card-footer"]}>
+                <div className={s["social-actions"]}>
+                  {coder.email && (
+                    <a 
+                      href={`mailto:${coder.email}`}
+                      className={`${s["social-btn"]} ${s["email-btn"]}`}
+                      title="Send Email"
+                    >
+                      <div className={s["btn-icon"]}>
+                        <FontAwesomeIcon icon={faEnvelope} />
+                      </div>
+                      <span className={s["btn-text"]}>Send E-Mail</span>
+                      <div className={s["btn-shine"]}></div>
+                    </a>
+                  )}
+                  {coder.linkedin && (
+                    <a 
+                      href={coder.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${s["social-btn"]} ${s["linkedin-btn"]}`}
+                      title="View LinkedIn Profile"
+                    >
+                      <div className={s["btn-icon"]}>
+                        <FontAwesomeIcon icon={faLinkedin} />
+                      </div>
+                      <span className={s["btn-text"]}>LinkedIn Profile</span>
+                      <div className={s["btn-shine"]}></div>
+                    </a>
+                  )}
+                  {coder.github && (
+                    <a 
+                      href={coder.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${s["social-btn"]} ${s["github-btn"]}`}
+                      title="View GitHub Profile"
+                    >
+                      <div className={s["btn-icon"]}>
+                        <FontAwesomeIcon icon={faGithub} />
+                      </div>
+                      <span className={s["btn-text"]}>GitHub Profile</span>
+                      <div className={s["btn-shine"]}></div>
+                    </a>
+                  )}
                 </div>
-              </div>              <div className={s["card-actions"]}>
-                {coder.email && (
-                  <a 
-                    href={`mailto:${coder.email}`}
-                    className={s["email-btn"]}
-                    title="Send Email"
-                  >
-                    <FontAwesomeIcon icon={faEnvelope} />
-                    <span>Email</span>
-                  </a>
-                )}
-                {coder.linkedin && (
-                  <a 
-                    href={coder.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={s["linkedin-btn"]}
-                    title="View LinkedIn Profile"
-                  >
-                    <FontAwesomeIcon icon={faLinkedin} />
-                    <span>LinkedIn</span>
-                  </a>
-                )}
-                {coder.github && (
-                  <a 
-                    href={coder.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={s["github-btn"]}
-                    title="View GitHub Profile"
-                  >
-                    <FontAwesomeIcon icon={faGithub} />
-                    <span>GitHub</span>
-                  </a>
-                )}
               </div>
             </div>
           ))
