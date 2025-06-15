@@ -26,6 +26,29 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+// Custom hook for responsive text
+const useResponsiveText = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 380);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  return isMobile;
+};
+
+// Register GSAP plugins
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 interface UserData {
   name: string;
   email: string;
@@ -144,7 +167,8 @@ const expertiseLabels = {
 };
 
 export const UserQuiz = () => {
-  const [currentStep, setCurrentStep] = useState(0);  const [userData, setUserData] = useState<UserData>({
+  const isMobile = useResponsiveText();
+  const [currentStep, setCurrentStep] = useState(0);const [userData, setUserData] = useState<UserData>({
     name: '',
     email: '',
     linkedin: '',
@@ -621,8 +645,7 @@ export const UserQuiz = () => {
     <div className={s["user-quiz"]} ref={sectionRef}>
       <h2 ref={titleRef}>Get to Know You Better</h2>
       
-      <div className={s["quiz-content"]} ref={contentRef}>
-        <div className={s["step-indicator"]}>
+      <div className={s["quiz-content"]} ref={contentRef}>        <div className={s["step-indicator"]}>
           <div className={`${s["step"]} ${currentStep >= 0 ? s["active"] : ''} ${currentStep > 0 ? s["completed"] : ''}`}>
             <span>1</span>
             Personal Info
@@ -630,9 +653,10 @@ export const UserQuiz = () => {
           <div className={`${s["step"]} ${currentStep >= 1 ? s["active"] : ''} ${currentStep > 1 ? s["completed"] : ''}`}>
             <span>2</span>
             Expertise
-          </div>          <div className={`${s["step"]} ${currentStep >= 2 ? s["active"] : ''}`}>
+          </div>          
+          <div className={`${s["step"]} ${currentStep >= 2 ? s["active"] : ''}`}>
             <span>3</span>
-            Interest Assessment
+            {isMobile ? 'Interests' : 'Interest Assessment'}
           </div>
         </div>
 
