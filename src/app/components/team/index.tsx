@@ -878,6 +878,18 @@ export const TeamSection = () => {
       college: "JIS University"
     },
     {
+      name: "Ananya Kar",
+      email: "ananyakar8900@gmail.com",
+      linkedin: "https://www.linkedin.com/in/ananya-kar01?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      college: "Guru Nanak Institute of Technology"
+    },
+    {
+      name: "Arpan Mitra",
+      email: "arpannghss@gmail.com",
+      linkedin: "https://www.linkedin.com/in/arpan-mitra-170231336?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      college: "Netaji Subhash Engineering College"
+    },
+    {
       name: "Arunima Dutta",
       email: "arunima.dutta@example.com",
       linkedin: "https://www.linkedin.com/in/arunima-dutta",
