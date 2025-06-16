@@ -474,7 +474,7 @@ const NearbyCoders = () => {
             )}
           </div>
           <span className={s["distance-filter"]}>
-            {isLoading ? 'Searching...' : error ? 'Search error' : `${coders.length} results`}
+            {isLoading ? 'Searching...' : error ? 'Search error' : `Total ${coders.length} Developers`}
           </span>
         </div>
       </div>
@@ -498,7 +498,7 @@ const NearbyCoders = () => {
             <h3>No developers found</h3>
             <p>Be the first to join the community! Fill out the quiz above to connect with like-minded developers.</p>
           </div>        ) : (
-          coders.map((coder, index) => (            <div 
+          coders.slice(0, 6).map((coder, index) => (<div 
               key={coder.id} 
               className={s["coder-card"]}
               ref={(el) => {
