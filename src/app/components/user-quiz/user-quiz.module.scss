@@ -694,6 +694,18 @@
 
 .results-header {
   margin-bottom: 3rem;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 2.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 2rem;
+  }
+  
+  @media (max-width: 360px) {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .score-circle {
@@ -706,6 +718,7 @@
   justify-content: center;
   margin: 0 auto 2rem;
   position: relative;
+  transition: all 0.3s ease;
 
   &::before {
     content: '';
@@ -717,6 +730,59 @@
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.8);
   }
+  
+  @media (max-width: 768px) {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1.5rem;
+    
+    &::before {
+      top: 3px;
+      left: 3px;
+      right: 3px;
+      bottom: 3px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    width: 85px;
+    height: 85px;
+    margin-bottom: 1.25rem;
+    
+    &::before {
+      top: 3px;
+      left: 3px;
+      right: 3px;
+      bottom: 3px;
+    }
+  }
+  
+  @media (max-width: 360px) {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 1rem;
+    
+    &::before {
+      top: 2px;
+      left: 2px;
+      right: 2px;
+      bottom: 2px;
+    }
+  }
+  
+  // Alternative badge shape for very small screens
+  @media (max-width: 320px) {
+    width: auto;
+    height: auto;
+    min-width: 100px;
+    border-radius: 25px;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, #57B9C2 0%, #4ade80 100%);
+    
+    &::before {
+      display: none;
+    }
+  }
 }
 
 .score-content {
@@ -725,12 +791,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.125rem;
+  
+  @media (max-width: 320px) {
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .score-number {
   font-size: 2rem;
   font-weight: 800;
   color: var(--color-white);
+  line-height: 1;
+  
+  @media (max-width: 768px) {
+    font-size: 1.75rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
+  
+  @media (max-width: 360px) {
+    font-size: 1.25rem;
+  }
+  
+  @media (max-width: 320px) {
+    font-size: 1.1rem;
+    margin-right: 0.25rem;
+  }
 }
 
 .score-label {
@@ -738,6 +830,29 @@
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 1px;
+  line-height: 1;
+  white-space: nowrap;
+  
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    letter-spacing: 0.8px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+    letter-spacing: 0.6px;
+  }
+  
+  @media (max-width: 360px) {
+    font-size: 0.65rem;
+    letter-spacing: 0.5px;
+  }
+  
+  @media (max-width: 320px) {
+    font-size: 0.6rem;
+    letter-spacing: 0.4px;
+    text-transform: capitalize;
+  }
 }
 
 .results-header h3 {
@@ -745,12 +860,54 @@
   font-weight: 700;
   color: var(--color-white);
   margin-bottom: 1rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1.75rem;
+    margin-bottom: 0.875rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  @media (max-width: 360px) {
+    font-size: 1.25rem;
+    margin-bottom: 0.625rem;
+  }
+  
+  @media (max-width: 320px) {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
 }
 
 .results-header p {
   color: rgba(255, 255, 255, 0.7);
   font-size: 1.1rem;
   line-height: 1.6;
+  padding: 0 1rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 0 0.75rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+    line-height: 1.5;
+  }
+  
+  @media (max-width: 360px) {
+    font-size: 0.85rem;
+    padding: 0 0.25rem;
+  }
+  
+  @media (max-width: 320px) {
+    font-size: 0.8rem;
+    padding: 0;
+  }
 }
 
 .user-summary {
@@ -1310,23 +1467,12 @@
   .form-header p {
     font-size: 1rem;
   }
-
   .question-container h3 {
     font-size: 1.3rem;
   }
+  // Score circle styles now handled in main declaration
 
-  .score-circle {
-    width: 100px;
-    height: 100px;
-  }
-
-  .score-number {
-    font-size: 1.5rem;
-  }
-
-  .results-header h3 {
-    font-size: 1.5rem;
-  }
+  // Results header styles now handled in main declaration
 }
 
 @media (max-width: 480px) {
@@ -1413,22 +1559,11 @@
     padding: 14px 28px;
     
     :global(.text) {
-      font-size: 0.9rem;
-    }
+      font-size: 0.9rem;    }
   }
+  // Score circle styles now handled in main declaration
 
-  .score-circle {
-    width: 90px;
-    height: 90px;
-  }
-
-  .score-number {
-    font-size: 1.4rem;
-  }
-
-  .results-header h3 {
-    font-size: 1.4rem;
-  }
+  // Results header styles now handled in main declaration
 
   .results-header p {
     font-size: 1rem;
@@ -1506,21 +1641,10 @@
   }
 
   .next-btn {
-    padding: 12px 24px;
-  }
+    padding: 12px 24px;  }
+  // Score circle styles now handled in main declaration
 
-  .score-circle {
-    width: 80px;
-    height: 80px;
-  }
-
-  .score-number {
-    font-size: 1.2rem;
-  }
-
-  .results-header h3 {
-    font-size: 1.2rem;
-  }
+  // Results header styles now handled in main declaration
 
   .user-summary {
     padding: 1.25rem;  }
