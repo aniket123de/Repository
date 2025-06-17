@@ -825,7 +825,18 @@ export const TeamSection = () => {
         linkedin: "https://www.linkedin.com/in/suryanshu-paul-2aa003253/",
         instagram: "https://www.instagram.com/suryanshupaul18/",
         twitter: "https://x.com/paul2_suryanshu",
-        github: "https://github.com/paulsuryanshu"
+        github: "https://github.com/paulsuryanshu"      }
+    },
+    {
+      name: "Swapnanil",
+      role: "Senior Advisor",
+      statement: "Strategic guidance and mentorship are crucial for sustainable community growth. I focus on providing direction and support to help our community navigate challenges and capitalize on opportunities for meaningful expansion.",
+      image: "/team/swapnanil.jpg",
+      socials: {
+        linkedin: "https://www.linkedin.com/in/swapnanil-adhikary/",
+        instagram: "https://www.instagram.com/putin_real1/",
+        twitter: "https://x.com/SwapnanilA41903",
+        github: "https://github.com/SwapnanilAdhikary"
       }
     },
     {
