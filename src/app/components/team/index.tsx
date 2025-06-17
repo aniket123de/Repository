@@ -109,23 +109,22 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
             }
           }
         );
-        
-        // Then animate the actual image with a slight delay
+          // Then animate the actual image with a slight delay
         gsap.fromTo(
           imageElement,
           { 
             scale: 0.95,
             x: direction * 40,
             rotation: direction * -8,
-            filter: 'blur(5px) brightness(0.7)'
+            filter: 'blur(2px) brightness(0.8)'
           },
           {
             scale: 1,
             x: 0,
             rotation: 0,
             filter: 'blur(0) brightness(0.95)',
-            duration: 1.8,
-            delay: 0.2,
+            duration: 0.8,
+            delay: 0.1,
             ease: "power3.out",
             scrollTrigger: {
               trigger: memberRef.current,
@@ -876,12 +875,17 @@ export const TeamSection = () => {
       email: "itzabhi888@gmail.com",
       linkedin: "https://github.com/ezabhishek1",
       college: "JIS University"
-    },
-    {
+    },    {
       name: "Ananya Kar",
       email: "ananyakar8900@gmail.com",
       linkedin: "https://www.linkedin.com/in/ananya-kar01?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       college: "Guru Nanak Institute of Technology"
+    },
+    {
+      name: "Antik Mondal",
+      email: "work.antikmondal@gmail.com",
+      linkedin: "https://linkedin.com/in/antik-mondal-825684240",
+      college: "Techno Main Saltlake"
     },
     {
       name: "Arpan Mitra",
