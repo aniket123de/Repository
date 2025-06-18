@@ -925,7 +925,7 @@ export const TeamSection = () => {
     {
       name: "Debangshu Chatterjee",
       email: "debangshu.chatterjee@example.com",
-      linkedin: "https://www.linkedin.com/in/debangshu-chatterjee",
+      linkedin: "https://www.linkedin.com/in/debangshu-chatterjee-858859282",
       college: "Institute of Engineering and Management"
     },
     {
