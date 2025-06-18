@@ -921,12 +921,17 @@ export const TeamSection = () => {
       email: "ayushmanrana81@gmail.com",
       linkedin: "https://www.linkedin.com/in/ayushman-rana-1478b32a5/",
       college: "Haldia Institute of Technology"
-    },
-    {
+    },    {
       name: "Debangshu Chatterjee",
       email: "debangshu.chatterjee@example.com",
       linkedin: "https://www.linkedin.com/in/debangshu-chatterjee-858859282",
       college: "Institute of Engineering and Management"
+    },
+    {
+      name: "Debosmita Chowdhury",
+      email: "debosmitachowdhury20@gmail.com",
+      linkedin: "https://www.linkedin.com/in/debosmita-chowdhury-777529302",
+      college: "Techno Main Saltlake"
     },
     {
       name: "Dhrubojyoti Saha",
