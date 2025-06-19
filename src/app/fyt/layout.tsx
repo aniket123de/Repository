@@ -1,3 +1,5 @@
+import PageRefreshLoader from '~/components/PageRefreshLoader';
+
 export default function FytLayout({
   children,
 }: {
@@ -5,6 +7,7 @@ export default function FytLayout({
 }) {
   return (
     <div>
+      <PageRefreshLoader pageName="FYT" />
       {children}
     </div>
   );

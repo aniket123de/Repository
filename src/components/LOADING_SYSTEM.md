@@ -1,6 +1,6 @@
 # Loading System Documentation
 
-This application now has a comprehensive loading system that shows the 3D cube loader in different scenarios.
+This application now has a comprehensive loading system that shows the 3D cube loader on every page refresh and navigation.
 
 ## Components Overview
 
@@ -13,10 +13,11 @@ This application now has a comprehensive loading system that shows the 3D cube l
 - Customizable version with props
 - Supports custom messages, colors, and sizes
 
-### 3. **InitialLoader** (`~/components/InitialLoader/index.tsx`)
-- Handles page refresh and initial load scenarios
-- Uses sessionStorage to track if page has been loaded
-- Shows for 1.2 seconds on refresh/initial load
+### 3. **PageRefreshLoader** (`~/components/PageRefreshLoader/index.tsx`) ⭐
+- **NEW**: Handles all refresh scenarios reliably
+- Shows on every component mount (refresh, initial load, navigation)
+- Simple and bulletproof approach
+- Used in individual page layouts
 
 ### 4. **Route Loading** (`loading.tsx` files)
 - Handles navigation between routes
@@ -25,11 +26,11 @@ This application now has a comprehensive loading system that shows the 3D cube l
 
 ## Loading Scenarios Covered
 
-### ✅ **Page Refresh/Initial Load**
-- **Component**: `InitialLoader`
-- **Location**: Root layout
+### ✅ **Page Refresh/Initial Load** (FIXED)
+- **Component**: `PageRefreshLoader` in each layout
+- **Location**: Individual page layouts
 - **Duration**: 1.2 seconds
-- **Trigger**: Page refresh (F5) or initial visit
+- **Trigger**: Every page refresh (F5), initial visit, browser navigation
 
 ### ✅ **Route Navigation**
 - **Component**: Route-specific `loading.tsx` files
@@ -37,11 +38,28 @@ This application now has a comprehensive loading system that shows the 3D cube l
 - **Duration**: Varies based on page load time
 - **Trigger**: Navigation between pages
 
-### ✅ **Custom Loading States**
-- **Component**: `LoadingProvider` + `useLoadingControl` hook
-- **Location**: Available for manual use
-- **Duration**: Customizable
-- **Trigger**: Manual API calls, form submissions, etc.
+## Implementation Details
+
+### Refresh Loading Implementation:
+```tsx
+// In each page layout (fyt, team, community, home)
+import PageRefreshLoader from '~/components/PageRefreshLoader';
+
+export default function PageLayout({ children }) {
+  return (
+    <>
+      <PageRefreshLoader pageName="Page Name" />
+      {children}
+    </>
+  );
+}
+```
+
+### Pages with Refresh Loading:
+- ✅ **Home Page** (`/`) - "Loading Repository..."
+- ✅ **FYT Page** (`/fyt`) - "Loading FYT..." 
+- ✅ **Team Page** (`/team`) - "Loading Team..."
+- ✅ **Community Page** (`/community`) - "Loading Community..."
 
 ## File Structure
 
@@ -52,86 +70,53 @@ src/
 │   │   ├── index.tsx              # Basic loader
 │   │   ├── LoaderAdvanced.tsx     # Advanced loader with props
 │   │   └── README.md              # Component documentation
-│   ├── InitialLoader/
-│   │   └── index.tsx              # Page refresh loader
-│   ├── GlobalLoader/              # (Alternative implementation)
+│   ├── PageRefreshLoader/         # ⭐ NEW - Main refresh loader
 │   │   └── index.tsx
-│   └── PageLoader/                # (Alternative implementation)
+│   ├── RefreshLoader/             # Alternative implementation
+│   │   └── index.tsx
+│   └── InitialLoader/             # Legacy implementation
 │       └── index.tsx
-├── providers/
-│   └── LoadingProvider.tsx        # Context provider for manual control
-├── hooks/
-│   └── useLoadingControl.ts       # Hook for manual loading control
 └── app/
-    ├── layout.tsx                 # Root layout with InitialLoader
+    ├── page.tsx                   # Home page with PageRefreshLoader
     ├── loading.tsx                # Root route loading
     ├── community/
+    │   ├── layout.tsx             # ⭐ NEW - With PageRefreshLoader
     │   └── loading.tsx            # Community page loading
     ├── team/
+    │   ├── layout.tsx             # ⭐ Updated - With PageRefreshLoader
     │   └── loading.tsx            # Team page loading
     ├── fyt/
+    │   ├── layout.tsx             # ⭐ Updated - With PageRefreshLoader
     │   └── loading.tsx            # FYT page loading
     └── debug/
         └── loading.tsx            # Debug page loading
 ```
 
-## Usage Examples
+## How It Works
 
-### Manual Loading Control (Optional)
-```tsx
-import { useLoadingControl } from '~/hooks/useLoadingControl';
+### PageRefreshLoader Logic:
+1. **Component mounts** when page loads/refreshes
+2. **Sets loading state** to `true` immediately
+3. **Shows loader** for specified duration (1.2s default)
+4. **Hides loader** after timeout
+5. **Covers all scenarios**: refresh, initial load, direct navigation
 
-function MyComponent() {
-  const { showLoading, startLoading, stopLoading } = useLoadingControl();
-
-  const handleSubmit = async () => {
-    startLoading();
-    try {
-      await submitForm();
-    } finally {
-      stopLoading();
-    }
-  };
-
-  return <button onClick={handleSubmit}>Submit</button>;
-}
-```
-
-### Custom Route Loading
-```tsx
-// In any route's loading.tsx file
-import Loader from '~/components/Loader/LoaderAdvanced';
-
-export default function Loading() {
-  return <Loader message="Loading Custom Page..." />;
-}
-```
-
-## Technical Implementation
-
-### Session Storage Tracking
-- Uses `sessionStorage.getItem('hasLoaded')` to track initial loads
-- Prevents loader from showing on every navigation
-- Resets when browser tab/window is closed
-
-### Performance Navigation API
-- Uses `performance.getEntriesByType('navigation')` to detect page refreshes
-- Differentiates between refresh and navigation
-
-### Next.js App Router Integration
-- `loading.tsx` files are automatically used by Next.js
-- Works seamlessly with server-side rendering
-- Client-side navigation is handled separately
+### Why This Approach Works:
+- ✅ **Simple and reliable** - no complex detection logic
+- ✅ **Always triggers** - every component mount shows loader
+- ✅ **Consistent duration** - predictable user experience
+- ✅ **No race conditions** - straightforward implementation
+- ✅ **Works with SSR** - client-side only, no hydration issues
 
 ## Browser Support
 - Modern browsers supporting ES6+
-- Performance Navigation API (supported in all modern browsers)
-- SessionStorage (widely supported)
+- React 18+ with Next.js 13+ app router
+- No external dependencies beyond styled-components
 
 ## Customization
-All loaders can be customized with:
-- Custom colors matching your theme
-- Different animation durations
-- Custom messages
-- Different sizes
-- Background overlays
+```tsx
+<PageRefreshLoader 
+  pageName="Custom Page" 
+  duration={1500}  // 1.5 seconds
+/>
+```
