@@ -11,7 +11,7 @@ import { useMedia } from "~/hooks/use-media";
 
 // Font Awesome imports
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBinoculars, faUsers, faUserGroup } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faPeopleGroup, faUserGroup } from "@fortawesome/free-solid-svg-icons";
 
 export const Hero = () => {
   const isMobileSize = useMedia("(max-width: 768px)");
@@ -73,21 +73,19 @@ export const Hero = () => {
                 width={15}
                 height={15}
               />
-              Community
-            </Link><Link 
+              Community            </Link><Link 
               href="/fyt"
             >
               <FontAwesomeIcon 
-                icon={faBinoculars} 
+                icon={faMagnifyingGlass} 
                 width={15}
                 height={15}
               />
-              <span>FYT</span>
-            </Link><Link 
+              <span>FYT</span>            </Link><Link
               href="/team"
             >
               <FontAwesomeIcon 
-                icon={faUsers} 
+                icon={faPeopleGroup} 
                 width={15}
                 height={15}
               />
