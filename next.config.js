@@ -3,18 +3,8 @@ const withBundleAnalyzer = require("@next/bundle-analyzer");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
-  swcMinify: true,
-  experimental: {
-    optimizeCss: true,
-  },
-  compress: true,
-  poweredByHeader: false,
-  generateEtags: false,
-  httpAgentOptions: {
-    keepAlive: true,
-  },  images: {
+  swcMinify: true,  images: {
     domains: [
-      "repositoryweb.com",
       "repository-main.vercel.app",
       "github.com",
       "avatars.githubusercontent.com",

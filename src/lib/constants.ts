@@ -1,10 +1,5 @@
-export const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL || 'https://repositoryweb.com';
+export const siteURL = process.env.NEXT_PUBLIC_SITE_URL 
+  ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+  : new URL('http://localhost:3000');
 
-export const siteURL = (() => {
-  try {
-    return new URL(siteOrigin);
-  } catch (error) {
-    // Fallback for build time
-    return new URL('https://repositoryweb.com');
-  }
-})();
+export const siteOrigin = siteURL.origin;
