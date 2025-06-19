@@ -6,7 +6,6 @@ import { siteOrigin } from "~/lib/constants";
 import { Analytics } from "@vercel/analytics/next";
 import SessionProvider from "~/providers/SessionProvider";
 import GlobalInitialLoader from "~/components/GlobalInitialLoader";
-import { StructuredData } from "~/components/StructuredData";
 
 const jetBrainsMono = JetBrains_Mono({
   weight: "400",
