@@ -11,8 +11,7 @@ import { useMedia } from "~/hooks/use-media";
 
 // Font Awesome imports
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBinoculars, faUsers } from "@fortawesome/free-solid-svg-icons";
-import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { faBinoculars, faUsers, faUserGroup } from "@fortawesome/free-solid-svg-icons";
 
 export const Hero = () => {
   const isMobileSize = useMedia("(max-width: 768px)");
@@ -65,13 +64,12 @@ export const Hero = () => {
             <pre>
               <code>npm install repository</code>
             </pre>
-            <div className={s["cta--buttons"]}>
-            <Link 
+            <div className={s["cta--buttons"]}>            <Link 
               href="/community"
               className={s["docs-link"]}
             >
               <FontAwesomeIcon 
-                icon={faWhatsapp} 
+                icon={faUserGroup} 
                 width={15}
                 height={15}
               />
