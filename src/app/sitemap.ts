@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { siteOrigin } from '~/lib/constants'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = siteOrigin
+  const baseUrl = siteOrigin || 'https://repositoryweb.com'
 
   // Static pages
   const staticRoutes = [

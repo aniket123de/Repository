@@ -28,7 +28,7 @@ const basementGrotesque = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteOrigin),
+  metadataBase: new URL(siteOrigin || 'https://repositoryweb.com'),
   title: {
     default: "Repository - Build More, Grow More | Development Community",
     template: "%s | Repository"
