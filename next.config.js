@@ -3,8 +3,13 @@ const withBundleAnalyzer = require("@next/bundle-analyzer");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
-  swcMinify: true,  images: {
+  swcMinify: true,
+  experimental: {
+    esmExternals: 'loose',
+  },  images: {
     domains: [
+      "repositoryweb.com",
+      "www.repositoryweb.com",
       "repository-main.vercel.app",
       "github.com",
       "avatars.githubusercontent.com",
@@ -13,8 +18,27 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-  },
-  webpack: (config, { dev, isServer }) => {
+  },  webpack: (config, { dev, isServer }) => {
+    // Handle missing Node.js modules for Supabase
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+        crypto: false,
+        bufferutil: false,
+        'utf-8-validate': false,
+      };
+    }
+
+    // Ignore optional dependencies that cause build issues
+    config.externals = config.externals || [];
+    config.externals.push({
+      'bufferutil': 'bufferutil',
+      'utf-8-validate': 'utf-8-validate',
+    });
+
     if (dev && !isServer) {
       config.watchOptions = {
         poll: 1000,
