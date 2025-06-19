@@ -72,14 +72,14 @@ export default function HomePage() {
 ## 🎨 **Visual Differences:**
 
 ### **InitialWebsiteLoader**
-- **Message**: "Loading Repository..."
-- **Size**: 48px spinner
+- **Message**: None (clean look)
+- **Size**: 70px spinner
 - **Duration**: 1 second (quick)
 - **Purpose**: Initial session setup
 
 ### **HomePageLoader**
-- **Message**: "Welcome to Repository..."
-- **Size**: 50px spinner
+- **Message**: None (clean look)
+- **Size**: 70px spinner
 - **Duration**: 1.5 seconds (welcoming)
 - **Purpose**: Home page specific loading
 
@@ -98,16 +98,16 @@ export default function HomePage() {
 ## 🔄 **Loading Sequence:**
 
 ### **First Visit**
-1. User opens website → `InitialWebsiteLoader` (1s)
-2. Home page mounts → `HomePageLoader` (1.5s)
+1. User opens website → `InitialWebsiteLoader` - Clean 70px spinner (1s)
+2. Home page mounts → `HomePageLoader` - Clean 70px spinner (1.5s)
 3. **Total**: ~2.5 seconds of branded loading
 
 ### **Subsequent Refreshes**
-1. User refreshes home → `HomePageLoader` (1.5s)
+1. User refreshes home → `HomePageLoader` - Clean 70px spinner (1.5s)
 2. **Total**: 1.5 seconds of smooth loading
 
 ### **Navigation to Home**
-1. User navigates to home → `HomePageLoader` (1.5s)
+1. User navigates to home → `HomePageLoader` - Clean 70px spinner (1.5s)
 2. **Total**: 1.5 seconds of consistent experience
 
 ## ⚡ **Performance Notes:**

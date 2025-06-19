@@ -10,26 +10,33 @@ interface HomePageLoaderProps {
 const HomePageLoader: React.FC<HomePageLoaderProps> = ({ 
   duration = 1500 
 }) => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Show loader on every component mount
-    // This covers: initial website opening, page refresh, navigation to home
+  const [isLoading, setIsLoading] = useState(true);  useEffect(() => {
+    // Simple timeout to hide loader after specified duration
+    console.log('HomePageLoader: Starting loader for', duration, 'ms');
+    
     const timer = setTimeout(() => {
+      console.log('HomePageLoader: Hiding loader after timeout');
       setIsLoading(false);
     }, duration);
 
-    return () => clearTimeout(timer);
-  }, []); // Empty dependency ensures it runs once per mount
+    // Cleanup timer on unmount
+    return () => {
+      console.log('HomePageLoader: Cleaning up timer');
+      clearTimeout(timer);
+    };
+  }, [duration]);
 
-  if (!isLoading) return null;
+  // Don't render anything if not loading
+  if (!isLoading) {
+    return null;
+  }
 
   return (
     <Loader 
-      message="Welcome to Repository..." 
+      message="" 
       spinnerColor="#57B9C2"
       backgroundColor="#000"
-      size={50}
+      size={70}
     />
   );
 };

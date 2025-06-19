@@ -29,10 +29,9 @@ const StyledWrapper = styled.div`
   top: 0;
   left: 0;
   z-index: 9999;
-
   .spinner {
-   width: 44px;
-   height: 44px;
+   width: 70px;
+   height: 70px;
    animation: spinner-y0fdc1 2s infinite ease;
    transform-style: preserve-3d;
   }
@@ -45,9 +44,8 @@ const StyledWrapper = styled.div`
    border: 2px solid #57B9C2;
    box-shadow: 0 0 10px rgba(87, 185, 194, 0.3);
   }
-
   .spinner div:nth-of-type(1) {
-   transform: translateZ(-22px) rotateY(180deg);
+   transform: translateZ(-35px) rotateY(180deg);
   }
 
   .spinner div:nth-of-type(2) {
@@ -71,7 +69,7 @@ const StyledWrapper = styled.div`
   }
 
   .spinner div:nth-of-type(6) {
-   transform: translateZ(22px);
+   transform: translateZ(35px);
   }
 
   @keyframes spinner-y0fdc1 {

@@ -24,15 +24,14 @@ const InitialWebsiteLoader = () => {
       }
     }
   }, []);
-
   if (!isLoading) return null;
 
   return (
     <Loader 
-      message="Loading Repository..." 
+      message="" 
       spinnerColor="#57B9C2"
       backgroundColor="#000"
-      size={48}
+      size={70}
     />
   );
 };

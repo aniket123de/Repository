@@ -19,7 +19,7 @@ A customizable 3D spinning cube loader component for the application.
 | `message` | `string` | `'Loading...'` | Text message displayed below spinner |
 | `backgroundColor` | `string` | `'#000'` | Background color of the overlay |
 | `spinnerColor` | `string` | `'#57B9C2'` | Color of the spinner border (theme teal) |
-| `size` | `number` | `44` | Size of the spinner in pixels |
+| `size` | `number` | `70` | Size of the spinner in pixels |
 
 ## Usage
 

@@ -13,7 +13,6 @@ const PageRefreshLoader: React.FC<PageRefreshLoaderProps> = ({
   duration = 1200 
 }) => {
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     // Simple approach: always show loader for the specified duration
     // This covers all scenarios: refresh, initial load, navigation
@@ -22,11 +21,11 @@ const PageRefreshLoader: React.FC<PageRefreshLoaderProps> = ({
     }, duration);
 
     return () => clearTimeout(timer);
-  }, []); // Empty dependency array ensures it runs once per component mount
+  }, [duration]);
 
   if (!isLoading) return null;
 
-  return <Loader message={`Loading ${pageName}...`} />;
+  return <Loader message={pageName ? `Loading ${pageName}...` : ""} size={70} />;
 };
 
 export default PageRefreshLoader;

@@ -14,7 +14,7 @@ const Loader: React.FC<LoaderProps> = ({
   message = 'Loading...', 
   backgroundColor = '#000',
   spinnerColor = '#57B9C2',
-  size = 44 
+  size = 70 
 }) => {
   return (
     <StyledWrapper $backgroundColor={backgroundColor}>
