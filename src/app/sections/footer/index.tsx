@@ -75,11 +75,11 @@ export const Footer = () => {
             <span>get in touch</span>
             <Link
               className="link"
-              href="mailto:repositorycore@gmail.com"
+              href="mailto:contact@repositoryweb.com"
               target="_blank"
               rel="noreferrer"
             > 
-              repositorycore@gmail.com
+              contact@repositoryweb.com
             </Link>
           </div>
           <div>
@@ -232,9 +232,9 @@ const Terminal = () => {
           <p
             ref={contentRef}
             style={{ cursor: "pointer", textDecoration: "bold" }}
-            onClick={() => window.open("https://repository-main.vercel.app/fyt", "_blank")}
+            onClick={() => window.open("https://repositoryweb.com/fyt", "_blank")}
           >
-            repository-main.vercel.app/fyt
+            repositoryweb.com/fyt
           </p>
           <button
             title="copy text"
