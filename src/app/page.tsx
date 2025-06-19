@@ -19,7 +19,7 @@ import { LabIntro } from "./sections/lab-cylinder/intro";
 import { LabCylinder } from "./sections/lab-cylinder";
 import ScrollProgressBar from "./components/scroll-progress-bar";
 import ScrollToTopButton from "./components/scroll-to-top-button";
-import HomePageLoader from "~/components/HomePageLoader/HomePageLoader";
+import HomePageLoader from "~/components/HomePageLoader";
 
 export default function HomePage() {
   return (

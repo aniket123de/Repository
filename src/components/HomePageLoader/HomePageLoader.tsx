@@ -13,12 +13,32 @@ const HomePageLoader: React.FC<HomePageLoaderProps> = ({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Always show loader on component mount (covers initial load and refresh)
+    setIsLoading(true);
+    
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, duration);
 
     return () => clearTimeout(timer);
-  }, []); // Empty dependency array to run only once
+  }, []); // Empty dependency array ensures it runs once per mount
+
+  useEffect(() => {
+    // Additional handler for page visibility changes (handles refresh scenarios)
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        setIsLoading(true);
+        setTimeout(() => setIsLoading(false), duration);
+      }
+    };
+
+    // Listen for page becoming visible after refresh
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [duration]);
 
   if (!isLoading) return null;
 

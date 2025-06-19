@@ -49,12 +49,12 @@ const StyledWrapper = styled.div<{ $backgroundColor: string }>`
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-  }
-  .loading-message {
+  }  .loading-message {
     color: #efefef;
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 1.5rem;
+    font-weight: 700;
     margin: 0;
+    margin-top: 3rem;
     text-align: center;
     opacity: 0.9;
     font-family: var(--font-basement-grotesque, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
