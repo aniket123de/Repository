@@ -51,9 +51,8 @@ export const metadata: Metadata = {
   creator: "Repository Team",
   publisher: "Repository",
   viewport: {
-    height: "device-height",
-    initialScale: 1,
     width: "device-width",
+    initialScale: 1,
   },
   robots: {
     index: true,
@@ -102,9 +101,6 @@ export const metadata: Metadata = {
     siteName: "Repository",
     type: "website",
     url: siteOrigin,
-  },  verification: {
-    google: "your-google-verification-code", // Add after setting up Google Search Console
-    yandex: "your-yandex-verification-code", // Optional
   },
 };
 
@@ -118,11 +114,7 @@ export default function RootLayout({
       lang="en"
       style={{
         ["--font-basement-grotesque" as string]: `${basementGrotesque.style.fontFamily}, var(--font-system), sans-serif`,
-        ["--font-jetbrains-mono" as string]: `${jetBrainsMono.style.fontFamily}, var(--font-system), sans-serif`,      }}
-    >
-      <head>
-        <StructuredData />
-      </head>
+        ["--font-jetbrains-mono" as string]: `${jetBrainsMono.style.fontFamily}, var(--font-system), sans-serif`,      }}    >
       <body>
         <GlobalInitialLoader />
         <SessionProvider>
