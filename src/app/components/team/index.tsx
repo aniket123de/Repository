@@ -980,12 +980,23 @@ export const TeamSection = () => {
       email: "rupsadas581@gmail.com",
       linkedin: "https://www.linkedin.com/in/rupsa-das2006",
       college: "Government College of Engineering and Leather Technology"
-    },
-    {
+    },    {
       name: "Sattik Mondal",
       email: "sattikmondal853@gmail.com",
       linkedin: "https://www.linkedin.com/in/sattik-m-4b78b2298/",
       college: "Greater Kolkata College of Engineering"
+    },
+    {
+      name: "Sayan Deyashi",
+      email: "deyashisayan2@gmail.com",
+      linkedin: "https://www.linkedin.com/in/sayandeyashi",
+      college: "Budge Budge Institute of Technology"
+    },
+    {
+      name: "Shatadru Dhar",
+      email: "shatadrudhar10c@gmail.com",
+      linkedin: "https://www.linkedin.com/in/shatadru-dhar/",
+      college: "Kalyani Government Engineering College"
     },
     {
       name: "Shayan Ghosh",
