@@ -1,6 +1,27 @@
 {
-    "icons": [
-      { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
-      { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
-    ]
-  }
+  "name": "Repository - Developer Community",
+  "short_name": "Repository",
+  "description": "Build More, Grow More - Join the thriving developer community",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    { 
+      "src": "/icon-192.png", 
+      "type": "image/png", 
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    { 
+      "src": "/icon-512.png", 
+      "type": "image/png", 
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["developer-tools", "education", "productivity"],
+  "lang": "en",
+  "scope": "/"
+}

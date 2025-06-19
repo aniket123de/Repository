@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /debug/
+Disallow: /_next/static/
+Disallow: /admin/
+
+# Allow important crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemap location
+Sitemap: https://repositoryweb.com/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
