@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import Loader from '~/components/Loader';
 
@@ -24,26 +24,42 @@ interface LoadingProviderProps {
 }
 
 export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
+  const isInitialLoad = useRef(true);
+  const previousPath = useRef<string>('');
 
-  // Handle initial page load
+  // Handle route changes - only show loader when navigating back to home from other routes
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+    // Skip loading on very first render (initial page load)
+    if (isInitialLoad.current) {
+      isInitialLoad.current = false;
+      previousPath.current = pathname;
+      return;
+    }
 
-    return () => clearTimeout(timer);
-  }, []);
+    const isHomePage = pathname === '/';
+    const comingFromOtherPage = previousPath.current !== '/' && previousPath.current !== '';
+    
+    // Only show loader when navigating back to home from other routes
+    if (isHomePage && comingFromOtherPage) {
+      console.log('NavigationLoader: Showing loader - returning to home from:', previousPath.current);
+      setIsLoading(true);
+      
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        console.log('NavigationLoader: Hiding loader');
+      }, 1200);
 
-  // Handle route changes
-  useEffect(() => {
-    setIsLoading(true);
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 600);
-
-    return () => clearTimeout(timer);
+      // Update previous path after setting up the loader
+      previousPath.current = pathname;
+      
+      return () => clearTimeout(timer);
+    } else {
+      // For other route changes, just update the previous path without showing loader
+      previousPath.current = pathname;
+      console.log('NavigationLoader: Route change to:', pathname, 'from:', previousPath.current, 'No loader needed');
+    }
   }, [pathname]);
 
   const setLoading = (loading: boolean) => {

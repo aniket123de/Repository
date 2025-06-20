@@ -5,7 +5,7 @@ import { JetBrains_Mono } from "next/font/google";
 import { siteOrigin } from "~/lib/constants";
 import { Analytics } from "@vercel/analytics/next";
 import SessionProvider from "~/providers/SessionProvider";
-import GlobalInitialLoader from "~/components/GlobalInitialLoader";
+import { LoadingProvider } from "~/providers/LoadingProvider";
 
 const jetBrainsMono = JetBrains_Mono({
   weight: "400",
@@ -113,11 +113,11 @@ export default function RootLayout({
       lang="en"
       style={{
         ["--font-basement-grotesque" as string]: `${basementGrotesque.style.fontFamily}, var(--font-system), sans-serif`,
-        ["--font-jetbrains-mono" as string]: `${jetBrainsMono.style.fontFamily}, var(--font-system), sans-serif`,      }}    >
-      <body>
-        <GlobalInitialLoader />
+        ["--font-jetbrains-mono" as string]: `${jetBrainsMono.style.fontFamily}, var(--font-system), sans-serif`,      }}    >      <body>
         <SessionProvider>
-          {children}
+          <LoadingProvider>
+            {children}
+          </LoadingProvider>
         </SessionProvider>
         <Analytics />
       </body>
