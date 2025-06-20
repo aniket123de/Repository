@@ -59,12 +59,11 @@ export const Hero = () => {
                 <path d="M28 10L31.5 22.5L44 26L31.5 29.5L28 42L24.5 29.5L12 26L24.5 22.5L28 10Z" fill="#fff"/>
               </svg>
             </span>
-          </div>
-          <div className={s["cta"]}>
+          </div>          <div className={s["cta"]}>
             <pre>
-              <code>Let&aposs grow together</code>
+              <code>Let&apos;s grow together</code>
             </pre>
-            <div className={s["cta--buttons"]}>            <Link 
+            <div className={s["cta--buttons"]}><Link 
               href="/community"
               className={s["docs-link"]}
             >
