@@ -26,7 +26,8 @@
     "clsx": "^1.2.1",
     "emailjs": "^4.0.3",
     "emailjs-com": "^3.2.0",
-    "eslint-config-custom": "^0.0.0",    "framer-motion": "^12.12.2",
+    "eslint-config-custom": "^0.0.0",
+    "framer-motion": "^12.12.2",
     "gsap": "^3.13.0",
     "leva": "^0.9.34",
     "next": "^13.5.11",
@@ -35,7 +36,7 @@
     "react-merge-refs": "^3.0.2",
     "sharp": "^0.32.0",
     "styled-components": "^6.1.18",
-    "tailwind-merge": "^3.3.0",
+    "tailwind-merge": "^3.3.1",
     "three": "0.159.0",
     "zustand": "^4.3.7"
   },

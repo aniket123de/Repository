@@ -13,7 +13,6 @@ export const toVw = (px: number, base: string | number = 1920, min?: number) =>
         (typeof base === "number" ? base : Number(base.replace("px", "")))
       }vw`;
 
-
 // Overlap duration arrays by a factor mantaining the final duration between them
 const overlapDurationArrayByFactor = (
   durations: { start: number; end: number }[],

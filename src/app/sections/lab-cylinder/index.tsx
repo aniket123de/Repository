@@ -46,6 +46,7 @@ interface Partnership {
 
 export const LabCylinder = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
   const typewriterRef = useRef<HTMLHeadingElement>(null);
@@ -130,8 +131,7 @@ export const LabCylinder = () => {
     });
 
     return () => ctx.revert();
-  }, []);
-  // Partnership data
+  }, []);  // Partnership data
   const partnerships = [
     {
       id: 1,
@@ -159,11 +159,12 @@ export const LabCylinder = () => {
       logo: "/hackathon-logos/metamorph2k25_logo.jpeg",
       link: "https://metamorph.example.com",
       venue: "Guru Nanak Institute of Technology",
-    },    {
+    },
+    {
       id: 4,
       name: "SAP Inside Track Kolkata",
       date: "Aug 2, 2025",
-      description: "A platform for the SAP community to network, learn, and grow together. Stay up-to-date on events, initiatives, and SAP developments in Kolkata.",
+      description: "A platform for the SAP community to network, learn, and grow together with SAP developments in Kolkata.",
       logo: "/hackathon-logos/sap.jpeg",
       link: "https://www.linkedin.com/company/sap-inside-track-kolkata/",
       venue: "St. Xavier's University",
@@ -172,8 +173,7 @@ export const LabCylinder = () => {
 
   return (
     <section className={styles.eventsSection} ref={sectionRef}>
-      <div className={styles.container}>
-        <h2 className={styles.sectionHeading} ref={typewriterRef}></h2>
+      <div className={styles.container}>        <h2 className={styles.sectionHeading} ref={typewriterRef}></h2>
         {/* Add floating elements for visual enhancement */}
         <div className="floating-element" style={{ position: "absolute", top: "10%", left: "5%", width: "100px", height: "100px", background: "rgba(255, 255, 255, 0.1)", borderRadius: "50%" }}></div>
         <div className="floating-element" style={{ position: "absolute", bottom: "15%", right: "8%", width: "150px", height: "150px", background: "rgba(255, 255, 255, 0.1)", borderRadius: "50%" }}></div>
@@ -189,6 +189,9 @@ export const LabCylinder = () => {
                 key={partnership.id}
                 partnership={partnership}
                 styles={styles}
+                index={index}
+                hoveredIndex={hoveredIndex}
+                setHoveredIndex={setHoveredIndex}
               />
             ))}
           </motion.div>
@@ -198,10 +201,13 @@ export const LabCylinder = () => {
   );
 };
 
-// Partnership card component
+// Partnership card component with hover effect
 const PartnershipCard = ({
   partnership,
   styles,
+  index,
+  hoveredIndex,
+  setHoveredIndex,
 }: {
   partnership: {
     id: number;
@@ -213,60 +219,149 @@ const PartnershipCard = ({
     venue: string;
   };
   styles: any;
-}) => {
-  const [isHovered, setIsHovered] = useState(false);
+  index: number;
+  hoveredIndex: number | null;
+  setHoveredIndex: (index: number | null) => void;
+}) => {  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.div
       className={styles.partnershipCard || 'partnershipCard'}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      whileHover={{
-        y: -8,
+      onHoverStart={() => {
+        setIsHovered(true);
+        setHoveredIndex(index);
       }}
+      onHoverEnd={() => {
+        setIsHovered(false);
+        setHoveredIndex(null);
+      }}
+      whileHover={{
+        y: -12,
+        scale: 1.02,
+        transition: { duration: 0.3, ease: [0.25, 0.8, 0.25, 1] }
+      }}
+      style={{ position: 'relative' }}
     >
-      {/* Logo Container */}
-      <motion.div
-        className={styles.logoContainer || 'logoContainer'}
-        animate={{
-          scale: isHovered ? 1.05 : 1        }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-      >        <Image
-          src={partnership.logo}
-          alt={`${partnership.name} logo`}
-          width={120}
-          height={60}
-          style={{ objectFit: "contain" }}
-        />
-      </motion.div>
-
-      {/* Content */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '100%' }}>
-        <div>
-          <h3 className={styles.eventTitle || 'eventTitle'}>
-            {partnership.name}
-          </h3>
-          <span className={styles.eventDate || 'eventDate'}>
-            {partnership.date}
-          </span>
-          <p className={styles.description || 'description'}>
-            {partnership.description}
-          </p>
-          <p className={styles.description || 'description'}>
-            <strong>Venue:</strong> {partnership.venue}
-          </p>
-        </div>
-        {/* View More Button */}
-        <motion.a
-          href={partnership.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.viewMouButton || 'viewMouButton'}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+      {/* Animated Hover Background Effect */}
+      <AnimatePresence>
+        {hoveredIndex === index && (
+          <motion.span
+            style={{
+              position: 'absolute',
+              inset: 0,
+              height: '100%',
+              width: '100%',
+              background: 'linear-gradient(135deg, rgba(87, 185, 194, 0.15) 0%, rgba(87, 185, 194, 0.05) 50%, transparent 100%)',
+              borderRadius: '1.5rem',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(87, 185, 194, 0.4)',
+              boxShadow: `
+                0 8px 32px rgba(87, 185, 194, 0.15),
+                0 4px 16px rgba(87, 185, 194, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1)
+              `,
+              zIndex: 1,
+            }}
+            layoutId="hoverBackground"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              transition: { 
+                duration: 0.3,
+                ease: [0.25, 0.8, 0.25, 1]
+              },
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0.95,
+              transition: { 
+                duration: 0.2,
+                delay: 0.1,
+                ease: [0.25, 0.8, 0.25, 1]
+              },
+            }}
+          />
+        )}
+      </AnimatePresence>      {/* Original Card Content */}
+      <div style={{ position: 'relative', zIndex: 2 }}>
+        {/* Logo Container */}
+        <motion.div
+          className={styles.logoContainer || 'logoContainer'}
+          animate={{
+            scale: isHovered ? 1.1 : 1,
+            rotateY: isHovered ? 5 : 0,
+          }}
+          transition={{ 
+            duration: 0.4, 
+            ease: [0.25, 0.8, 0.25, 1] 
+          }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            margin: '0 auto 20px auto'
+          }}
         >
-          <span className={styles.text || 'text'}>View More</span>
-        </motion.a>
+          <Image
+            src={partnership.logo}
+            alt={`${partnership.name} logo`}
+            width={
+              partnership.name === "Metamorph 2K25" || partnership.name === "SAP Inside Track Kolkata" 
+                ? 100 
+                : 120
+            }
+            height={
+              partnership.name === "Metamorph 2K25" || partnership.name === "SAP Inside Track Kolkata" 
+                ? 50 
+                : 60
+            }
+            style={{ 
+              objectFit: "contain",
+              display: 'block'
+            }}
+          />
+        </motion.div>
+
+        {/* Content */}
+        <div style={{ 
+          flex: 1, 
+          display: 'flex', 
+          flexDirection: 'column', 
+          justifyContent: 'space-between', 
+          width: '100%',
+          minHeight: '280px'
+        }}>
+          <div>
+            <h3 className={styles.eventTitle || 'eventTitle'}>
+              {partnership.name}
+            </h3>
+            <span className={styles.eventDate || 'eventDate'}>
+              {partnership.date}
+            </span>
+            <p className={styles.description || 'description'}>
+              {partnership.description}
+            </p>
+            <p className={styles.description || 'description'}>
+              <strong>Venue:</strong> {partnership.venue}
+            </p>          </div>
+          {/* View More Button */}
+          <motion.a
+            href={partnership.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.viewMouButton || 'viewMouButton'}
+            whileHover={{ 
+              scale: 1.05,
+              boxShadow: '0 4px 20px rgba(87, 185, 194, 0.3)'
+            }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.2 }}
+          >
+            <span className={styles.text || 'text'}>View More</span>
+          </motion.a>
+        </div>
       </div>
     </motion.div>
   );
