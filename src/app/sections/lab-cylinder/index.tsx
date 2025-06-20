@@ -88,7 +88,7 @@ export const LabCylinder = () => {
 
       // Typewriting effect for the heading when it comes into the viewport
       if (typewriterRef.current) {
-        const text = "HACKATHON PARTNERSHIPS";
+        const text = "EVENT PARTNERSHIPS";
         const chars = text.split("");
         typewriterRef.current.textContent = "";
 
@@ -131,7 +131,6 @@ export const LabCylinder = () => {
 
     return () => ctx.revert();
   }, []);
-
   // Partnership data
   const partnerships = [
     {
@@ -160,6 +159,14 @@ export const LabCylinder = () => {
       logo: "/hackathon-logos/metamorph2k25_logo.jpeg",
       link: "https://metamorph.example.com",
       venue: "Guru Nanak Institute of Technology",
+    },    {
+      id: 4,
+      name: "SAP Inside Track Kolkata",
+      date: "Aug 2, 2025",
+      description: "A platform for the SAP community to network, learn, and grow together. Stay up-to-date on events, initiatives, and SAP developments in Kolkata.",
+      logo: "/hackathon-logos/sap.jpeg",
+      link: "https://www.linkedin.com/company/sap-inside-track-kolkata/",
+      venue: "St. Xavier's University, New Town",
     },
   ];
 
