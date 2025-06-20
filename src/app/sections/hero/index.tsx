@@ -62,7 +62,7 @@ export const Hero = () => {
           </div>
           <div className={s["cta"]}>
             <pre>
-              <code>npm install repository</code>
+              <code>Let's grow together</code>
             </pre>
             <div className={s["cta--buttons"]}>            <Link 
               href="/community"
