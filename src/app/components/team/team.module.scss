@@ -582,13 +582,12 @@
   margin-top: tovw(120px, "desktop-large", 80px);
   position: relative;
   z-index: 1;
-
   .ambassadors-header {
     text-align: center;
-    margin-bottom: tovw(80px, "desktop-large", 60px);
+    margin-bottom: tovw(40px, "desktop-large", 30px);
 
     h3 {
-      font-size: tovw(48px, "desktop-large", 36px);
+      font-size: tovw(58px, "desktop-large", 46px);
       font-weight: 800;
       margin-bottom: tovw(20px, "desktop-large", 15px);
       background: linear-gradient(135deg, var(--color-white) 0%, var(--color-orange) 100%);
@@ -611,6 +610,80 @@
       font-size: tovw(18px, "desktop-large", 16px);
       color: rgba(255, 255, 255, 0.7);
       line-height: 1.5;
+    }
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: tovw(60px, "desktop-large", 40px);
+    position: relative;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .search-icon {
+      position: absolute;
+      left: tovw(20px, "desktop-large", 16px);
+      color: rgba(255, 255, 255, 0.5);
+      font-size: tovw(18px, "desktop-large", 16px);
+      z-index: 2;
+      transition: color 0.3s ease;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: tovw(16px, "desktop-large", 14px) tovw(20px, "desktop-large", 16px);
+      padding-left: tovw(55px, "desktop-large", 45px);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      color: var(--color-white);
+      font-size: tovw(16px, "desktop-large", 14px);
+      font-weight: 400;
+      outline: none;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      backdrop-filter: blur(10px);
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+        font-weight: 400;
+      }
+
+      &:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(87, 185, 194, 0.5);
+        box-shadow: 
+          0 0 0 3px rgba(87, 185, 194, 0.1),
+          0 8px 32px rgba(0, 0, 0, 0.3);
+        transform: translateY(-2px);
+
+        + .search-icon {
+          color: var(--color-orange);
+        }
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.07);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+
+      @media screen and (max-width: 800px) {
+        padding: 12px 16px;
+        padding-left: 40px;
+        font-size: 14px;
+      }
+    }
+
+    @media screen and (max-width: 800px) {
+      max-width: 100%;
+      margin-bottom: 30px;
+
+      .search-icon {
+        left: 14px;
+        font-size: 14px;
+      }
     }
   }
 

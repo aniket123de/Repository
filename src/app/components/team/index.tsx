@@ -10,7 +10,7 @@ import {
   faGithub, 
   faInstagram 
 } from '@fortawesome/free-brands-svg-icons';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe, faSearch } from '@fortawesome/free-solid-svg-icons';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import s from './team.module.scss';
@@ -538,6 +538,7 @@ export const CampusAmbassador: React.FC<CampusAmbassadorProps> = ({
 
 export const TeamSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const teamMembersRef = useRef<HTMLDivElement>(null);
@@ -1053,8 +1054,23 @@ export const TeamSection = () => {
             <h3>Campus Ambassadors</h3>
             <p>Our dedicated representatives across leading institutions</p>
           </div>
+          <div className={s["search-bar"]}>
+            <FontAwesomeIcon icon={faSearch} className={s["search-icon"]} />
+            <input 
+              type="text" 
+              placeholder="Search by name or college..." 
+              className={s["search-input"]}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
           <div className={s["campus-ambassadors"]} ref={ambassadorsRef}>
-            {campusAmbassadors.map((ambassador) => (
+            {campusAmbassadors
+              .filter(ambassador => 
+                ambassador.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                ambassador.college.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+              .map((ambassador) => (
               <CampusAmbassador
                 key={ambassador.name}
                 name={ambassador.name}
