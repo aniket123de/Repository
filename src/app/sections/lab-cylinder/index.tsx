@@ -166,7 +166,7 @@ export const LabCylinder = () => {
       description: "A platform for the SAP community to network, learn, and grow together. Stay up-to-date on events, initiatives, and SAP developments in Kolkata.",
       logo: "/hackathon-logos/sap.jpeg",
       link: "https://www.linkedin.com/company/sap-inside-track-kolkata/",
-      venue: "St. Xavier's University, New Town",
+      venue: "St. Xavier's University",
     },
   ];
 
