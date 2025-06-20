@@ -910,12 +910,17 @@ export const TeamSection = () => {
       email: "arunima.dutta@example.com",
       linkedin: "https://www.linkedin.com/in/arunima-dutta",
       college: "Heritage Institute of Technology"
-    },
-    {
+    },    {
       name: "Arnab Mal",
       email: "arnab37686@gmail.com",
       linkedin: "https://www.linkedin.com/in/arnab-mal-a544a828b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       college: "Asansol Engineering College"
+    },
+    {
+      name: "Aryan Sengupta",
+      email: "aryansengupta75@gmail.com",
+      linkedin: "https://www.linkedin.com/in/aryan-sengupta-685a32270?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      college: "Institute of Engineering and Management"
     },
     {
       name: "Ayushman Rana",
