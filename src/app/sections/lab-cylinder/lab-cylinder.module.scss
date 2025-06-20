@@ -13,6 +13,11 @@
   align-items: center;
   position: relative;
   overflow: hidden;
+  width: 100%;
+  
+  @media screen and (max-width: 480px) {
+    padding: tovw(60px, "mobile", 60px) 0;
+  }
   
   // Subtle floating elements
   &::before, &::after {
@@ -49,6 +54,12 @@
   75% { transform: translate(5px, -5px) scale(1.02); }
 }
 
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
 .container {
   width: 100%;
   max-width: tovw(1200px, "desktop-large", 1200px);
@@ -56,6 +67,14 @@
   padding: 0 tovw(32px, "desktop-large", 16px);
   position: relative;
   z-index: 1;
+  
+  @media screen and (max-width: 480px) {
+    padding: 0 tovw(20px, "mobile", 20px);
+  }
+  
+  @media screen and (max-width: 360px) {
+    padding: 0 tovw(16px, "mobile", 16px);
+  }
 }
 
 .sectionHeading {
@@ -71,16 +90,26 @@
   color: transparent;
   animation: shine 8s linear infinite;
   text-shadow: 0 2px 15px rgba(87, 185, 194, 0.3);
-  
-  @keyframes shine {
-    to {
-      background-position: 200% center;
-    }
-  }
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
   
   @media screen and (max-width: 800px) {
-    font-size: tovw(36px, "mobile", 36px);
+    font-size: tovw(32px, "mobile", 32px);
     margin-bottom: tovw(60px, "mobile", 60px);
+    letter-spacing: -0.01em;
+  }
+  
+  @media screen and (max-width: 480px) {
+    font-size: clamp(24px, 6.5vw, 28px);
+    margin-bottom: tovw(40px, "mobile", 40px);
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+  
+  @media screen and (max-width: 360px) {
+    font-size: clamp(20px, 5.5vw, 24px);
+    margin-bottom: tovw(30px, "mobile", 30px);
   }
 }
 
