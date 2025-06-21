@@ -46,12 +46,12 @@ interface Partnership {
 
 export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState(false);  const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [tappedCard, setTappedCard] = useState<number | null>(null);
+  const tappedTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
   const typewriterRef = useRef<HTMLHeadingElement>(null);
-  const cardObserverRefs = useRef<HTMLDivElement[]>([]);
-  const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const mobileCheckTimeoutRef = useRef<NodeJS.Timeout | null>(null);useEffect(() => {    // Detect mobile device - improved detection with throttling
     const checkIsMobile = () => {
       const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -60,72 +60,15 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
       const hasCoarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
       setIsMobile(isTouchDevice || isSmallScreen || isMobileUserAgent || hasCoarsePointer);
     };
-    
-    const throttledCheckIsMobile = () => {
+      const throttledCheckIsMobile = () => {
       if (mobileCheckTimeoutRef.current) {
         clearTimeout(mobileCheckTimeoutRef.current);
       }
-      mobileCheckTimeoutRef.current = setTimeout(checkIsMobile, 150); // Throttle resize checks
+      mobileCheckTimeoutRef.current = setTimeout(checkIsMobile, 200); // Increased throttle for better performance
     };
     
     checkIsMobile();
-    window.addEventListener('resize', throttledCheckIsMobile);
-
-    // Setup Intersection Observer for mobile scroll animations
-    let observer: IntersectionObserver | null = null;
-    
-    const setupObserver = () => {
-      if (isMobile && cardObserverRefs.current.length > 0) {        observer = new IntersectionObserver(
-          (entries) => {
-            // Clear any existing timeout
-            if (debounceTimeoutRef.current) {
-              clearTimeout(debounceTimeoutRef.current);
-            }
-            
-            // Debounce the card activation to prevent rapid changes
-            debounceTimeoutRef.current = setTimeout(() => {
-              // Sort entries by intersection ratio to find the most visible card
-              const visibleEntries = entries
-                .filter(entry => entry.isIntersecting && entry.intersectionRatio > 0.5)
-                .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-              
-              if (visibleEntries.length > 0) {
-                // Only activate the most visible card
-                const mostVisibleEntry = visibleEntries[0];
-                const cardIndex = parseInt(mostVisibleEntry.target.getAttribute('data-card-index') || '0');
-                
-                // Only update if different from current active card to prevent unnecessary re-renders
-                setActiveCard(prevActiveCard => {
-                  if (prevActiveCard !== cardIndex) {
-                    return cardIndex;
-                  }
-                  return prevActiveCard;
-                });
-              } else {
-                // No cards are sufficiently visible
-                setActiveCard(prevActiveCard => {
-                  if (prevActiveCard !== null) {
-                    return null;
-                  }
-                  return prevActiveCard;
-                });
-              }
-            }, 100); // Increased debounce to 100ms for better performance
-          },
-          {
-            threshold: [0.0, 0.25, 0.5, 0.75, 1.0], // Reduced threshold points for better performance
-            rootMargin: '-20% 0px -20% 0px' // Increased margin for less frequent triggers
-          }
-        );
-
-        cardObserverRefs.current.forEach((card) => {
-          if (card && observer) observer.observe(card);
-        });
-      }
-    };
-
-    // Setup observer with a delay to ensure cards are rendered
-    const timeoutId = setTimeout(setupObserver, 200);
+    window.addEventListener('resize', throttledCheckIsMobile, { passive: true });
 
     const ctx = gsap.context(() => {
       // Section entry animation
@@ -206,15 +149,11 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
     });    return () => {
       ctx.revert();
       window.removeEventListener('resize', throttledCheckIsMobile);
-      clearTimeout(timeoutId);
-      if (debounceTimeoutRef.current) {
-        clearTimeout(debounceTimeoutRef.current);
-      }
       if (mobileCheckTimeoutRef.current) {
         clearTimeout(mobileCheckTimeoutRef.current);
       }
-      if (observer) {
-        observer.disconnect();
+      if (tappedTimeoutRef.current) {
+        clearTimeout(tappedTimeoutRef.current);
       }
     };
   }, [isMobile]);// Partnership data
@@ -264,11 +203,6 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
       venue: "St. Xavier's University",
     },];
 
-  // Memoize card ref function to prevent unnecessary re-renders
-  const createCardRef = useCallback((index: number) => (el: HTMLDivElement | null) => {
-    if (el) cardObserverRefs.current[index] = el;
-  }, []);
-
   return (
     <section className={styles.eventsSection} ref={sectionRef}>
       <div className={styles.container}>        <h2 className={styles.sectionHeading} ref={typewriterRef}></h2>
@@ -280,16 +214,34 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
             ref={(el) => {
               if (el) cardsRef.current.push(el);
             }}
-          >
-            {partnerships.map((partnership, index) => (
+          >            {partnerships.map((partnership, index) => (
               <PartnershipCard
                 key={partnership.id}
                 partnership={partnership}
                 styles={styles}
                 index={index}
                 hoveredIndex={hoveredIndex}
-                setHoveredIndex={setHoveredIndex}                isMobile={isMobile}
-                isVisible={isMobile ? index === activeCard : false}                cardRef={createCardRef(index)}
+                setHoveredIndex={setHoveredIndex}
+                isMobile={isMobile}
+                isTapped={isMobile ? index === tappedCard : false}
+                onTap={(cardIndex: number) => {
+                  if (isMobile) {
+                    // Clear any existing timeout
+                    if (tappedTimeoutRef.current) {
+                      clearTimeout(tappedTimeoutRef.current);
+                    }
+                    
+                    // Toggle tapped state
+                    setTappedCard(prev => prev === cardIndex ? null : cardIndex);
+                    
+                    // Auto-hide after 3 seconds if tapped
+                    if (tappedCard !== cardIndex) {
+                      tappedTimeoutRef.current = setTimeout(() => {
+                        setTappedCard(null);
+                      }, 3000);
+                    }
+                  }
+                }}
               />
             ))}
           </motion.div>
@@ -307,8 +259,8 @@ const PartnershipCard = memo(({
   hoveredIndex,
   setHoveredIndex,
   isMobile,
-  isVisible,
-  cardRef,
+  isTapped,
+  onTap,
 }: {
   partnership: {
     id: number;
@@ -324,58 +276,59 @@ const PartnershipCard = memo(({
   hoveredIndex: number | null;
   setHoveredIndex: (index: number | null) => void;
   isMobile: boolean;
-  isVisible: boolean;
-  cardRef: (el: HTMLDivElement | null) => void;
-}) => {  const [isHovered, setIsHovered] = useState(false);
-
-  // For mobile, use scroll-based visibility; for desktop, use hover
-  const shouldShowEffect = isMobile ? isVisible : hoveredIndex === index;
-
+  isTapped: boolean;
+  onTap: (index: number) => void;
+}) => {const [isHovered, setIsHovered] = useState(false);
+  // For mobile, use only tap state; for desktop, use hover
+  const shouldShowEffect = isMobile ? isTapped : hoveredIndex === index;
   return (
     <motion.div
       className={styles.partnershipCard || 'partnershipCard'}
-      ref={(el) => {
-        cardRef(el);
-        if (el) el.setAttribute('data-card-index', index.toString());
-      }}
       onHoverStart={() => {
         if (!isMobile) {
           setIsHovered(true);
           setHoveredIndex(index);
         }
-      }}
-      onHoverEnd={() => {
+      }}      onHoverEnd={() => {
         if (!isMobile) {
           setIsHovered(false);
           setHoveredIndex(null);
         }
-      }}      whileHover={!isMobile ? {
+      }}      onTap={() => {
+        if (isMobile) {
+          onTap(index);
+        }
+      }}
+      whileTap={isMobile ? { scale: 0.98 } : {}}whileHover={!isMobile ? {
         y: -12,
         scale: 1.02,
         transition: { duration: 0.3, ease: [0.25, 0.8, 0.25, 1] }
-      } : {}}      animate={isMobile ? (isVisible ? {
-        y: -16,
-        scale: 1.03,
+      } : {}}      animate={isMobile ? (isTapped ? {
+        y: -12,
+        scale: 1.02,
         transition: { 
-          duration: 0.4, 
-          ease: [0.23, 1, 0.32, 1],
-          type: "tween" // Use tween instead of spring for better performance
+          duration: 0.25, 
+          ease: "easeOut",
+          type: "tween"
         }
       } : {
         y: 0,
         scale: 1,
         transition: { 
-          duration: 0.3, 
-          ease: [0.23, 1, 0.32, 1],
+          duration: 0.2, 
+          ease: "easeOut",
           type: "tween"
         }
       }) : {}}style={{ 
-        position: 'relative',        // Add CSS shadows for mobile to match hover effect
-        ...(isMobile && isVisible ? {
-          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), 0 8px 20px rgba(87, 185, 194, 0.15)',
+        position: 'relative',        // Simplified mobile shadow effects for better performance
+        ...(isMobile && isTapped ? {
+          boxShadow: '0 15px 40px rgba(0, 0, 0, 0.25)',
           borderColor: 'rgba(87, 185, 194, 0.4)',
-          transform: 'translateZ(0)', // Enable hardware acceleration
-          willChange: 'transform' // Optimize for animations
+          transform: 'translate3d(0, 0, 0)', // Hardware acceleration
+          backfaceVisibility: 'hidden', // Prevent flickering
+          willChange: 'transform' // Only when animating
+        } : isMobile ? {
+          willChange: 'auto' // Reset when not animating
         } : {}),
         // Mobile-specific styling
         ...(isMobile ? {
@@ -393,7 +346,9 @@ const PartnershipCard = memo(({
               inset: 0,
               height: '100%',
               width: '100%',
-              background: 'linear-gradient(135deg, rgba(87, 185, 194, 0.15) 0%, rgba(87, 185, 194, 0.05) 50%, transparent 100%)',
+              background: isMobile && isTapped ? 
+                'linear-gradient(135deg, rgba(87, 185, 194, 0.2) 0%, rgba(87, 185, 194, 0.08) 50%, transparent 100%)' :
+                'linear-gradient(135deg, rgba(87, 185, 194, 0.15) 0%, rgba(87, 185, 194, 0.05) 50%, transparent 100%)',
               borderRadius: 'inherit', // This will inherit the border radius from the parent card
               backdropFilter: 'blur(20px)',
               border: '1px solid rgba(87, 185, 194, 0.4)',
@@ -404,22 +359,19 @@ const PartnershipCard = memo(({
               `,
               zIndex: 1,
             }}
-            layoutId={isMobile ? `mobileBackground-${index}` : "hoverBackground"}            initial={{ opacity: 0, scale: 0.96 }}
+            layoutId={isMobile ? `mobileBackground-${index}` : "hoverBackground"}            initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
-              scale: 1,
               transition: { 
-                duration: isMobile ? 0.4 : 0.3,
-                ease: isMobile ? [0.23, 1, 0.32, 1] : [0.25, 0.8, 0.25, 1],
-                type: "tween" // Use tween for better performance
+                duration: isMobile ? 0.2 : 0.3,
+                ease: "easeOut"
               },
             }}
             exit={{
               opacity: 0,
-              scale: 0.96,
               transition: { 
-                duration: isMobile ? 0.3 : 0.2,
-                ease: isMobile ? [0.23, 1, 0.32, 1] : [0.25, 0.8, 0.25, 1]
+                duration: isMobile ? 0.15 : 0.2,
+                ease: "easeOut"
               },
             }}
           />
@@ -427,12 +379,10 @@ const PartnershipCard = memo(({
       </AnimatePresence>{/* Original Card Content */}
       <div style={{ position: 'relative', zIndex: 2 }}>        {/* Logo Container */}        <motion.div
           className={styles.logoContainer || 'logoContainer'}          animate={{
-            scale: shouldShowEffect ? 1.06 : 1,
-            rotateY: shouldShowEffect ? 2 : 0,
+            scale: shouldShowEffect ? 1.04 : 1,
           }}          transition={{ 
-            duration: isMobile ? 0.4 : 0.4, 
-            ease: isMobile ? [0.23, 1, 0.32, 1] : [0.25, 0.8, 0.25, 1],
-            type: "tween" // Use tween for better performance
+            duration: 0.2, 
+            ease: "easeOut"
           }}
           style={{
             display: 'flex',
@@ -517,19 +467,16 @@ const PartnershipCard = memo(({
             whileHover={!isMobile ? { 
               scale: 1.05,
               boxShadow: '0 4px 20px rgba(87, 185, 194, 0.3)'
-            } : {}}            animate={isMobile ? (isVisible ? {
-              scale: 1.03,
-              boxShadow: '0 4px 20px rgba(87, 185, 194, 0.3)',
+            } : {}}            animate={isMobile ? (isTapped ? {
+              scale: 1.02,
               borderColor: 'var(--color-orange)'
             } : {
               scale: 1,
-              boxShadow: 'none',
               borderColor: 'rgba(87, 185, 194, 0.3)'
             }) : {}}
             whileTap={{ scale: 0.98 }}            transition={{ 
-              duration: isMobile ? 0.3 : 0.2,
-              ease: isMobile ? [0.23, 1, 0.32, 1] : [0.25, 0.8, 0.25, 1],
-              type: "tween" // Use tween for better performance
+              duration: 0.15,
+              ease: "easeOut"
             }}
           >
             <span className={styles.text || 'text'}>View More</span>
