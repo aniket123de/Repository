@@ -47,11 +47,62 @@ interface Partnership {
 export const LabCylinder = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
   const typewriterRef = useRef<HTMLHeadingElement>(null);
+  const cardObserverRefs = useRef<HTMLDivElement[]>([]);  useEffect(() => {
+    // Detect mobile device - improved detection
+    const checkIsMobile = () => {
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth <= 768;
+      const isMobileUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      setIsMobile(isTouchDevice || isSmallScreen || isMobileUserAgent);
+    };
+    
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
 
-  useEffect(() => {
+    // Setup Intersection Observer for mobile scroll animations
+    let observer: IntersectionObserver | null = null;
+    
+    const setupObserver = () => {
+      if (isMobile && cardObserverRefs.current.length > 0) {
+        observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              const cardIndex = parseInt(entry.target.getAttribute('data-card-index') || '0');
+              if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+                setVisibleCards(prev => {
+                  const newSet = new Set(prev);
+                  newSet.add(cardIndex);
+                  return newSet;
+                });
+              } else {
+                setVisibleCards(prev => {
+                  const newSet = new Set(prev);
+                  newSet.delete(cardIndex);
+                  return newSet;
+                });
+              }
+            });
+          },
+          {
+            threshold: [0.1, 0.3, 0.5, 0.7],
+            rootMargin: '-20% 0px -20% 0px'
+          }
+        );
+
+        cardObserverRefs.current.forEach((card) => {
+          if (card && observer) observer.observe(card);
+        });
+      }
+    };
+
+    // Setup observer with a delay to ensure cards are rendered
+    const timeoutId = setTimeout(setupObserver, 200);
+
     const ctx = gsap.context(() => {
       // Section entry animation
       gsap.fromTo(
@@ -128,10 +179,15 @@ export const LabCylinder = () => {
         yoyo: true,
         ease: "sine.inOut",
       });
-    });
-
-    return () => ctx.revert();
-  }, []);  // Partnership data
+    });    return () => {
+      ctx.revert();
+      window.removeEventListener('resize', checkIsMobile);
+      clearTimeout(timeoutId);
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+  }, [isMobile]);// Partnership data
   const partnerships = [
     {
       id: 1,
@@ -176,8 +232,7 @@ export const LabCylinder = () => {
       <div className={styles.container}>        <h2 className={styles.sectionHeading} ref={typewriterRef}></h2>
         {/* Add floating elements for visual enhancement */}
         <div className="floating-element" style={{ position: "absolute", top: "10%", left: "5%", width: "100px", height: "100px", background: "rgba(255, 255, 255, 0.1)", borderRadius: "50%" }}></div>
-        <div className="floating-element" style={{ position: "absolute", bottom: "15%", right: "8%", width: "150px", height: "150px", background: "rgba(255, 255, 255, 0.1)", borderRadius: "50%" }}></div>
-        <AnimatePresence mode="wait">
+        <div className="floating-element" style={{ position: "absolute", bottom: "15%", right: "8%", width: "150px", height: "150px", background: "rgba(255, 255, 255, 0.1)", borderRadius: "50%" }}></div>        <AnimatePresence mode="wait">
           <motion.div
             className={styles.eventsGrid}
             ref={(el) => {
@@ -192,6 +247,11 @@ export const LabCylinder = () => {
                 index={index}
                 hoveredIndex={hoveredIndex}
                 setHoveredIndex={setHoveredIndex}
+                isMobile={isMobile}
+                isVisible={visibleCards.has(index)}
+                cardRef={(el: HTMLDivElement | null) => {
+                  if (el) cardObserverRefs.current[index] = el;
+                }}
               />
             ))}
           </motion.div>
@@ -208,6 +268,9 @@ const PartnershipCard = ({
   index,
   hoveredIndex,
   setHoveredIndex,
+  isMobile,
+  isVisible,
+  cardRef,
 }: {
   partnership: {
     id: number;
@@ -222,29 +285,62 @@ const PartnershipCard = ({
   index: number;
   hoveredIndex: number | null;
   setHoveredIndex: (index: number | null) => void;
+  isMobile: boolean;
+  isVisible: boolean;
+  cardRef: (el: HTMLDivElement | null) => void;
 }) => {  const [isHovered, setIsHovered] = useState(false);
+
+  // For mobile, use scroll-based visibility; for desktop, use hover
+  const shouldShowEffect = isMobile ? isVisible : hoveredIndex === index;
 
   return (
     <motion.div
       className={styles.partnershipCard || 'partnershipCard'}
+      ref={(el) => {
+        cardRef(el);
+        if (el) el.setAttribute('data-card-index', index.toString());
+      }}
       onHoverStart={() => {
-        setIsHovered(true);
-        setHoveredIndex(index);
+        if (!isMobile) {
+          setIsHovered(true);
+          setHoveredIndex(index);
+        }
       }}
       onHoverEnd={() => {
-        setIsHovered(false);
-        setHoveredIndex(null);
-      }}
-      whileHover={{
+        if (!isMobile) {
+          setIsHovered(false);
+          setHoveredIndex(null);
+        }
+      }}      whileHover={!isMobile ? {
         y: -12,
         scale: 1.02,
         transition: { duration: 0.3, ease: [0.25, 0.8, 0.25, 1] }
+      } : {}}
+      animate={isMobile ? (isVisible ? {
+        y: -12,
+        scale: 1.02,
+        transition: { duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }
+      } : {
+        y: 0,
+        scale: 1,
+        transition: { duration: 0.4, ease: [0.25, 0.8, 0.25, 1] }
+      }) : {}}      style={{ 
+        position: 'relative',
+        // Add CSS shadows for mobile to match hover effect
+        ...(isMobile && isVisible ? {
+          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), 0 8px 20px rgba(87, 185, 194, 0.1)',
+          borderColor: 'rgba(87, 185, 194, 0.3)'
+        } : {}),
+        // Mobile-specific styling
+        ...(isMobile ? {
+          padding: '20px 16px',
+          minHeight: '320px',
+          maxWidth: '100%'
+        } : {})
       }}
-      style={{ position: 'relative' }}
-    >
-      {/* Animated Hover Background Effect */}
+    >      {/* Animated Hover Background Effect */}
       <AnimatePresence>
-        {hoveredIndex === index && (
+        {shouldShowEffect && (
           <motion.span
             style={{
               position: 'absolute',
@@ -262,13 +358,13 @@ const PartnershipCard = ({
               `,
               zIndex: 1,
             }}
-            layoutId="hoverBackground"
+            layoutId={isMobile ? `mobileBackground-${index}` : "hoverBackground"}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{
               opacity: 1,
               scale: 1,
               transition: { 
-                duration: 0.3,
+                duration: isMobile ? 0.5 : 0.3,
                 ease: [0.25, 0.8, 0.25, 1]
               },
             }}
@@ -276,24 +372,23 @@ const PartnershipCard = ({
               opacity: 0,
               scale: 0.95,
               transition: { 
-                duration: 0.2,
-                delay: 0.1,
+                duration: isMobile ? 0.3 : 0.2,
+                delay: isMobile ? 0 : 0.1,
                 ease: [0.25, 0.8, 0.25, 1]
               },
             }}
           />
         )}
-      </AnimatePresence>      {/* Original Card Content */}
-      <div style={{ position: 'relative', zIndex: 2 }}>
-        {/* Logo Container */}
+      </AnimatePresence>{/* Original Card Content */}
+      <div style={{ position: 'relative', zIndex: 2 }}>        {/* Logo Container */}
         <motion.div
           className={styles.logoContainer || 'logoContainer'}
           animate={{
-            scale: isHovered ? 1.1 : 1,
-            rotateY: isHovered ? 5 : 0,
+            scale: shouldShowEffect ? 1.1 : 1,
+            rotateY: shouldShowEffect ? 5 : 0,
           }}
           transition={{ 
-            duration: 0.4, 
+            duration: isMobile ? 0.5 : 0.4, 
             ease: [0.25, 0.8, 0.25, 1] 
           }}
           style={{
@@ -301,63 +396,96 @@ const PartnershipCard = ({
             alignItems: 'center',
             justifyContent: 'center',
             width: '100%',
-            margin: '0 auto 20px auto'
+            height: isMobile ? 'auto' : undefined,
+            minHeight: isMobile ? '80px' : undefined,
+            maxHeight: isMobile ? '100px' : undefined,
+            margin: isMobile ? '0 auto 16px auto' : '0 auto 20px auto',
+            padding: isMobile ? '8px' : '0'
           }}
         >
           <Image
             src={partnership.logo}
             alt={`${partnership.name} logo`}
             width={
-              partnership.name === "Metamorph 2K25" || partnership.name === "SAP Inside Track Kolkata" 
-                ? 100 
-                : 120
+              isMobile ? 
+                (partnership.name === "Metamorph 2K25" || partnership.name === "SAP Inside Track Kolkata" 
+                  ? 80 : 90) :
+                (partnership.name === "Metamorph 2K25" || partnership.name === "SAP Inside Track Kolkata" 
+                  ? 100 : 120)
             }
             height={
-              partnership.name === "Metamorph 2K25" || partnership.name === "SAP Inside Track Kolkata" 
-                ? 50 
-                : 60
+              isMobile ? 
+                (partnership.name === "Metamorph 2K25" || partnership.name === "SAP Inside Track Kolkata" 
+                  ? 40 : 45) :
+                (partnership.name === "Metamorph 2K25" || partnership.name === "SAP Inside Track Kolkata" 
+                  ? 50 : 60)
             }
             style={{ 
               objectFit: "contain",
-              display: 'block'
+              display: 'block',
+              maxWidth: isMobile ? '90%' : '100%',
+              height: 'auto'
             }}
           />
-        </motion.div>
-
-        {/* Content */}
+        </motion.div>{/* Content */}
         <div style={{ 
           flex: 1, 
           display: 'flex', 
           flexDirection: 'column', 
           justifyContent: 'space-between', 
           width: '100%',
-          minHeight: '280px'
+          minHeight: isMobile ? '240px' : '280px',
+          padding: isMobile ? '0 8px' : '0'
         }}>
-          <div>
-            <h3 className={styles.eventTitle || 'eventTitle'}>
+          <div style={{ marginBottom: isMobile ? '16px' : '20px' }}>
+            <h3 className={styles.eventTitle || 'eventTitle'} style={{
+              fontSize: isMobile ? 'clamp(18px, 4vw, 22px)' : undefined,
+              lineHeight: isMobile ? '1.3' : undefined,
+              marginBottom: isMobile ? '8px' : undefined
+            }}>
               {partnership.name}
             </h3>
-            <span className={styles.eventDate || 'eventDate'}>
+            <span className={styles.eventDate || 'eventDate'} style={{
+              fontSize: isMobile ? 'clamp(12px, 3vw, 14px)' : undefined,
+              marginBottom: isMobile ? '12px' : undefined,
+              display: 'block'
+            }}>
               {partnership.date}
             </span>
-            <p className={styles.description || 'description'}>
+            <p className={styles.description || 'description'} style={{
+              fontSize: isMobile ? 'clamp(12px, 3vw, 14px)' : undefined,
+              lineHeight: isMobile ? '1.4' : undefined,
+              marginBottom: isMobile ? '8px' : undefined
+            }}>
               {partnership.description}
             </p>
-            <p className={styles.description || 'description'}>
+            <p className={styles.description || 'description'} style={{
+              fontSize: isMobile ? 'clamp(11px, 2.8vw, 13px)' : undefined,
+              lineHeight: isMobile ? '1.3' : undefined,
+              marginBottom: isMobile ? '0' : undefined
+            }}>
               <strong>Venue:</strong> {partnership.venue}
-            </p>          </div>
-          {/* View More Button */}
-          <motion.a
+            </p>
+          </div>{/* View More Button */}          <motion.a
             href={partnership.link}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.viewMouButton || 'viewMouButton'}
-            whileHover={{ 
+            whileHover={!isMobile ? { 
               scale: 1.05,
               boxShadow: '0 4px 20px rgba(87, 185, 194, 0.3)'
-            }}
+            } : {}}
+            animate={isMobile ? (isVisible ? {
+              scale: 1.05,
+              boxShadow: '0 4px 20px rgba(87, 185, 194, 0.3)',
+              borderColor: 'var(--color-orange)'
+            } : {
+              scale: 1,
+              boxShadow: 'none',
+              borderColor: 'rgba(87, 185, 194, 0.3)'
+            }) : {}}
             whileTap={{ scale: 0.98 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: isMobile ? 0.5 : 0.2 }}
           >
             <span className={styles.text || 'text'}>View More</span>
           </motion.a>
