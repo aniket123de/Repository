@@ -754,7 +754,18 @@ export const TeamSection = () => {
         linkedin: "https://www.linkedin.com/in/parthita-chattopadhyay-7bb3072b4?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
         twitter: "https://x.com/half_icecream?t=1TLgicXbTdsiEs6JBJhA1A&s=09",
         instagram: "https://www.instagram.com/lesshairyape?igsh=aThxZmx2dDNoaGYy",
-        github: "https://github.com/Parthita"
+        github: "https://github.com/Parthita"      }
+    },
+    {
+      name: "Adrish",
+      role: "Tech Co-Lead",
+      statement: "Meaningful engagement creates lasting community bonds. I work to design events, workshops and interactive experiences that bring our members together, spark creativity, and create an atmosphere where knowledge sharing becomes second nature.",
+      image: "/team/adrish.jpg",
+      socials: {
+        linkedin: "https://www.linkedin.com/in/adrishbasak/",
+        instagram: "https://www.instagram.com/bepoisdying/?hl=en",
+        twitter: "https://x.com/bepoooooooooe",
+        github: "https://github.com/bepoooe"
       }
     },
     {
@@ -783,7 +794,7 @@ export const TeamSection = () => {
     },
     {
       name: "Protyoy",
-      role: "Creative & Marketing Lead",
+      role: "Design Lead",
       statement: "Great ideas deserve great storytelling. I blend creativity with strategy to showcase our community's incredible work, build our brand identity, and create compelling narratives that resonate with developers and industry leaders alike.",
       image: "/team/ptoy.jpg",
       socials: {
@@ -837,32 +848,7 @@ export const TeamSection = () => {
         linkedin: "https://www.linkedin.com/in/swapnanil-adhikary/",
         instagram: "https://www.instagram.com/putin_real1/",
         twitter: "https://x.com/SwapnanilA41903",
-        github: "https://github.com/SwapnanilAdhikary"
-      }
-    },
-    {
-      name: "Adrish",
-      role: "Engagement Lead",
-      statement: "Meaningful engagement creates lasting community bonds. I work to design events, workshops and interactive experiences that bring our members together, spark creativity, and create an atmosphere where knowledge sharing becomes second nature.",
-      image: "/team/adrish.jpg",
-      socials: {
-        linkedin: "https://www.linkedin.com/in/adrishbasak/",
-        instagram: "https://www.instagram.com/bepoisdying/?hl=en",
-        twitter: "https://x.com/bepoooooooooe",
-        github: "https://github.com/bepoooe"
-      }
-    },
-    {
-      name: "Sambit",
-      role: "Engagement Co-lead",
-      statement: "The strength of a community lies in its member interactions. I help craft meaningful engagement opportunities that foster genuine connections, encourage knowledge exchange, and create a supportive environment where everyone can thrive.",
-      image: "/team/sambit.jpg",
-      socials: {
-        linkedin: "https://www.linkedin.com/in/sambit-das-59688526a",
-        instagram: "https://www.instagram.com/itssambit/",
-        twitter: "https://x.com/iamsosambit?t=41IgU4oGEpRmUMK4NWVEgg&s=09",
-        github: "https://github.com/sambitdas77"
-      }
+        github: "https://github.com/SwapnanilAdhikary"      }
     },
     {
       name: "Pranay",
@@ -871,11 +857,25 @@ export const TeamSection = () => {
       image: "/team/pranay.jpg",
       socials: {
         linkedin: "https://www.linkedin.com/in/pranay-chatterjee-346717244/",
-        instagram: "https://www.instagram.com/heypranayy/",
-        twitter: "https://x.com/Pranay_221",
+        instagram: "https://www.instagram.com/heypranayy/",        twitter: "https://x.com/Pranay_221",
         github: "https://github.com/heypranayy"
       }
-    }  ];  const campusAmbassadors = [
+    },
+    {
+      name: "Sambit",
+      role: "Marketing Co-Lead",
+      statement: "The strength of a community lies in its member interactions. I help craft meaningful engagement opportunities that foster genuine connections, encourage knowledge exchange, and create a supportive environment where everyone can thrive.",
+      image: "/team/sambit.jpg",
+      socials: {
+        linkedin: "https://www.linkedin.com/in/sambit-das-59688526a",
+        instagram: "https://www.instagram.com/itssambit/",
+        twitter: "https://x.com/iamsosambit?t=41IgU4oGEpRmUMK4NWVEgg&s=09",
+        github: "https://github.com/sambitdas77"
+      }
+    }
+  ];
+
+  const campusAmbassadors = [
     {
       name: "Aayushi Kaushik",
       email: "33200122001@tib.edu.in",
@@ -1009,12 +1009,17 @@ export const TeamSection = () => {
       email: "shayanghosh0439@gmail.com",
       linkedin: "https://www.linkedin.com/in/shayan-ghosh-0834b3271/",
       college: "Abacus Institute of Engineering and Management"
-    },
-    {
+    },    {
       name: "Souvik Saha",
       email: "sahasouvik631@gmail.com",
       linkedin: "https://github.com/souvik27-lab",
       college: "Saroj Mohan Institute of Technology"
+    },
+    {
+      name: "Subhanu Majumder",
+      email: "reach.subhanu@gmail.com",
+      linkedin: "https://www.linkedin.com/in/subhanumajumder/",
+      college: "Future Institute of Engineering and Management"
     }
   ];
   return (
