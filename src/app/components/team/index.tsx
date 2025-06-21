@@ -1009,12 +1009,17 @@ export const TeamSection = () => {
       email: "shayanghosh0439@gmail.com",
       linkedin: "https://www.linkedin.com/in/shayan-ghosh-0834b3271/",
       college: "Abacus Institute of Engineering and Management"
-    },
-    {
+    },    {
       name: "Souvik Saha",
       email: "sahasouvik631@gmail.com",
       linkedin: "https://github.com/souvik27-lab",
       college: "Saroj Mohan Institute of Technology"
+    },
+    {
+      name: "Subhanu Majumder",
+      email: "reach.subhanu@gmail.com",
+      linkedin: "https://www.linkedin.com/in/subhanumajumder/",
+      college: "Future Institute of Engineering and Management"
     }
   ];
   return (
