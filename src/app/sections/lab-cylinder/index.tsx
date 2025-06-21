@@ -52,13 +52,13 @@ export const LabCylinder = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
   const typewriterRef = useRef<HTMLHeadingElement>(null);
-  const cardObserverRefs = useRef<HTMLDivElement[]>([]);  useEffect(() => {
-    // Detect mobile device - improved detection
+  const cardObserverRefs = useRef<HTMLDivElement[]>([]);  useEffect(() => {    // Detect mobile device - improved detection
     const checkIsMobile = () => {
       const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
       const isSmallScreen = window.innerWidth <= 768;
       const isMobileUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      setIsMobile(isTouchDevice || isSmallScreen || isMobileUserAgent);
+      const hasCoarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+      setIsMobile(isTouchDevice || isSmallScreen || isMobileUserAgent || hasCoarsePointer);
     };
     
     checkIsMobile();
@@ -68,18 +68,18 @@ export const LabCylinder = () => {
     let observer: IntersectionObserver | null = null;
     
     const setupObserver = () => {
-      if (isMobile && cardObserverRefs.current.length > 0) {
-        observer = new IntersectionObserver(
+      if (isMobile && cardObserverRefs.current.length > 0) {        observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
               const cardIndex = parseInt(entry.target.getAttribute('data-card-index') || '0');
-              if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+              // More responsive threshold for mobile
+              if (entry.isIntersecting && entry.intersectionRatio > 0.25) {
                 setVisibleCards(prev => {
                   const newSet = new Set(prev);
                   newSet.add(cardIndex);
                   return newSet;
                 });
-              } else {
+              } else if (!entry.isIntersecting || entry.intersectionRatio < 0.1) {
                 setVisibleCards(prev => {
                   const newSet = new Set(prev);
                   newSet.delete(cardIndex);
@@ -89,8 +89,8 @@ export const LabCylinder = () => {
             });
           },
           {
-            threshold: [0.1, 0.3, 0.5, 0.7],
-            rootMargin: '-20% 0px -20% 0px'
+            threshold: [0.1, 0.25, 0.4, 0.6, 0.8],
+            rootMargin: '-15% 0px -15% 0px' // Slightly less aggressive margin for smoother triggers
           }
         );
 
@@ -315,16 +315,27 @@ const PartnershipCard = ({
         y: -12,
         scale: 1.02,
         transition: { duration: 0.3, ease: [0.25, 0.8, 0.25, 1] }
-      } : {}}
-      animate={isMobile ? (isVisible ? {
+      } : {}}      animate={isMobile ? (isVisible ? {
         y: -12,
         scale: 1.02,
-        transition: { duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }
+        transition: { 
+          duration: 0.8, 
+          ease: [0.16, 1, 0.3, 1],
+          type: "spring",
+          damping: 25,
+          stiffness: 120
+        }
       } : {
         y: 0,
         scale: 1,
-        transition: { duration: 0.4, ease: [0.25, 0.8, 0.25, 1] }
-      }) : {}}      style={{ 
+        transition: { 
+          duration: 0.6, 
+          ease: [0.16, 1, 0.3, 1],
+          type: "spring",
+          damping: 20,
+          stiffness: 100
+        }
+      }) : {}}style={{ 
         position: 'relative',
         // Add CSS shadows for mobile to match hover effect
         ...(isMobile && isVisible ? {
@@ -348,7 +359,7 @@ const PartnershipCard = ({
               height: '100%',
               width: '100%',
               background: 'linear-gradient(135deg, rgba(87, 185, 194, 0.15) 0%, rgba(87, 185, 194, 0.05) 50%, transparent 100%)',
-              borderRadius: '1.5rem',
+              borderRadius: 'inherit', // This will inherit the border radius from the parent card
               backdropFilter: 'blur(20px)',
               border: '1px solid rgba(87, 185, 194, 0.4)',
               boxShadow: `
@@ -359,22 +370,24 @@ const PartnershipCard = ({
               zIndex: 1,
             }}
             layoutId={isMobile ? `mobileBackground-${index}` : "hoverBackground"}
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{
               opacity: 1,
               scale: 1,
               transition: { 
-                duration: isMobile ? 0.5 : 0.3,
-                ease: [0.25, 0.8, 0.25, 1]
+                duration: isMobile ? 0.8 : 0.3,
+                ease: isMobile ? [0.16, 1, 0.3, 1] : [0.25, 0.8, 0.25, 1],
+                type: isMobile ? "spring" : "tween",
+                ...(isMobile && { damping: 25, stiffness: 120 })
               },
             }}
             exit={{
               opacity: 0,
               scale: 0.95,
               transition: { 
-                duration: isMobile ? 0.3 : 0.2,
+                duration: isMobile ? 0.5 : 0.2,
                 delay: isMobile ? 0 : 0.1,
-                ease: [0.25, 0.8, 0.25, 1]
+                ease: isMobile ? [0.16, 1, 0.3, 1] : [0.25, 0.8, 0.25, 1]
               },
             }}
           />
@@ -382,14 +395,14 @@ const PartnershipCard = ({
       </AnimatePresence>{/* Original Card Content */}
       <div style={{ position: 'relative', zIndex: 2 }}>        {/* Logo Container */}
         <motion.div
-          className={styles.logoContainer || 'logoContainer'}
-          animate={{
+          className={styles.logoContainer || 'logoContainer'}          animate={{
             scale: shouldShowEffect ? 1.1 : 1,
             rotateY: shouldShowEffect ? 5 : 0,
           }}
           transition={{ 
-            duration: isMobile ? 0.5 : 0.4, 
-            ease: [0.25, 0.8, 0.25, 1] 
+            duration: isMobile ? 0.8 : 0.4, 
+            ease: isMobile ? [0.16, 1, 0.3, 1] : [0.25, 0.8, 0.25, 1],
+            ...(isMobile && { type: "spring", damping: 25, stiffness: 120 })
           }}
           style={{
             display: 'flex',
@@ -474,8 +487,7 @@ const PartnershipCard = ({
             whileHover={!isMobile ? { 
               scale: 1.05,
               boxShadow: '0 4px 20px rgba(87, 185, 194, 0.3)'
-            } : {}}
-            animate={isMobile ? (isVisible ? {
+            } : {}}            animate={isMobile ? (isVisible ? {
               scale: 1.05,
               boxShadow: '0 4px 20px rgba(87, 185, 194, 0.3)',
               borderColor: 'var(--color-orange)'
@@ -485,7 +497,11 @@ const PartnershipCard = ({
               borderColor: 'rgba(87, 185, 194, 0.3)'
             }) : {}}
             whileTap={{ scale: 0.98 }}
-            transition={{ duration: isMobile ? 0.5 : 0.2 }}
+            transition={{ 
+              duration: isMobile ? 0.6 : 0.2,
+              ease: isMobile ? [0.16, 1, 0.3, 1] : [0.25, 0.8, 0.25, 1],
+              ...(isMobile && { type: "spring", damping: 20, stiffness: 100 })
+            }}
           >
             <span className={styles.text || 'text'}>View More</span>
           </motion.a>

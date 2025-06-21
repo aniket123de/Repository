@@ -191,13 +191,15 @@
       }
     }
   }
-    @media screen and (max-width: 800px) {
+  @media screen and (max-width: 800px) {
     padding: tovw(24px, "mobile", 20px);
     min-height: tovw(320px, "mobile", 300px);
     border-radius: tovw(18px, "mobile", 16px);
     margin: 0 auto;
     max-width: 400px;
     width: 100%;
+    // Ensure smooth transitions on mobile
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   @media screen and (max-width: 480px) {
@@ -205,12 +207,14 @@
     min-height: tovw(300px, "mobile", 280px);
     border-radius: tovw(16px, "mobile", 14px);
     max-width: 100%;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   @media screen and (max-width: 360px) {
     padding: tovw(16px, "mobile", 14px);
     min-height: tovw(280px, "mobile", 260px);
     border-radius: tovw(14px, "mobile", 12px);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 
