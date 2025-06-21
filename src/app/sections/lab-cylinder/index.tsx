@@ -46,14 +46,12 @@ interface Partnership {
 
 export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState(false);  const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const [tappedCard, setTappedCard] = useState<number | null>(null);
   const tappedTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
   const typewriterRef = useRef<HTMLHeadingElement>(null);
-  const cardObserverRefs = useRef<HTMLDivElement[]>([]);
-  const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const mobileCheckTimeoutRef = useRef<NodeJS.Timeout | null>(null);useEffect(() => {    // Detect mobile device - improved detection with throttling
     const checkIsMobile = () => {
       const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -71,55 +69,6 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
     
     checkIsMobile();
     window.addEventListener('resize', throttledCheckIsMobile, { passive: true });
-
-    // Setup Intersection Observer for mobile scroll animations
-    let observer: IntersectionObserver | null = null;
-    
-    const setupObserver = () => {
-      if (isMobile && cardObserverRefs.current.length > 0) {        observer = new IntersectionObserver(
-          (entries) => {
-            // Use requestAnimationFrame for smoother updates
-            requestAnimationFrame(() => {
-              // Clear any existing timeout
-              if (debounceTimeoutRef.current) {
-                clearTimeout(debounceTimeoutRef.current);
-              }
-              
-              // Reduced debounce for more responsive feel
-              debounceTimeoutRef.current = setTimeout(() => {
-                // Find the most visible card more efficiently
-                let mostVisibleCard = null;
-                let maxRatio = 0.3; // Lower threshold for better responsiveness
-                
-                for (const entry of entries) {
-                  if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
-                    maxRatio = entry.intersectionRatio;
-                    mostVisibleCard = parseInt(entry.target.getAttribute('data-card-index') || '0');
-                  }
-                }
-                
-                // Only update if there's a change
-                setActiveCard(prevActiveCard => {
-                  if (mostVisibleCard !== prevActiveCard) {
-                    return mostVisibleCard;
-                  }
-                  return prevActiveCard;
-                });
-              }, 50); // Reduced debounce for better responsiveness
-            });
-          },
-          {
-            threshold: [0.3, 0.6], // Minimal threshold points for best performance
-            rootMargin: '-10% 0px -10% 0px' // Smaller margin for more responsive triggers
-          }
-        );
-
-        cardObserverRefs.current.forEach((card) => {
-          if (card && observer) observer.observe(card);
-        });
-      }
-    };    // Setup observer with reduced delay for better responsiveness
-    const timeoutId = setTimeout(setupObserver, 100);
 
     const ctx = gsap.context(() => {
       // Section entry animation
@@ -200,17 +149,11 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
     });    return () => {
       ctx.revert();
       window.removeEventListener('resize', throttledCheckIsMobile);
-      clearTimeout(timeoutId);
-      if (debounceTimeoutRef.current) {
-        clearTimeout(debounceTimeoutRef.current);
-      }      if (mobileCheckTimeoutRef.current) {
+      if (mobileCheckTimeoutRef.current) {
         clearTimeout(mobileCheckTimeoutRef.current);
       }
       if (tappedTimeoutRef.current) {
         clearTimeout(tappedTimeoutRef.current);
-      }
-      if (observer) {
-        observer.disconnect();
       }
     };
   }, [isMobile]);// Partnership data
@@ -252,11 +195,6 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
       venue: "St. Xavier's University",
     },  ];
 
-  // Memoize card ref function to prevent unnecessary re-renders
-  const createCardRef = useCallback((index: number) => (el: HTMLDivElement | null) => {
-    if (el) cardObserverRefs.current[index] = el;
-  }, []);
-
   return (
     <section className={styles.eventsSection} ref={sectionRef}>
       <div className={styles.container}>        <h2 className={styles.sectionHeading} ref={typewriterRef}></h2>
@@ -268,17 +206,17 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
             ref={(el) => {
               if (el) cardsRef.current.push(el);
             }}
-          >
-            {partnerships.map((partnership, index) => (
+          >            {partnerships.map((partnership, index) => (
               <PartnershipCard
                 key={partnership.id}
                 partnership={partnership}
                 styles={styles}
                 index={index}
                 hoveredIndex={hoveredIndex}
-                setHoveredIndex={setHoveredIndex}                isMobile={isMobile}
-                isVisible={isMobile ? index === activeCard : false}
-                isTapped={isMobile ? index === tappedCard : false}                onTap={(cardIndex: number) => {
+                setHoveredIndex={setHoveredIndex}
+                isMobile={isMobile}
+                isTapped={isMobile ? index === tappedCard : false}
+                onTap={(cardIndex: number) => {
                   if (isMobile) {
                     // Clear any existing timeout
                     if (tappedTimeoutRef.current) {
@@ -296,7 +234,6 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
                     }
                   }
                 }}
-                cardRef={createCardRef(index)}
               />
             ))}
           </motion.div>
@@ -314,10 +251,8 @@ const PartnershipCard = memo(({
   hoveredIndex,
   setHoveredIndex,
   isMobile,
-  isVisible,
   isTapped,
   onTap,
-  cardRef,
 }: {
   partnership: {
     id: number;
@@ -333,21 +268,14 @@ const PartnershipCard = memo(({
   hoveredIndex: number | null;
   setHoveredIndex: (index: number | null) => void;
   isMobile: boolean;
-  isVisible: boolean;
   isTapped: boolean;
   onTap: (index: number) => void;
-  cardRef: (el: HTMLDivElement | null) => void;
 }) => {const [isHovered, setIsHovered] = useState(false);
-  // For mobile, use scroll-based visibility or tap state; for desktop, use hover
-  const shouldShowEffect = isMobile ? (isVisible || isTapped) : hoveredIndex === index;
-
+  // For mobile, use only tap state; for desktop, use hover
+  const shouldShowEffect = isMobile ? isTapped : hoveredIndex === index;
   return (
     <motion.div
       className={styles.partnershipCard || 'partnershipCard'}
-      ref={(el) => {
-        cardRef(el);
-        if (el) el.setAttribute('data-card-index', index.toString());
-      }}
       onHoverStart={() => {
         if (!isMobile) {
           setIsHovered(true);
@@ -367,7 +295,7 @@ const PartnershipCard = memo(({
         y: -12,
         scale: 1.02,
         transition: { duration: 0.3, ease: [0.25, 0.8, 0.25, 1] }
-      } : {}}      animate={isMobile ? ((isVisible || isTapped) ? {
+      } : {}}      animate={isMobile ? (isTapped ? {
         y: -12,
         scale: 1.02,
         transition: { 
@@ -385,7 +313,7 @@ const PartnershipCard = memo(({
         }
       }) : {}}style={{ 
         position: 'relative',        // Simplified mobile shadow effects for better performance
-        ...(isMobile && (isVisible || isTapped) ? {
+        ...(isMobile && isTapped ? {
           boxShadow: '0 15px 40px rgba(0, 0, 0, 0.25)',
           borderColor: 'rgba(87, 185, 194, 0.4)',
           transform: 'translate3d(0, 0, 0)', // Hardware acceleration
@@ -531,7 +459,7 @@ const PartnershipCard = memo(({
             whileHover={!isMobile ? { 
               scale: 1.05,
               boxShadow: '0 4px 20px rgba(87, 185, 194, 0.3)'
-            } : {}}            animate={isMobile ? ((isVisible || isTapped) ? {
+            } : {}}            animate={isMobile ? (isTapped ? {
               scale: 1.02,
               borderColor: 'var(--color-orange)'
             } : {
