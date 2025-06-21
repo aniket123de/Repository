@@ -236,8 +236,7 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
       logo: "/hackathon-logos/sc2logo.png",
       link: "https://statuscode-2.devfolio.co/?ref=843a4bfca8",
       venue: "IIIT Kalyani",
-    },
-    {
+    },    {
       id: 2,
       name: "Metamorph 2K25",
       date: "Sep 6-7, 2025",
@@ -247,6 +246,15 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
       venue: "Guru Nanak Institute of Technology",
     },
     {
+      id: 5,
+      name: "Hack4Brahma",
+      date: "Sep 9-10, 2025",
+      description: "An exciting hackathon bringing together innovators and developers in the northeast region.",
+      logo: "/hackathon-logos/hack4brahma.png", // Placeholder - add actual logo when available
+      link: "https://hack4brahmaputra.devfolio.co/?ref=843a4bfca8", // Placeholder - add actual link when available
+      venue: "Guwahati",
+    },
+    {
       id: 4,
       name: "SAP Inside Track Kolkata",
       date: "Aug 2, 2025",
@@ -254,7 +262,7 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
       logo: "/hackathon-logos/sap.jpeg",
       link: "https://www.linkedin.com/company/sap-inside-track-kolkata/",
       venue: "St. Xavier's University",
-    },  ];
+    },];
 
   // Memoize card ref function to prevent unnecessary re-renders
   const createCardRef = useCallback((index: number) => (el: HTMLDivElement | null) => {
