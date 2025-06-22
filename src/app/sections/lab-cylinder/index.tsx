@@ -195,7 +195,7 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
     },
     {
       id: 4,
-      name: "SAP Inside Track Kolkata",
+      name: "SAP Inside Track",
       date: "Aug 2, 2025",
       description: "A platform for the SAP community to network, learn, and grow together with SAP developments in Kolkata.",
       logo: "/hackathon-logos/sap.jpeg",
