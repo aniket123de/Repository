@@ -464,6 +464,18 @@ const PartnershipCard = memo(({
             target="_blank"
             rel="noopener noreferrer"
             className={styles.viewMouButton || 'viewMouButton'}
+            onClick={(e) => {
+              // Prevent card tap handler from interfering with button click
+              e.stopPropagation();
+            }}
+            onTouchStart={(e) => {
+              // Prevent card touch events from interfering on mobile
+              e.stopPropagation();
+            }}
+            onTouchEnd={(e) => {
+              // Prevent card touch events from interfering on mobile
+              e.stopPropagation();
+            }}
             whileHover={!isMobile ? { 
               scale: 1.05,
               boxShadow: '0 4px 20px rgba(87, 185, 194, 0.3)'
@@ -477,6 +489,19 @@ const PartnershipCard = memo(({
             whileTap={{ scale: 0.98 }}            transition={{ 
               duration: 0.15,
               ease: "easeOut"
+            }}
+            style={{
+              // Ensure button has proper touch target size on mobile
+              minHeight: isMobile ? '44px' : undefined,
+              minWidth: isMobile ? '120px' : undefined,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textDecoration: 'none',
+              // Improve touch responsiveness
+              touchAction: 'manipulation',
+              userSelect: 'none',
+              WebkitTapHighlightColor: 'transparent'
             }}
           >
             <span className={styles.text || 'text'}>View More</span>
