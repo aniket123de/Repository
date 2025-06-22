@@ -949,7 +949,7 @@ export const TeamSection = () => {
       name: "Gourabananda Datta",
       email: "gourabanandadattacse@gmail.com",
       linkedin: "https://www.linkedin.com/in/gourabananda-datta-a3521a285",
-      college: "Ramkrishna Mahato Government Engineering College, Purulia"
+      college: "Ramkrishna Mahato Government Engineering College"
     },
     {
       name: "Piyush Goenka",
@@ -979,7 +979,7 @@ export const TeamSection = () => {
       name: "Rimanshu Patel",
       email: "rimanshupatel1@gmail.com",
       linkedin: "https://www.linkedin.com/in/rimanshu-patel-246a79245?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-      college: "Techno India University"
+      college: "Brainware University"
     },
     {
       name: "Rupsa Das",
