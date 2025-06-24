@@ -581,9 +581,25 @@
 .ambassadors-section {
   margin-top: tovw(120px, "desktop-large", 80px);
   position: relative;
+<<<<<<< HEAD
   z-index: 1;  .ambassadors-header {
+=======
+  z-index: 1;
+  padding: 0 20px; // Add horizontal padding to prevent content cutoff
+
+  @media screen and (max-width: 800px) {
+    margin-top: 60px;
+    padding: 0 15px; // Tighter padding on mobile
+  }
+
+  @media screen and (max-width: 480px) {
+    margin-top: 40px;
+    padding: 0 10px; // Even tighter padding on small mobile
+  }.ambassadors-header {
+>>>>>>> 3fe10bd487d99d13385f3ab53a19c8a3fe82d1d2
     text-align: center;
     margin-bottom: tovw(40px, "desktop-large", 30px);
+    padding: 0 20px; // Add horizontal padding to prevent text cutoff
 
     h3 {
       font-size: tovw(58px, "desktop-large", 46px);
@@ -594,6 +610,8 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       position: relative;
+      word-wrap: break-word; // Ensure text wraps on smaller screens
+      overflow-wrap: break-word;
 
       &::after {
         content: '';
@@ -602,6 +620,22 @@
         height: 2px;
         background: linear-gradient(to right, transparent, var(--color-orange), transparent);
         margin: 30px auto 0;
+      }
+
+      @media screen and (max-width: 800px) {
+        font-size: 32px;
+        line-height: 1.2;
+        margin-bottom: 15px;
+        
+        &::after {
+          width: 80px;
+          margin: 20px auto 0;
+        }
+      }
+      
+      @media screen and (max-width: 480px) {
+        font-size: 28px;
+        line-height: 1.1;
       }
     }
 
@@ -674,6 +708,16 @@
       @media screen and (max-width: 800px) {
         gap: 20px;
         flex-wrap: wrap;
+      }
+    }
+
+    @media screen and (max-width: 800px) {
+      margin-bottom: 20px;
+      padding: 0 15px;
+      
+      p {
+        font-size: 14px;
+        line-height: 1.4;
       }
     }
   }
