@@ -768,8 +768,7 @@ export const TeamSection = () => {
     );  }, [isLoaded]);
 
   // Function to get campus ambassador image
-  const getCampusAmbassadorImage = (name: string): string | undefined => {
-    const imageMap: { [key: string]: string } = {
+  const getCampusAmbassadorImage = (name: string): string | undefined => {    const imageMap: { [key: string]: string } = {
       "Arnab Mal": "/ca/1000198148 - Arnab.jpg",
       "Shatadru Dhar": "/ca/1000200600 (1) - Shatadru Dhar.jpg",
       "Arunima Dutta": "/ca/IMG-20221003-WA0006 - Arunima Dutta.jpg",
@@ -785,7 +784,8 @@ export const TeamSection = () => {
       "Debosmita Chowdhury": "/ca/Polish_20241224_101440639 - Debosmita Chowdhury.jpg",
       "Debangshu Chatterjee": "/ca/Screenshot_20240403_213620 - Debangshu Chatterjee.jpg",
       "Dhrubojyoti Saha": "/ca/team-slider3 - Dhrubojyoti Saha.png",
-      "Piyush Goenka": "/ca/WhatsApp Image 2024-10-02 at 22.40.08_4130eb42 - Piyush Goenka.jpg"
+      "Piyush Goenka": "/ca/WhatsApp Image 2024-10-02 at 22.40.08_4130eb42 - Piyush Goenka.jpg",
+      "Arpan Mitra": "/ca/Snapchat-1240840304 - _.zeniki._.jpg"
     };
     
     return imageMap[name];
