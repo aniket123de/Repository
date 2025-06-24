@@ -934,7 +934,8 @@ export const TeamSection = () => {
       image: "/team/pranay.jpg",
       socials: {
         linkedin: "https://www.linkedin.com/in/pranay-chatterjee-346717244/",
-        instagram: "https://www.instagram.com/heypranayy/",        twitter: "https://x.com/Pranay_221",
+        instagram: "https://www.instagram.com/heypranayy/",        
+        twitter: "https://x.com/Pranay_221",
         github: "https://github.com/heypranayy"
       }
     },
