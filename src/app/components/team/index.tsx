@@ -557,13 +557,7 @@ export const CampusAmbassador: React.FC<CampusAmbassadorProps> = ({
                 {name.split(' ').map(n => n[0]).join('').slice(0, 2)}
               </div>
             </div>
-          )}
-          <div className={s["ambassador-badge"]}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="12" cy="12" r="10" fill="#FF6B35"/>
-              <path d="M12 6L14.5 10.5L19 11L15.5 14.5L16.5 19L12 16.5L7.5 19L8.5 14.5L5 11L9.5 10.5L12 6Z" fill="#fff"/>
-            </svg>
-          </div>
+          )}          
         </div>
       </div>
       <div className={s["ambassador-content"]}>

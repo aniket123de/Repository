@@ -365,7 +365,7 @@
       width: tovw(44px, "desktop-large", 40px);
       height: tovw(44px, "desktop-large", 40px);
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--color-orange), darken(#FF6B35, 15%));
+      background: linear-gradient(135deg, var(--color-orange), #e55a28);
       color: var(--color-black);
       font-size: tovw(18px, "desktop-large", 16px);
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -537,6 +537,20 @@
   100% {
     transform: translate(0, 0);
     opacity: 0.5;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0;
   }
 }
 
@@ -892,17 +906,17 @@
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-  padding: tovw(24px, "desktop-large", 20px);
+  padding: tovw(32px, "desktop-large", 20px);
   display: flex;
   flex-direction: column;
-  gap: tovw(16px, "desktop-large", 14px);
+  gap: tovw(20px, "desktop-large", 14px);
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   backdrop-filter: blur(15px);
   position: relative;
   overflow: hidden;
   opacity: 0; // Start with opacity 0 for GSAP animation
   will-change: transform, opacity;
-  min-height: 280px;
+  min-height: tovw(320px, "desktop-large", 280px);
 
   // Gradient border effect
   &::before {
@@ -931,15 +945,22 @@
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-
   &:hover {
-    transform: translateY(-8px) scale(1.02);
+    transform: translateY(-10px) scale(1.03);
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
     border-color: rgba(87, 185, 194, 0.4);
     box-shadow: 
-      0 15px 50px rgba(0, 0, 0, 0.4),
+      0 20px 60px rgba(0, 0, 0, 0.4),
       0 0 0 1px rgba(87, 185, 194, 0.2),
-      0 0 40px rgba(87, 185, 194, 0.15);
+      0 0 50px rgba(87, 185, 194, 0.15);
+
+    @media screen and (max-width: 800px) {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 
+        0 15px 50px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(87, 185, 194, 0.2),
+        0 0 40px rgba(87, 185, 194, 0.15);
+    }
 
     &::before {
       opacity: 1;
@@ -956,9 +977,17 @@
         .ambassador-avatar {
           filter: brightness(1.1) contrast(1.05) saturate(1.1);
         }
-        
-        .ambassador-badge {
-          transform: scale(1.1) rotate(10deg);
+          .ambassador-badge {
+          transform: scale(1.15) rotate(15deg);
+          box-shadow: 
+            0 8px 25px rgba(255, 193, 7, 0.6),
+            0 4px 12px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.7);
+          
+          &::before {
+            opacity: 1;
+            animation-duration: 1.5s;
+          }
         }
       }
     }
@@ -967,12 +996,10 @@
   .ambassador-image {
     display: flex;
     justify-content: center;
-    margin-bottom: tovw(12px, "desktop-large", 10px);
-    
-    .image-wrapper {
+    margin-bottom: tovw(12px, "desktop-large", 10px);    .image-wrapper {
       position: relative;
-      width: tovw(100px, "desktop-large", 90px);
-      height: tovw(100px, "desktop-large", 90px);
+      width: tovw(180px, "desktop-large", 130px);
+      height: tovw(180px, "desktop-large", 130px);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         .ambassador-avatar {
         width: 100%;
@@ -1055,34 +1082,65 @@
           background: linear-gradient(135deg, rgba(87, 185, 194, 0.4), rgba(255, 107, 53, 0.4));
         }
       }
-      
-      .ambassador-badge {
+        .ambassador-badge {
         position: absolute;
-        bottom: -5px;
-        right: -5px;
-        width: tovw(28px, "desktop-large", 24px);
-        height: tovw(28px, "desktop-large", 24px);
-        background: linear-gradient(135deg, var(--color-orange), darken(#FF6B35, 10%));
+        bottom: -8px;
+        right: -8px;
+        width: tovw(36px, "desktop-large", 28px);
+        height: tovw(36px, "desktop-large", 28px);
+        background: linear-gradient(135deg, 
+          rgba(255, 215, 0, 0.95) 0%,
+          rgba(255, 193, 7, 0.95) 30%, 
+          rgba(255, 152, 0, 0.95) 70%,
+          rgba(255, 111, 97, 0.95) 100%);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 2px solid var(--color-black);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 3px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 
+          0 6px 20px rgba(255, 193, 7, 0.4),
+          0 2px 8px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        backdrop-filter: blur(8px);
+        position: relative;
+        
+        // Add shimmer effect
+        &::before {
+          content: '';
+          position: absolute;
+          top: -2px;
+          left: -2px;
+          right: -2px;
+          bottom: -2px;
+          background: conic-gradient(from 0deg, 
+            transparent 0deg,
+            rgba(255, 255, 255, 0.8) 60deg,
+            transparent 120deg,
+            rgba(255, 255, 255, 0.8) 180deg,
+            transparent 240deg,
+            rgba(255, 255, 255, 0.8) 300deg,
+            transparent 360deg);
+          border-radius: 50%;
+          opacity: 0;
+          animation: shimmer 3s ease-in-out infinite;
+          z-index: -1;
+        }
         
         svg {
-          width: tovw(14px, "desktop-large", 12px);
-          height: tovw(14px, "desktop-large", 12px);
+          width: tovw(18px, "desktop-large", 14px);
+          height: tovw(18px, "desktop-large", 14px);
+          filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
         }
         
         @media screen and (max-width: 800px) {
-          width: 20px;
-          height: 20px;
+          width: 24px;
+          height: 24px;
           
           svg {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
           }
         }
       }
@@ -1093,11 +1151,10 @@
       }
     }
   }
-
   .ambassador-content {
     display: flex;
     flex-direction: column;
-    gap: tovw(16px, "desktop-large", 14px);
+    gap: tovw(20px, "desktop-large", 14px);
     flex: 1;
   }
 
@@ -1105,10 +1162,10 @@
     text-align: center;
     
     h4 {
-      font-size: tovw(18px, "desktop-large", 16px);
+      font-size: tovw(24px, "desktop-large", 19px);
       font-weight: 700;
       color: var(--color-white);
-      margin-bottom: tovw(6px, "desktop-large", 5px);
+      margin-bottom: tovw(8px, "desktop-large", 5px);
       line-height: 1.2;
       background: linear-gradient(135deg, #fff, #b2ebf2);
       -webkit-background-clip: text;
@@ -1117,7 +1174,7 @@
     }
 
     .college-name {
-      font-size: tovw(13px, "desktop-large", 12px);
+      font-size: tovw(16px, "desktop-large", 14px);
       color: rgba(255, 255, 255, 0.7);
       line-height: 1.4;
       font-weight: 500;
@@ -1129,19 +1186,17 @@
     display: flex;
     gap: tovw(10px, "desktop-large", 8px);
     justify-content: center;
-    margin-top: auto;
-
-    .contact-link {
+    margin-top: auto;    .contact-link {
       display: flex;
       align-items: center;
-      gap: tovw(6px, "desktop-large", 5px);
-      padding: tovw(8px, "desktop-large", 7px) tovw(12px, "desktop-large", 10px);
+      gap: tovw(8px, "desktop-large", 5px);
+      padding: tovw(10px, "desktop-large", 7px) tovw(16px, "desktop-large", 10px);
       background: linear-gradient(135deg, rgba(87, 185, 194, 0.15), rgba(87, 185, 194, 0.05));
       border: 1px solid rgba(87, 185, 194, 0.3);
       border-radius: 25px;
       color: var(--color-white);
       text-decoration: none;
-      font-size: tovw(12px, "desktop-large", 11px);
+      font-size: tovw(13px, "desktop-large", 11px);
       font-weight: 600;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       min-width: fit-content;
@@ -1158,11 +1213,9 @@
         height: 100%;
         background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
         transition: left 0.6s ease;
-      }
-
-      svg {
-        width: tovw(12px, "desktop-large", 11px);
-        height: tovw(12px, "desktop-large", 11px);
+      }      svg {
+        width: tovw(14px, "desktop-large", 11px);
+        height: tovw(14px, "desktop-large", 11px);
         color: var(--color-orange);
         transition: all 0.3s ease;
       }
