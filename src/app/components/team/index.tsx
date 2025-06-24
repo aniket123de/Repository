@@ -1019,7 +1019,7 @@ export const TeamSection = () => {
     {
       name: "Dhrubojyoti Saha",
       email: "dhrubojyotisaha5@gmail.com",
-      linkedin: "https://github.com/dhrubojyotii",
+      linkedin: "https://www.linkedin.com/in/dhrubojyoti-saha-420120327/",
       college: "JIS College of Engineering"
     },
     {
