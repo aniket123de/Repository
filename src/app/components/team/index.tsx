@@ -760,13 +760,14 @@ export const TeamSection = () => {
         }
       }
     );  }, [isLoaded]);
-
   // Function to get campus ambassador image
   const getCampusAmbassadorImage = (name: string): string | undefined => {    const imageMap: { [key: string]: string } = {
       "Arnab Mal": "/ca/1000198148 - Arnab.jpg",
       "Shatadru Dhar": "/ca/1000200600 (1) - Shatadru Dhar.jpg",
+      "Aryan Sengupta": "/ca/20250402_205414 - Aryan Sengupta.jpg",
       "Arunima Dutta": "/ca/IMG-20221003-WA0006 - Arunima Dutta.jpg",
       "Sattik Mondal": "/ca/IMG-20250207-WA0018 - Sattik Mondal.jpg",
+      "Gourabananda Datta": "/ca/IMG-20250530-WA0001 - Gourabananda Datta.jpg",
       "Rahul Singh": "/ca/IMG-20250623-WA0003 - Rahul Singh.jpg",
       "Ayushman Rana": "/ca/IMG_0633 - Ayushman Rana.jpeg",
       "Antik Mondal": "/ca/IMG_20240305_233829 - Antik Mondal.jpg",
