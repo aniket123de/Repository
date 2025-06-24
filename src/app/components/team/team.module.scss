@@ -581,9 +581,6 @@
 .ambassadors-section {
   margin-top: tovw(120px, "desktop-large", 80px);
   position: relative;
-<<<<<<< HEAD
-  z-index: 1;  .ambassadors-header {
-=======
   z-index: 1;
   padding: 0 20px; // Add horizontal padding to prevent content cutoff
 
@@ -595,8 +592,9 @@
   @media screen and (max-width: 480px) {
     margin-top: 40px;
     padding: 0 10px; // Even tighter padding on small mobile
-  }.ambassadors-header {
->>>>>>> 3fe10bd487d99d13385f3ab53a19c8a3fe82d1d2
+  }
+
+  .ambassadors-header {
     text-align: center;
     margin-bottom: tovw(40px, "desktop-large", 30px);
     padding: 0 20px; // Add horizontal padding to prevent text cutoff
@@ -718,9 +716,9 @@
       p {
         font-size: 14px;
         line-height: 1.4;
-      }
-    }
+      }    }
   }
+
   .search-bar {
     display: flex;
     align-items: center;
