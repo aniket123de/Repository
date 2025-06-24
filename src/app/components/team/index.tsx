@@ -962,7 +962,7 @@ export const TeamSection = () => {
     {
       name: "Abhishek Gupta",
       email: "itzabhi888@gmail.com",
-      linkedin: "https://github.com/ezabhishek1",
+      linkedin: "https://www.linkedin.com/in/typing-abhishek/",
       college: "JIS University"
     },    {
       name: "Ananya Kar",
@@ -1089,7 +1089,7 @@ export const TeamSection = () => {
     },    {
       name: "Souvik Saha",
       email: "sahasouvik631@gmail.com",
-      linkedin: "https://github.com/souvik27-lab",
+      linkedin: "https://www.linkedin.com/in/souvik-saha-3155902a6",
       college: "Saroj Mohan Institute of Technology"
     },
     {
