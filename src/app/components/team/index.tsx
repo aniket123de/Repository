@@ -398,15 +398,18 @@ type CampusAmbassadorProps = {
   email: string;
   linkedin: string;
   college: string;
+  image?: string;
 };
 
 export const CampusAmbassador: React.FC<CampusAmbassadorProps> = ({ 
   name, 
   email, 
   linkedin, 
-  college 
+  college,
+  image 
 }) => {
   const ambassadorRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
 
@@ -434,6 +437,31 @@ export const CampusAmbassador: React.FC<CampusAmbassadorProps> = ({
         }
       }
     );
+
+    // Animate image section
+    if (imageRef.current) {
+      gsap.fromTo(
+        imageRef.current,
+        { 
+          opacity: 0, 
+          scale: 0.8,
+          rotation: -5
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          rotation: 0,
+          duration: 0.8,
+          delay: 0.1,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: ambassadorRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+    }
 
     // Animate info section
     if (infoRef.current) {
@@ -505,32 +533,64 @@ export const CampusAmbassador: React.FC<CampusAmbassadorProps> = ({
       });
     }
   }, []);
-
   return (
     <div className={s["campus-ambassador"]} ref={ambassadorRef}>
-      <div className={s["ambassador-info"]} ref={infoRef}>
-        <h4>{name}</h4>
-        <p className={s["college-name"]}>{college}</p>
+      <div className={s["ambassador-image"]} ref={imageRef}>
+        <div className={s["image-wrapper"]}>
+          {image ? (
+            <Image 
+              src={image} 
+              alt={`${name} - Campus Ambassador`} 
+              width={120} 
+              height={120} 
+              className={s["ambassador-avatar"]}
+              onError={(e) => {
+                // Fallback to a placeholder if image fails to load
+                const target = e.target as HTMLImageElement;
+                target.onerror = null;
+                target.src = '/circle.png';
+              }}
+            />
+          ) : (
+            <div className={s["avatar-placeholder"]}>
+              <div className={s["placeholder-initials"]}>
+                {name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+              </div>
+            </div>
+          )}
+          <div className={s["ambassador-badge"]}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" fill="#FF6B35"/>
+              <path d="M12 6L14.5 10.5L19 11L15.5 14.5L16.5 19L12 16.5L7.5 19L8.5 14.5L5 11L9.5 10.5L12 6Z" fill="#fff"/>
+            </svg>
+          </div>
+        </div>
       </div>
-      <div className={s["ambassador-contact"]} ref={contactRef}>
-        <Link 
-          href={`mailto:${email}`} 
-          className={s["contact-link"]}
-          aria-label={`Email ${name}`}
-        >
-          <FontAwesomeIcon icon={faGlobe} />
-          <span>Email</span>
-        </Link>
-        <Link 
-          href={linkedin} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className={s["contact-link"]}
-          aria-label={`${name}'s LinkedIn`}
-        >
-          <FontAwesomeIcon icon={faLinkedinIn} />
-          <span>LinkedIn</span>
-        </Link>
+      <div className={s["ambassador-content"]}>
+        <div className={s["ambassador-info"]} ref={infoRef}>
+          <h4>{name}</h4>
+          <p className={s["college-name"]}>{college}</p>
+        </div>
+        <div className={s["ambassador-contact"]} ref={contactRef}>
+          <Link 
+            href={`mailto:${email}`} 
+            className={s["contact-link"]}
+            aria-label={`Email ${name}`}
+          >
+            <FontAwesomeIcon icon={faGlobe} />
+            <span>Email</span>
+          </Link>
+          <Link 
+            href={linkedin} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={s["contact-link"]}
+            aria-label={`${name}'s LinkedIn`}
+          >
+            <FontAwesomeIcon icon={faLinkedinIn} />
+            <span>LinkedIn</span>
+          </Link>
+        </div>
       </div>
     </div>
   );
@@ -705,8 +765,31 @@ export const TeamSection = () => {
           toggleActions: "play none none none"
         }
       }
-    );
-  }, [isLoaded]);
+    );  }, [isLoaded]);
+
+  // Function to get campus ambassador image
+  const getCampusAmbassadorImage = (name: string): string | undefined => {
+    const imageMap: { [key: string]: string } = {
+      "Arnab Mal": "/ca/1000198148 - Arnab.jpg",
+      "Shatadru Dhar": "/ca/1000200600 (1) - Shatadru Dhar.jpg",
+      "Arunima Dutta": "/ca/IMG-20221003-WA0006 - Arunima Dutta.jpg",
+      "Sattik Mondal": "/ca/IMG-20250207-WA0018 - Sattik Mondal.jpg",
+      "Rahul Singh": "/ca/IMG-20250623-WA0003 - Rahul Singh.jpg",
+      "Ayushman Rana": "/ca/IMG_0633 - Ayushman Rana.jpeg",
+      "Antik Mondal": "/ca/IMG_20240305_233829 - Antik Mondal.jpg",
+      "Ananya Kar": "/ca/IMG_20240805_090144 - Ananya Kar.jpg",
+      "Abhishek Gupta": "/ca/IMG_20241123_122407073~2 - Abhishek Gupta.jpg",
+      "Shayan Ghosh": "/ca/IMG_20250311_103250 - Shayan Ghosh.jpg",
+      "Rupsa Das": "/ca/IMG_20250622_133208 - RUPSA DAS.jpg",
+      "Rimanshu Patel": "/ca/IMG_20250622_213336 - Rimanshu Patel.jpg",
+      "Debosmita Chowdhury": "/ca/Polish_20241224_101440639 - Debosmita Chowdhury.jpg",
+      "Debangshu Chatterjee": "/ca/Screenshot_20240403_213620 - Debangshu Chatterjee.jpg",
+      "Dhrubojyoti Saha": "/ca/team-slider3 - Dhrubojyoti Saha.png",
+      "Piyush Goenka": "/ca/WhatsApp Image 2024-10-02 at 22.40.08_4130eb42 - Piyush Goenka.jpg"
+    };
+    
+    return imageMap[name];
+  };
 
     const teamMembers = [
     {
@@ -1056,14 +1139,24 @@ export const TeamSection = () => {
               isReversed={index % 2 !== 0}
             />
           ))}
-        </div>
-
-        {/* Campus Ambassadors Section */}
+        </div>        {/* Campus Ambassadors Section */}
         <div className={s["ambassadors-section"]}>
           <div className={s["ambassadors-header"]} ref={ambassadorsHeaderRef}>
             <h3>Campus Ambassadors</h3>
             <p>Our dedicated representatives across leading institutions</p>
+              {/* Statistics */}
+            <div className={s["stats-container"]}>
+              <div className={s["stat-item"]}>
+                <span className={s["stat-number"]}>{campusAmbassadors.length}</span>
+                <span className={s["stat-label"]}>Ambassadors</span>
+              </div>
+              <div className={s["stat-item"]}>
+                <span className={s["stat-number"]}>{new Set(campusAmbassadors.map(ca => ca.college)).size}</span>
+                <span className={s["stat-label"]}>Colleges</span>
+              </div>
+            </div>
           </div>
+          
           <div className={s["search-bar"]}>
             <FontAwesomeIcon icon={faSearch} className={s["search-icon"]} />
             <input 
@@ -1073,7 +1166,16 @@ export const TeamSection = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+            {searchTerm && (
+              <button 
+                className={s["clear-search"]}
+                onClick={() => setSearchTerm("")}
+                aria-label="Clear search"
+              >
+                ×
+              </button>            )}
           </div>
+          
           <div className={s["campus-ambassadors"]} ref={ambassadorsRef}>
             {campusAmbassadors
               .filter(ambassador => 
@@ -1081,14 +1183,29 @@ export const TeamSection = () => {
                 ambassador.college.toLowerCase().includes(searchTerm.toLowerCase())
               )
               .map((ambassador) => (
-              <CampusAmbassador
-                key={ambassador.name}
-                name={ambassador.name}
-                email={ambassador.email}
-                linkedin={ambassador.linkedin}
-                college={ambassador.college}
-              />
-            ))}
+                <CampusAmbassador
+                  key={ambassador.name}
+                  name={ambassador.name}
+                  email={ambassador.email}
+                  linkedin={ambassador.linkedin}
+                  college={ambassador.college}
+                  image={getCampusAmbassadorImage(ambassador.name)}
+                />
+              ))
+            }
+            {campusAmbassadors
+              .filter(ambassador => 
+                ambassador.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                ambassador.college.toLowerCase().includes(searchTerm.toLowerCase())
+              ).length === 0 && (
+              <div className={s["no-results"]}>
+                <div className={s["no-results-icon"]}>
+                  <FontAwesomeIcon icon={faSearch} />
+                </div>
+                <h4>No ambassadors found</h4>
+                <p>Try adjusting your search criteria</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
