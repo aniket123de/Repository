@@ -1089,7 +1089,8 @@ export const TeamSection = () => {
       email: "shayanghosh0439@gmail.com",
       linkedin: "https://www.linkedin.com/in/shayan-ghosh-0834b3271/",
       college: "Abacus Institute of Engineering and Management"
-    },    {
+    },    
+    {
       name: "Souvik Saha",
       email: "sahasouvik631@gmail.com",
       linkedin: "https://www.linkedin.com/in/souvik-saha-3155902a6",
