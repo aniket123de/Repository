@@ -1094,12 +1094,6 @@ export const TeamSection = () => {
       email: "sahasouvik631@gmail.com",
       linkedin: "https://www.linkedin.com/in/souvik-saha-3155902a6",
       college: "Saroj Mohan Institute of Technology"
-    },
-    {
-      name: "Subhanu Majumder",
-      email: "reach.subhanu@gmail.com",
-      linkedin: "https://www.linkedin.com/in/subhanumajumder/",
-      college: "Future Institute of Engineering and Management"
     }
   ];
   return (
