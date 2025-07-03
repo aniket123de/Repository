@@ -770,6 +770,9 @@ export const TeamSection = () => {
       "Rahul Singh": "/ca/IMG-20250623-WA0003 - Rahul Singh.jpg",
       "Rahul Pradhan": "/ca/IMG_20250624_231757 - Rahul Pradhan.jpg",
       "Sayan Deyashi": "/ca/WhatsApp Image 2025-04-23 at 5.51.45 PM11010 - Sayan Deyashi.jpeg",
+      "Rohan Kumar": "/ca/IMG-20250515-WA0009 - Rohan Kumar (1).jpg",
+      "Souvik Saha": "/ca/DSC_3092 - Souvik Saha.jpg",
+      "Ricky Dey": "/ca/my_pic - Ricky Dey (1).png",
       "Ayushman Rana": "/ca/IMG_0633 - Ayushman Rana.jpeg",
       "Antik Mondal": "/ca/IMG_20240305_233829 - Antik Mondal.jpg",
       "Ananya Kar": "/ca/IMG_20240805_090144 - Ananya Kar.jpg",
@@ -957,12 +960,6 @@ export const TeamSection = () => {
 
   const campusAmbassadors = [
     {
-      name: "Aayushi Kaushik",
-      email: "33200122001@tib.edu.in",
-      linkedin: "https://www.linkedin.com/in/aayushi-kaushik-243b10251",
-      college: "Techno International Batanagar"
-    },
-    {
       name: "Abhishek Gupta",
       email: "itzabhi888@gmail.com",
       linkedin: "https://www.linkedin.com/in/typing-abhishek/",
@@ -1095,6 +1092,12 @@ export const TeamSection = () => {
       email: "sahasouvik631@gmail.com",
       linkedin: "https://www.linkedin.com/in/souvik-saha-3155902a6",
       college: "Saroj Mohan Institute of Technology"
+    },
+    {
+      name: "Rohan Kumar",
+      email: "123131rkorohan@gmail.com",
+      linkedin: "http://www.linkedin.com/in/rohan-kumar-1a60b7314",
+      college: "Government College of Engineering and Ceramic Technology"
     }
   ];
   return (
