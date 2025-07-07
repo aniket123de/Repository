@@ -725,7 +725,7 @@ export const TeamSection = () => {
     gsap.fromTo(
       ambassadorsHeaderRef.current.querySelector('h3'),
       { 
-        opacity: 0, 
+        opacity: 1, 
         y: 30
       },
       { 
