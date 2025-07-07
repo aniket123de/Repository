@@ -121,7 +121,7 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
                 textContent: text.slice(0, i + 1),
                 duration: 0.05,
                 ease: "none",
-                x: 0, // Ensure the text starts from the left end
+                x: 0,
               });
             });
 
