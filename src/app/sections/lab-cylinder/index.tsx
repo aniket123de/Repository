@@ -251,7 +251,6 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
   );
 };
 
-// Partnership card component with hover effect
 const PartnershipCard = memo(({
   partnership,
   styles,
