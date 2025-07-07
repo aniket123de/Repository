@@ -190,7 +190,7 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
       date: "Sep 9-10, 2025",
       description: "An exciting hackathon bringing together innovators and developers in the northeast region.",
       logo: "/hackathon-logos/h4b.jpg", 
-      link: "https://hack4brahmaputra.devfolio.co/?ref=843a4bfca8", // Placeholder - add actual link when available
+      link: "https://hack4brahmaputra.devfolio.co/?ref=843a4bfca8", 
       venue: "Guwahati",
     },
     {
