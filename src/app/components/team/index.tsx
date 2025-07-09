@@ -1053,12 +1053,6 @@ export const TeamSection = () => {
       college: "Techno International New Town"
     },
     {
-      name: "Rimanshu Patel",
-      email: "rimanshupatel1@gmail.com",
-      linkedin: "https://www.linkedin.com/in/rimanshu-patel-246a79245?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-      college: "Brainware University"
-    },
-    {
       name: "Rupsa Das",
       email: "rupsadas581@gmail.com",
       linkedin: "https://www.linkedin.com/in/rupsa-das2006",
@@ -1115,7 +1109,7 @@ export const TeamSection = () => {
       name: "Snigdho Bachar",
       email: "snigdho442@gmail.com",
       linkedin: "www.linkedin.com/in/snigdho-bachar-chanakya-401a4628b",
-      college: "Jis University"
+      college: "JIS University"
     },
     {
       name: "Soumyadeep Sarkar",
