@@ -1053,6 +1053,12 @@ export const TeamSection = () => {
       college: "Techno International New Town"
     },
     {
+      name: "Rimanshu Patel",
+      email: "rimanshupatel1@gmail.com",
+      linkedin: "https://www.linkedin.com/in/rimanshu-patel-246a79245?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      college: "Brainware University"
+    },
+    {
       name: "Rupsa Das",
       email: "rupsadas581@gmail.com",
       linkedin: "https://www.linkedin.com/in/rupsa-das2006",
@@ -1117,12 +1123,6 @@ export const TeamSection = () => {
       linkedin: "https://www.linkedin.com/in/soumyadeep-sarkar2004/",
       college: "University Institute of Technology, Burdwan University"
     },
-    {
-      name: "Raunak Parai",
-      email: "raunak.parai2005@gmail.com",
-      linkedin: "www.linkedin.com/in/raunak-parai-4514142a9",
-      college: "St. Thomas' College of Engineering & Technology"
-    }
   ];
   return (
     <section className={s["team-section"]} ref={sectionRef}>
