@@ -1098,6 +1098,36 @@ export const TeamSection = () => {
       email: "123131rkorohan@gmail.com",
       linkedin: "http://www.linkedin.com/in/rohan-kumar-1a60b7314",
       college: "Government College of Engineering and Ceramic Technology"
+    },
+    {
+      name: "Anish Bar",
+      email: "anish.bar.dev@gmail.com",
+      linkedin: "https://www.linkedin.com/in/anishbar",
+      college: "Government College of Engineering and Textile Technology, Serampore"
+    },
+    {
+      name: "Kunal Das",
+      email: "das840kunal@gmail.com",
+      linkedin: "www.linkedin.com/in/kunal-das-dev",
+      college: "Government College of Engineering and Textile Technology, Serampore"
+    },
+    {
+      name: "Snigdho Bachar",
+      email: "snigdho442@gmail.com",
+      linkedin: "www.linkedin.com/in/snigdho-bachar-chanakya-401a4628b",
+      college: "Jis University"
+    },
+    {
+      name: "Soumyadeep Sarkar",
+      email: "shannking969@gmail.com",
+      linkedin: "https://www.linkedin.com/in/soumyadeep-sarkar2004/",
+      college: "University Institute of Technology, Burdwan University"
+    },
+    {
+      name: "Raunak Parai",
+      email: "raunak.parai2005@gmail.com",
+      linkedin: "www.linkedin.com/in/raunak-parai-4514142a9",
+      college: "St. Thomas' College of Engineering & Technology"
     }
   ];
   return (
