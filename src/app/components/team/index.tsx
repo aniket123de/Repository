@@ -788,7 +788,12 @@ export const TeamSection = () => {
       "Debangshu Chatterjee": "/ca/Screenshot_20240403_213620 - Debangshu Chatterjee.jpg",
       "Dhrubojyoti Saha": "/ca/team-slider3 - Dhrubojyoti Saha.png",
       "Piyush Goenka": "/ca/WhatsApp Image 2024-10-02 at 22.40.08_4130eb42 - Piyush Goenka.jpg",
-      "Arpan Mitra": "/ca/Snapchat-1240840304 - _.zeniki._.jpg"
+      "Arpan Mitra": "/ca/Snapchat-1240840304 - _.zeniki._.jpg",
+      "Sneha Debnath": "/ca/BeautyPlus_20240327151500949_save - Sneha Debnath.jpg",
+      "Saikat Bera": "/ca/WhatsApp Image 2025-05-01 at 22.22.27 - Saikat Bera.jpeg",
+      "Eshani Paul": "/ca/IMG-20250405-WA0011 - Eshani.jpg",
+      "Dipman Majumdar": "/ca/IMG20250422135306 - Dipman Majumdar.jpg",
+      "Annesha Bhakta": "/ca/IMG-20250316-WA0043 - Annesha Bhakta.jpg"
     };
     
     return imageMap[name];
@@ -845,7 +850,7 @@ export const TeamSection = () => {
     {
       name: "Adrish",
       role: "Tech Co-Lead",
-      statement: "Meaningful engagement creates lasting community bonds. I work to design events, workshops and interactive experiences that bring our members together, spark creativity, and create an atmosphere where knowledge sharing becomes second nature.",
+      statement: "Tech leadership thrives on collaboration and curiosity. As Tech Co-Lead, I help build a culture where developers support each other, share knowledge freely, and turn ideas into impactful solutions-strengthening both our tech and our community.",
       image: "/team/adrish.jpg",
       socials: {
         linkedin: "https://www.linkedin.com/in/adrishbasak/",
@@ -968,11 +973,24 @@ export const TeamSection = () => {
       email: "itzabhi888@gmail.com",
       linkedin: "https://www.linkedin.com/in/typing-abhishek/",
       college: "JIS University"
-    },    {
+    },
+    {
       name: "Ananya Kar",
       email: "ananyakar8900@gmail.com",
       linkedin: "https://www.linkedin.com/in/ananya-kar01?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       college: "Guru Nanak Institute of Technology"
+    },
+    {
+      name: "Anish Bar",
+      email: "anish.bar.dev@gmail.com",
+      linkedin: "https://www.linkedin.com/in/anishbar",
+      college: "Government College of Engineering and Textile Technology, Serampore"
+    },
+    {
+      name: "Annesha Bhakta",
+      email: "anneshabhakta7@gmail.com",
+      linkedin: "https://www.linkedin.com/in/annesha-bhakta-17b236313/",
+      college: "Techno main Saltlake"
     },
     {
       name: "Antik Mondal",
@@ -987,15 +1005,16 @@ export const TeamSection = () => {
       college: "Netaji Subhash Engineering College"
     },
     {
-      name: "Arunima Dutta",
-      email: "dutta.arunima.2005@gmail.com",
-      linkedin: "https://www.linkedin.com/in/arunima-dutta-073505331",
-      college: "Heritage Institute of Technology"
-    },    {
       name: "Arnab Mal",
       email: "arnab37686@gmail.com",
       linkedin: "https://www.linkedin.com/in/arnab-mal-a544a828b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       college: "Asansol Engineering College"
+    },
+    {
+      name: "Arunima Dutta",
+      email: "dutta.arunima.2005@gmail.com",
+      linkedin: "https://www.linkedin.com/in/arunima-dutta-073505331",
+      college: "Heritage Institute of Technology"
     },
     {
       name: "Aryan Sengupta",
@@ -1008,7 +1027,8 @@ export const TeamSection = () => {
       email: "ayushmanrana81@gmail.com",
       linkedin: "https://www.linkedin.com/in/ayushman-rana-1478b32a5/",
       college: "Haldia Institute of Technology"
-    },    {
+    },
+    {
       name: "Debangshu Chatterjee",
       email: "debangshu.chatterjee@gmail.com",
       linkedin: "https://www.linkedin.com/in/debangshu-chatterjee-858859282",
@@ -1027,10 +1047,28 @@ export const TeamSection = () => {
       college: "JIS College of Engineering"
     },
     {
+      name: "Dipman Majumdar",
+      email: "work.dipmanmajumdar@gmail.com",
+      linkedin: "https://www.linkedin.com/in/dipman-majumdar-624288341/",
+      college: "Techno Main Saltlake"
+    },
+    {
+      name: "Eshani Paul",
+      email: "pauleshani06@gmail.com",
+      linkedin: "https://www.linkedin.com/in/eshani-paul-a63a86327?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      college: "Sister Nivedita University"
+    },
+    {
       name: "Gourabananda Datta",
       email: "gourabanandadattacse@gmail.com",
       linkedin: "https://www.linkedin.com/in/gourabananda-datta-a3521a285",
       college: "Ramkrishna Mahato Government Engineering College"
+    },
+    {
+      name: "Kunal Das",
+      email: "das840kunal@gmail.com",
+      linkedin: "www.linkedin.com/in/kunal-das-dev",
+      college: "Government College of Engineering and Textile Technology, Serampore"
     },
     {
       name: "Piyush Goenka",
@@ -1063,11 +1101,30 @@ export const TeamSection = () => {
       college: "Brainware University"
     },
     {
+      name: "Rohan Kumar",
+      email: "123131rkorohan@gmail.com",
+      linkedin: "http://www.linkedin.com/in/rohan-kumar-1a60b7314",
+      college: "Government College of Engineering and Ceramic Technology"
+    },
+    {
       name: "Rupsa Das",
       email: "rupsadas581@gmail.com",
       linkedin: "https://www.linkedin.com/in/rupsa-das2006",
       college: "Government College of Engineering and Leather Technology"
-    },    {
+    },
+    {
+      name: "Sagnik Dutta",
+      email: "sagnikdutta408@gmail.com",
+      linkedin: "https://www.linkedin.com/in/sagnik-dutta-367717261",
+      college: "Sister Nivedita University"
+    },
+    {
+      name: "Saikat Bera",
+      email: "work.saikatbera1@gmail.com",
+      linkedin: "https://www.linkedin.com/in/saikat-bera-a62b68274/",
+      college: "Techno Main Salt Lake"
+    },
+    {
       name: "Sattik Mondal",
       email: "sattikmondal853@gmail.com",
       linkedin: "https://www.linkedin.com/in/sattik-m-4b78b2298/",
@@ -1080,6 +1137,12 @@ export const TeamSection = () => {
       college: "Budge Budge Institute of Technology"
     },
     {
+      name: "Shahid Afridi",
+      email: "mdafridishahid8910@gmail.com",
+      linkedin: "https://www.linkedin.com/in/shahid-afridi-793a01297",
+      college: "Techno India College of Technology"
+    },
+    {
       name: "Shatadru Dhar",
       email: "shatadrudhar10c@gmail.com",
       linkedin: "https://www.linkedin.com/in/shatadru-dhar/",
@@ -1090,30 +1153,12 @@ export const TeamSection = () => {
       email: "shayanghosh0439@gmail.com",
       linkedin: "https://www.linkedin.com/in/shayan-ghosh-0834b3271/",
       college: "Abacus Institute of Engineering and Management"
-    },    
-    {
-      name: "Souvik Saha",
-      email: "sahasouvik631@gmail.com",
-      linkedin: "https://www.linkedin.com/in/souvik-saha-3155902a6",
-      college: "Saroj Mohan Institute of Technology"
     },
     {
-      name: "Rohan Kumar",
-      email: "123131rkorohan@gmail.com",
-      linkedin: "http://www.linkedin.com/in/rohan-kumar-1a60b7314",
-      college: "Government College of Engineering and Ceramic Technology"
-    },
-    {
-      name: "Anish Bar",
-      email: "anish.bar.dev@gmail.com",
-      linkedin: "https://www.linkedin.com/in/anishbar",
-      college: "Government College of Engineering and Textile Technology, Serampore"
-    },
-    {
-      name: "Kunal Das",
-      email: "das840kunal@gmail.com",
-      linkedin: "www.linkedin.com/in/kunal-das-dev",
-      college: "Government College of Engineering and Textile Technology, Serampore"
+      name: "Sneha Debnath",
+      email: "debnathsneha2707@gmail.com",
+      linkedin: "https://www.linkedin.com/in/sneha-debnath-196511291",
+      college: "Jadavpur University"
     },
     {
       name: "Snigdho Bachar",
@@ -1126,6 +1171,12 @@ export const TeamSection = () => {
       email: "shannking969@gmail.com",
       linkedin: "https://www.linkedin.com/in/soumyadeep-sarkar2004/",
       college: "University Institute of Technology, Burdwan University"
+    },
+    {
+      name: "Souvik Saha",
+      email: "sahasouvik631@gmail.com",
+      linkedin: "https://www.linkedin.com/in/souvik-saha-3155902a6",
+      college: "Saroj Mohan Institute of Technology"
     },
   ];
   return (
