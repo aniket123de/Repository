@@ -181,7 +181,7 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
       date: "Sep 6-7, 2025",
       description: "Transform ideas into reality through innovative coding solutions.",
       logo: "/hackathon-logos/metamorph2k25_logo.jpeg",
-      link: "https://metamorph.example.com",
+      link: "https://metamorph.devfolio.co/?ref=843a4bfca8",
       venue: "Guru Nanak Institute of Technology",
     },
     {
