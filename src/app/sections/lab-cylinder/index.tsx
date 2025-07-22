@@ -173,7 +173,7 @@ export const LabCylinder = () => {  const [isVisible, setIsVisible] = useState(f
       date: "Aug 23-24, 2025",
       description: "The wildest hackathon of the year! Code till your fingers cramp.",
       logo: "/hackathon-logos/sc2logo.png",
-      link: "https://statuscode-2.devfolio.co/?ref=843a4bfca8",
+      link: "https://statuscode-2.devfolio.co/?ref=843a4bfca7",
       venue: "IIIT Kalyani",
     },    {
       id: 2,
